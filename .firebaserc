@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "irecipe-c7f9c": {
+      "hosting": {
+        "iRecipe": [
+          "irecipe-c7f9c"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "irecipe-c7f9c"
+  }
+}

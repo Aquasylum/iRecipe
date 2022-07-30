@@ -1,0 +1,57 @@
+.display-card {
+  border: 4px solid black;
+  border-radius: 10px;
+  margin: 1vw 1vw 1vw 1vw;
+  padding: 1vw 1vw 1vw 1vw;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  align-content: center;
+  text-align: center;
+}
+
+img {
+  max-width: 25vw;
+  max-height: 25vh;
+}
+
+.material-icons {
+  font-size: 4vh;
+  display: inline-block;
+  vertical-align: -1vh;
+}
+
+.time {
+  text-align: center;
+}
+
+button:hover {
+  background-color: #e8a87c;
+  transform: scale(1.1);
+}
+
+.recipe-type {
+  display: inline-grid;
+  margin: 5px 10px 5px 10px;
+  padding: 5px 10px 5px 10px;
+  background-color: #e8a87c;
+  border-radius: 10px;
+  min-width: 100px;
+  text-align: center;
+}
+
+.view-button,
+.edit-button {
+  width: 4vw;
+  min-width: 85px;
+  font-size: 1rem;
+  margin-top: 2vh;
+  margin-right: 0vw;
+}
+
+.view-button {
+  margin-right: 1vw;
+}
+
+.edit-button {
+  margin-left: 1vw;
+}

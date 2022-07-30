@@ -1,0 +1,24 @@
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+/>
+<div class="display-card">
+  <h1>{{ recipe.name }}</h1>
+  <h4>{{ recipe.author }}</h4>
+  <img [src]="recipe.imageSrc" />
+  <h4 class="time">
+    {{ recipe.estimatedTime }} min
+    <span class="material-icons"> timer </span>
+  </h4>
+  <div>
+    <button
+      routerLink="/view-recipe/{{ recipe.id }}"
+      class="view-button btn-sm"
+    >
+      View
+    </button>
+    <button routerLink="/recipe/{{ recipe.id }}" class="edit-button btn-sm">
+      Edit
+    </button>
+  </div>
+</div>

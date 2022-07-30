@@ -1,0 +1,29 @@
+.navbar-container {
+  font-family: Babas;
+  font: large;
+  background-color: #7dc2ae;
+}
+
+.navbar-brand {
+  font-family: pacificoregular;
+  padding-left: 2vh;
+  font-size: 2vw;
+}
+
+.material-icons {
+  margin-left: 2vh;
+}
+
+.material-icons:hover {
+  transform: scale(1.2);
+}
+
+button {
+  color: black;
+  border-color: black;
+}
+
+button:hover {
+  background-color: white;
+  color: black;
+}

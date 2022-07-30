@@ -1,0 +1,101 @@
+.header {
+  padding-left: 2vw;
+  padding-top: 2vh;
+}
+
+.recipe-container {
+  padding: 2vw 0vw 2vw 3vw;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.author-name {
+  flex-grow: 3;
+}
+
+.recipe-name {
+  flex-grow: 1;
+}
+
+input[type="text"] {
+  margin-left: 2vw;
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: black;
+}
+
+.input-field-container {
+  padding-right: 4vw;
+}
+
+label {
+  font-size: 1.5rem;
+}
+
+input {
+  font-size: 1rem;
+}
+
+.input-group-container {
+  padding-top: 5vh;
+}
+
+input.extra-long {
+  width: 45vw;
+}
+
+input.long {
+  width: 15vw;
+}
+
+input.medium {
+  width: 10vw;
+}
+
+.material-icons,
+.material-symbols-outlined {
+  font-size: 3vh;
+  display: inline-block;
+  vertical-align: -0.25rem;
+  padding-right: 0.5vw;
+}
+
+.ingredient-row {
+  display: inline-block;
+}
+
+.ingredient-row > input {
+  margin: 1vh 2vw 1vh 2vw;
+}
+
+.ingredients-container,
+.steps-container,
+.tips-container,
+.recipe-types-container {
+  margin: 3vh 1vw 2vh 1vw;
+}
+
+.ingredient-container,
+.step-container,
+.tip-container,
+.recipe-type-container {
+  margin: 2vh 0vw 0vh 0vw;
+}
+
+.add-button {
+  width: 8vw;
+  min-width: 85px;
+  font-size: 16px;
+  margin-top: 2vh;
+}
+
+.delete-button {
+  margin-left: 2vw;
+}
+
+.save-button {
+  background-color: #7dc2ae;
+  margin: 5vh;
+}
