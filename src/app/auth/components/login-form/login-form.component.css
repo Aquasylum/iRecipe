@@ -1,0 +1,29 @@
+button {
+  background-color: var(--irecipe-orange);
+  color: #fff;
+}
+
+.user-login-form {
+  width: 400px;
+  padding-top: 2vh;
+}
+
+.form-field {
+  width: 100%;
+  text-align: left;
+}
+
+.form-footer {
+  padding-top: 4vh;
+}
+
+.error-label {
+  background-color: var(--irecipe-orange);
+}
+
+input[type="text"] {
+  margin-left: 2vw;
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: black;
+}

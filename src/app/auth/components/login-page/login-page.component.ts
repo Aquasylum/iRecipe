@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 import { Router } from '@angular/router';
-import { ILoginData } from 'src/app/models/Interfaces/ILoginData';
 
 @Component({
   selector: 'irecipe-login-page',
@@ -22,7 +21,14 @@ export class LoginPageComponent implements OnInit {
   login(data: { email: string; password: string }) {
     this.authService
       .login(data)
-      .then(() => this.router.navigate(['/home']))
+      .then(() => this.router.navigate(['/main']))
+      .catch((e) => console.log(e.message));
+  }
+
+  loginWithGoogle() {
+    this.authService
+      .loginWithGoogle()
+      .then(() => this.router.navigate(['/main']))
       .catch((e) => console.log(e.message));
   }
 }

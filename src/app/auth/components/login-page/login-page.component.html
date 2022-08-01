@@ -1,5 +1,24 @@
-<div class="form-container">
-  <h1>Welcome to iRecipe Login</h1>
-  <h5>Sign in with your email</h5>
-  <irecipe-login-form (userFormData)="login($event)"></irecipe-login-form>
+<div class="control-container">
+  <div class="login-container">
+    <div class="register-redirect">
+      <h2>Hey stranger!</h2>
+      <p>
+        Want to create an awesome account to access this awesome app? Go ahead
+        and click the button below!
+      </p>
+      <button class="irecipe-button" routerLink="/register">Register</button>
+    </div>
+    <div class="login-form-container">
+      <a class="logo">iRecipe</a>
+      <h2>Welcome to iRecipe Login</h2>
+      <button class="irecipe-button" (click)="loginWithGoogle()">
+        Sign In with Google
+      </button>
+      <h5>Or sign in with your email</h5>
+      <irecipe-login-form
+        class="login-form"
+        (userFormData)="login($event)"
+      ></irecipe-login-form>
+    </div>
+  </div>
 </div>

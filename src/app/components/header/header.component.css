@@ -1,7 +1,7 @@
 .navbar-container {
   font-family: Babas;
   font: large;
-  background-color: #7dc2ae;
+  background-color: var(--irecipe-green);
 }
 
 .navbar-brand {

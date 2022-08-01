@@ -18,27 +18,45 @@ import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { RecipeComponent } from './components/recipe/recipe.component';
-import { HomeComponent } from './components/home/home.component';
+import { MainComponent } from './components/main/main.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthRoutingModule } from './auth/auth-routing.module';
 import { ViewRecipeComponent } from './components/view-recipe/view-recipe.component';
+import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
 
 let routes: Routes = [
   {
-    path: '',
-    component: HomeComponent,
+    path: 'main',
+    component: MainComponent,
+    children: [
+      {
+        path: '',
+        component: RecipesContainerComponent,
+      },
+      {
+        path: 'recipe',
+        component: RecipeComponent,
+      },
+      {
+        path: 'recipe-list',
+        component: RecipesContainerComponent,
+      },
+      {
+        path: 'recipe/:id',
+        component: RecipeComponent,
+      },
+      {
+        path: 'view-recipe/:id',
+        component: ViewRecipeComponent,
+      },
+    ],
+    ...canActivate(redirectUnauthorizedToLogin),
   },
   {
-    path: 'recipe',
-    component: RecipeComponent,
-  },
-  {
-    path: 'recipe/:id',
-    component: RecipeComponent,
-  },
-  {
-    path: 'view-recipe/:id',
-    component: ViewRecipeComponent,
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full',
   },
 ];
 
@@ -49,7 +67,7 @@ let routes: Routes = [
     SectionListComponent,
     RecipesContainerComponent,
     RecipeDisplayCardComponent,
-    HomeComponent,
+    MainComponent,
     RecipeComponent,
     ViewRecipeComponent,
   ],

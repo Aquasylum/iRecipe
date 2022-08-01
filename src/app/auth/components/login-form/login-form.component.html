@@ -1,29 +1,38 @@
 <div class="user-login-form">
   <form [formGroup]="userForm" class="form" (ngSubmit)="onSubmit()">
-    <div class="x">
+    <div class="form-field">
       <label
         >Email
-        <input placeholder="email" formControlName="email" required />
+        <input class="long" type="text" formControlName="email" required />
       </label>
-      <div *ngIf="email?.hasError('email')">
+      <div class="error-label" *ngIf="email?.hasError('email')">
         Email isn't valid. Please enter a valid email.
       </div>
     </div>
 
-    <div class="X">
+    <div class="form-field">
       <label>
         Password
-        <input formControlName="password" placeholder="password" required />
+        <input class="long" type="text" formControlName="password" required />
       </label>
-      <div *ngIf="password?.hasError('required') && userForm.touched">
+      <div
+        class="error-label"
+        *ngIf="password?.hasError('required') && userForm.touched"
+      >
         Password is required
       </div>
-      <div *ngIf="password?.hasError('minlength')">
+      <div class="error-label" *ngIf="password?.hasError('minlength')">
         Password needs to be longer then 6 characters!
       </div>
     </div>
     <div class="form-footer">
-      <button [disabled]="userForm.invalid" type="submit">Submit</button>
+      <button
+        class="irecipe-button"
+        [disabled]="userForm.invalid"
+        type="submit"
+      >
+        Submit
+      </button>
     </div>
   </form>
 </div>

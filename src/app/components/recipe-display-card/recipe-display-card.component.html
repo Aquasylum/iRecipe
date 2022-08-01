@@ -12,12 +12,15 @@
   </h4>
   <div>
     <button
-      routerLink="/view-recipe/{{ recipe.id }}"
+      routerLink="/main/view-recipe/{{ recipe.id }}"
       class="view-button btn-sm"
     >
       View
     </button>
-    <button routerLink="/recipe/{{ recipe.id }}" class="edit-button btn-sm">
+    <button
+      routerLink="/main/recipe/{{ recipe.id }}"
+      class="edit-button btn-sm"
+    >
       Edit
     </button>
   </div>

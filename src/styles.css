@@ -4,5 +4,40 @@ body {
   font-family: Babas !important;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+:root {
+  --irecipe-orange: #e8a87c;
+  --irecipe-green: #7dc2ae;
+}
+
+.irecipe-button {
+  margin-left: 1vw;
+  border-radius: 20px;
+  padding: 0 50px;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+}
+
+.irecipe-button:hover {
+  transform: scale(1.05);
+}
+
+input.extra-long {
+  width: 45vw;
+}
+
+input.long {
+  width: 15vw;
+}
+
+input.medium {
+  width: 10vw;
+}

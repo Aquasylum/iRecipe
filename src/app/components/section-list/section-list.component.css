@@ -15,12 +15,12 @@ ul {
 }
 
 .menu-item:hover {
-  background-color: #7dc2ae;
+  background-color: var(--irecipe-green);
   cursor: pointer;
 }
 
 .active {
-  background-color: #e8a87c;
+  background-color: var(--irecipe-orange);
 }
 
 .material-icons.md-16 {
@@ -31,7 +31,7 @@ ul {
 }
 
 .add-recipe-button {
-  background-color: #7dc2ae;
+  background-color: var(--irecipe-green);
   margin: auto;
   display: flex;
   font-size: 1.5vw;

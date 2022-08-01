@@ -17,7 +17,4 @@ export class SectionListComponent implements OnInit {
   onSelectMenuOption(selector: number): void {
     this.selectedMenuOption = selector;
   }
-  onh() {
-    console.log('h');
-  }
 }

@@ -1,0 +1,18 @@
+<div class="control-container">
+  <div class="register-container">
+    <div class="register-form-container">
+      <a class="logo">iRecipe</a>
+      <h2>Welcome to iRecipe Registration!</h2>
+      <h5>Register here with your email</h5>
+      <irecipe-login-form
+        class="login-form"
+        (userFormData)="register($event)"
+      ></irecipe-login-form>
+    </div>
+    <div class="login-redirect">
+      <h2>Already a member?</h2>
+      <p>Click here to sign back in!</p>
+      <button class="irecipe-button" routerLink="/login">Sign In</button>
+    </div>
+  </div>
+</div>

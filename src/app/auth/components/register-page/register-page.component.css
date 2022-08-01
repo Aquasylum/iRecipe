@@ -6,7 +6,7 @@
   margin-top: 5%;
 }
 
-.register-redirect {
+.login-redirect {
   align-items: center;
   background-color: var(--irecipe-green);
   border-radius: 10px 0 0 10px;
@@ -28,23 +28,27 @@ button {
   color: #fff;
 }
 
+h5 {
+  color: #838383;
+}
+
 p {
   margin-bottom: 20px;
   text-align: center;
 }
 
-h5 {
-  color: #838383;
+h2 {
+  text-align: center;
 }
 
-.login-container {
+.register-container {
   border-radius: 10px;
   box-shadow: 0 0 20px 2px #e4e4e4;
   display: flex;
   width: 60%;
 }
 
-.login-form-container {
+.register-form-container {
   align-items: center;
   background-color: #fff;
   border-radius: 0 10px 10px 0;
@@ -55,11 +59,11 @@ h5 {
   width: 70%;
 }
 
-.register-redirect h1 {
+.login-redirect h1 {
   color: #fff;
 }
 
-.register-redirect button {
+.login-redirect button {
   background-color: transparent;
   border: 1px solid #fff;
 }
