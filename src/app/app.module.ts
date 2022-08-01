@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule, Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { AuthModule } from './auth/auth.module';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -18,8 +19,9 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { RecipeComponent } from './components/recipe/recipe.component';
 import { HomeComponent } from './components/home/home.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthRoutingModule } from './auth/auth-routing.module';
 import { ViewRecipeComponent } from './components/view-recipe/view-recipe.component';
-import { LoginComponent } from './components/login/login.component';
 
 let routes: Routes = [
   {
@@ -38,10 +40,6 @@ let routes: Routes = [
     path: 'view-recipe/:id',
     component: ViewRecipeComponent,
   },
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
 ];
 
 @NgModule({
@@ -54,18 +52,19 @@ let routes: Routes = [
     HomeComponent,
     RecipeComponent,
     ViewRecipeComponent,
-    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AuthModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+    BrowserAnimationsModule,
   ],
-  exports: [RouterModule],
+  exports: [RouterModule, ReactiveFormsModule],
   providers: [RecipeService],
   bootstrap: [AppComponent],
 })

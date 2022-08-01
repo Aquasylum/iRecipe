@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import { RecipeType } from '../models/RecipeType';
 import { Recipe } from '../models/Recipe';
-import { Tip } from '../models/Tip';
-
 import { environment } from './../../environments/environment.prod';
 
 //Firestore imports

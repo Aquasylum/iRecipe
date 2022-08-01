@@ -1,0 +1,29 @@
+<div class="user-login-form">
+  <form [formGroup]="userForm" class="form" (ngSubmit)="onSubmit()">
+    <div class="x">
+      <label
+        >Email
+        <input placeholder="email" formControlName="email" required />
+      </label>
+      <div *ngIf="email?.hasError('email')">
+        Email isn't valid. Please enter a valid email.
+      </div>
+    </div>
+
+    <div class="X">
+      <label>
+        Password
+        <input formControlName="password" placeholder="password" required />
+      </label>
+      <div *ngIf="password?.hasError('required') && userForm.touched">
+        Password is required
+      </div>
+      <div *ngIf="password?.hasError('minlength')">
+        Password needs to be longer then 6 characters!
+      </div>
+    </div>
+    <div class="form-footer">
+      <button [disabled]="userForm.invalid" type="submit">Submit</button>
+    </div>
+  </form>
+</div>
