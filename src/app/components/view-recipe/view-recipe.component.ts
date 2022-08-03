@@ -18,8 +18,10 @@ export class ViewRecipeComponent implements OnInit {
   id = this.route.snapshot.paramMap.get('id') as string;
 
   ngOnInit(): void {
-    this.recipeService.getRecipeById(this.id).subscribe((recipe) => {
-      this.recipe = recipe;
-    });
+    this.recipeService.getRecipeById(this.id).then((obs) =>
+      obs.subscribe((recipe) => {
+        this.recipe = recipe;
+      })
+    );
   }
 }

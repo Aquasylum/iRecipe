@@ -48,9 +48,9 @@ export class RecipeService {
     return recipes;
   }
 
-  getRecipeById(id: string): Observable<Recipe> {
+  async getRecipeById(id: string): Promise<Observable<Recipe>> {
     const recipeDocumentReference = doc(this.recipeCollection, id);
-    return docData(recipeDocumentReference) as Observable<Recipe>;
+    return (await docData(recipeDocumentReference)) as Observable<Recipe>;
   }
 
   async createRecipe(recipe: Recipe) {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { emailVerified } from '@angular/fire/auth-guard';
 
 @Component({
   selector: 'irecipe-register-page',
@@ -12,7 +13,7 @@ export class RegisterPageComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  register(data: { email: string; password: string }) {
+  register(data: { email: string; password: string; username?: string }) {
     this.authService
       .register(data)
       .then(() => this.router.navigate(['/login']))

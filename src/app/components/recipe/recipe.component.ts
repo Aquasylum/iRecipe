@@ -72,25 +72,26 @@ export class RecipeComponent implements OnInit {
     //Checking if in edit mode
     if (!this.isAddMode) {
       if (this.id) {
-        this.recipeService
-          .getRecipeById(this.id)
-          .pipe(
-            tap((r: Recipe) => {
-              r.ingredients.forEach((i: Ingredient) =>
-                this.ingredients.push(this.fb.group(i))
-              ),
-                r.steps.forEach((s) => {
-                  this.steps.push(this.fb.group(s));
-                });
-              r.tips?.forEach((t) => this.tips.push(this.fb.group(t))),
-                r.recipeType?.forEach((rt) =>
-                  this.recipeTypes.push(this.fb.group(rt))
-                );
-            })
-          )
-          .subscribe((recipe: Recipe) => {
-            this.recipeForm.patchValue(recipe);
-          });
+        this.recipeService.getRecipeById(this.id).then((observable) => {
+          observable
+            .pipe(
+              tap((r: Recipe) => {
+                r.ingredients.forEach((i: Ingredient) =>
+                  this.ingredients.push(this.fb.group(i))
+                ),
+                  r.steps.forEach((s) => {
+                    this.steps.push(this.fb.group(s));
+                  });
+                r.tips?.forEach((t) => this.tips.push(this.fb.group(t))),
+                  r.recipeType?.forEach((rt) =>
+                    this.recipeTypes.push(this.fb.group(rt))
+                  );
+              })
+            )
+            .subscribe((recipe) => {
+              this.recipeForm.patchValue(recipe);
+            });
+        });
       }
     }
   }
@@ -136,7 +137,7 @@ export class RecipeComponent implements OnInit {
 
   addStep() {
     const stepForm = this.fb.group({
-      step: ['', Validators.required, Validators.minLength(10)],
+      step: ['', Validators.required],
     });
     this.steps.push(stepForm);
   }
@@ -179,6 +180,7 @@ export class RecipeComponent implements OnInit {
   }
 
   onSubmit(): void {
+    console.log(this.recipeForm.value);
     if (this.isAddMode) {
       this.recipeService
         .createRecipe(this.recipeForm.value)
@@ -193,8 +195,6 @@ export class RecipeComponent implements OnInit {
   deleteRecipe() {
     this.recipeService
       .deleteRecipe(this.id)
-      .then(() => this.router.navigate(['/main']));
-
-    console.log('should nagivgate to view');
+      .then(() => this.router.navigate(['/main/recipe']));
   }
 }

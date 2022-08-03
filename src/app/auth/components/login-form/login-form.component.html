@@ -1,11 +1,55 @@
 <div class="user-login-form">
   <form [formGroup]="userForm" class="form" (ngSubmit)="onSubmit()">
+    <div *ngIf="formType == 'register'">
+      <div class="form-field">
+        <label
+          >Username
+          <input class="long" type="text" formControlName="username" required />
+        </label>
+        <div
+          class="error-label"
+          *ngIf="
+            username?.hasError('required') &&
+            userForm.controls['username'].touched
+          "
+        >
+          A username is required.
+        </div>
+        <div
+          class="error-label"
+          *ngIf="
+            username?.hasError('minlength') &&
+            userForm.controls['username'].touched
+          "
+        >
+          Username is too short! Please enter more than 3 characters.
+        </div>
+        <div
+          class="error-label"
+          *ngIf="
+            username?.hasError('maxlength') &&
+            userForm.controls['username'].touched
+          "
+        >
+          Username is too long! Please enter less than 12 characters.
+        </div>
+      </div>
+    </div>
+
     <div class="form-field">
       <label
         >Email
         <input class="long" type="text" formControlName="email" required />
       </label>
       <div class="error-label" *ngIf="email?.hasError('email')">
+        Email isn't valid. Please enter a valid email.
+      </div>
+      <div
+        class="error-label"
+        *ngIf="
+          email?.hasError('required') && userForm.controls['email'].touched
+        "
+      >
         Email isn't valid. Please enter a valid email.
       </div>
     </div>
@@ -17,7 +61,10 @@
       </label>
       <div
         class="error-label"
-        *ngIf="password?.hasError('required') && userForm.touched"
+        *ngIf="
+          password?.hasError('required') &&
+          userForm.controls['password'].touched
+        "
       >
         Password is required
       </div>

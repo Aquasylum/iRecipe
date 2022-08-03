@@ -34,7 +34,6 @@ ul {
   background-color: var(--irecipe-green);
   margin: auto;
   display: flex;
-  font-size: 1.5vw;
 }
 
 li {

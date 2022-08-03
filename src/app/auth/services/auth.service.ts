@@ -1,5 +1,7 @@
 import {
   Auth,
+  updateProfile,
+  sendEmailVerification,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
@@ -28,12 +30,22 @@ export class AuthService {
     return this.auth.currentUser;
   }
 
-  register(register: ILoginData) {
-    return createUserWithEmailAndPassword(
+  getCurrentUserDisplayName() {
+    return this.auth.currentUser?.displayName;
+  }
+
+  async register(register: ILoginData) {
+    await createUserWithEmailAndPassword(
       this.auth,
       register.email,
       register.password
-    );
+    ).then((cred) => {
+      updateProfile(cred.user, {
+        displayName: register.username,
+      });
+
+      sendEmailVerification(cred.user);
+    });
   }
 
   logout() {

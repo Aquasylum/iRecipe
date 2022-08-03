@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -7,6 +7,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login-form.component.css'],
 })
 export class LoginFormComponent implements OnInit {
+  @Input() formType!: string;
+
   @Output() userFormData = new EventEmitter<{
     email: string;
     password: string;
@@ -17,10 +19,27 @@ export class LoginFormComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.userForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-    });
+    if (this.formType == 'login') {
+      this.userForm = this.fb.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+      });
+    }
+
+    if (this.formType == 'register') {
+      this.userForm = this.fb.group({
+        username: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(12),
+          ],
+        ],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+      });
+    }
   }
 
   get email() {
@@ -29,6 +48,10 @@ export class LoginFormComponent implements OnInit {
 
   get password() {
     return this.userForm.get('password');
+  }
+
+  get username() {
+    return this.userForm.get('username');
   }
 
   onSubmit() {

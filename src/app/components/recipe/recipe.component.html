@@ -221,14 +221,6 @@
 
     <div class="steps-container">
       <h4>Steps:</h4>
-      <div
-        class="error-label extra-long"
-        *ngIf="
-          steps?.hasError('required') && recipeForm.controls['steps'].touched
-        "
-      >
-        At least one step is required to make a recipe.
-      </div>
       <ng-container formArrayName="steps">
         <ng-container *ngFor="let step of steps.controls; let i = index">
           <div class="step-container" [formArrayName]="i">
@@ -326,14 +318,14 @@
         <button
           (click)="onSubmit()"
           type="submit"
-          class="save-button btn-lg irecipe-button"
+          class="save-button irecipe-button"
         >
           Save Recipe
         </button>
         <button
           *ngIf="!isAddMode"
           (click)="deleteRecipe()"
-          class="delete-button btn-lg irecipe-button"
+          class="delete-button irecipe-button"
         >
           Delete Recipe
         </button>

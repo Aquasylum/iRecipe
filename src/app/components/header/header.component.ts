@@ -9,8 +9,11 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router) {}
+  displayName!: string | null | undefined;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.displayName = this.auth.getCurrentUserDisplayName();
+  }
 
   logout() {
     this.auth
