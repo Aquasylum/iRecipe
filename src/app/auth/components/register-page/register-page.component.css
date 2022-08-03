@@ -62,8 +62,3 @@ h2 {
 .login-redirect h1 {
   color: #fff;
 }
-
-.login-redirect button {
-  background-color: transparent;
-  border: 1px solid #fff;
-}

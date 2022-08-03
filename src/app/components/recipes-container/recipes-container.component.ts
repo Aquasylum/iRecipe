@@ -14,7 +14,7 @@ export class RecipesContainerComponent implements OnInit {
 
   ngOnInit(): void {
     this.recipeService
-      .getRecipes()
-      .subscribe((recipe) => (this.recipeSelection = recipe));
+      .getAllRecipesByUserId()
+      .then((recipes) => (this.recipeSelection = recipes));
   }
 }

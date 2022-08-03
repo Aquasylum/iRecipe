@@ -1,3 +1,12 @@
 .recipe-cards-container {
   display: inline-flex;
 }
+
+.no-recipes {
+  text-align: center;
+  margin-top: 10%;
+}
+
+.irecipe-button {
+  background-color: var(--irecipe-green);
+}

@@ -18,4 +18,8 @@ export class HeaderComponent implements OnInit {
       .then(() => this.router.navigate(['/']))
       .catch((e) => console.log(e.message));
   }
+
+  routeHome() {
+    this.router.navigate(['/main']);
+  }
 }

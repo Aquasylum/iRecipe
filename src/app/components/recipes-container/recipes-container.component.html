@@ -1,3 +1,16 @@
-<div class="recipe-cards-container" *ngFor="let recipe of recipeSelection">
-  <irecipe-recipe-display-card [recipe]="recipe"></irecipe-recipe-display-card>
-</div>
+<div
+  *ngIf="recipeSelection.length === 0; then addRecipe; else showRecipes"
+></div>
+<ng-template #addRecipe>
+  <div class="no-recipes">
+    <h2>Oh no, it seems like you have no recipes!</h2>
+    <button class="irecipe-button" routerLink="/main/recipe">Add Recipe</button>
+  </div>
+</ng-template>
+<ng-template #showRecipes>
+  <div class="recipe-cards-container" *ngFor="let recipe of recipeSelection">
+    <irecipe-recipe-display-card
+      [recipe]="recipe"
+    ></irecipe-recipe-display-card>
+  </div>
+</ng-template>

@@ -16,28 +16,39 @@ body {
 :root {
   --irecipe-orange: #e8a87c;
   --irecipe-green: #7dc2ae;
+  --irecipe-red: #c23b22;
 }
 
 .irecipe-button {
-  margin-left: 1vw;
   border-radius: 20px;
   padding: 0 50px;
   margin-top: 2vh;
   margin-bottom: 2vh;
+  background-color: transparent;
+  border: 1px solid #fff;
 }
 
 .irecipe-button:hover {
   transform: scale(1.05);
 }
 
-input.extra-long {
+.extra-long {
   width: 45vw;
 }
 
-input.long {
+.long {
   width: 15vw;
 }
 
-input.medium {
+.medium {
   width: 10vw;
+}
+
+.error-label {
+  background-color: var(--irecipe-red);
+  padding-left: 0.5vw;
+}
+
+button.standard:disabled {
+  color: rgb(68, 68, 68);
 }

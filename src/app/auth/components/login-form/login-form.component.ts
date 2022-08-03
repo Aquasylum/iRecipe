@@ -13,7 +13,6 @@ export class LoginFormComponent implements OnInit {
   }>();
 
   userForm!: FormGroup;
-  bool: boolean = true;
 
   constructor(private fb: FormBuilder) {}
 

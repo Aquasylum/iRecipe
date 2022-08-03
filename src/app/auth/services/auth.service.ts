@@ -17,12 +17,15 @@ export class AuthService {
   constructor(private auth: Auth) {}
 
   login(login: ILoginData) {
-    console.log(login);
     return signInWithEmailAndPassword(this.auth, login.email, login.password);
   }
 
   loginWithGoogle() {
     return signInWithPopup(this.auth, new GoogleAuthProvider());
+  }
+
+  getCurrentUser() {
+    return this.auth.currentUser;
   }
 
   register(register: ILoginData) {

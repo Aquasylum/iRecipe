@@ -10,6 +10,10 @@
   font-size: 2vw;
 }
 
+.irecipe:hover {
+  transform: scale(1.05);
+}
+
 .material-icons {
   margin-left: 2vh;
 }

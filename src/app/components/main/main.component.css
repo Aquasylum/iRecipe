@@ -3,9 +3,9 @@
 }
 
 .irecipe-section {
-  flex-grow: 1;
+  flex: 1;
 }
 
 .irecipe-main {
-  flex-grow: 7;
+  flex: 5;
 }

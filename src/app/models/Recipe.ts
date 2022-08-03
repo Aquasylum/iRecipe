@@ -3,9 +3,11 @@ import { RecipeType } from '../models/RecipeType';
 import { Step } from './Step';
 import { Ingredient } from './Ingredient';
 import { Tip } from './Tip';
+import { User } from 'firebase/auth';
 
 export class Recipe {
   id!: string;
+  userId!: string | undefined;
   author!: string;
   name!: string;
   imageSrc?: string;

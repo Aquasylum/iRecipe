@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, tap, map } from 'rxjs';
 //Routes
-import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeService } from 'src/app/services/recipe.service';
 import { Recipe } from 'src/app/models/Recipe';
+
 import {
   ControlContainer,
   Form,
@@ -16,6 +16,8 @@ import {
 } from '@angular/forms';
 import { Ingredient } from 'src/app/models/Ingredient';
 import { MealType } from 'src/app/enums/MealType';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { validateArgCount } from '@firebase/util';
 
 @Component({
   selector: 'irecipe-recipe',
@@ -28,11 +30,14 @@ export class RecipeComponent implements OnInit {
   recipeForm!: FormGroup;
   ingredientsData!: any;
   recipeTypesArray = Object.values(MealType);
+  ifNoPhoto: string = '../../../assets/images/emptyjpg';
+  currentUser: any;
 
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -40,11 +45,24 @@ export class RecipeComponent implements OnInit {
     this.isAddMode = !this.id;
 
     this.recipeForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(5)]],
-      author: [''],
-      description: [''],
-      ingredients: this.fb.array([]),
-      steps: this.fb.array([], [Validators.required, Validators.minLength(1)]),
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(20),
+        ],
+      ],
+      author: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(20),
+        ],
+      ],
+      ingredients: this.fb.array([], [Validators.required]),
+      steps: this.fb.array([], [Validators.required]),
       recipeTypes: this.fb.array([]),
       calories: [''],
       tips: this.fb.array([]),
@@ -70,9 +88,20 @@ export class RecipeComponent implements OnInit {
                 );
             })
           )
-          .subscribe((recipe: Recipe) => this.recipeForm.patchValue(recipe));
+          .subscribe((recipe: Recipe) => {
+            this.recipeForm.patchValue(recipe);
+          });
       }
     }
+  }
+
+  //Get individual form fields for validation:
+  get name() {
+    return this.recipeForm.get('name');
+  }
+
+  get author() {
+    return this.recipeForm.get('author');
   }
 
   //Ingredients
@@ -82,9 +111,16 @@ export class RecipeComponent implements OnInit {
 
   addIngredient() {
     const ingredientForm = this.fb.group({
-      name: [''],
-      weight: [''],
-      metricUnit: [''],
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+        ],
+      ],
+      weight: ['', Validators.required],
+      metricUnit: ['', Validators.required],
     });
     this.ingredients.push(ingredientForm);
   }
@@ -100,7 +136,7 @@ export class RecipeComponent implements OnInit {
 
   addStep() {
     const stepForm = this.fb.group({
-      step: [''],
+      step: ['', Validators.required, Validators.minLength(10)],
     });
     this.steps.push(stepForm);
   }
@@ -136,7 +172,6 @@ export class RecipeComponent implements OnInit {
       types: [recipeType],
     });
     this.recipeTypes.push(recipeTypeForm);
-    console.log(this.recipeForm.value);
   }
 
   deleteRecipeType(recipeTypeIndex: number): void {
@@ -144,6 +179,22 @@ export class RecipeComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.recipeForm.value);
+    if (this.isAddMode) {
+      this.recipeService
+        .createRecipe(this.recipeForm.value)
+        .then((id) => this.router.navigate(['/main/view-recipe/' + id]));
+    } else if (!this.isAddMode) {
+      this.recipeService
+        .updateRecipe(this.recipeForm.value, this.id)
+        .then(() => this.router.navigate(['/main/view-recipe/' + this.id]));
+    }
+  }
+
+  deleteRecipe() {
+    this.recipeService
+      .deleteRecipe(this.id)
+      .then(() => this.router.navigate(['/main']));
+
+    console.log('should nagivgate to view');
   }
 }

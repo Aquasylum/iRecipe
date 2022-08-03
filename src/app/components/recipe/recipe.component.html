@@ -12,7 +12,7 @@
 <h1 class="header" *ngIf="!isAddMode">Edit Recipe</h1>
 
 <div class="recipe-container">
-  <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="recipeForm">
     <div class="flex-container">
       <div class="recipe-name">
         <div>
@@ -26,6 +26,30 @@
               formControlName="name"
             />
           </label>
+          <div
+            class="error-label long"
+            *ngIf="
+              name?.hasError('required') && recipeForm.controls['name'].touched
+            "
+          >
+            Recipe name is required
+          </div>
+          <div
+            class="error-label long"
+            *ngIf="
+              name?.hasError('minlength') && recipeForm.controls['name'].touched
+            "
+          >
+            Recipe name has to be longer than 4 characters
+          </div>
+          <div
+            class="error-label long"
+            *ngIf="
+              name?.hasError('maxlength') && recipeForm.controls['name'].touched
+            "
+          >
+            Recipe name cannot be longer than 20 characters
+          </div>
         </div>
       </div>
 
@@ -35,11 +59,38 @@
           >Recipe Author
           <input
             type="text"
-            class="medium"
+            class="long"
             name="author"
             formControlName="author"
           />
         </label>
+        <div
+          class="error-label long"
+          *ngIf="
+            author?.hasError('required') &&
+            recipeForm.controls['author'].touched
+          "
+        >
+          Author name is required
+        </div>
+        <div
+          class="error-label long"
+          *ngIf="
+            author?.hasError('minlength') &&
+            recipeForm.controls['author'].touched
+          "
+        >
+          Author name has to be longer than 4 characters
+        </div>
+        <div
+          class="error-label long"
+          *ngIf="
+            author?.hasError('maxlength') &&
+            recipeForm.controls['author'].touched
+          "
+        >
+          Author name cannot be longer than 20 characters
+        </div>
       </div>
 
       <!-- <div class="recipe-types-container">
@@ -71,6 +122,15 @@
 
     <div class="ingredients-container">
       <h4>Ingredients:</h4>
+      <div
+        class="error-label extra-long"
+        *ngIf="
+          ingredients?.hasError('required') &&
+          recipeForm.controls['ingredients'].touched
+        "
+      >
+        At least one ingredient is required for a recipe.
+      </div>
       <ng-container formArrayName="ingredients">
         <ng-container
           *ngFor="let ingredient of ingredients.controls; let i = index"
@@ -79,14 +139,49 @@
             <div class="ingredient-row">
               {{ i + 1 }}
               <input formControlName="name" type="text" placeholder="Name" />
+              <a
+                class="error-label extra-long"
+                *ngIf="
+                  ingredients.controls[i].get('name')?.hasError('required') &&
+                  ingredients.controls[i].get('name')?.touched
+                "
+              >
+                Ingredient name is required.
+              </a>
+              <a
+                class="error-label extra-long"
+                *ngIf="
+                  ingredients.controls[i].get('name')?.hasError('minlength') &&
+                  ingredients.controls[i].get('name')?.touched
+                "
+              >
+                Ingredient name has to be longer than 3 characters.
+              </a>
+              <a
+                class="error-label extra-long"
+                *ngIf="
+                  ingredients.controls[i].get('name')?.hasError('maxlength') &&
+                  ingredients.controls[i].get('name')?.touched
+                "
+              >
+                Ingredient name cannot be longer than 20 characters.
+              </a>
             </div>
-
             <div class="ingredient-row">
               <input
                 formControlName="weight"
                 type="text"
                 placeholder="Weight"
               />
+              <a
+                class="error-label extra-long"
+                *ngIf="
+                  ingredients.controls[i].get('weight')?.hasError('required') &&
+                  ingredients.controls[i].get('weight')?.touched
+                "
+              >
+                Ingredient weight is required for an successful recipe.
+              </a>
             </div>
 
             <div class="ingredient-row">
@@ -95,9 +190,21 @@
                 type="text"
                 placeholder="Metric Unit"
               />
+              <a
+                class="error-label extra-long"
+                *ngIf="
+                  ingredients.controls[i]
+                    .get('metricUnit')
+                    ?.hasError('required') &&
+                  ingredients.controls[i].get('metricUnit')?.touched
+                "
+              >
+                A metric unit of weight is required for an accurate recipe.
+              </a>
             </div>
 
             <button
+              [disabled]="i == 0"
               class="delete-button btn-danger btn-sm"
               (click)="deleteIngredient(i)"
             >
@@ -114,6 +221,14 @@
 
     <div class="steps-container">
       <h4>Steps:</h4>
+      <div
+        class="error-label extra-long"
+        *ngIf="
+          steps?.hasError('required') && recipeForm.controls['steps'].touched
+        "
+      >
+        At least one step is required to make a recipe.
+      </div>
       <ng-container formArrayName="steps">
         <ng-container *ngFor="let step of steps.controls; let i = index">
           <div class="step-container" [formArrayName]="i">
@@ -124,7 +239,27 @@
               type="text"
               placeholder="step"
             />
+            <div
+              class="error-label extra-long"
+              *ngIf="
+                steps.controls[0].get('step')?.hasError('required') &&
+                steps.controls[0].get('step')?.touched &&
+                i == 0
+              "
+            >
+              At least one step is required for a recipe!
+            </div>
+            <div
+              class="error-label extra-long"
+              *ngIf="
+                steps.controls[i].get('step')?.hasError('minlength') &&
+                steps.controls[i].get('step')?.touched
+              "
+            >
+              At least one step is required for a recipe!
+            </div>
             <button
+              [disabled]="i == 0"
               class="delete-button btn-danger btn-sm"
               (click)="deleteStep(i)"
             >
@@ -188,7 +323,20 @@
         </label>
       </a>
       <div>
-        <button type="submit" class="save-button btn-lg">Save Recipe</button>
+        <button
+          (click)="onSubmit()"
+          type="submit"
+          class="save-button btn-lg irecipe-button"
+        >
+          Save Recipe
+        </button>
+        <button
+          *ngIf="!isAddMode"
+          (click)="deleteRecipe()"
+          class="delete-button btn-lg irecipe-button"
+        >
+          Delete Recipe
+        </button>
       </div>
     </div>
   </form>

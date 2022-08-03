@@ -10,5 +10,7 @@ export class RecipeDisplayCardComponent implements OnInit {
   @Input() recipe!: Recipe;
   constructor() {}
 
+  ifNoPhoto: string = '../../../assets/images/empty.jpg';
+
   ngOnInit(): void {}
 }

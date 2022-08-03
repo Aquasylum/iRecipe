@@ -93,6 +93,7 @@ input.medium {
 
 .delete-button {
   margin-left: 2vw;
+  background-color: var(--irecipe-orange);
 }
 
 .save-button {

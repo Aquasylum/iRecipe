@@ -1,1 +1,43 @@
-<p>view-recipe works!</p>
+<div class="recipe-container">
+  <div>
+    <h3>Recipe Name</h3>
+    {{ recipe.name }}
+
+    <h3>Author Name</h3>
+    {{ recipe.author }}
+  </div>
+
+  <div class="ingredients-container">
+    <h3>Ingredients:</h3>
+    <ul>
+      <li *ngFor="let ingredient of recipe.ingredients">
+        <a></a> {{ ingredient.name }} <a></a> {{ ingredient.weight }} <a></a>
+        {{ ingredient.metricUnit }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="steps-container">
+    <h3>Steps:</h3>
+    <ul>
+      <li *ngFor="let step of recipe.steps">
+        <div>{{ step.step }}</div>
+      </li>
+    </ul>
+  </div>
+
+  <div>
+    <h3>Calories per serving</h3>
+    {{ recipe.calories }}
+  </div>
+
+  <div>
+    <h3>Estimated time to make</h3>
+    {{ recipe.estimatedTime }}
+  </div>
+
+  <div>
+    <h3>Recipe created on:</h3>
+    {{ recipe.dateCreated }}
+  </div>
+</div>

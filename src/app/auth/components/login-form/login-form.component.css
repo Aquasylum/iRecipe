@@ -15,10 +15,7 @@ button {
 
 .form-footer {
   padding-top: 4vh;
-}
-
-.error-label {
-  background-color: var(--irecipe-orange);
+  margin-left: 35%;
 }
 
 input[type="text"] {

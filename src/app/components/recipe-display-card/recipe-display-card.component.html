@@ -5,7 +5,14 @@
 <div class="display-card">
   <h1>{{ recipe.name }}</h1>
   <h4>{{ recipe.author }}</h4>
-  <img [src]="recipe.imageSrc" />
+  <div *ngIf="recipe.imageSrc == null; then showEmpty; else showImage"></div>
+  <ng-template #showEmpty>
+    <img [src]="ifNoPhoto" />
+  </ng-template>
+  <ng-template #showImage>
+    <img [src]="recipe.imageSrc" />
+  </ng-template>
+  {{ recipe.imageSrc }}
   <h4 class="time">
     {{ recipe.estimatedTime }} min
     <span class="material-icons"> timer </span>
