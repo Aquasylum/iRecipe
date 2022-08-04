@@ -7,9 +7,16 @@
   rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
 />
+<div class="header-container">
+  <a>
+    <button class="add-button btn-sm" routerLink="/main">
+      Back to main menu
+    </button>
+  </a>
 
-<h1 class="header" *ngIf="isAddMode">Add Recipe</h1>
-<h1 class="header" *ngIf="!isAddMode">Edit Recipe</h1>
+  <a class="header" *ngIf="isAddMode">Add Recipe</a>
+  <a class="header" *ngIf="!isAddMode">Edit Recipe</a>
+</div>
 
 <div class="recipe-container">
   <form [formGroup]="recipeForm">
@@ -301,6 +308,15 @@
             placeholder="kkcal"
           />
         </label>
+        <a
+          class="error-label long"
+          *ngIf="
+            calories?.hasError('pattern') &&
+            recipeForm.controls['calories'].touched
+          "
+        >
+          Please only enter numbers.
+        </a>
       </a>
       <a class="input-field-container">
         <span class="material-icons"> timer </span>
@@ -313,9 +329,40 @@
             formControlName="estimatedTime"
           />
         </label>
+        <a
+          class="error-label long"
+          *ngIf="
+            estimatedTime?.hasError('pattern') &&
+            recipeForm.controls['estimatedTime'].touched
+          "
+        >
+          Please only enter numbers.
+        </a>
+      </a>
+      <a class="input-field-container">
+        <span class="material-symbols-outlined"> groups </span>
+        <label for="portions"
+          >Estimated portions
+          <input
+            type="text"
+            name="portions"
+            placeholder="portions"
+            formControlName="portions"
+          />
+        </label>
+        <a
+          class="error-label long"
+          *ngIf="
+            portions?.hasError('pattern') &&
+            recipeForm.controls['portions'].touched
+          "
+        >
+          Please only enter numbers.
+        </a>
       </a>
       <div>
         <button
+          [disabled]="recipeForm.invalid"
           (click)="onSubmit()"
           type="submit"
           class="save-button irecipe-button"

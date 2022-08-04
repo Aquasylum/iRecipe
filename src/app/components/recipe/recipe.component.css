@@ -1,10 +1,20 @@
 .header {
   padding-left: 2vw;
   padding-top: 2vh;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.header-container {
+  margin-left: 2vw;
 }
 
 .recipe-container {
   padding: 2vw 0vw 2vw 3vw;
+  border-radius: 10px;
+  box-shadow: 0 0 20px 2px #e4e4e4;
+  margin: 2%;
+  padding: 2%;
 }
 
 .flex-container {
@@ -42,26 +52,6 @@ input {
   padding-top: 5vh;
 }
 
-/* input.extra-long {
-  width: 45vw;
-}
-
-input.long {
-  width: 15vw;
-}
-
-input.medium {
-  width: 10vw;
-} */
-
-.material-icons,
-.material-symbols-outlined {
-  font-size: 3vh;
-  display: inline-block;
-  vertical-align: -0.25rem;
-  padding-right: 0.5vw;
-}
-
 .ingredient-row {
   display: inline-block;
 }
@@ -93,7 +83,7 @@ input.medium {
 
 .delete-button {
   margin-left: 2vw;
-  background-color: var(--irecipe-orange);
+  background-color: var(--irecipe-red);
 }
 
 .save-button {

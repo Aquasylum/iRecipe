@@ -1,8 +1,64 @@
-.recipe-container {
+.irecipe-container {
   border-radius: 10px;
   box-shadow: 0 0 20px 2px #e4e4e4;
-  margin-top: 2%;
-  margin-left: 2%;
-  margin-right: 2%;
+  margin: 2%;
+  padding: 2%;
+
+  font-size: 1.25rem;
+}
+
+.image-container {
+  max-width: 70vw;
+  max-height: 70vh;
+}
+
+.irecipe-details {
+  text-align: center;
+}
+
+.irecipe-infographics {
+  margin-top: 2vh;
+}
+
+.material-symbols-outlined {
+  font-size: 5vh;
+  vertical-align: -0.5rem;
+}
+
+.ingredients,
+.steps,
+.tips {
+  text-align: left;
+  margin-top: 8vh;
+}
+
+.edit-button {
   background-color: var(--irecipe-green);
+  border: none;
+}
+
+.send-button {
+  background-color: white;
+  margin-left: 2vw;
+}
+
+.irecipe-share {
+  margin-top: 4vh;
+  padding: 2vh;
+  width: 80%;
+  text-align: center;
+  border-radius: 10px;
+  background-color: var(--irecipe-green);
+}
+
+.username-input-field {
+  margin-top: 2vh;
+}
+
+input[type="text"] {
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: black;
+  background-color: transparent;
+  color: black;
 }

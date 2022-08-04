@@ -1,43 +1,147 @@
-<div class="recipe-container">
-  <div>
-    <h3>Recipe Name</h3>
-    {{ recipe.name }}
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+/>
+<div class="irecipe-container">
+  <div class="intro-container">
+    <div class="row">
+      <div class="col-md-6">
+        <div
+          *ngIf="recipe?.imageSrc == null; then showEmpty; else showRecipeImage"
+        ></div>
+        <ng-template #showEmpty>
+          <img class="image-container" [src]="ifNoPhoto" />
+        </ng-template>
+        <ng-template #showRecipeImage>
+          <img class="image-container" [src]="recipe.imageSrc" />
+        </ng-template>
 
-    <h3>Author Name</h3>
-    {{ recipe.author }}
-  </div>
+        <div>
+          <button
+            class="irecipe-button edit-button"
+            routerLink="main/recipe/{{ recipe.id }}"
+          >
+            Edit Recipe
+          </button>
+          <button class="irecipe-button delete-button" (click)="deleteRecipe()">
+            Delete Recipe
+          </button>
+        </div>
 
-  <div class="ingredients-container">
-    <h3>Ingredients:</h3>
-    <ul>
-      <li *ngFor="let ingredient of recipe.ingredients">
-        <a></a> {{ ingredient.name }} <a></a> {{ ingredient.weight }} <a></a>
-        {{ ingredient.metricUnit }}
-      </li>
-    </ul>
-  </div>
+        <div class="irecipe-share">
+          Want to share this recipe with another user?
+          <br />
+          Enter their username and we'll take care of the rest!
+          <div class="username-input-field">
+            <label for="username">
+              <input
+                type="text"
+                name="placeholder"
+                placeholder="username"
+                #username
+              />
+            </label>
+            <button class="irecipe-button send-button" (click)="sendRecipe()">
+              Send Recipe
+            </button>
+          </div>
+        </div>
+      </div>
 
-  <div class="steps-container">
-    <h3>Steps:</h3>
-    <ul>
-      <li *ngFor="let step of recipe.steps">
-        <div>{{ step.step }}</div>
-      </li>
-    </ul>
-  </div>
+      <div class="col-md-6 irecipe-details">
+        <h2>{{ recipe.name }} by {{ recipe.author }}</h2>
+        <div class="row irecipe-infographics">
+          <div class="col-md-4">
+            <div
+              *ngIf="
+                recipe.estimatedTime == null;
+                then timeNotSpecified;
+                else showTime
+              "
+            ></div>
+            <ng-template #timeNotSpecified>
+              <span class="material-symbols-outlined"> timer </span>
+              <a>Time to cook : not specified</a>
+            </ng-template>
+            <ng-template #showTime>
+              <span class="material-symbols-outlined"> timer </span>
+              <a>Time to cook : {{ recipe.estimatedTime }}</a>
+            </ng-template>
+          </div>
 
-  <div>
-    <h3>Calories per serving</h3>
-    {{ recipe.calories }}
-  </div>
+          <div class="col-md-4">
+            <div
+              *ngIf="
+                recipe.calories == null;
+                then caloriesNotSpecified;
+                else showCalories
+              "
+            ></div>
+            <ng-template #caloriesNotSpecified>
+              <span class="material-symbols-outlined"> monitoring </span>
+              <a>Calories: not specified</a>
+            </ng-template>
+            <ng-template #showCalories>
+              <span class="material-symbols-outlined"> monitoring </span>
+              <a>Calories: {{ recipe.calories }}</a>
+            </ng-template>
+          </div>
 
-  <div>
-    <h3>Estimated time to make</h3>
-    {{ recipe.estimatedTime }}
-  </div>
+          <div class="col-md-4">
+            <div
+              *ngIf="
+                recipe.portions == null;
+                then portionsNotSpecified;
+                else showPortions
+              "
+            ></div>
+            <ng-template #portionsNotSpecified>
+              <span class="material-symbols-outlined"> monitoring </span>
+              <a>Portions: not specified</a>
+            </ng-template>
+            <ng-template #showPortions>
+              <span class="material-symbols-outlined"> groups </span>
+              <a>Portions: {{ recipe.portions }}</a>
+            </ng-template>
+          </div>
+        </div>
 
-  <div>
-    <h3>Recipe created on:</h3>
-    {{ recipe.dateCreated }}
+        <div class="row">
+          <div class="col md 12 ingredients">
+            <h4>Ingredients</h4>
+            <ul>
+              <li *ngFor="let ingredient of recipe.ingredients">
+                {{ ingredient.name }} {{ ingredient.weight }}
+                {{ ingredient.metricUnit }}
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col md 12 steps">
+            <h4>Steps</h4>
+            <ul>
+              <li *ngFor="let step of recipe.steps">
+                {{ step.step }}
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div *ngIf="recipe.tips != null">
+          <div class="row">
+            <div class="col md 12 tips">
+              <h4>Tips</h4>
+              <ul>
+                <li *ngFor="let tip of recipe.tips">
+                  {{ tip.tip }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

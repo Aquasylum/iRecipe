@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MenuType } from 'src/app/enums/MenuType';
 
 @Component({
@@ -9,12 +9,16 @@ import { MenuType } from 'src/app/enums/MenuType';
 export class SectionListComponent implements OnInit {
   constructor() {}
 
+  @Output() viewBy = new EventEmitter<string>();
   menu = Object.values(MenuType);
   selectedMenuOption: number = 0;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.viewBy.emit(this.menu[0]);
+  }
 
   onSelectMenuOption(selector: number): void {
     this.selectedMenuOption = selector;
+    this.viewBy.emit(this.menu[selector]);
   }
 }

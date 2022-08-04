@@ -23,13 +23,6 @@ ul {
   background-color: var(--irecipe-orange);
 }
 
-.material-icons.md-16 {
-  font-size: 3vh;
-  display: inline-block;
-  vertical-align: -0.7vh;
-  padding-left: 0.5vw;
-}
-
 .add-recipe-button {
   background-color: var(--irecipe-green);
   margin: auto;

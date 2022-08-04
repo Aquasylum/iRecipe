@@ -17,7 +17,6 @@ import {
 import { Ingredient } from 'src/app/models/Ingredient';
 import { MealType } from 'src/app/enums/MealType';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { validateArgCount } from '@firebase/util';
 
 @Component({
   selector: 'irecipe-recipe',
@@ -31,7 +30,6 @@ export class RecipeComponent implements OnInit {
   ingredientsData!: any;
   recipeTypesArray = Object.values(MealType);
   ifNoPhoto: string = '../../../assets/images/emptyjpg';
-  currentUser: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -64,9 +62,12 @@ export class RecipeComponent implements OnInit {
       ingredients: this.fb.array([], [Validators.required]),
       steps: this.fb.array([], [Validators.required]),
       recipeTypes: this.fb.array([]),
-      calories: [''],
+      calories: ['', Validators.pattern('^[0-9]*$')],
       tips: this.fb.array([]),
-      estimatedTime: [''],
+      estimatedTime: ['', Validators.pattern('^[0-9]*$')],
+      tags: this.fb.array([]),
+      rating: [''],
+      portions: ['', Validators.pattern('^[0-9]*$')],
     });
 
     //Checking if in edit mode
@@ -89,6 +90,7 @@ export class RecipeComponent implements OnInit {
               })
             )
             .subscribe((recipe) => {
+              console.log(recipe);
               this.recipeForm.patchValue(recipe);
             });
         });
@@ -103,6 +105,18 @@ export class RecipeComponent implements OnInit {
 
   get author() {
     return this.recipeForm.get('author');
+  }
+
+  get calories() {
+    return this.recipeForm.get('calories');
+  }
+
+  get portions() {
+    return this.recipeForm.get('portions');
+  }
+
+  get estimatedTime() {
+    return this.recipeForm.get('estimatedTime');
   }
 
   //Ingredients
@@ -195,6 +209,6 @@ export class RecipeComponent implements OnInit {
   deleteRecipe() {
     this.recipeService
       .deleteRecipe(this.id)
-      .then(() => this.router.navigate(['/main/recipe']));
+      .then(() => this.router.navigate(['/main']));
   }
 }

@@ -9,6 +9,7 @@ import { RecipeService } from 'src/app/services/recipe.service';
 })
 export class RecipesContainerComponent implements OnInit {
   recipeSelection: Recipe[] = [];
+  selectedMenu!: string;
 
   constructor(private recipeService: RecipeService) {}
 
@@ -16,5 +17,9 @@ export class RecipesContainerComponent implements OnInit {
     this.recipeService
       .getAllRecipesByUserId()
       .then((recipes) => (this.recipeSelection = recipes));
+  }
+
+  onMenuSelect(selectBy: string) {
+    this.selectedMenu = selectBy;
   }
 }

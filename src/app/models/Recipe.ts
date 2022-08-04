@@ -10,14 +10,17 @@ export class Recipe {
   userId!: string | undefined;
   author!: string;
   name!: string;
+  description?: string;
   imageSrc?: string;
   dateCreated!: number;
   dateModified!: number;
   ingredients!: Ingredient[];
   steps!: Step[];
   tips?: Tip[];
+  portions?: number;
   calories?: number;
   estimatedTime?: number;
   recipeType!: RecipeType[];
   tags?: string[];
+  rating?: number;
 }

@@ -12,23 +12,23 @@
     >
       {{ m }}
       <ng-template [ngIf]="i == 0">
-        <span class="material-icons md-16"> dashboard </span>
+        <span class="material-icons"> dashboard </span>
       </ng-template>
       <ng-template [ngIf]="i == 1">
-        <span class="material-icons md-16"> favorite </span>
+        <span class="material-icons"> favorite </span>
       </ng-template>
       <ng-template [ngIf]="i == 2">
-        <span class="material-icons md-16"> thumb_up </span>
+        <span class="material-icons"> thumb_up </span>
       </ng-template>
       <ng-template [ngIf]="i == 3">
-        <span class="material-icons md-16"> watch_later </span>
+        <span class="material-icons"> watch_later </span>
       </ng-template>
     </li>
   </ul>
 </div>
 
 <div>
-  <button class="add-recipe-button irecipe-button" routerLink="/main/recipe">
+  <button class="add-recipe-button btn-lg" routerLink="/main/recipe">
     Add Recipe!
   </button>
 </div>

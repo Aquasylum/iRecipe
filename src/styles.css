@@ -17,6 +17,7 @@ body {
   --irecipe-orange: #e8a87c;
   --irecipe-green: #7dc2ae;
   --irecipe-red: #c23b22;
+  --irecipe-blue: #7abacc;
 }
 
 .irecipe-button {
@@ -51,4 +52,20 @@ body {
 
 button.standard:disabled {
   color: rgb(68, 68, 68);
+}
+
+.material-icons,
+.material-symbols-outlined {
+  font-size: 3vh;
+  display: inline-block;
+  vertical-align: -0.25rem;
+  padding-right: 0.5vw;
+}
+
+.add-button {
+  background-color: var(--irecipe-green);
+}
+
+.delete-button {
+  background-color: var(--irecipe-red);
 }
