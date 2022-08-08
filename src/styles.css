@@ -1,16 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
 body {
-  font-family: Babas !important;
+  font-family: Avenir, "Helvetica Neue", sans-serif;
 }
 
 html,
 body {
   height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 :root {
@@ -21,12 +17,14 @@ body {
 }
 
 .irecipe-button {
-  border-radius: 20px;
-  padding: 0 50px;
   margin-top: 2vh;
   margin-bottom: 2vh;
-  background-color: transparent;
-  border: 1px solid #fff;
+  border: none;
+}
+
+button:disabled {
+  background-color: rgb(68, 68, 68) !important;
+  transform: none !important;
 }
 
 .irecipe-button:hover {
@@ -48,10 +46,12 @@ body {
 .error-label {
   background-color: var(--irecipe-red);
   padding-left: 0.5vw;
+  border-radius: 5px;
 }
 
-button.standard:disabled {
-  color: rgb(68, 68, 68);
+.error-container {
+  font-size: 1rem;
+  margin-bottom: 1vh;
 }
 
 .material-icons,
@@ -68,4 +68,23 @@ button.standard:disabled {
 
 .delete-button {
   background-color: var(--irecipe-red);
+}
+
+.logo {
+  font-family: pacificoregular;
+  font-size: 6vh;
+}
+
+.irecipe-input {
+  margin-left: 2vw;
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: black;
+}
+
+.irecipe-header {
+  margin-left: 1%;
+  text-align: center;
+  margin-bottom: 3%;
+  border-bottom: 3px solid black;
 }

@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Recipe } from '../models/Recipe';
-import { Observable, of, from, ObservedValuesFromArray } from 'rxjs';
-import { environment } from 'src/environments/environment.prod';
-import { MealType } from 'src/app/enums/MealType';
+import { Observable, of, from } from 'rxjs';
 
 //firebase imports:
 import {
-  DocumentData,
   addDoc,
   collection,
   where,
@@ -15,36 +12,36 @@ import {
   doc,
   updateDoc,
 } from '@firebase/firestore';
-import { initializeApp } from 'firebase/app';
 
-import {
-  Firestore,
-  docData,
-  getDocs,
-  firestoreInstance$,
-} from '@angular/fire/firestore';
+import { Firestore, docData, getDocs } from '@angular/fire/firestore';
 import { AuthService } from '../auth/services/auth.service';
-import { RecipeComponent } from '../components/recipe/recipe.component';
+import { UserService } from '../auth/services/user.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
-  constructor(private fireStore: Firestore, private auth: AuthService) {}
+  constructor(
+    private fireStore: Firestore,
+    private auth: AuthService,
+    private userService: UserService
+  ) {}
 
   recipeCollection = collection(this.fireStore, 'recipes');
 
   async getAllRecipesByUserId(): Promise<Recipe[]> {
     let recipes: Recipe[] = [];
-    const q = query(
-      this.recipeCollection,
-      where('userId', '==', this.auth.getCurrentUser()?.uid)
-    );
 
-    await getDocs(q).then((querySnapshot) =>
-      querySnapshot.forEach((doc) => recipes.push(doc.data() as Recipe))
-    );
+    this.userService.userRecipeIds().then((ids) => {
+      ids.forEach((id) => {
+        const q = query(this.recipeCollection, where('id', '==', id));
+        getDocs(q).then((querySnapshot) =>
+          querySnapshot.forEach((doc) => recipes.push(doc.data() as Recipe))
+        );
+      });
+    });
 
+    console.log(recipes);
     return recipes;
   }
 
@@ -54,16 +51,18 @@ export class RecipeService {
   }
 
   async createRecipe(recipe: Recipe) {
-    recipe.userId = this.auth.getCurrentUser()?.uid;
     recipe.dateCreated = Date.now();
     recipe.dateModified = Date.now();
-    let newDocument = await addDoc(this.recipeCollection, recipe);
+    let newRecipe = await addDoc(this.recipeCollection, recipe);
+
+    //Adding recipe to the recipe array in User collection:
+    this.userService.updateUserWithRecipeId(newRecipe.id);
 
     //Adding id to document:
-    recipe.id = newDocument.id;
+    recipe.id = newRecipe.id;
     const recipeDocumentReference = doc(this.recipeCollection, recipe.id);
     await updateDoc(recipeDocumentReference, { ...recipe });
-    return newDocument.id;
+    return newRecipe.id;
   }
 
   async updateRecipe(recipe: Recipe, id: string) {

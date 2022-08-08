@@ -4,30 +4,37 @@
       (viewBy)="onMenuSelect($event)"
     ></irecipe-section-list>
   </div>
+
   <div class="irecipe-main">
-    <h1 class="irecipe-header">
-      {{ selectedMenu }}
-    </h1>
-    <div
-      *ngIf="recipeSelection.length === 0; then addRecipe; else showRecipes"
-    ></div>
-    <ng-template #addRecipe>
-      <div class="no-recipes">
-        <h2>Oh no, it seems like you have no recipes!</h2>
-        <button class="irecipe-button" routerLink="/main/recipe">
-          Add Recipe
-        </button>
-      </div>
-    </ng-template>
-    <ng-template #showRecipes>
+    <div class="irecipe-header">
+      <a class="header"> {{ selectedMenu }}</a>
+    </div>
+    <div class="irecipe-display">
       <div
-        class="recipe-cards-container"
-        *ngFor="let recipe of recipeSelection"
-      >
-        <irecipe-recipe-display-card
-          [recipe]="recipe"
-        ></irecipe-recipe-display-card>
-      </div>
-    </ng-template>
+        *ngIf="recipeSelection.length === 0; then addRecipe; else showRecipes"
+      ></div>
+      <ng-template #addRecipe>
+        <div class="no-recipes">
+          <h2>Oh no, it seems like you have no recipes!</h2>
+          <button class="irecipe-button btn-lg" routerLink="/main/recipe">
+            Add Recipe
+          </button>
+        </div>
+      </ng-template>
+      <ng-template #showRecipes>
+        <div class="row">
+          <div
+            class="recipe-cards-container"
+            *ngFor="let recipe of recipeSelection"
+          >
+            <div class="col-lg-4 col-sm-6 col-xs-12">
+              <irecipe-recipe-display-card
+                [recipe]="recipe"
+              ></irecipe-recipe-display-card>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
   </div>
 </div>

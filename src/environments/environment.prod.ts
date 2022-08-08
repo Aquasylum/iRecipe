@@ -1,5 +1,5 @@
 export const environment = {
-  firebaseConfig: {
+  firebase: {
     projectId: 'irecipe-c7f9c',
     appId: '1:502635283257:web:97f63d25847dcaf8351ee8',
     storageBucket: 'irecipe-c7f9c.appspot.com',

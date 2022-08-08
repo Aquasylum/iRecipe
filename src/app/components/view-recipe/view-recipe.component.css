@@ -1,10 +1,24 @@
+.header-container {
+  margin-left: 2vw;
+}
+
+.add-button {
+  width: 8vw;
+  min-width: 85px;
+  font-size: 16px;
+  margin-top: 2vh;
+}
+
 .irecipe-container {
   border-radius: 10px;
   box-shadow: 0 0 20px 2px #e4e4e4;
   margin: 2%;
   padding: 2%;
-
   font-size: 1.25rem;
+}
+
+img {
+  border-radius: 50%;
 }
 
 .image-container {
@@ -34,7 +48,7 @@
 
 .edit-button {
   background-color: var(--irecipe-green);
-  border: none;
+  margin-right: 2vw;
 }
 
 .send-button {

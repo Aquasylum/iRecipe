@@ -7,7 +7,6 @@ import { User } from 'firebase/auth';
 
 export class Recipe {
   id!: string;
-  userId!: string | undefined;
   author!: string;
   name!: string;
   description?: string;

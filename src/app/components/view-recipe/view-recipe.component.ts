@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/services/auth.service';
+import { UserService } from 'src/app/auth/services/user.service';
 import { Recipe } from 'src/app/models/Recipe';
 import { RecipeService } from 'src/app/services/recipe.service';
+import { UserDoesNotExist } from 'src/app/shared/validators/UserDoesNotExist.validator';
 
 @Component({
   selector: 'app-view-recipe',
@@ -14,13 +17,17 @@ export class ViewRecipeComponent implements OnInit {
     private route: ActivatedRoute,
     private recipeService: RecipeService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private userService: UserService,
+    private userDoesNotExistValidator: UserDoesNotExist,
+    private authService: AuthService
   ) {}
 
   recipe!: Recipe;
   id = this.route.snapshot.paramMap.get('id') as string;
   ifNoPhoto: string = '../../../assets/images/empty.jpg';
   usernameForm!: FormGroup;
+  showSuccessMessage: boolean = false;
 
   ngOnInit(): void {
     this.recipeService.getRecipeById(this.id).then((obs) =>
@@ -30,8 +37,20 @@ export class ViewRecipeComponent implements OnInit {
     );
 
     this.usernameForm = this.fb.group({
-      username: [''],
+      username: [
+        '',
+        [],
+        [
+          this.userDoesNotExistValidator.validate.bind(
+            this.userDoesNotExistValidator
+          ),
+        ],
+      ],
     });
+  }
+
+  get username() {
+    return this.usernameForm.get('username');
   }
 
   deleteRecipe() {
@@ -41,6 +60,21 @@ export class ViewRecipeComponent implements OnInit {
   }
 
   sendRecipe() {
-    console.log(this.usernameForm.value);
+    //check if user is typing in their display name ie cannot send recipe to self
+    if (this.authService.getCurrentUserDisplayName() == this.username?.value) {
+      this.username?.setErrors({ cantUseOwnUsername: true });
+      return;
+    }
+
+    this.userService
+      .updateUserWithRecipeId(this.recipe.id, this.username?.value)
+      .then(() => {
+        this.usernameForm.reset;
+        this.showSuccessMessage = true;
+      });
+  }
+
+  onCloseSuccessMessage() {
+    this.showSuccessMessage = false;
   }
 }

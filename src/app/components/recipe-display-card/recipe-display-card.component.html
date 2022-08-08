@@ -3,8 +3,8 @@
   rel="stylesheet"
 />
 <div class="display-card">
-  <h1>{{ recipe.name }}</h1>
-  <h4>{{ recipe.author }}</h4>
+  <h1 class="text-cutter">{{ recipe.name }}</h1>
+  <h4 class="text-cutter">{{ recipe.author }}</h4>
   <div
     *ngIf="recipe.imageSrc == null; then showEmpty; else showRecipeImage"
   ></div>
