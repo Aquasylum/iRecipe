@@ -1,13 +1,28 @@
-import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
+
+import { HttpErrorResponse } from '@angular/common/http';
+
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserExistsValidator } from '../../../shared/validators/UserExists.validator';
 
 @Component({
   selector: 'irecipe-login-form',
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.css'],
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent implements OnInit, OnChanges {
   @Input() formType!: string;
+  @Input() showSuccessMessage: boolean = false;
+  @Input() userError!: HttpErrorResponse;
 
   @Output() userFormData = new EventEmitter<{
     email: string;
@@ -16,7 +31,28 @@ export class LoginFormComponent implements OnInit {
 
   userForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private userExistsValidator: UserExistsValidator,
+    private router: Router
+  ) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.userError);
+    if (
+      this.userError?.message == 'Firebase: Error (auth/email-already-in-use).'
+    ) {
+      this.email?.setErrors({ emailAlreadyInUse: true });
+    }
+
+    if (this.userError?.message == 'Firebase: Error (auth/wrong-password).') {
+      this.password?.setErrors({ wrongPassword: true });
+    }
+
+    if (this.userError?.message == 'Firebase: Error (auth/user-not-found).') {
+      this.userForm?.setErrors({ userNotFound: true });
+    }
+  }
 
   ngOnInit(): void {
     if (this.formType == 'login') {
@@ -35,6 +71,7 @@ export class LoginFormComponent implements OnInit {
             Validators.minLength(3),
             Validators.maxLength(12),
           ],
+          [this.userExistsValidator.validate.bind(this.userExistsValidator)],
         ],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]],
@@ -56,5 +93,14 @@ export class LoginFormComponent implements OnInit {
 
   onSubmit() {
     this.userFormData.emit(this.userForm.value);
+  }
+
+  onCloseSuccessMessage() {
+    this.showSuccessMessage = false;
+    this.router.navigate(['/login']);
+  }
+
+  onForgetPassword() {
+    this.router.navigate(['/forget-password']);
   }
 }

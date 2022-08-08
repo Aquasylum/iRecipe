@@ -4,34 +4,43 @@
       <div class="form-field">
         <label
           >Username
-          <input class="long" type="text" formControlName="username" required />
+          <input
+            class="long irecipe-input"
+            type="text"
+            formControlName="username"
+            required
+          />
         </label>
-        <div
-          class="error-label"
-          *ngIf="
-            username?.hasError('required') &&
-            userForm.controls['username'].touched
-          "
-        >
-          A username is required.
-        </div>
-        <div
-          class="error-label"
-          *ngIf="
-            username?.hasError('minlength') &&
-            userForm.controls['username'].touched
-          "
-        >
-          Username is too short! Please enter more than 3 characters.
-        </div>
-        <div
-          class="error-label"
-          *ngIf="
-            username?.hasError('maxlength') &&
-            userForm.controls['username'].touched
-          "
-        >
-          Username is too long! Please enter less than 12 characters.
+        <div class="error-container">
+          <ng-container *ngIf="username?.invalid && username?.touched">
+            <div
+              class="error-label"
+              *ngIf="username?.hasError('required') && username?.touched"
+            >
+              A username is required.
+            </div>
+
+            <div
+              class="error-label"
+              *ngIf="username?.hasError('minlength') && username?.touched"
+            >
+              Username is too short! Please enter more than 3 characters.
+            </div>
+
+            <div
+              class="error-label"
+              *ngIf="username?.hasError('maxlength') && username?.touched"
+            >
+              Username is too long! Please enter less than 12 characters.
+            </div>
+
+            <div
+              class="error-label"
+              *ngIf="username?.hasError('exists') && username?.touched"
+            >
+              Username is already taken. Please enter a new username.
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>
@@ -39,42 +48,112 @@
     <div class="form-field">
       <label
         >Email
-        <input class="long" type="text" formControlName="email" required />
+        <input
+          class="long irecipe-input"
+          type="text"
+          formControlName="email"
+          required
+        />
       </label>
-      <div class="error-label" *ngIf="email?.hasError('email')">
-        Email isn't valid. Please enter a valid email.
-      </div>
-      <div
-        class="error-label"
-        *ngIf="
-          email?.hasError('required') && userForm.controls['email'].touched
-        "
-      >
-        Email isn't valid. Please enter a valid email.
+      <div class="error-container">
+        <ng-container *ngIf="email?.invalid && email?.touched">
+          <div
+            class="error-label"
+            *ngIf="email?.hasError('email') && email?.touched"
+          >
+            Email isn't valid. Please enter a valid email.
+          </div>
+
+          <div
+            class="error-label"
+            *ngIf="email?.hasError('emailAlreadyInUse') && email?.touched"
+          >
+            Email is already in use. Please log in or reset your password.
+          </div>
+
+          <div
+            class="error-label"
+            *ngIf="email?.hasError('required') && email?.touched"
+          >
+            Email isn't valid. Please enter a valid email.
+          </div>
+        </ng-container>
       </div>
     </div>
 
     <div class="form-field">
       <label>
         Password
-        <input class="long" type="text" formControlName="password" required />
+        <input
+          class="long irecipe-input"
+          type="password"
+          formControlName="password"
+          required
+        />
       </label>
-      <div
-        class="error-label"
-        *ngIf="
-          password?.hasError('required') &&
-          userForm.controls['password'].touched
-        "
-      >
-        Password is required
-      </div>
-      <div class="error-label" *ngIf="password?.hasError('minlength')">
-        Password needs to be longer then 6 characters!
+      <div class="error-container">
+        <ng-container>
+          <div
+            class="error-label"
+            *ngIf="password?.hasError('required') && password?.touched"
+          >
+            Password is required
+          </div>
+
+          <div
+            class="error-label"
+            *ngIf="password?.hasError('minlength') && password?.touched"
+          >
+            Password needs to be longer then 6 characters!
+          </div>
+
+          <div
+            class="error-label"
+            *ngIf="password?.hasError('wrongPassword') && password?.touched"
+          >
+            This password does not match the specified email address. Please try
+            again!
+          </div>
+
+          <div
+            *ngIf="formType == 'login'"
+            class="forgot-password"
+            (click)="onForgetPassword()"
+          >
+            <u> Oh no! Did you forget your password?</u>
+          </div>
+        </ng-container>
       </div>
     </div>
+    <div
+      class="alert alert-success alert-dismissible fade show"
+      role="alert"
+      *ngIf="showSuccessMessage"
+    >
+      <strong>Hoooray!</strong> You have successfully registered. Please login
+      on the next screen
+      <button
+        (click)="onCloseSuccessMessage()"
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="error-container">
+      <ng-container *ngIf="userForm.invalid"> </ng-container>
+    </div>
+    <div class="error-label" *ngIf="userForm?.hasError('userNotFound')">
+      This user does not exist. Please enter the details correctly or create an
+      account!
+    </div>
+
     <div class="form-footer">
       <button
-        class="irecipe-button"
+        class="irecipe-button btn-lg"
         [disabled]="userForm.invalid"
         type="submit"
       >

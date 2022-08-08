@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { Router } from '@angular/router';
 
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class LoginPageComponent implements OnInit {
   bool: boolean = true;
+  error!: HttpErrorResponse;
 
   constructor(
     private readonly authService: AuthService,
@@ -22,7 +24,7 @@ export class LoginPageComponent implements OnInit {
     this.authService
       .login(data)
       .then(() => this.router.navigate(['/main']))
-      .catch((e) => console.log(e.message));
+      .catch((e) => (this.error = e));
   }
 
   loginWithGoogle() {

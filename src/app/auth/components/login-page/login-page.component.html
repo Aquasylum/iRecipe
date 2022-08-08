@@ -6,18 +6,21 @@
         Want to create an awesome account to access this awesome app? Go ahead
         and click the button below!
       </p>
-      <button class="irecipe-button" routerLink="/register">Register</button>
+      <button class="irecipe-button btn-lg" routerLink="/register">
+        Register
+      </button>
     </div>
     <div class="login-form-container">
       <a class="logo">iRecipe</a>
       <h2>Welcome to iRecipe Login</h2>
-      <button class="irecipe-button" (click)="loginWithGoogle()">
+      <button class="irecipe-button btn-lg" (click)="loginWithGoogle()">
         Sign In with Google
       </button>
       <h5>Or sign in with your email</h5>
       <irecipe-login-form
         class="login-form"
         (userFormData)="login($event)"
+        [userError]="error"
         formType="login"
       ></irecipe-login-form>
     </div>

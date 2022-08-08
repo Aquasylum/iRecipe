@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { RegisterPageComponent } from './components/register-page/register-page.component';
 import { canActivate, redirectLoggedInTo } from '@angular/fire/auth-guard';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 
 const redirectLoggedInToHome = () => redirectLoggedInTo(['main']);
 
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterPageComponent,
+  },
+  {
+    path: 'forget-password',
+    component: ForgetPasswordComponent,
   },
 ];
 

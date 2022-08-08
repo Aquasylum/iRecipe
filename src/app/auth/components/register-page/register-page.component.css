@@ -6,21 +6,34 @@
   margin-top: 5%;
 }
 
-.login-redirect {
+.register-container {
+  border-radius: 10px;
+  box-shadow: 0 0 20px 2px #e4e4e4;
+  display: flex;
+  width: 60%;
+}
+
+.register-form-container {
   align-items: center;
-  background-color: var(--irecipe-green);
+  background-color: #fff;
   border-radius: 10px 0 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8vh;
+  width: 70%;
+}
+
+.login-redirect {
+  text-align: center;
+  background-color: var(--irecipe-green);
+  border-radius: 0 10px 10px 0;
   color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 50px;
   width: 30%;
-}
-
-.logo {
-  font-family: pacificoregular;
-  font-size: 6vh;
 }
 
 button {
@@ -39,24 +52,6 @@ p {
 
 h2 {
   text-align: center;
-}
-
-.register-container {
-  border-radius: 10px;
-  box-shadow: 0 0 20px 2px #e4e4e4;
-  display: flex;
-  width: 60%;
-}
-
-.register-form-container {
-  align-items: center;
-  background-color: #fff;
-  border-radius: 0 10px 10px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 80px;
-  width: 70%;
 }
 
 .login-redirect h1 {

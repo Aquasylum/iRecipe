@@ -7,7 +7,9 @@ import {
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
+  sendPasswordResetEmail,
 } from '@angular/fire/auth';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 import { ILoginData } from '../../models/Interfaces/ILoginData';
@@ -18,12 +20,18 @@ import { ILoginData } from '../../models/Interfaces/ILoginData';
 export class AuthService {
   constructor(private auth: Auth) {}
 
-  login(login: ILoginData) {
-    return signInWithEmailAndPassword(this.auth, login.email, login.password);
+  async login(login: ILoginData) {
+    return await signInWithEmailAndPassword(
+      this.auth,
+      login.email,
+      login.password
+    ).catch((e: HttpErrorResponse) => {
+      throw e;
+    });
   }
 
-  loginWithGoogle() {
-    return signInWithPopup(this.auth, new GoogleAuthProvider());
+  async loginWithGoogle() {
+    return await signInWithPopup(this.auth, new GoogleAuthProvider());
   }
 
   getCurrentUser() {
@@ -39,13 +47,25 @@ export class AuthService {
       this.auth,
       register.email,
       register.password
-    ).then((cred) => {
-      updateProfile(cred.user, {
-        displayName: register.username,
-      });
+    )
+      .then((cred) => {
+        updateProfile(cred.user, {
+          displayName: register.username,
+        });
 
-      sendEmailVerification(cred.user);
-    });
+        sendEmailVerification(cred.user);
+      })
+      .catch((e: HttpErrorResponse) => {
+        throw e;
+      });
+  }
+
+  async resetPassword(email: string) {
+    await sendPasswordResetEmail(this.auth, email).catch(
+      (e: HttpErrorResponse) => {
+        throw e;
+      }
+    );
   }
 
   logout() {

@@ -7,9 +7,10 @@ import { AuthService } from './services/auth.service';
 import { LoginPageComponent } from './components/login-page/login-page.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { RegisterPageComponent } from './components/register-page/register-page.component';
+import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 
 @NgModule({
-  declarations: [LoginFormComponent, LoginPageComponent, RegisterPageComponent],
+  declarations: [LoginFormComponent, LoginPageComponent, RegisterPageComponent, ForgetPasswordComponent],
   imports: [CommonModule, AuthRoutingModule, ReactiveFormsModule, FormsModule],
   providers: [AuthService],
 })

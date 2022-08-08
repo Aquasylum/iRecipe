@@ -1,4 +1,4 @@
-button {
+.irecipe-button {
   background-color: var(--irecipe-orange);
   color: #fff;
 }
@@ -18,9 +18,10 @@ button {
   margin-left: 35%;
 }
 
-input[type="text"] {
-  margin-left: 2vw;
-  outline: 0;
-  border-width: 0 0 2px;
-  border-color: black;
+.forgot-password {
+  text-align: center;
+}
+
+.forgot-password:hover {
+  color: var(--irecipe-orange);
 }

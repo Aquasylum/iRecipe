@@ -5,6 +5,8 @@
       <h2>Welcome to iRecipe Registration!</h2>
       <h5>Register here with your email</h5>
       <irecipe-login-form
+        [showSuccessMessage]="success"
+        [userError]="error"
         formType="register"
         class="login-form"
         (userFormData)="register($event)"
@@ -13,7 +15,7 @@
     <div class="login-redirect">
       <h2>Already a member?</h2>
       <p>Click here to sign back in!</p>
-      <button class="irecipe-button" routerLink="/login">Sign In</button>
+      <button class="irecipe-button btn-lg" routerLink="/login">Sign In</button>
     </div>
   </div>
 </div>
