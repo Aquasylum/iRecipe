@@ -8,11 +8,12 @@
   --irecipe-dark: #242424;
 
   /* Font sizes */
-  --irecipe-logo: 100px;
-  --irecipe-heading: 28px;
-  --irecipe-label: 16px
-  --irecipe-text: 14px;
+  --irecipe-profile-name: 75px;
+  --irecipe-logo: 60px;
+  --irecipe-heading: 24px;
+  --irecipe-label: 16px  
   --irecipe-icons: 32px;
+  --irecipe-text: 14px;
 
   --input-long: 350px;
   --input-medium: 250px;
@@ -21,6 +22,10 @@
 
 /* Responsiveness sizing adjustments from variables */
 @media screen and (max-width: 1800px) {
+.irecipe-profile-name{
+  font-size: var(--irecipe-profile-name);
+}
+
   .irecipe-logo {
     font-size: var(--irecipe-logo);
   }
@@ -48,6 +53,10 @@
 
 
 @media screen and (max-width: 1200px) {
+  .irecipe-profile-name{
+    font-size: calc(var(--irecipe-profile-name)*0.8);
+  }
+
   .irecipe-logo {
     font-size: calc(var(--irecipe-logo) *0.8);
   }
@@ -74,6 +83,10 @@
 }
 
 @media screen and (max-width: 600px) {
+  .irecipe-profile-name{
+    font-size: calc(var(--irecipe-profile-name)*0.5);
+  }
+
   .irecipe-logo {
     font-size: calc(var(--irecipe-logo) *0.5);
   }
@@ -99,8 +112,8 @@
 }
 
 body {
-  font-family: Avenir, "Helvetica Neue", sans-serif;
-  font-size: var(--irecipe--text);
+  font-family: Avenir, "Helvetica Neue", sans-serif !important;
+  font-size: var(--irecipe-text) !important;
 }
 
 .light {
