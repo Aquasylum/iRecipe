@@ -1,164 +1,204 @@
-<div class="user-login-form">
-  <form [formGroup]="userForm" class="form" (ngSubmit)="onSubmit()">
-    <div *ngIf="formType == 'register'">
+<div class="irecipe-text">
+  <a class="irecipe-header bold">Sign In</a>
+  <div *ngIf="formType == 'register'">
+    <p>
+      Already have an account?
+      <a routerLink="/login" class="irecipe-create-account">Sign in</a>
+    </p>
+  </div>
+
+  <div *ngIf="formType == 'login'">
+    <p>
+      New user?
+      <a routerLink="/register" class="irecipe-create-account"
+        >Create an account</a
+      >
+    </p>
+  </div>
+
+  <div class="irecipe-user-login-details">
+    <form [formGroup]="userForm" class="form" (ngSubmit)="onSubmit()">
+      <div *ngIf="formType == 'register'">
+        <div class="form-field">
+          <label
+            >Username
+            <br />
+            <input
+              class="irecipe-input irecipe-length"
+              type="text"
+              formControlName="username"
+              required
+            />
+          </label>
+          <div class="error-container">
+            <ng-container *ngIf="username?.invalid && username?.touched">
+              <div
+                class="error-label"
+                *ngIf="username?.hasError('required') && username?.touched"
+              >
+                A username is required.
+              </div>
+
+              <div
+                class="error-label"
+                *ngIf="username?.hasError('minlength') && username?.touched"
+              >
+                Username is too short! Please enter more than 3 characters.
+              </div>
+
+              <div
+                class="error-label"
+                *ngIf="username?.hasError('maxlength') && username?.touched"
+              >
+                Username is too long! Please enter less than 12 characters.
+              </div>
+
+              <div
+                class="error-label"
+                *ngIf="username?.hasError('exists') && username?.touched"
+              >
+                Username is already taken. Please enter a new username.
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
       <div class="form-field">
         <label
-          >Username
+          >Email address
+          <br />
           <input
-            class="long irecipe-input"
+            class="irecipe-input irecipe-length"
             type="text"
-            formControlName="username"
+            formControlName="email"
             required
           />
         </label>
         <div class="error-container">
-          <ng-container *ngIf="username?.invalid && username?.touched">
+          <ng-container *ngIf="email?.invalid && email?.touched">
             <div
               class="error-label"
-              *ngIf="username?.hasError('required') && username?.touched"
+              *ngIf="email?.hasError('email') && email?.touched"
             >
-              A username is required.
+              Email isn't valid. Please enter a valid email.
             </div>
 
             <div
               class="error-label"
-              *ngIf="username?.hasError('minlength') && username?.touched"
+              *ngIf="email?.hasError('emailAlreadyInUse') && email?.touched"
             >
-              Username is too short! Please enter more than 3 characters.
+              Email is already in use. Please log in or reset your password.
             </div>
 
             <div
               class="error-label"
-              *ngIf="username?.hasError('maxlength') && username?.touched"
+              *ngIf="email?.hasError('required') && email?.touched"
             >
-              Username is too long! Please enter less than 12 characters.
-            </div>
-
-            <div
-              class="error-label"
-              *ngIf="username?.hasError('exists') && username?.touched"
-            >
-              Username is already taken. Please enter a new username.
+              Email isn't valid. Please enter a valid email.
             </div>
           </ng-container>
         </div>
       </div>
-    </div>
 
-    <div class="form-field">
-      <label
-        >Email
-        <input
-          class="long irecipe-input"
-          type="text"
-          formControlName="email"
-          required
-        />
-      </label>
-      <div class="error-container">
-        <ng-container *ngIf="email?.invalid && email?.touched">
-          <div
-            class="error-label"
-            *ngIf="email?.hasError('email') && email?.touched"
-          >
-            Email isn't valid. Please enter a valid email.
-          </div>
+      <div class="form-field">
+        <label>
+          Password
+          <br />
+          <input
+            class="irecipe-input irecipe-length"
+            type="password"
+            formControlName="password"
+            required
+          />
+        </label>
+        <div class="error-container">
+          <ng-container>
+            <div
+              class="error-label"
+              *ngIf="password?.hasError('required') && password?.touched"
+            >
+              Password is required
+            </div>
 
-          <div
-            class="error-label"
-            *ngIf="email?.hasError('emailAlreadyInUse') && email?.touched"
-          >
-            Email is already in use. Please log in or reset your password.
-          </div>
+            <div
+              class="error-label"
+              *ngIf="password?.hasError('minlength') && password?.touched"
+            >
+              Password needs to be longer then 6 characters!
+            </div>
 
-          <div
-            class="error-label"
-            *ngIf="email?.hasError('required') && email?.touched"
-          >
-            Email isn't valid. Please enter a valid email.
-          </div>
-        </ng-container>
+            <div
+              class="error-label"
+              *ngIf="password?.hasError('wrongPassword') && password?.touched"
+            >
+              This password does not match the specified email address. Please
+              try again!
+            </div>
+
+            <div
+              *ngIf="formType == 'login'"
+              class="irecipe-forgot-password"
+              (click)="onForgetPassword()"
+            >
+              <u> Oh no! Did you forget your password?</u>
+            </div>
+          </ng-container>
+        </div>
       </div>
-    </div>
-
-    <div class="form-field">
-      <label>
-        Password
-        <input
-          class="long irecipe-input"
-          type="password"
-          formControlName="password"
-          required
-        />
-      </label>
-      <div class="error-container">
-        <ng-container>
-          <div
-            class="error-label"
-            *ngIf="password?.hasError('required') && password?.touched"
-          >
-            Password is required
-          </div>
-
-          <div
-            class="error-label"
-            *ngIf="password?.hasError('minlength') && password?.touched"
-          >
-            Password needs to be longer then 6 characters!
-          </div>
-
-          <div
-            class="error-label"
-            *ngIf="password?.hasError('wrongPassword') && password?.touched"
-          >
-            This password does not match the specified email address. Please try
-            again!
-          </div>
-
-          <div
-            *ngIf="formType == 'login'"
-            class="forgot-password"
-            (click)="onForgetPassword()"
-          >
-            <u> Oh no! Did you forget your password?</u>
-          </div>
-        </ng-container>
-      </div>
-    </div>
-    <div
-      class="alert alert-success alert-dismissible fade show"
-      role="alert"
-      *ngIf="showSuccessMessage"
-    >
-      <strong>Hoooray!</strong> You have successfully registered. Please login
-      on the next screen
-      <button
-        (click)="onCloseSuccessMessage()"
-        type="button"
-        class="close"
-        data-dismiss="alert"
-        aria-label="Close"
+      <div
+        class="alert alert-success alert-dismissible fade show"
+        role="alert"
+        *ngIf="showSuccessMessage"
       >
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
+        <strong>Hoooray!</strong> You have successfully registered. Please login
+        on the next screen
+        <button
+          (click)="onCloseSuccessMessage()"
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
 
-    <div class="error-container">
-      <ng-container *ngIf="userForm.invalid"> </ng-container>
-    </div>
-    <div class="error-label" *ngIf="userForm?.hasError('userNotFound')">
-      This user does not exist. Please enter the details correctly or create an
-      account!
-    </div>
+      <div class="error-container">
+        <ng-container *ngIf="userForm.invalid"> </ng-container>
+      </div>
+      <div class="error-label" *ngIf="userForm?.hasError('userNotFound')">
+        This user does not exist. Please enter the details correctly or create
+        an account!
+      </div>
 
-    <div class="form-footer">
       <button
-        class="irecipe-button btn-lg"
+        class="irecipe-button-login-submit"
         [disabled]="userForm.invalid"
         type="submit"
       >
         Submit
       </button>
+    </form>
+  </div>
+
+  <div class="irecipe-social-login">
+    <div>OR</div>
+    <div>
+      <button
+        (click)="onGoogleLogin()"
+        class="irecipe-button-social irecipe-length-social google"
+      >
+        <img src=" ../../../../assets/logos/google.svg" height="35" />Continue
+        with Google
+      </button>
     </div>
-  </form>
+
+    <div>
+      <button class="irecipe-button-social irecipe-length-social facebook">
+        <img src=" ../../../../assets/logos/facebook.png" height="35" />Continue
+        with Facebook
+      </button>
+    </div>
+  </div>
 </div>

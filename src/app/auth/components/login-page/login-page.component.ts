@@ -27,10 +27,12 @@ export class LoginPageComponent implements OnInit {
       .catch((e) => (this.error = e));
   }
 
-  loginWithGoogle() {
-    this.authService
-      .loginWithGoogle()
-      .then(() => this.router.navigate(['/main']))
-      .catch((e) => console.log(e.message));
+  loginWithGoogle(data: boolean) {
+    if (data) {
+      this.authService
+        .loginWithGoogle()
+        .then(() => this.router.navigate(['/main']))
+        .catch((e) => console.log(e.message));
+    }
   }
 }

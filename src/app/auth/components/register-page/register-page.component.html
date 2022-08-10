@@ -1,21 +1,20 @@
-<div class="control-container">
-  <div class="register-container">
-    <div class="register-form-container">
-      <a class="logo">iRecipe</a>
-      <h2>Welcome to iRecipe Registration!</h2>
-      <h5>Register here with your email</h5>
-      <irecipe-login-form
-        [showSuccessMessage]="success"
-        [userError]="error"
-        formType="register"
-        class="login-form"
-        (userFormData)="register($event)"
-      ></irecipe-login-form>
+<div class="register-page-container">
+  <div class="irecipe-heading">
+    <div>
+      <h2 class="irecipe-logo bold">iRecipe</h2>
     </div>
-    <div class="login-redirect">
-      <h2>Already a member?</h2>
-      <p>Click here to sign back in!</p>
-      <button class="irecipe-button btn-lg" routerLink="/login">Sign In</button>
+
+    <div>
+      <h4 class="irecipe-header">The world of personal recipes.</h4>
     </div>
+  </div>
+
+  <div class="irecipe-register-form">
+    <irecipe-login-form
+      (userFormData)="register($event)"
+      (googleLogin)="loginWithGoogle($event)"
+      [userError]="error"
+      formType="register"
+    ></irecipe-login-form>
   </div>
 </div>

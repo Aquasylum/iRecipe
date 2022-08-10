@@ -1,60 +1,41 @@
-.control-container {
+.login-page-container {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  display: flex;
-  height: 100%;
-  justify-content: center;
-  margin-top: 5%;
-}
-
-.login-container {
-  border-radius: 10px;
-  box-shadow: 0 0 20px 2px #e4e4e4;
-  display: flex;
-  width: 60%;
-}
-
-.login-form-container {
-  align-items: center;
-  background-color: #fff;
-  border-radius: 0 10px 10px 0;
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 8vh;
-  width: 70%;
+  background-color: var(--irecipe-primary);
+  height: 100vh;
+  width: 100vw;
 }
 
-.register-redirect {
+.irecipe-heading {
   text-align: center;
-  background-color: var(--irecipe-green);
-  border-radius: 10px 0 0 10px;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 50px;
-  width: 30%;
+  color: white;
 }
 
-.logo {
-  font-family: pacificoregular;
-  font-size: 6vh;
+.irecipe-login-form {
+  background-color: white;
+  border-radius: 30px;
 }
 
-button {
-  background-color: var(--irecipe-orange);
-  color: #fff;
+@media screen and (max-width: 1800px) {
+  .irecipe-login-form {
+    padding: 4%;
+    padding-top: 2%;
+    padding-bottom: 1%;
+  }
 }
 
-p {
-  margin-bottom: 20px;
-  text-align: center;
+@media screen and (max-width: 1200px) {
+  .irecipe-login-form {
+    padding: 6%;
+    padding-bottom: 1%;
+    padding-top: 2%;
+  }
 }
 
-h5 {
-  color: #838383;
-}
-
-.register-redirect h1 {
-  color: #fff;
+@media screen and (max-width: 600px) {
+  .irecipe-login-form {
+    padding: 8%;
+  }
 }

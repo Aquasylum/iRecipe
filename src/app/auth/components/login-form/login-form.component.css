@@ -1,11 +1,40 @@
-.irecipe-button {
-  background-color: var(--irecipe-orange);
-  color: #fff;
+@media screen and (max-width: 1800px) {
+  .irecipe-length-social {
+    width: 350px;
+  }
+
+  .irecipe-button-login-submit {
+    width: 175px;
+  }
 }
 
-.user-login-form {
-  width: 400px;
-  padding-top: 2vh;
+@media screen and (max-width: 1200px) {
+  .irecipe-length-social {
+    width: 250px;
+  }
+
+  .irecipe-button-login-submit {
+    width: 125px;
+  }
+}
+
+.irecipe-create-account {
+  color: #1a77f0;
+}
+
+.irecipe-create-account:hover {
+  color: #1a77f0;
+  cursor: pointer;
+}
+
+.irecipe-input {
+  border-color: #1a77f0;
+  margin-left: 0;
+}
+
+.irecipe-button {
+  background-color: var(--irecipe-secondary);
+  color: #fff;
 }
 
 .form-field {
@@ -13,15 +42,54 @@
   text-align: left;
 }
 
-.form-footer {
-  padding-top: 4vh;
-  margin-left: 35%;
+.irecipe-forgot-password {
+  text-align: center;
+  margin-top: 2vh;
 }
 
-.forgot-password {
+.irecipe-button-login-submit {
+  margin-left: 25%;
+  background-color: #1a77f0;
+  border-radius: 30px;
+  border: none;
+  color: white;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+}
+
+.irecipe-button-social {
+  margin: 1vh;
+  border-radius: 30px;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+}
+
+.google {
+  background-color: white;
+  color: black;
+}
+
+.facebook {
+  background-color: #1a77f0;
+  color: white;
+  border: none;
+}
+
+.irecipe-forgot-password:hover {
+  cursor: pointer;
+}
+
+.irecipe-social-login {
+  margin-top: 2%;
   text-align: center;
 }
 
-.forgot-password:hover {
-  color: var(--irecipe-orange);
+/* .irecipe-social-login::before {
+  content: "";
+  border-bottom: 1px solid black;
 }
+
+.irecipe-social-login::after {
+  content: "";
+  border-bottom: 1px solid black;
+} */

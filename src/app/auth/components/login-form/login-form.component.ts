@@ -24,6 +24,8 @@ export class LoginFormComponent implements OnInit, OnChanges {
   @Input() showSuccessMessage: boolean = false;
   @Input() userError!: HttpErrorResponse;
 
+  @Output() googleLogin = new EventEmitter<boolean>();
+
   @Output() userFormData = new EventEmitter<{
     email: string;
     password: string;
@@ -93,6 +95,10 @@ export class LoginFormComponent implements OnInit, OnChanges {
 
   onSubmit() {
     this.userFormData.emit(this.userForm.value);
+  }
+
+  onGoogleLogin() {
+    this.googleLogin.emit(true);
   }
 
   onCloseSuccessMessage() {

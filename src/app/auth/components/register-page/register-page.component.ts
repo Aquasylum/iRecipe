@@ -13,7 +13,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class RegisterPageComponent implements OnInit {
   constructor(
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   error!: HttpErrorResponse;
@@ -34,5 +35,14 @@ export class RegisterPageComponent implements OnInit {
       .catch((e: HttpErrorResponse) => {
         this.error = e;
       });
+  }
+
+  loginWithGoogle(data: boolean) {
+    if (data) {
+      this.authService
+        .loginWithGoogle()
+        .then(() => this.router.navigate(['/main']))
+        .catch((e) => console.log(e.message));
+    }
   }
 }
