@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AbstractControl, AsyncValidator } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { UserService } from '../../auth/services/user.service';
+import { UserService } from '../../user/user.service';
 
 @Injectable({
   providedIn: 'root',

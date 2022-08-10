@@ -12,7 +12,7 @@ import {
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
-import { ILoginData } from '../../models/Interfaces/ILoginData';
+import { ILoginData } from '../Interfaces/ILoginData';
 
 @Injectable({
   providedIn: 'root',

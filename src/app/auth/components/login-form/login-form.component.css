@@ -48,6 +48,7 @@
 }
 
 .irecipe-button-login-submit {
+  margin-top: 2vh;
   margin-left: 25%;
   background-color: #1a77f0;
   border-radius: 30px;

@@ -26,10 +26,7 @@ export class LoginFormComponent implements OnInit, OnChanges {
 
   @Output() googleLogin = new EventEmitter<boolean>();
 
-  @Output() userFormData = new EventEmitter<{
-    email: string;
-    password: string;
-  }>();
+  @Output() userFormData = new EventEmitter<any>();
 
   userForm!: FormGroup;
 
@@ -40,7 +37,6 @@ export class LoginFormComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.userError);
     if (
       this.userError?.message == 'Firebase: Error (auth/email-already-in-use).'
     ) {
@@ -75,6 +71,18 @@ export class LoginFormComponent implements OnInit, OnChanges {
           ],
           [this.userExistsValidator.validate.bind(this.userExistsValidator)],
         ],
+        name: [
+          '',
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(12),
+        ],
+        surname: [
+          '',
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(12),
+        ],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]],
       });
@@ -91,6 +99,14 @@ export class LoginFormComponent implements OnInit, OnChanges {
 
   get username() {
     return this.userForm.get('username');
+  }
+
+  get name() {
+    return this.userForm.get('name');
+  }
+
+  get surname() {
+    return this.userForm.get('surname');
   }
 
   onSubmit() {

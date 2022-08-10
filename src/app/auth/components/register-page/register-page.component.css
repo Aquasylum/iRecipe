@@ -4,9 +4,6 @@
   align-items: center;
   flex-direction: column;
   background-color: var(--irecipe-primary);
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: hidden;
 }
 
 .irecipe-heading {

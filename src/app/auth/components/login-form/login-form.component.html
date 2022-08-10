@@ -62,6 +62,80 @@
             </ng-container>
           </div>
         </div>
+
+        <div class="form-field">
+          <label
+            >Name
+            <br />
+            <input
+              class="irecipe-input irecipe-length"
+              type="text"
+              formControlName="name"
+              required
+            />
+          </label>
+          <div class="error-container">
+            <ng-container *ngIf="name?.invalid && name?.touched">
+              <div
+                class="error-label"
+                *ngIf="name?.hasError('required') && name?.touched"
+              >
+                A name is required.
+              </div>
+
+              <div
+                class="error-label"
+                *ngIf="name?.hasError('minlength') && name?.touched"
+              >
+                Name is too short! Please enter more than 3 characters.
+              </div>
+
+              <div
+                class="error-label"
+                *ngIf="name?.hasError('maxlength') && name?.touched"
+              >
+                Name is too long! Please enter less than 12 characters.
+              </div>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label
+            >Surname
+            <br />
+            <input
+              class="irecipe-input irecipe-length"
+              type="text"
+              formControlName="surname"
+              required
+            />
+          </label>
+          <div class="error-container">
+            <ng-container *ngIf="surname?.invalid && surname?.touched">
+              <div
+                class="error-label"
+                *ngIf="surname?.hasError('required') && surname?.touched"
+              >
+                A surname is required.
+              </div>
+
+              <div
+                class="error-label"
+                *ngIf="surname?.hasError('minlength') && surname?.touched"
+              >
+                Surname is too short! Please enter more than 3 characters.
+              </div>
+
+              <div
+                class="error-label"
+                *ngIf="surname?.hasError('maxlength') && surname?.touched"
+              >
+                Surname is too long! Please enter less than 12 characters.
+              </div>
+            </ng-container>
+          </div>
+        </div>
       </div>
 
       <div class="form-field">
