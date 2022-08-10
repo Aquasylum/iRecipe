@@ -29,7 +29,7 @@
               "src/assets/fonts/Pacifico/stylesheet.css",
               "src/assets/fonts/Babas/stylesheet.css"
             ],
-            "scripts": []
+            "scripts": ["node_modules/jquery/dist/jquery.slim.min.js"]
           },
           "configurations": {
             "production": {

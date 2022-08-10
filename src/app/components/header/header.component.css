@@ -1,43 +1,80 @@
-.navbar-container {
-  font-family: Babas;
+@media screen and (max-width: 1800px) {
+  .navbar-logo {
+    font-size: 48px;
+    margin-left: 120px;
+    margin-right: 120px;
+  }
+
+  .navbar-heading {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .navbar-logo {
+    font-size: 36px;
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+
+  .navbar-heading {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .navbar-logo {
+    font-size: 28px;
+    margin-left: 80px;
+    margin-right: 80px;
+  }
+
+  .navbar-heading {
+    font-size: 16px;
+  }
+}
+
+.navbar {
   font: large;
-  background-color: var(--irecipe-green);
+  color: var(--irecipe-primary);
 }
 
-.navbar-brand {
-  font-family: pacificoregular;
-  padding-left: 2vh;
-  font-size: 2vw;
+.nav-item {
+  padding-left: 10px;
 }
 
-.user-nav {
-  font-size: 1.5rem;
+.navbar-heading-left,
+.navbar-heading-right {
+  margin-top: 25px;
+  color: var(--irecipe-secondary);
 }
 
-.user {
-  margin-left: 0.5vw;
-  margin-right: 0.5vw;
-}
-
-.irecipe:hover {
-  transform: scale(1.05);
+.navbar-heading-left:hover,
+.navbar-heading-right:hover {
+  transform: scale(1.1);
   cursor: pointer;
 }
 
-.material-icons {
-  margin-left: 2vh;
+.collapsed-item {
+  color: var(--irecipe-secondary);
 }
 
-.material-icons:hover {
+.collapsed-item:hover {
+  cursor: pointer;
+}
+
+.nav-item:hover {
   transform: scale(1.2);
 }
 
-button {
-  color: black;
-  border-color: black;
+.navbar-nav {
+  flex-direction: row;
 }
 
-button:hover {
-  background-color: white;
-  color: black;
+.irecipe-hide {
+  visibility: hidden;
+}
+
+.navbar-toggler {
+  color: var(--irecipe-secondary);
 }

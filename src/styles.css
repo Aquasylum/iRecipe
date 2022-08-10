@@ -1,7 +1,114 @@
 /* You can add global styles to this file, and also import other style files */
 
+:root {
+  /* Colors */
+  --irecipe-secondary: #e8a87c;
+  --irecipe-primary: #7dc2ae;
+  --irecipe-red: #c23b22;
+  --irecipe-dark: #242424;
+
+  /* Font sizes */
+  --irecipe-logo: 100px;
+  --irecipe-heading: 28px;
+  --irecipe-label: 16px
+  --irecipe-text: 14px;
+  --irecipe-icons: 32px;
+
+  --input-long: 350px;
+  --input-medium: 250px;
+  --input-small: 175px;
+}
+
+/* Responsiveness sizing adjustments from variables */
+@media screen and (max-width: 1800px) {
+  .irecipe-logo {
+    font-size: var(--irecipe-logo);
+  }
+
+  .irecipe-header {
+    font-size: var(--irecipe-heading);
+  }
+
+ .irecipe-icons{
+  font-size: var(--irecipe-icons) !important;
+ }
+
+  .irecipe-label{
+    font-size: var( --irecipe-label);
+  }
+
+  .irecipe-text{
+    font-size: var(--irecipe-text);
+  }
+
+  .irecipe-length{
+    width: var(--input-long);
+  }
+}
+
+
+@media screen and (max-width: 1200px) {
+  .irecipe-logo {
+    font-size: calc(var(--irecipe-logo) *0.8);
+  }
+
+  .irecipe-header {
+    font-size: calc(var(--irecipe-heading) *0.8);
+  }
+
+  .irecipe-icons{
+    font-size: calc(var(--irecipe-icons)*0.8);
+   }
+
+  .irecipe-label{
+    font-size: calc(var( --irecipe-label) *0.8);
+  }
+
+  .irecipe-text{
+    font-size: calc(var(--irecipe-text)*0.8);
+  }
+
+  .irecipe-length{
+    width: var(--input-medium);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .irecipe-logo {
+    font-size: calc(var(--irecipe-logo) *0.5);
+  }
+  .irecipe-header {
+    font-size: calc(var(--irecipe-heading) *0.5);
+  }
+
+  .irecipe-icons{
+    font-size: calc(var(--irecipe-icons)*0.5);
+   }
+
+  .irecipe-label{
+    font-size: calc(var( --irecipe-label)*0.5);
+  }
+
+  .irecipe-text{
+    font-size: calc(var(--irecipe-text)*0.5);
+  }
+
+  .irecipe-length{
+    width: var(--input-small);
+  }
+}
+
 body {
   font-family: Avenir, "Helvetica Neue", sans-serif;
+  font-size: var(--irecipe--text);
+}
+
+.light {
+  font-weight: 400;
+}
+
+.bold {
+  font-weight: 600;
 }
 
 html,
@@ -9,11 +116,19 @@ body {
   height: 100%;
 }
 
-:root {
-  --irecipe-orange: #e8a87c;
-  --irecipe-green: #7dc2ae;
-  --irecipe-red: #c23b22;
-  --irecipe-blue: #7abacc;
+.irecipe-logo {
+  font-family: pacificoregular;
+}
+
+.irecipe-logo-navbar {
+  font-family: pacificoregular;
+  font-size: 38px;
+}
+
+.irecipe-input-login {
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: #1a77f0;
 }
 
 .irecipe-button {
@@ -32,21 +147,21 @@ button:disabled {
 }
 
 .extra-long {
-  width: 45vw;
+  width: 450px;
 }
 
 .long {
-  width: 15vw;
+  width: 350px;
 }
 
 .medium {
-  width: 10vw;
+  width: 250px;
 }
 
 .error-label {
-  background-color: var(--irecipe-red);
+  color: red;
+  opacity: 0.8;
   padding-left: 0.5vw;
-  border-radius: 5px;
 }
 
 .error-container {
@@ -72,7 +187,7 @@ button:disabled {
 
 .logo {
   font-family: pacificoregular;
-  font-size: 6vh;
+  
 }
 
 .irecipe-input {
@@ -80,11 +195,4 @@ button:disabled {
   outline: 0;
   border-width: 0 0 2px;
   border-color: black;
-}
-
-.irecipe-header {
-  margin-left: 1%;
-  text-align: center;
-  margin-bottom: 3%;
-  border-bottom: 3px solid black;
 }

@@ -7,7 +7,6 @@ import { AuthModule } from './auth/auth.module';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
-import { SectionListComponent } from './/components/section-list/section-list.component';
 import { RecipesContainerComponent } from './components/recipes-container/recipes-container.component';
 import { RecipeDisplayCardComponent } from './components/recipe-display-card/recipe-display-card.component';
 
@@ -64,7 +63,6 @@ let routes: Routes = [
   declarations: [
     AppComponent,
     HeaderComponent,
-    SectionListComponent,
     RecipesContainerComponent,
     RecipeDisplayCardComponent,
     MainComponent,

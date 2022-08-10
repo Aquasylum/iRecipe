@@ -9,17 +9,21 @@
 
 .irecipe-container {
   display: flex;
-}
-
-.irecipe-section {
-  flex: 1;
-  box-shadow: 0 0 10px #e4e4e4;
+  justify-content: center;
+  margin: 20px 0;
+  width: 100%;
 }
 
 .irecipe-main {
-  flex: 5;
-  padding: 2%;
-  margin: 2%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.recipe-card {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  padding-bottom: 0;
 }
 
 .row {

@@ -33,15 +33,16 @@ export class RecipeService {
     let recipes: Recipe[] = [];
 
     this.userService.userRecipeIds().then((ids) => {
-      ids.forEach((id) => {
-        const q = query(this.recipeCollection, where('id', '==', id));
-        getDocs(q).then((querySnapshot) =>
-          querySnapshot.forEach((doc) => recipes.push(doc.data() as Recipe))
-        );
-      });
+      if (ids) {
+        ids.forEach((id) => {
+          const q = query(this.recipeCollection, where('id', '==', id));
+          getDocs(q).then((querySnapshot) =>
+            querySnapshot.forEach((doc) => recipes.push(doc.data() as Recipe))
+          );
+        });
+      }
     });
 
-    console.log(recipes);
     return recipes;
   }
 
