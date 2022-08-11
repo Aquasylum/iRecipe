@@ -5,8 +5,9 @@ import { MainComponent } from './recipe/components/main/main.component';
 import { RecipeComponent } from './recipe/components/recipe/recipe.component';
 import { RecipesContainerComponent } from './recipe/components/recipes-container/recipes-container.component';
 import { ViewRecipeComponent } from './recipe/components/view-recipe/view-recipe.component';
+import { DiscoverComponent } from './user/components/discover/discover.component';
 
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/']);
 
 let routes: Routes = [
   {
@@ -33,14 +34,18 @@ let routes: Routes = [
         path: 'view-recipe/:id',
         component: ViewRecipeComponent,
       },
+      {
+        path: 'discover',
+        component: DiscoverComponent,
+      },
     ],
     ...canActivate(redirectUnauthorizedToLogin),
   },
-  {
-    path: '**',
-    redirectTo: '',
-    pathMatch: 'full',
-  },
+  // {
+  //   path: '**',
+  //   redirectTo: '/',
+  //   pathMatch: 'full',
+  // },
 ];
 
 @NgModule({

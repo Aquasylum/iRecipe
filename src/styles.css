@@ -13,7 +13,7 @@
   --irecipe-dark: #242424;
 
   /* Font sizes */
-  --irecipe-profile-name: 75px;
+  --irecipe-name: 75px;
   --irecipe-logo: 60px;
   --irecipe-heading: 24px;
   --irecipe-label: 16px;
@@ -21,8 +21,8 @@
 
 /* Responsiveness sizing adjustments from variables */
 @media screen and (max-width: 1800px) {
-  .irecipe-profile-name {
-    font-size: var(--irecipe-profile-name);
+  .irecipe-name {
+    font-size: var(--irecipe-name);
   }
 
   .irecipe-logo {
@@ -51,8 +51,8 @@
 }
 
 @media screen and (max-width: 1200px) {
-  .irecipe-profile-name {
-    font-size: calc(var(--irecipe-profile-name) * 0.8);
+  .irecipe-name {
+    font-size: calc(var(--irecipe-name) * 0.8);
   }
 
   .irecipe-logo {
@@ -81,8 +81,8 @@
 }
 
 @media screen and (max-width: 600px) {
-  .irecipe-profile-name {
-    font-size: calc(var(--irecipe-profile-name) * 0.5);
+  .irecipe-name {
+    font-size: calc(var(--irecipe-name) * 0.5);
   }
 
   .irecipe-logo {
@@ -125,6 +125,10 @@ body {
 .irecipe-profile-black {
   font-family: Alegreya;
   line-height: 1;
+}
+
+.irecipe-name {
+  color: var(--irecipe-secondary);
 }
 
 .irecipe-logo {

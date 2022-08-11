@@ -16,9 +16,8 @@
   }
 }
 
-.profile-header {
+.profile-container {
   text-align: center;
-  color: var(--irecipe-secondary);
 }
 
 .user-icons {

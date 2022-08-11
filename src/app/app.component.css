@@ -1,11 +1,3 @@
 .body-container {
   display: flex;
 }
-
-.irecipe-section {
-  flex-grow: 1;
-}
-
-.irecipe-main {
-  flex-grow: 7;
-}

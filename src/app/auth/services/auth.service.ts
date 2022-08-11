@@ -13,8 +13,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 import { ILoginData } from '../Interfaces/ILoginData';
-import { UserService } from 'src/app/user/service/user.service';
+import { User } from '../../user/models/User';
 import { collection, Firestore, setDoc, doc } from '@angular/fire/firestore';
+import { getDocs, query, where } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -42,6 +43,20 @@ export class AuthService {
       // and use the remainder as the surname
       let surname: any = user.user.displayName;
       let name = user.user.displayName?.split(' ', 2);
+
+      let userExists: User = new User();
+
+      //Check if user exists in user collection
+      let q = query(this.userCollection, where('userId', '==', user.user.uid));
+      await getDocs(q).then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          userExists = doc.data() as User;
+        });
+      });
+
+      if (userExists) {
+        return;
+      }
 
       if (name && user?.user.displayName) {
         surname = surname?.replace(name[0], '');

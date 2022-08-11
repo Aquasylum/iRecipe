@@ -20,9 +20,7 @@ import { RecipeComponent } from './recipe/components/recipe/recipe.component';
 import { MainComponent } from './recipe/components/main/main.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewRecipeComponent } from './recipe/components/view-recipe/view-recipe.component';
-import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
-import { ProfileHeaderComponent } from './user/components/profile-header/profile-header.component';
-import { DiscoverComponent } from './user/components/discover/discover.component';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -33,13 +31,12 @@ import { DiscoverComponent } from './user/components/discover/discover.component
     MainComponent,
     RecipeComponent,
     ViewRecipeComponent,
-    ProfileHeaderComponent,
-    DiscoverComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AuthModule,
+    UserModule,
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

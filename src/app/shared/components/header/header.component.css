@@ -5,7 +5,7 @@
     margin-right: 120px;
   }
 
-  .irecipe-icons {
+  .recipe-icons {
     font-size: 32px;
   }
 
@@ -21,7 +21,7 @@
     margin-right: 100px;
   }
 
-  .irecipe-icons {
+  .recipe-icons {
     font-size: 24px;
   }
 
@@ -37,13 +37,17 @@
     margin-right: 80px;
   }
 
-  .irecipe-icons {
+  .recipe-icons {
     font-size: 18px;
   }
 
   .navbar-heading {
     font-size: 16px;
   }
+}
+
+.recipe-icons:hover {
+  cursor: pointer;
 }
 
 .navbar {
