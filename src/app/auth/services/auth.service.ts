@@ -13,12 +13,16 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 import { ILoginData } from '../Interfaces/ILoginData';
+import { UserService } from 'src/app/user/user.service';
+import { collection, Firestore, setDoc, doc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private auth: Auth) {}
+  constructor(private auth: Auth, private firestore: Firestore) {}
+
+  userCollection = collection(this.firestore, 'users');
 
   async login(login: ILoginData) {
     return await signInWithEmailAndPassword(
@@ -31,7 +35,27 @@ export class AuthService {
   }
 
   async loginWithGoogle() {
-    return await signInWithPopup(this.auth, new GoogleAuthProvider());
+    let user = await signInWithPopup(this.auth, new GoogleAuthProvider());
+
+    if (user) {
+      //get display name so we can cut first name
+      // and use the remainder as the surname
+      let surname: any = user.user.displayName;
+      let name = user.user.displayName?.split(' ', 2);
+
+      if (name && user?.user.displayName) {
+        surname = surname?.replace(name[0], '');
+
+        await setDoc(doc(this.firestore, 'users', user?.user.displayName), {
+          userId: this.getCurrentUser()?.uid,
+          username: user?.user.displayName.toLowerCase(),
+          name: name[0],
+          surname: surname,
+        });
+      }
+    }
+
+    return user;
   }
 
   getCurrentUser() {

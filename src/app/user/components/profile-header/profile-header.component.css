@@ -1,3 +1,26 @@
-.irecipe-profile-name {
+@media screen and (max-width: 1800px) {
+  .user-icons {
+    font-size: 48px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .user-icons {
+    font-size: 36px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .user-icons {
+    font-size: 24px;
+  }
+}
+
+.profile-header {
+  text-align: center;
   color: var(--irecipe-secondary);
+}
+
+.user-icons {
+  color: var(--irecipe-primary);
 }

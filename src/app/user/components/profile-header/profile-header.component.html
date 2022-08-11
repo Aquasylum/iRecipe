@@ -3,11 +3,16 @@
   href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
 />
 
-<div class="profile-header">
-  <div class="irecipe-profile-name bold">
+<div class="profile-header irecipe-profile-header">
+  <div class="irecipe-profile-name">
     {{ username }}
   </div>
   <div>
-    <span class="material-symbols-outlined"> star </span>
+    <span
+      *ngFor="let star of userRatingArray"
+      class="material-symbols-outlined user-icons"
+    >
+      grade
+    </span>
   </div>
 </div>

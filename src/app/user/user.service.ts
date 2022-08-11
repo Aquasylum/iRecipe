@@ -11,6 +11,7 @@ import {
   where,
   getDocs,
 } from 'firebase/firestore';
+
 import { User } from 'src/app/user/models/User';
 import { AuthService } from '../auth/services/auth.service';
 
@@ -23,7 +24,6 @@ export class UserService {
   userCollection = collection(this.firestore, 'users');
 
   async addUser(username: string, firstName: string, lastName: string) {
-    console.log('first name: ' + firstName + ' last name: ' + lastName);
     await setDoc(doc(this.firestore, 'users', username), {
       userId: this.auth.getCurrentUser()?.uid,
       username: username.toLowerCase(),
@@ -79,14 +79,14 @@ export class UserService {
       querySnapshot.forEach((doc) => (user = doc.data() as User))
     );
 
-    if (user.username == username) {
+    if (user.displayName == username) {
       return true;
     } else {
       return false;
     }
   }
 
-  async getUserNameAndSurname(): Promise<string> {
+  async getUserNameAndSurname(): Promise<string | undefined> {
     let user: User = new User();
     let q = query(
       this.userCollection,
@@ -97,7 +97,12 @@ export class UserService {
       querySnapshot.forEach((doc) => (user = doc.data() as User))
     );
 
-    return user.name + ' ' + user.surname;
+    if (user.name || user.surname) {
+      return user.name + ' ' + user.surname;
+    } else {
+      console.log(user);
+      return user.displayName;
+    }
   }
 
   getUserRating(): number {
@@ -108,6 +113,7 @@ export class UserService {
       let max1 = Math.floor(max);
       return Math.floor(Math.random() * (max1 - min1 + 1)) + min1;
     };
+    console.log(genrateRandomNumber(1, 5));
     return genrateRandomNumber(1, 5);
   }
 }

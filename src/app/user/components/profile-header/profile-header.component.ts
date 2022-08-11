@@ -8,18 +8,18 @@ import { UserService } from '../../user.service';
   styleUrls: ['./profile-header.component.css'],
 })
 export class ProfileHeaderComponent implements OnInit {
-  username: string = '';
+  username: string | undefined = '';
   userRating: number = 0;
+  userRatingArray: number[] = [];
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     this.userService.getUserNameAndSurname().then((username) => {
-      this.username = username;
+      this.username = username?.toLowerCase();
     });
 
     this.userRating = this.userService.getUserRating();
-
-    console.log(this.username);
+    this.userRatingArray = new Array(this.userRating);
   }
 }

@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
+  /* Input elements */
+  --input-long: 350px;
+  --input-medium: 250px;
+  --input-small: 175px;
+
   /* Colors */
   --irecipe-secondary: #e8a87c;
   --irecipe-primary: #7dc2ae;
@@ -9,22 +14,17 @@
 
   /* Font sizes */
   --irecipe-profile-name: 75px;
+  --irecipe-icons: 32px;
   --irecipe-logo: 60px;
   --irecipe-heading: 24px;
-  --irecipe-label: 16px  
-  --irecipe-icons: 32px;
-  --irecipe-text: 14px;
-
-  --input-long: 350px;
-  --input-medium: 250px;
-  --input-small: 175px;
+  --irecipe-label: 16px;
 }
 
 /* Responsiveness sizing adjustments from variables */
 @media screen and (max-width: 1800px) {
-.irecipe-profile-name{
-  font-size: var(--irecipe-profile-name);
-}
+  .irecipe-profile-name {
+    font-size: var(--irecipe-profile-name);
+  }
 
   .irecipe-logo {
     font-size: var(--irecipe-logo);
@@ -34,85 +34,84 @@
     font-size: var(--irecipe-heading);
   }
 
- .irecipe-icons{
-  font-size: var(--irecipe-icons) !important;
- }
-
-  .irecipe-label{
-    font-size: var( --irecipe-label);
+  .irecipe-icons {
+    font-size: var(--irecipe-icons);
   }
 
-  .irecipe-text{
+  .irecipe-label {
+    font-size: var(--irecipe-label);
+  }
+
+  .irecipe-text {
     font-size: var(--irecipe-text);
   }
 
-  .irecipe-length{
+  .irecipe-length {
     width: var(--input-long);
   }
 }
 
-
 @media screen and (max-width: 1200px) {
-  .irecipe-profile-name{
-    font-size: calc(var(--irecipe-profile-name)*0.8);
+  .irecipe-profile-name {
+    font-size: calc(var(--irecipe-profile-name) * 0.8);
   }
 
   .irecipe-logo {
-    font-size: calc(var(--irecipe-logo) *0.8);
+    font-size: calc(var(--irecipe-logo) * 0.8);
   }
 
   .irecipe-header {
-    font-size: calc(var(--irecipe-heading) *0.8);
+    font-size: calc(var(--irecipe-heading) * 0.8);
   }
 
-  .irecipe-icons{
-    font-size: calc(var(--irecipe-icons)*0.8);
-   }
-
-  .irecipe-label{
-    font-size: calc(var( --irecipe-label) *0.8);
+  .irecipe-icons {
+    font-size: calc(var(--irecipe-icons) * 0.8);
   }
 
-  .irecipe-text{
-    font-size: calc(var(--irecipe-text)*0.8);
+  .irecipe-label {
+    font-size: calc(var(--irecipe-label) * 0.8);
   }
 
-  .irecipe-length{
+  .irecipe-text {
+    font-size: calc(var(--irecipe-text) * 0.8);
+  }
+
+  .irecipe-length {
     width: var(--input-medium);
   }
 }
 
 @media screen and (max-width: 600px) {
-  .irecipe-profile-name{
-    font-size: calc(var(--irecipe-profile-name)*0.5);
+  .irecipe-profile-name {
+    font-size: calc(var(--irecipe-profile-name) * 0.5);
   }
 
   .irecipe-logo {
-    font-size: calc(var(--irecipe-logo) *0.5);
+    font-size: calc(var(--irecipe-logo) * 0.5);
   }
   .irecipe-header {
-    font-size: calc(var(--irecipe-heading) *0.5);
+    font-size: calc(var(--irecipe-heading) * 0.5);
   }
 
-  .irecipe-icons{
-    font-size: calc(var(--irecipe-icons)*0.5);
-   }
-
-  .irecipe-label{
-    font-size: calc(var( --irecipe-label)*0.5);
+  .irecipe-icons {
+    font-size: calc(var(--irecipe-icons) * 0.5);
   }
 
-  .irecipe-text{
-    font-size: calc(var(--irecipe-text)*0.5);
+  .irecipe-label {
+    font-size: calc(var(--irecipe-label) * 0.5);
   }
 
-  .irecipe-length{
+  .irecipe-text {
+    font-size: calc(var(--irecipe-text) * 0.5);
+  }
+
+  .irecipe-length {
     width: var(--input-small);
   }
 }
 
 body {
-  font-family: Avenir, "Helvetica Neue", sans-serif !important;
+  font-family: AlegreyaBold, "Helvetica Neue", sans-serif !important;
   font-size: var(--irecipe-text) !important;
 }
 
@@ -124,9 +123,9 @@ body {
   font-weight: 600;
 }
 
-html,
-body {
-  height: 100%;
+.irecipe-profile-header {
+  font-family: Alegreya;
+  letter-spacing: 0px;
 }
 
 .irecipe-logo {
@@ -184,7 +183,6 @@ button:disabled {
 
 .material-icons,
 .material-symbols-outlined {
-  font-size: 3vh;
   display: inline-block;
   vertical-align: -0.25rem;
   padding-right: 0.5vw;
@@ -200,7 +198,6 @@ button:disabled {
 
 .logo {
   font-family: pacificoregular;
-  
 }
 
 .irecipe-input {

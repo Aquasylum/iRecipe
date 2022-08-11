@@ -27,7 +27,8 @@
               "src/styles.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/fonts/Pacifico/stylesheet.css",
-              "src/assets/fonts/Babas/stylesheet.css"
+              "src/assets/fonts/Babas/stylesheet.css",
+              "src/assets/fonts/Alegreya/stylesheet.css"
             ],
             "scripts": ["node_modules/jquery/dist/jquery.slim.min.js"]
           },
