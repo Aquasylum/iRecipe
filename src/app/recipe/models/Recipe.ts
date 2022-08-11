@@ -7,7 +7,6 @@ import { User } from 'firebase/auth';
 
 export class Recipe {
   id!: string;
-  author!: string;
   name!: string;
   description?: string;
   imageSrc?: string;

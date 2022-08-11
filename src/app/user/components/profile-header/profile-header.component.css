@@ -24,3 +24,8 @@
 .user-icons {
   color: var(--irecipe-primary);
 }
+
+.profile-picture {
+  font-size: 100px;
+  color: var(--irecipe-primary);
+}

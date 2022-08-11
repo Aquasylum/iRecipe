@@ -17,10 +17,6 @@
   display: flex;
 }
 
-.author-name {
-  flex-grow: 3;
-}
-
 .recipe-name {
   flex-grow: 1;
 }

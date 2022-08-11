@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { UserService } from 'src/app/user/user.service';
+import { UserService } from 'src/app/user/service/user.service';
 import { Recipe } from 'src/app/recipe/models/Recipe';
 import { RecipeService } from 'src/app/recipe/services/recipe.service';
 import { UserDoesNotExist } from 'src/app/shared/validators/UserDoesNotExist.validator';

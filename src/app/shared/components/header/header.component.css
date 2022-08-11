@@ -5,6 +5,10 @@
     margin-right: 120px;
   }
 
+  .irecipe-icons {
+    font-size: 32px;
+  }
+
   .navbar-heading {
     font-size: 20px;
   }
@@ -17,6 +21,10 @@
     margin-right: 100px;
   }
 
+  .irecipe-icons {
+    font-size: 24px;
+  }
+
   .navbar-heading {
     font-size: 18px;
   }
@@ -27,6 +35,10 @@
     font-size: 28px;
     margin-left: 80px;
     margin-right: 80px;
+  }
+
+  .irecipe-icons {
+    font-size: 18px;
   }
 
   .navbar-heading {

@@ -8,13 +8,12 @@
 
   /* Colors */
   --irecipe-secondary: #e8a87c;
-  --irecipe-primary: #7dc2ae;
+  --irecipe-primary: #7ec2ae;
   --irecipe-red: #c23b22;
   --irecipe-dark: #242424;
 
   /* Font sizes */
   --irecipe-profile-name: 75px;
-  --irecipe-icons: 32px;
   --irecipe-logo: 60px;
   --irecipe-heading: 24px;
   --irecipe-label: 16px;
@@ -123,9 +122,9 @@ body {
   font-weight: 600;
 }
 
-.irecipe-profile-header {
+.irecipe-profile-black {
   font-family: Alegreya;
-  letter-spacing: 0px;
+  line-height: 1;
 }
 
 .irecipe-logo {

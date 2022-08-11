@@ -13,7 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 import { ILoginData } from '../Interfaces/ILoginData';
-import { UserService } from 'src/app/user/user.service';
+import { UserService } from 'src/app/user/service/user.service';
 import { collection, Firestore, setDoc, doc } from '@angular/fire/firestore';
 
 @Injectable({

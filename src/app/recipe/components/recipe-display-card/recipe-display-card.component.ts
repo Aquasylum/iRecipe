@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Recipe } from 'src/app/recipe/models/Recipe';
+import { RecipeService } from '../../services/recipe.service';
 
 @Component({
   selector: 'irecipe-recipe-display-card',

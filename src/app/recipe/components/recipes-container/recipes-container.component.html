@@ -1,6 +1,6 @@
-<div class="irecipe-container">
+<div class="recipes-container">
   <irecipe-profile-header></irecipe-profile-header>
-  <div class="irecipe-display">
+  <div class="recipe-display">
     <div
       *ngIf="recipeSelection.length === 0; then addRecipe; else showRecipes"
     ></div>
@@ -26,5 +26,16 @@
         </div>
       </div>
     </ng-template>
+  </div>
+  <div class="recipes-container-functionality">
+    <div routerLink="/main/recipe" class="functionality-button">
+      <span class="material-icons icon-large"> add_circle </span>
+      <div>Add Recipe</div>
+    </div>
+
+    <div class="functionality-button">
+      <span class="material-symbols-outlined icon-large"> edit </span>
+      <div>Edit Recipe</div>
+    </div>
   </div>
 </div>

@@ -1,10 +1,8 @@
-<link
-  href="https://fonts.googleapis.com/icon?family=Material+Icons"
-  rel="stylesheet"
-/>
 <div class="display-card">
-  <h1 class="text-cutter">{{ recipe.name }}</h1>
-  <h4 class="text-cutter">{{ recipe.author }}</h4>
+  <div></div>
+  <div class="text-cutter irecipe-profile-black recipe-name">
+    {{ recipe.name }}
+  </div>
   <div
     *ngIf="recipe.imageSrc == null; then showEmpty; else showRecipeImage"
   ></div>
@@ -15,39 +13,12 @@
     <img [src]="recipe.imageSrc" />
   </ng-template>
   {{ recipe.imageSrc }}
+  <div class="recipe-icons">
+    <span class="material-icons functionality-icons"> thumb_up </span>
+    <span class="material-icons functionality-icons">
+      chat_bubble_outline
+    </span>
 
-  <div
-    *ngIf="
-      recipe.estimatedTime == undefined;
-      then timeNotSpecified;
-      else showTime
-    "
-  ></div>
-  <ng-template #timeNotSpecified>
-    <h4 class="time">
-      Time not specified
-      <span class="material-icons"> timer </span>
-    </h4>
-  </ng-template>
-  <ng-template #showTime>
-    <h4 class="time">
-      {{ recipe.estimatedTime }} min
-      <span class="material-icons"> timer </span>
-    </h4>
-  </ng-template>
-
-  <div>
-    <button
-      routerLink="/main/view-recipe/{{ recipe.id }}"
-      class="view-button btn-sm"
-    >
-      View
-    </button>
-    <button
-      routerLink="/main/recipe/{{ recipe.id }}"
-      class="edit-button btn-sm"
-    >
-      Edit
-    </button>
+    <span class="material-icons functionality-icons"> add </span>
   </div>
 </div>

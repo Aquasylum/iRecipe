@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { user } from '@angular/fire/auth';
-import { UserService } from '../../user.service';
+import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'irecipe-profile-header',

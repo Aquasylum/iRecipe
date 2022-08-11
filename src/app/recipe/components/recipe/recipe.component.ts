@@ -51,14 +51,6 @@ export class RecipeComponent implements OnInit {
           Validators.maxLength(20),
         ],
       ],
-      author: [
-        '',
-        [
-          Validators.required,
-          Validators.minLength(2),
-          Validators.maxLength(20),
-        ],
-      ],
       ingredients: this.fb.array([], [Validators.required]),
       steps: this.fb.array([], [Validators.required]),
       recipeTypes: this.fb.array([]),
@@ -101,10 +93,6 @@ export class RecipeComponent implements OnInit {
   //Get individual form fields for validation:
   get name() {
     return this.recipeForm.get('name');
-  }
-
-  get author() {
-    return this.recipeForm.get('author');
   }
 
   get calories() {

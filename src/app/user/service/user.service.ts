@@ -13,7 +13,7 @@ import {
 } from 'firebase/firestore';
 
 import { User } from 'src/app/user/models/User';
-import { AuthService } from '../auth/services/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Injectable({
   providedIn: 'root',

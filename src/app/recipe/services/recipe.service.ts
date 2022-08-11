@@ -15,7 +15,7 @@ import {
 
 import { Firestore, docData, getDocs } from '@angular/fire/firestore';
 import { AuthService } from '../../auth/services/auth.service';
-import { UserService } from '../../user/user.service';
+import { UserService } from '../../user/service/user.service';
 
 @Injectable({
   providedIn: 'root',

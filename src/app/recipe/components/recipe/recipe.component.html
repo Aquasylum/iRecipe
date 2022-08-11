@@ -60,46 +60,6 @@
         </div>
       </div>
 
-      <div class="author-name">
-        <span class="material-icons"> person </span>
-        <label for="author"
-          >Recipe Author
-          <input
-            type="text"
-            class="long"
-            name="author"
-            formControlName="author"
-          />
-        </label>
-        <div
-          class="error-label long"
-          *ngIf="
-            author?.hasError('required') &&
-            recipeForm.controls['author'].touched
-          "
-        >
-          Author name is required
-        </div>
-        <div
-          class="error-label long"
-          *ngIf="
-            author?.hasError('minlength') &&
-            recipeForm.controls['author'].touched
-          "
-        >
-          Author name has to be longer than 4 characters
-        </div>
-        <div
-          class="error-label long"
-          *ngIf="
-            author?.hasError('maxlength') &&
-            recipeForm.controls['author'].touched
-          "
-        >
-          Author name cannot be longer than 20 characters
-        </div>
-      </div>
-
       <!-- <div class="recipe-types-container">
         <div class="fl">
           <div formArrayName="recipeTypes">

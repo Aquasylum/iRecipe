@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './recipe/components/header/header.component';
+import { HeaderComponent } from './shared/components/header/header.component';
 import { RecipesContainerComponent } from './recipe/components/recipes-container/recipes-container.component';
 import { RecipeDisplayCardComponent } from './recipe/components/recipe-display-card/recipe-display-card.component';
 
@@ -22,43 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewRecipeComponent } from './recipe/components/view-recipe/view-recipe.component';
 import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { ProfileHeaderComponent } from './user/components/profile-header/profile-header.component';
-
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['']);
-
-let routes: Routes = [
-  {
-    path: 'main',
-    component: MainComponent,
-    children: [
-      {
-        path: '',
-        component: RecipesContainerComponent,
-      },
-      {
-        path: 'recipe',
-        component: RecipeComponent,
-      },
-      {
-        path: 'recipe-list',
-        component: RecipesContainerComponent,
-      },
-      {
-        path: 'recipe/:id',
-        component: RecipeComponent,
-      },
-      {
-        path: 'view-recipe/:id',
-        component: ViewRecipeComponent,
-      },
-    ],
-    ...canActivate(redirectUnauthorizedToLogin),
-  },
-  {
-    path: '**',
-    redirectTo: '',
-    pathMatch: 'full',
-  },
-];
+import { DiscoverComponent } from './user/components/discover/discover.component';
 
 @NgModule({
   declarations: [
@@ -70,13 +34,13 @@ let routes: Routes = [
     RecipeComponent,
     ViewRecipeComponent,
     ProfileHeaderComponent,
+    DiscoverComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AuthModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
