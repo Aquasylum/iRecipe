@@ -21,6 +21,7 @@ import { MainComponent } from './recipe/components/main/main.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewRecipeComponent } from './recipe/components/view-recipe/view-recipe.component';
 import { UserModule } from './user/user.module';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { UserModule } from './user/user.module';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
     BrowserAnimationsModule,
   ],
   exports: [RouterModule, ReactiveFormsModule],

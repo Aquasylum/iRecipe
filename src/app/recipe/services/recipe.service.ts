@@ -13,7 +13,7 @@ import {
   updateDoc,
 } from '@firebase/firestore';
 
-import { Firestore, docData, getDocs } from '@angular/fire/firestore';
+import { Firestore, docData, getDocs, setDoc } from '@angular/fire/firestore';
 import { AuthService } from '../../auth/services/auth.service';
 import { UserService } from '../../user/service/user.service';
 
@@ -54,16 +54,12 @@ export class RecipeService {
   async createRecipe(recipe: Recipe) {
     recipe.dateCreated = Date.now();
     recipe.dateModified = Date.now();
-    let newRecipe = await addDoc(this.recipeCollection, recipe);
+    await setDoc(doc(this.fireStore, 'recipes', recipe.id), recipe);
 
     //Adding recipe to the recipe array in User collection:
-    this.userService.updateUserWithRecipeId(newRecipe.id);
+    this.userService.updateUserWithRecipeId(recipe.id);
 
-    //Adding id to document:
-    recipe.id = newRecipe.id;
-    const recipeDocumentReference = doc(this.recipeCollection, recipe.id);
-    await updateDoc(recipeDocumentReference, { ...recipe });
-    return newRecipe.id;
+    return recipe.id;
   }
 
   async updateRecipe(recipe: Recipe, id: string) {

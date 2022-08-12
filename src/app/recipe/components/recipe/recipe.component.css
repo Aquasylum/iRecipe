@@ -1,18 +1,40 @@
 @media screen and (max-width: 1800px) {
   .recipe-section-header {
-    font-size: 48px;
+    font-size: 48px !important;
+  }
+  .recipe-image {
+    width: 500px;
   }
 
-  @media screen and (max-width: 1200px) {
-    .recipe-section-header {
-      font-size: 36px;
-    }
+  input[type="text"] {
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .recipe-section-header {
+    font-size: 36px !important;
   }
 
-  @media screen and (max-width: 600px) {
-    .recipe-section-header {
-      font-size: 28px;
-    }
+  .recipe-image {
+    width: 400px;
+  }
+
+  input[type="text"] {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .recipe-section-header {
+    font-size: 28px !important;
+  }
+
+  .recipe-image {
+    width: 300px;
+  }
+  input[type="text"] {
+    font-size: 16px;
   }
 }
 
@@ -23,23 +45,66 @@
   text-align: center;
 }
 
+.details-container {
+  width: 150px;
+}
+
 .recipe-name-container {
   padding-bottom: 3%;
+}
+
+.tips-container {
+  padding-top: 3%;
+}
+
+.upload-button {
+  background-color: var(--irecipe-primary);
+  color: white;
+  border: none;
+}
+
+.remove-button {
+  background-color: var(--irecipe-secondary);
+  color: white;
+  border: none;
 }
 
 input[type="text"] {
   margin-left: 2vw;
   border: none;
-  font-family: Alegreya;
   text-align: center;
+  color: var(--irecipe-secondary);
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: block;
+  padding: 6px 12px;
+  cursor: pointer;
+  width: 60%;
+}
+
+.file-input {
+  padding-left: 30%;
+  min-height: 15vh;
 }
 
 .recipe-section-header,
 ::placeholder,
 .add-icon {
   color: var(--irecipe-secondary);
-  font-family: Alegreya;
   text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.ingredient-text::placeholder,
+.ingredient-text {
+  color: var(--irecipe-primary) !important;
 }
 
 form {
@@ -69,6 +134,8 @@ form {
 }
 
 .save-button {
-  background-color: var(--irecipe-green);
+  background-color: var(--irecipe-primary);
   margin: 5vh;
+  border: none;
+  color: white;
 }

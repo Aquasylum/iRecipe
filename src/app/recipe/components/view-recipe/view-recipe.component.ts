@@ -6,6 +6,7 @@ import { UserService } from 'src/app/user/service/user.service';
 import { Recipe } from 'src/app/recipe/models/Recipe';
 import { RecipeService } from 'src/app/recipe/services/recipe.service';
 import { UserDoesNotExist } from 'src/app/shared/validators/UserDoesNotExist.validator';
+import { FileService } from 'src/app/user/service/file.service';
 
 @Component({
   selector: 'app-view-recipe',
@@ -20,19 +21,23 @@ export class ViewRecipeComponent implements OnInit {
     private fb: FormBuilder,
     private userService: UserService,
     private userDoesNotExistValidator: UserDoesNotExist,
-    private authService: AuthService
+    private authService: AuthService,
+    private fileService: FileService
   ) {}
 
   recipe!: Recipe;
   id = this.route.snapshot.paramMap.get('id') as string;
-  ifNoPhoto: string = '../../../assets/images/empty.jpg';
   usernameForm!: FormGroup;
+  recipeImage!: string | undefined;
   showSuccessMessage: boolean = false;
 
   ngOnInit(): void {
     this.recipeService.getRecipeById(this.id).then((obs) =>
       obs.subscribe((recipe) => {
         this.recipe = recipe;
+        this.fileService.downloadRecipeImage(this.recipe.id).then((url) => {
+          this.recipeImage = url;
+        });
       })
     );
 

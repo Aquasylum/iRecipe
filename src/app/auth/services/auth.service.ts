@@ -13,7 +13,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { Injectable } from '@angular/core';
 import { ILoginData } from '../Interfaces/ILoginData';
-import { User } from '../../user/models/User';
 import { collection, Firestore, setDoc, doc } from '@angular/fire/firestore';
 import { getDocs, query, where } from 'firebase/firestore';
 
@@ -42,35 +41,43 @@ export class AuthService {
       //get display name so we can cut first name
       // and use the remainder as the surname
       let surname: any = user.user.displayName;
-      let name = user.user.displayName?.split(' ', 2);
-
-      let userExists: User = new User();
+      let name = user.user.displayName?.split(' ');
 
       //Check if user exists in user collection
+      this.userCollection;
+
       let q = query(this.userCollection, where('userId', '==', user.user.uid));
       await getDocs(q).then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          userExists = doc.data() as User;
-        });
+        if (!querySnapshot.empty) {
+          return;
+        } else {
+          if (name && user?.user.displayName) {
+            surname = surname?.replace(name[0], '');
+
+            setDoc(
+              doc(
+                this.firestore,
+                'users',
+                user.user.displayName.replace(/\s+/g, '').toLowerCase()
+              ),
+              {
+                userId: this.getCurrentUser()?.uid,
+                username: user.user.displayName
+                  .replace(/\s+/g, '')
+                  .toLowerCase(),
+                name: name[0],
+                surname: surname.trim(),
+              }
+            );
+          } else {
+            return;
+          }
+        }
       });
 
-      if (userExists) {
-        return;
-      }
-
-      if (name && user?.user.displayName) {
-        surname = surname?.replace(name[0], '');
-
-        await setDoc(doc(this.firestore, 'users', user?.user.displayName), {
-          userId: this.getCurrentUser()?.uid,
-          username: user?.user.displayName.toLowerCase(),
-          name: name[0],
-          surname: surname,
-        });
-      }
+      return user;
     }
-
-    return user;
+    return;
   }
 
   getCurrentUser() {

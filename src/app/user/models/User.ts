@@ -1,6 +1,6 @@
 export class User {
   userId!: string;
-  displayName!: string | undefined;
+  username!: string | undefined;
   name!: string;
   surname!: string;
   rating!: number;

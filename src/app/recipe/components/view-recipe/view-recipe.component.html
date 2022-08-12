@@ -11,15 +11,7 @@
   </a>
   <div class="row">
     <div class="col-md-6">
-      <div
-        *ngIf="recipe?.imageSrc == null; then showEmpty; else showRecipeImage"
-      ></div>
-      <ng-template #showEmpty>
-        <img class="image-container" [src]="ifNoPhoto" />
-      </ng-template>
-      <ng-template #showRecipeImage>
-        <img class="image-container" [src]="recipe.imageSrc" />
-      </ng-template>
+      <img class="image-container" [src]="recipeImage" />
 
       <div class="row justify-content-center">
         <div class="col-md-12">

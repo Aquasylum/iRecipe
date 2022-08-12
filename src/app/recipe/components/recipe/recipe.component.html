@@ -4,7 +4,7 @@
       <label for="name">
         <input
           type="text"
-          class="irecipe-length recipe-section-header"
+          class="irecipe-length recipe-section-header bold"
           name="name"
           placeholder="Recipe Name"
           formControlName="name"
@@ -56,7 +56,7 @@
               <div class="ingredient-container" [formArrayName]="i">
                 <div class="ingredient-row">
                   <input
-                    class="input"
+                    class="input ingredient-text"
                     formControlName="name"
                     type="text"
                     placeholder="Name"
@@ -99,7 +99,7 @@
                   <input
                     formControlName="weight"
                     type="text"
-                    class="input"
+                    class="input ingredient-text"
                     placeholder="Weight"
                   />
                   <div
@@ -117,7 +117,7 @@
 
                 <div class="ingredient-row">
                   <input
-                    class="input"
+                    class="input ingredient-text"
                     formControlName="metricUnit"
                     type="text"
                     placeholder="Metric Unit"
@@ -154,7 +154,44 @@
         </div>
       </div>
 
-      <div class="col-xl-4 col-md-6 col-sm-12"></div>
+      <div class="col-xl-4 col-md-6 col-sm-12">
+        <div class="upload-photo-container">
+          <div class="recipe-section-header">Upload Photo</div>
+          <div *ngIf="!fileUploaded; then showUpload; else showImage"></div>
+
+          <ng-template #showUpload>
+            <div class="file-input">
+              <label
+                (change)="onChange($event)"
+                class="custom-file-upload form-control"
+              >
+                <input type="file" />
+                Add Recipe Photo
+              </label>
+            </div>
+            <div>
+              <button
+                (click)="onUpload()"
+                class="recipe-button btn-lg upload-button"
+              >
+                Upload
+              </button>
+            </div>
+          </ng-template>
+
+          <ng-template #showImage>
+            <img class="recipe-image" [src]="recipeImage" />
+            <div>
+              <button
+                (click)="onDeleteImage()"
+                class="irecipe-button btn-lg remove-button"
+              >
+                Delete Image
+              </button>
+            </div>
+          </ng-template>
+        </div>
+      </div>
 
       <div class="col-xl-4 col-md-6 col-sm-12">
         <div class="steps-container">
@@ -238,6 +275,7 @@
           <label class="recipe-details" for="calories"
             >Calories
             <input
+              class="details-container"
               type="text"
               name="calories"
               formControlName="calories"
@@ -258,8 +296,9 @@
         <div class="col-xl-4 col-md-6 col-sm-12">
           <span class="material-icons"> timer </span>
           <label class="recipe-details" for="estimatedTime"
-            >Estimated Time to Make
+            >Estimated Time
             <input
+              class="details-container"
               type="text"
               name="estimatedTime"
               placeholder="min"
@@ -278,16 +317,18 @@
         </div>
 
         <div class="col-xl-4 col-md-6 col-sm-12">
-          <span class="material-symbols-outlined"> groups </span>
-          <label class="recipe-details" for="portions"
-            >Estimated portions
-            <input
-              type="text"
-              name="portions"
-              placeholder="portions"
-              formControlName="portions"
-            />
-          </label>
+          <div>
+            <label class="recipe-details" for="portions">
+              <span class="material-symbols-outlined"> groups </span>Portions
+              <input
+                class="details-container"
+                type="text"
+                name="portions"
+                placeholder="portions"
+                formControlName="portions"
+              />
+            </label>
+          </div>
           <div
             class="error-label long"
             *ngIf="

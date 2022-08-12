@@ -5,18 +5,20 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeService } from 'src/app/recipe/services/recipe.service';
 import { Recipe } from 'src/app/recipe/models/Recipe';
 
+//Uuid
+import * as uuid from 'uuid';
+
 import {
-  ControlContainer,
   Form,
   FormArray,
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
 import { Ingredient } from 'src/app/recipe/models/Ingredient';
 import { MealType } from 'src/app/shared/enums/MealType';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { FileService } from 'src/app/user/service/file.service';
 
 @Component({
   selector: 'irecipe-recipe',
@@ -27,15 +29,18 @@ export class RecipeComponent implements OnInit {
   isAddMode!: boolean;
   id!: string;
   recipeForm!: FormGroup;
-  ingredientsData!: any;
-  recipeTypesArray = Object.values(MealType);
-  ifNoPhoto: string = '../../../assets/images/emptyjpg';
+  recipeId!: string;
+  recipeImage!: string | undefined;
+
+  file!: File;
+  fileUploaded: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private fileService: FileService
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +48,7 @@ export class RecipeComponent implements OnInit {
     this.isAddMode = !this.id;
 
     this.recipeForm = this.fb.group({
+      id: [''],
       name: [
         '',
         [
@@ -61,6 +67,13 @@ export class RecipeComponent implements OnInit {
       rating: [''],
       portions: ['', Validators.pattern('^[0-9]*$')],
     });
+
+    if (this.isAddMode) {
+      this.recipeId = uuid.v4();
+      this.recipeForm.patchValue({
+        id: this.recipeId,
+      });
+    }
 
     //Checking if in edit mode
     if (!this.isAddMode) {
@@ -82,7 +95,6 @@ export class RecipeComponent implements OnInit {
               })
             )
             .subscribe((recipe) => {
-              console.log(recipe);
               this.recipeForm.patchValue(recipe);
             });
         });
@@ -182,7 +194,6 @@ export class RecipeComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.recipeForm.value);
     if (this.isAddMode) {
       this.recipeService
         .createRecipe(this.recipeForm.value)
@@ -198,5 +209,24 @@ export class RecipeComponent implements OnInit {
     this.recipeService
       .deleteRecipe(this.id)
       .then(() => this.router.navigate(['/main']));
+  }
+
+  onChange(event: any) {
+    this.file = event.target.files[0];
+  }
+
+  onUpload() {
+    this.fileService.uploadRecipeImage(this.file, this.recipeId).then(() => {
+      this.fileService.downloadRecipeImage(this.recipeId).then((imageUrl) => {
+        this.recipeImage = imageUrl;
+        this.fileUploaded = true;
+      });
+    });
+  }
+
+  onDeleteImage() {
+    this.fileService
+      .deleteRecipe(this.recipeId)
+      .then(() => (this.fileUploaded = false));
   }
 }

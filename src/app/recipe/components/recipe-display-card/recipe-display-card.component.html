@@ -3,16 +3,9 @@
   <div class="text-cutter irecipe-profile-black recipe-name">
     {{ recipe.name }}
   </div>
-  <div
-    *ngIf="recipe.imageSrc == null; then showEmpty; else showRecipeImage"
-  ></div>
-  <ng-template #showEmpty>
-    <img [src]="ifNoPhoto" />
-  </ng-template>
-  <ng-template #showRecipeImage>
-    <img [src]="recipe.imageSrc" />
-  </ng-template>
-  {{ recipe.imageSrc }}
+
+  <img [src]="recipeImage" />
+
   <div class="recipe-icons">
     <span class="material-icons functionality-icons"> thumb_up </span>
     <span class="material-icons functionality-icons">

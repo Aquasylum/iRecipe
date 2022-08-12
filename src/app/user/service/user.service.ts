@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { user } from '@angular/fire/auth';
 import { Firestore } from '@angular/fire/firestore';
 
 import {
@@ -45,14 +46,33 @@ export class UserService {
     }
 
     if (!username) {
-      const displayName = this.auth.getCurrentUser()?.displayName;
-      if (displayName != null || displayName != undefined) {
-        const userToAddRecipeTo = doc(this.firestore, 'users', displayName);
-        return await updateDoc(userToAddRecipeTo, {
-          recipes: arrayUnion(recipeId),
-        });
-      }
+      await this.getUsername().then((username) => {
+        username = username;
+
+        if (username != null || username != undefined) {
+          console.log('should work');
+          const userToAddRecipeTo = doc(this.firestore, 'users', username);
+          return updateDoc(userToAddRecipeTo, {
+            recipes: arrayUnion(recipeId),
+          }).then((s) => console.log(s));
+        }
+        return;
+      });
     }
+  }
+
+  async getUsername() {
+    let user: User = new User();
+    let q = query(
+      this.userCollection,
+      where('userId', '==', this.auth.getCurrentUser()?.uid)
+    );
+
+    await getDocs(q).then((querySnapshot) =>
+      querySnapshot.forEach((doc) => (user = doc.data() as User))
+    );
+
+    return user.username;
   }
 
   async userRecipeIds(): Promise<string[]> {
@@ -79,7 +99,7 @@ export class UserService {
       querySnapshot.forEach((doc) => (user = doc.data() as User))
     );
 
-    if (user.displayName == username) {
+    if (user.username == username) {
       return true;
     } else {
       return false;
@@ -93,6 +113,7 @@ export class UserService {
       where('userId', '==', this.auth.getCurrentUser()?.uid)
     );
 
+    console.log(this.auth.getCurrentUser()?.displayName);
     await getDocs(q).then((querySnapshot) =>
       querySnapshot.forEach((doc) => (user = doc.data() as User))
     );
@@ -100,8 +121,7 @@ export class UserService {
     if (user.name || user.surname) {
       return user.name + ' ' + user.surname;
     } else {
-      console.log(user);
-      return user.displayName;
+      return user.username;
     }
   }
 
@@ -113,7 +133,7 @@ export class UserService {
       let max1 = Math.floor(max);
       return Math.floor(Math.random() * (max1 - min1 + 1)) + min1;
     };
-    console.log(genrateRandomNumber(1, 5));
+
     return genrateRandomNumber(1, 5);
   }
 }
