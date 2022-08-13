@@ -1,161 +1,21 @@
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
-/>
-
 <div class="irecipe-container">
-  <a>
-    <button class="add-button btn-sm irecipe-button" routerLink="/main">
-      Back to main menu
-    </button>
-  </a>
-  <div class="row">
-    <div class="col-md-6">
-      <img class="image-container" [src]="recipeImage" />
+  <div class="recipe-header">
+    <div class="irecipe-name">{{ recipe.name }}</div>
+  </div>
 
-      <div class="row justify-content-center">
-        <div class="col-md-12">
-          <button
-            class="irecipe-button btn-lg edit-button"
-            routerLink="main/recipe/{{ recipe.id }}"
-          >
-            Edit Recipe
-          </button>
-          <button
-            class="irecipe-button btn-lg delete-button"
-            (click)="deleteRecipe()"
-          >
-            Delete Recipe
-          </button>
-        </div>
+  <div class="recipe-display">
+    <div class="row">
+      <div class="col-lg-6 col-sm-12">
+        <img class="irecipe-image" [src]="recipeImage" />
       </div>
 
-      <div class="irecipe-share">
-        Want to share this recipe with another user?
-        <br />
-        Enter their username and we'll take care of the rest!
-        <form [formGroup]="usernameForm" class="form">
-          <div class="username-input-field">
-            <label for="username">
-              <input
-                type="text"
-                name="username"
-                formControlName="username"
-                placeholder="username"
-              />
-            </label>
-            <button
-              class="irecipe-button send-button btn-sm"
-              (click)="sendRecipe()"
-            >
-              Send Recipe
-            </button>
-            <div class="error-container">
-              <ng-container *ngIf="username?.invalid && username?.touched">
-                <div
-                  class="error-label"
-                  *ngIf="
-                    username?.hasError('doesNotExist') &&
-                    usernameForm.controls['username'].touched
-                  "
-                >
-                  Username does not exist.
-                </div>
-                <div
-                  class="error-label"
-                  *ngIf="
-                    username?.hasError('cantUseOwnUsername') &&
-                    usernameForm.controls['username'].touched
-                  "
-                >
-                  You cannot send a recipe to yourself. Please enter another
-                  persons username!
-                </div>
-              </ng-container>
-            </div>
-            <div
-              class="alert alert-success alert-dismissible fade show"
-              role="alert"
-              *ngIf="showSuccessMessage"
-            >
-              <strong>Holy guacamole!</strong> You have successfully sent the
-              recipe
-              <button
-                (click)="onCloseSuccessMessage()"
-                type="button"
-                class="close"
-                data-dismiss="alert"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <div class="col-md-6 irecipe-details">
-      <h2>{{ recipe.name }}</h2>
-      <div class="row irecipe-infographics">
-        <div class="col-md-4">
-          <div
-            *ngIf="
-              recipe.estimatedTime == null;
-              then timeNotSpecified;
-              else showTime
-            "
-          ></div>
-          <ng-template #timeNotSpecified>
-            <span class="material-symbols-outlined"> timer </span>
-            <a>Time to cook : not specified</a>
-          </ng-template>
-          <ng-template #showTime>
-            <span class="material-symbols-outlined"> timer </span>
-            <a>Time to cook : {{ recipe.estimatedTime }}</a>
-          </ng-template>
+      <div class="col-lg-6 col-sm-12">
+        <div class="user">
+          <span class="material-symbols-outlined"> account_circle </span>
+          {{ recipe.author }}
         </div>
-
-        <div class="col-md-4">
-          <div
-            *ngIf="
-              recipe.calories == null;
-              then caloriesNotSpecified;
-              else showCalories
-            "
-          ></div>
-          <ng-template #caloriesNotSpecified>
-            <span class="material-symbols-outlined"> monitoring </span>
-            <a>Calories: not specified</a>
-          </ng-template>
-          <ng-template #showCalories>
-            <span class="material-symbols-outlined"> monitoring </span>
-            <a>Calories: {{ recipe.calories }}</a>
-          </ng-template>
-        </div>
-
-        <div class="col-md-4">
-          <div
-            *ngIf="
-              recipe.portions == null;
-              then portionsNotSpecified;
-              else showPortions
-            "
-          ></div>
-          <ng-template #portionsNotSpecified>
-            <span class="material-symbols-outlined"> monitoring </span>
-            <a>Portions: not specified</a>
-          </ng-template>
-          <ng-template #showPortions>
-            <span class="material-symbols-outlined"> groups </span>
-            <a>Portions: {{ recipe.portions }}</a>
-          </ng-template>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col md 12 ingredients">
-          <h4>Ingredients</h4>
+        <div class="ingredients">
+          <div class="irecipe-title ingredients-heading">Ingredients</div>
           <ul>
             <li *ngFor="let ingredient of recipe.ingredients">
               {{ ingredient.name }} {{ ingredient.weight }}
@@ -164,30 +24,109 @@
           </ul>
         </div>
       </div>
+    </div>
 
-      <div class="row">
-        <div class="col md 12 steps">
-          <h4>Steps</h4>
-          <ul>
-            <li *ngFor="let step of recipe.steps">
-              {{ step.step }}
-            </li>
-          </ul>
-        </div>
+    <div class="row">
+      <div class="col-lg-12 steps">
+        <h4>Steps</h4>
+        <ul>
+          <li *ngFor="let step of recipe.steps">
+            {{ step.step }}
+          </li>
+        </ul>
       </div>
+    </div>
 
-      <div *ngIf="recipe.tips != null">
-        <div class="row">
-          <div class="col md 12 tips">
-            <h4>Tips</h4>
-            <ul>
-              <li *ngFor="let tip of recipe.tips">
-                {{ tip.tip }}
-              </li>
-            </ul>
-          </div>
-        </div>
+    <div class="row">
+      <div class="col-lg-12 tips">
+        <h4>Tips</h4>
+        <ul>
+          <li *ngFor="let tip of recipe.tips">
+            {{ tip.tip }}
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 </div>
+
+<!-- <div class="row">
+  <div class="col-lg-6 col-sm-12">
+    <button
+      class="irecipe-button btn-lg edit-button"
+      routerLink="/main/recipe/{{ recipe.id }}"
+    >
+      Edit Recipe
+    </button>
+    <button
+      class="irecipe-button btn-lg delete-button"
+      (click)="deleteRecipe()"
+    >
+      Delete Recipe
+    </button>
+  </div>
+</div>
+
+<div class="irecipe-share">
+  Want to share this recipe with another user?
+  <br />
+  Enter their username and we'll take care of the rest!
+  <form [formGroup]="usernameForm" class="form">
+    <div class="username-input-field">
+      <label for="username">
+        <input
+          type="text"
+          name="username"
+          formControlName="username"
+          placeholder="username"
+        />
+      </label>
+      <button
+        class="irecipe-button send-button btn-sm"
+        (click)="sendRecipe()"
+      >
+        Send Recipe
+      </button>
+      <div class="error-container">
+        <ng-container *ngIf="username?.invalid && username?.touched">
+          <div
+            class="error-label"
+            *ngIf="
+              username?.hasError('doesNotExist') &&
+              usernameForm.controls['username'].touched
+            "
+          >
+            Username does not exist.
+          </div>
+          <div
+            class="error-label"
+            *ngIf="
+              username?.hasError('cantUseOwnUsername') &&
+              usernameForm.controls['username'].touched
+            "
+          >
+            You cannot send a recipe to yourself. Please enter another
+            persons username!
+          </div>
+        </ng-container>
+      </div>
+      <div
+        class="alert alert-success alert-dismissible fade show"
+        role="alert"
+        *ngIf="showSuccessMessage"
+      >
+        <strong>Holy guacamole!</strong> You have successfully sent the
+        recipe
+        <button
+          (click)="onCloseSuccessMessage()"
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div> -->

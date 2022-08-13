@@ -9,6 +9,7 @@ export class Recipe {
   id!: string;
   name!: string;
   description?: string;
+  author?: string | undefined;
   imageSrc?: string;
   dateCreated!: number;
   dateModified!: number;

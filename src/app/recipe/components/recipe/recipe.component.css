@@ -2,12 +2,14 @@
   .recipe-section-header {
     font-size: 48px !important;
   }
-  .recipe-image {
-    width: 500px;
+
+  .ingredient-name-text {
+    font-size: 24px;
   }
 
-  input[type="text"] {
-    font-size: 24px;
+  .steps-text {
+    width: 300px;
+    height: 120px;
   }
 }
 
@@ -16,11 +18,7 @@
     font-size: 36px !important;
   }
 
-  .recipe-image {
-    width: 400px;
-  }
-
-  input[type="text"] {
+  .ingredient-name-text {
     font-size: 20px;
   }
 }
@@ -30,10 +28,7 @@
     font-size: 28px !important;
   }
 
-  .recipe-image {
-    width: 300px;
-  }
-  input[type="text"] {
+  .ingredient-name-text {
     font-size: 16px;
   }
 }
@@ -47,6 +42,18 @@
 
 .details-container {
   width: 150px;
+}
+
+.add-icon {
+  margin-left: 10px;
+}
+
+textarea {
+  border: 2px solid var(--irecipe-secondary);
+  border-radius: 10px;
+  background-color: transparent;
+  color: var(--irecipe-primary);
+  resize: none;
 }
 
 .recipe-name-container {
@@ -102,8 +109,10 @@ input[type="file"] {
   font-weight: 700;
 }
 
-.ingredient-text::placeholder,
-.ingredient-text {
+.ingredient-name-text::placeholder,
+.ingredient-name-text,
+.steps-text,
+.steps-text::placeholder {
   color: var(--irecipe-primary) !important;
 }
 
@@ -129,7 +138,6 @@ form {
 }
 
 .delete-button {
-  margin-left: 2vw;
   background-color: var(--irecipe-red);
 }
 
@@ -138,4 +146,9 @@ form {
   margin: 5vh;
   border: none;
   color: white;
+}
+
+.display-ingredient:hover {
+  transform: scale(1.1);
+  cursor: pointer;
 }

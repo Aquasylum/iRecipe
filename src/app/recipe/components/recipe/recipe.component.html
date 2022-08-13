@@ -56,7 +56,7 @@
               <div class="ingredient-container" [formArrayName]="i">
                 <div class="ingredient-row">
                   <input
-                    class="input ingredient-text"
+                    class="input ingredient-name-text"
                     formControlName="name"
                     type="text"
                     placeholder="Name"
@@ -99,7 +99,7 @@
                   <input
                     formControlName="weight"
                     type="text"
-                    class="input ingredient-text"
+                    class="input ingredient-name-text"
                     placeholder="Weight"
                   />
                   <div
@@ -117,7 +117,7 @@
 
                 <div class="ingredient-row">
                   <input
-                    class="input ingredient-text"
+                    class="input ingredient-name-text"
                     formControlName="metricUnit"
                     type="text"
                     placeholder="Metric Unit"
@@ -199,12 +199,12 @@
           <ng-container formArrayName="steps">
             <ng-container *ngFor="let step of steps.controls; let i = index">
               <div class="step-container" [formArrayName]="i">
-                <input
+                <textarea
                   formControlName="step"
-                  class="input"
+                  class="input steps-text"
                   type="text"
                   placeholder="step"
-                />
+                ></textarea>
                 <div
                   class="error-label irecipe-length"
                   *ngIf="
@@ -224,13 +224,15 @@
                 >
                   At least one step is required for a recipe!
                 </div>
-                <button
-                  [disabled]="i == 0"
-                  class="delete-button btn-danger btn-sm irecipe-button"
-                  (click)="deleteStep(i)"
-                >
-                  X
-                </button>
+                <div>
+                  <button
+                    [disabled]="i == 0"
+                    class="delete-button btn-danger btn-sm irecipe-button"
+                    (click)="deleteStep(i)"
+                  >
+                    X
+                  </button>
+                </div>
               </div>
             </ng-container>
           </ng-container>

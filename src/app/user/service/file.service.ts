@@ -28,21 +28,18 @@ export class FileService {
     let recipeImageRef = ref(this.storage, 'recipeImages/' + recipeId);
     let defaultImageRef = ref(this.storage, 'recipeImages/' + 'empty.jpg');
     let defaultImage: string;
-    getDownloadURL(defaultImageRef).then((url) => {
+    return getDownloadURL(defaultImageRef).then((url) => {
       defaultImage = url.toString();
-    });
-
-    //Get the image url:
-    return getDownloadURL(recipeImageRef)
-      .then((url) => {
-        return url.toString();
-      })
-      .catch((error) => {
-        if (error.code == 'storage/object-not-found') {
+      //Get the image url:
+      return getDownloadURL(recipeImageRef)
+        .then((url) => {
+          return url.toString();
+        })
+        .catch((error) => {
+          console.log(defaultImage);
           return defaultImage;
-        }
-        return error;
-      });
+        });
+    });
   }
 
   deleteRecipe(recipeId: string) {

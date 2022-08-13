@@ -8,16 +8,9 @@ import { Recipe } from 'src/app/recipe/models/Recipe';
 //Uuid
 import * as uuid from 'uuid';
 
-import {
-  Form,
-  FormArray,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Ingredient } from 'src/app/recipe/models/Ingredient';
-import { MealType } from 'src/app/shared/enums/MealType';
-import { AuthService } from 'src/app/auth/services/auth.service';
+
 import { FileService } from 'src/app/user/service/file.service';
 
 @Component({
@@ -31,9 +24,13 @@ export class RecipeComponent implements OnInit {
   recipeForm!: FormGroup;
   recipeId!: string;
   recipeImage!: string | undefined;
-
   file!: File;
   fileUploaded: boolean = false;
+
+  ingredientIndex: number = -1;
+  ingredientName!: string;
+  ingredientWeight!: string;
+  ingredientMetricUnit!: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -67,6 +64,8 @@ export class RecipeComponent implements OnInit {
       rating: [''],
       portions: ['', Validators.pattern('^[0-9]*$')],
     });
+
+    this.addIngredient();
 
     if (this.isAddMode) {
       this.recipeId = uuid.v4();
@@ -127,17 +126,25 @@ export class RecipeComponent implements OnInit {
   addIngredient() {
     const ingredientForm = this.fb.group({
       name: [
-        '',
+        this.ingredientName,
         [
           Validators.required,
           Validators.minLength(3),
           Validators.maxLength(20),
         ],
       ],
-      weight: ['', Validators.required],
-      metricUnit: ['', Validators.required],
+      weight: [this.ingredientWeight, Validators.required],
+      metricUnit: [this.ingredientMetricUnit, Validators.required],
     });
+
     this.ingredients.push(ingredientForm);
+    this.ingredientIndex++;
+    console.log(this.ingredients.controls);
+  }
+
+  getCurrentIngredient(index: number) {
+    console.log(this.ingredients.controls[index].value);
+    this.ingredientIndex == index;
   }
 
   deleteIngredient(ingredientIndex: number) {

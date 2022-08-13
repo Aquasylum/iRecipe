@@ -50,7 +50,6 @@ export class UserService {
         username = username;
 
         if (username != null || username != undefined) {
-          console.log('should work');
           const userToAddRecipeTo = doc(this.firestore, 'users', username);
           return updateDoc(userToAddRecipeTo, {
             recipes: arrayUnion(recipeId),

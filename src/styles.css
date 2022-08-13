@@ -15,6 +15,7 @@
   /* Font sizes */
   --irecipe-name: 75px;
   --irecipe-logo: 60px;
+  --irecipe-title: 48px;
   --irecipe-heading: 24px;
   --irecipe-label: 16px;
 }
@@ -27,6 +28,14 @@
 
   .irecipe-logo {
     font-size: var(--irecipe-logo);
+  }
+
+  .irecipe-image {
+    width: 500px;
+  }
+
+  .irecipe-title {
+    font-size: var(--irecipe-title);
   }
 
   .irecipe-header {
@@ -59,6 +68,14 @@
     font-size: calc(var(--irecipe-logo) * 0.8);
   }
 
+  .irecipe-image {
+    width: 400px;
+  }
+
+  .irecipe-title {
+    font-size: calc(var(--irecipe-title) * 0.8);
+  }
+
   .irecipe-header {
     font-size: calc(var(--irecipe-heading) * 0.8);
   }
@@ -88,6 +105,15 @@
   .irecipe-logo {
     font-size: calc(var(--irecipe-logo) * 0.5);
   }
+
+  .irecipe-image {
+    width: 300px;
+  }
+
+  .irecipe-title {
+    font-size: calc(var(--irecipe-title) * 0.5);
+  }
+
   .irecipe-header {
     font-size: calc(var(--irecipe-heading) * 0.5);
   }

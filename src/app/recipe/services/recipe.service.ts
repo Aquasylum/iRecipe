@@ -52,12 +52,16 @@ export class RecipeService {
   }
 
   async createRecipe(recipe: Recipe) {
+    //Add all data not done by user
     recipe.dateCreated = Date.now();
     recipe.dateModified = Date.now();
-    await setDoc(doc(this.fireStore, 'recipes', recipe.id), recipe);
 
-    //Adding recipe to the recipe array in User collection:
-    this.userService.updateUserWithRecipeId(recipe.id);
+    this.userService.getUserNameAndSurname().then((usernameAndSurname) => {
+      recipe.author = usernameAndSurname;
+      setDoc(doc(this.fireStore, 'recipes', recipe.id), recipe).then(() =>
+        this.userService.updateUserWithRecipeId(recipe.id)
+      );
+    });
 
     return recipe.id;
   }
