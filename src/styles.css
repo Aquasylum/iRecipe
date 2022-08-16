@@ -32,7 +32,7 @@
 
   .irecipe-image {
     width: 450px;
-    height: 450px;
+    max-height: 450px;
   }
 
   .irecipe-title {
@@ -71,7 +71,7 @@
 
   .irecipe-image {
     width: 375px;
-    height: 375px;
+    max-height: 375px;
   }
 
   .irecipe-title {
@@ -110,7 +110,7 @@
 
   .irecipe-image {
     width: 300px;
-    height: 300px;
+    max-height: 300px;
   }
 
   .irecipe-title {
@@ -139,7 +139,7 @@
 }
 
 body {
-  font-family: AlegreyaBold, "Helvetica Neue", sans-serif !important;
+  font-family: AlegreyaBold, "Helvetica Neue", sans-serif;
   font-size: var(--irecipe-text) !important;
 }
 

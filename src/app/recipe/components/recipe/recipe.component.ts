@@ -26,6 +26,7 @@ export class RecipeComponent implements OnInit {
   recipeImage!: string | undefined;
   file!: File;
   fileUploaded: boolean = false;
+  fileName!: string;
 
   ingredientIndex: number = 0;
   ingredientName!: string;
@@ -206,6 +207,7 @@ export class RecipeComponent implements OnInit {
 
   onChange(event: any) {
     this.file = event.target.files[0];
+    this.fileName = this.file.name;
   }
 
   onUpload() {

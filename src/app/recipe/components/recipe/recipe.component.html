@@ -4,7 +4,7 @@
       <label for="name">
         <input
           type="text"
-          class="irecipe-length recipe-section-header bold"
+          class="recipe-name bold"
           name="name"
           placeholder="Recipe Name"
           formControlName="name"
@@ -171,7 +171,7 @@
                 class="custom-file-upload form-control"
               >
                 <input type="file" />
-                Add Recipe Photo
+                Click to add photo
               </label>
             </div>
             <div>
@@ -179,7 +179,7 @@
                 (click)="onUpload()"
                 class="recipe-button btn-lg upload-button"
               >
-                Upload
+                Upload {{ fileName }}
               </button>
             </div>
           </ng-template>

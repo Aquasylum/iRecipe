@@ -34,12 +34,11 @@ export class RecipeDisplayCardComponent implements OnInit, OnChanges {
     const newRecipeImage = await this.fileService.downloadRecipeImage(
       this.recipe.id
     );
-    console.log('changing image');
+
     this.recipeImage = newRecipeImage;
   }
 
   changeImage(changes: SimpleChanges) {
-    console.log('changing text');
     this.recipe = changes['recipe'].currentValue;
   }
 }

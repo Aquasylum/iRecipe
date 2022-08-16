@@ -4,6 +4,11 @@
     margin-bottom: 40px;
   }
 
+  .recipe-name {
+    font-size: 85px;
+    width: 700px;
+  }
+
   .material-symbols-outlined,
   .material-icons {
     font-size: 35px;
@@ -27,7 +32,7 @@
 
   .recipe-textarea {
     width: 300px;
-    height: 120px;
+    height: 250px;
   }
 }
 
@@ -35,6 +40,11 @@
   .recipe-section-header {
     font-size: 32px !important;
     margin-bottom: 25px;
+  }
+
+  .recipe-name {
+    font-size: 65px;
+    width: 500px;
   }
 
   .material-symbols-outlined,
@@ -54,8 +64,8 @@
   }
 
   .recipe-textarea {
-    width: 200px;
-    height: 80px;
+    width: 300px;
+    height: 250px;
   }
 }
 
@@ -63,6 +73,11 @@
   .recipe-section-header {
     font-size: 24px !important;
     margin-bottom: 10px;
+  }
+
+  .recipe-name {
+    font-size: 50px;
+    width: 350px;
   }
 
   .material-symbols-outlined,
@@ -100,8 +115,8 @@
   }
 
   .recipe-textarea {
-    width: 150px;
-    height: 60px;
+    width: 400px;
+    height: 150px;
   }
 }
 
@@ -201,7 +216,6 @@ input[type="file"] {
 
 .file-input {
   padding-left: 30%;
-  min-height: 15vh;
 }
 
 .recipe-section-header,

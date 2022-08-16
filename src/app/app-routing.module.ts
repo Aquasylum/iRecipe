@@ -8,36 +8,42 @@ import { DiscoverComponent } from './user/components/discover/discover.component
 import { ProfileComponent } from './user/components/profile/profile.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/login']);
-//...canActivate(redirectUnauthorizedToLogin)
 
 let routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
   },
   {
     path: 'profile/:id',
     component: ProfileComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
   },
   {
     path: 'recipe',
     component: RecipeComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
   },
   {
     path: 'recipe/:id',
     component: RecipeComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
   },
   {
     path: 'recipe-list',
     component: RecipesContainerComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
   },
   {
     path: 'view-recipe/:id',
     component: ViewRecipeComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
   },
   {
     path: 'discover',
     component: DiscoverComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
   },
   { path: '', redirectTo: '/profile', pathMatch: 'full' },
 
