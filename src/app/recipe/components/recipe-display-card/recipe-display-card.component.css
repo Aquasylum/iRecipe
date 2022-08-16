@@ -2,19 +2,35 @@
   .recipe-name {
     font-size: 32px !important;
     padding-top: 15px;
-    padding-bottom: 20px;
+  }
+
+  .recipe-display-card-image {
+    width: 300px;
+    height: 300px;
   }
 }
 
 @media screen and (max-width: 1200px) {
   .recipe-name {
     font-size: 26px !important;
+    padding-top: 12px;
+  }
+
+  .recipe-display-card-image {
+    width: 250px;
+    height: 250px;
   }
 }
 
 @media screen and (max-width: 600px) {
   .recipe-name {
     font-size: 20px !important;
+    padding-top: 10px;
+  }
+
+  .recipe-display-card-image {
+    width: 200px;
+    height: 200px;
   }
 }
 
@@ -22,17 +38,10 @@
   transition: 0.3s;
   align-content: center;
   text-align: center;
-  width: 20vw;
 }
 
 .irecipe-profile-black {
   color: var(--irecipe-secondary);
-}
-
-img {
-  width: 100%;
-  height: 100%;
-  display: block;
 }
 
 .text-cutter {

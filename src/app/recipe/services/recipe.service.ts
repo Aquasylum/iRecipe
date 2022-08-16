@@ -31,24 +31,29 @@ export class RecipeService {
 
   async getAllRecipesByUserId(): Promise<Recipe[]> {
     let recipes: Recipe[] = [];
+    const userRecipeIds = await this.userService.userRecipeIds();
 
-    this.userService.userRecipeIds().then((ids) => {
-      if (ids) {
-        ids.forEach((id) => {
-          const q = query(this.recipeCollection, where('id', '==', id));
-          getDocs(q).then((querySnapshot) =>
-            querySnapshot.forEach((doc) => recipes.push(doc.data() as Recipe))
-          );
-        });
-      }
+    const recipieQueries = userRecipeIds.map((recipeId) => {
+      const q = query(this.recipeCollection, where('id', '==', recipeId));
+      return getDocs(q);
     });
+
+    await Promise.all(
+      recipieQueries.map((recipe) =>
+        recipe.then((querySnapshot) => {
+          querySnapshot.docs.forEach((doc) =>
+            recipes.push(doc.data() as Recipe)
+          );
+        })
+      )
+    );
 
     return recipes;
   }
 
   async getRecipeById(id: string): Promise<Observable<Recipe>> {
     const recipeDocumentReference = doc(this.recipeCollection, id);
-    return (await docData(recipeDocumentReference)) as Observable<Recipe>;
+    return docData(recipeDocumentReference) as Observable<Recipe>;
   }
 
   async createRecipe(recipe: Recipe) {

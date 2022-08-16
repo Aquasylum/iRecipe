@@ -16,12 +16,9 @@ export class FileService {
   constructor() {}
 
   async uploadRecipeImage(file: any, recipeId: string) {
-    console.log(recipeId);
     let imagesRef = ref(this.storage, 'recipeImages/' + recipeId);
 
-    return await uploadBytes(imagesRef, file).then((snapshot) => {
-      console.log(snapshot);
-    });
+    return await uploadBytes(imagesRef, file).then((snapshot) => {});
   }
 
   downloadRecipeImage(recipeId: string): Promise<string | undefined> {
@@ -36,7 +33,6 @@ export class FileService {
           return url.toString();
         })
         .catch((error) => {
-          console.log(defaultImage);
           return defaultImage;
         });
     });

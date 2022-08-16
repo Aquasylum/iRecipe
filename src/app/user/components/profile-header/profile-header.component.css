@@ -1,12 +1,12 @@
 @media screen and (max-width: 1800px) {
   .user-icons {
-    font-size: 48px;
+    font-size: 36px;
   }
 }
 
 @media screen and (max-width: 1200px) {
   .user-icons {
-    font-size: 36px;
+    font-size: 30px;
   }
 }
 
@@ -20,11 +20,19 @@
   text-align: center;
 }
 
+.irecipe-name {
+  line-height: 47px;
+}
+
 .user-icons {
   color: var(--irecipe-primary);
 }
 
+.profile-header-user-rating {
+  margin-top: 3%;
+}
+
 .profile-picture {
-  font-size: 100px;
+  font-size: 75px;
   color: var(--irecipe-primary);
 }

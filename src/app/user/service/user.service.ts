@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { user } from '@angular/fire/auth';
 import { Firestore } from '@angular/fire/firestore';
 
 import {
@@ -12,6 +11,7 @@ import {
   where,
   getDocs,
 } from 'firebase/firestore';
+import { asapScheduler } from 'rxjs';
 
 import { User } from 'src/app/user/models/User';
 import { AuthService } from '../../auth/services/auth.service';
@@ -75,16 +75,13 @@ export class UserService {
   }
 
   async userRecipeIds(): Promise<string[]> {
-    let user: User = new User();
     const q = query(
       this.userCollection,
       where('userId', '==', this.auth.getCurrentUser()?.uid)
     );
 
-    await getDocs(q).then((querySnapshot) =>
-      querySnapshot.forEach((doc) => (user = doc.data() as User))
-    );
-
+    const docs = await getDocs(q);
+    const user = docs.docs[0].data() as User;
     return user.recipes;
   }
 
@@ -112,7 +109,6 @@ export class UserService {
       where('userId', '==', this.auth.getCurrentUser()?.uid)
     );
 
-    console.log(this.auth.getCurrentUser()?.displayName);
     await getDocs(q).then((querySnapshot) =>
       querySnapshot.forEach((doc) => (user = doc.data() as User))
     );

@@ -1,132 +1,163 @@
 <div class="irecipe-container">
   <div class="recipe-header">
-    <div class="irecipe-name">{{ recipe.name }}</div>
+    <div class="irecipe-name bold">
+      {{ recipe.name }}
+      <div class="view-recipe-description">
+        This salmon salad recipe makes a main dish salad with chopped
+        vegetables, flaky fish, and tangy citrus dressing. It has plenty of
+        protein and healthy fats, so it’s nutritious and delicious!
+      </div>
+    </div>
   </div>
 
-  <div class="recipe-display">
+  <div class="view-recipe-display">
     <div class="row">
       <div class="col-lg-6 col-sm-12">
         <img class="irecipe-image" [src]="recipeImage" />
       </div>
 
       <div class="col-lg-6 col-sm-12">
-        <div class="user">
-          <span class="material-symbols-outlined"> account_circle </span>
+        <div class="view-recipe-author">
+          <span class="material-symbols-outlined view-recipe-author-icon">
+            account_circle
+          </span>
           {{ recipe.author }}
         </div>
         <div class="ingredients">
-          <div class="irecipe-title ingredients-heading">Ingredients</div>
-          <ul>
-            <li *ngFor="let ingredient of recipe.ingredients">
-              {{ ingredient.name }} {{ ingredient.weight }}
-              {{ ingredient.metricUnit }}
-            </li>
-          </ul>
+          <div class="irecipe-title bold view-recipe-heading">Ingredients</div>
+
+          <div
+            class="view-recipe-section"
+            *ngFor="let ingredient of recipe.ingredients"
+          >
+            {{ ingredient.weight }} {{ ingredient.metricUnit }}
+            {{ ingredient.name }}
+          </div>
         </div>
       </div>
     </div>
 
     <div class="row">
       <div class="col-lg-12 steps">
-        <h4>Steps</h4>
-        <ul>
-          <li *ngFor="let step of recipe.steps">
-            {{ step.step }}
-          </li>
-        </ul>
+        <div class="irecipe-title bold view-recipe-heading">Steps</div>
+
+        <div class="view-recipe-section" *ngFor="let step of recipe.steps">
+          {{ step.step }}
+        </div>
       </div>
     </div>
 
     <div class="row">
       <div class="col-lg-12 tips">
-        <h4>Tips</h4>
-        <ul>
-          <li *ngFor="let tip of recipe.tips">
-            {{ tip.tip }}
-          </li>
-        </ul>
+        <div class="irecipe-title bold view-recipe-heading">Tips</div>
+
+        <div class="view-recipe-section" *ngFor="let tip of recipe.tips">
+          {{ tip.tip }}
+        </div>
+      </div>
+    </div>
+
+    <div class="view-recipe-details-container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 view-recipe-detail">
+          <span class="material-symbols-outlined"> monitoring </span>
+          Calories: {{ recipe.calories }} KKCAL
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12 view-recipe-detail">
+          <span class="material-icons"> timer </span>
+          Estimated time: {{ recipe.estimatedTime }} min.
+        </div>
+
+        <div class="col-lg-4 col-md-6 col-sm-12 view-recipe-detail">
+          <span class="material-symbols-outlined"> groups </span>
+          Portions: {{ recipe.portions }}
+        </div>
+      </div>
+    </div>
+
+    <div class="view-recipe-send-container">
+      <div class="irecipe-share">
+        Want to share this recipe with another user?
+        <br />
+        Enter their username and we'll take care of the rest!
+
+        <div class="username-input-field">
+          <label for="username">
+            <input
+              type="text"
+              name="username"
+              [formControl]="usernameControl"
+              placeholder="username"
+            />
+          </label>
+          <button
+            [disabled]="usernameControl.invalid"
+            class="irecipe-button send-button btn-sm"
+            (click)="sendRecipe()"
+          >
+            Send Recipe
+          </button>
+          <div class="error-container">
+            <ng-container *ngIf="username?.invalid && username?.touched">
+              <div
+                class="error-label"
+                *ngIf="
+                  username?.hasError('doesNotExist') && usernameControl.touched
+                "
+              >
+                Username does not exist.
+              </div>
+              <div
+                class="error-label"
+                *ngIf="
+                  username?.hasError('cantUseOwnUsername') &&
+                  usernameControl.touched
+                "
+              >
+                You cannot send a recipe to yourself. Please enter another
+                persons username!
+              </div>
+            </ng-container>
+          </div>
+          <div
+            class="alert alert-success alert-dismissible fade show"
+            role="alert"
+            *ngIf="showSuccessMessage"
+          >
+            <strong>Holy guacamole!</strong> You have successfully sent the
+            recipe
+            <button
+              (click)="onCloseSuccessMessage()"
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="view-recipe-functionality-container">
+      <div class="row">
+        <div class="col-lg-12">
+          <button
+            class="irecipe-button btn-lg edit-button"
+            routerLink="/main/recipe/{{ recipe.id }}"
+          >
+            Edit Recipe
+          </button>
+          <button
+            class="irecipe-button btn-lg delete-button"
+            (click)="deleteRecipe()"
+          >
+            Delete Recipe
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
-<!-- <div class="row">
-  <div class="col-lg-6 col-sm-12">
-    <button
-      class="irecipe-button btn-lg edit-button"
-      routerLink="/main/recipe/{{ recipe.id }}"
-    >
-      Edit Recipe
-    </button>
-    <button
-      class="irecipe-button btn-lg delete-button"
-      (click)="deleteRecipe()"
-    >
-      Delete Recipe
-    </button>
-  </div>
-</div>
-
-<div class="irecipe-share">
-  Want to share this recipe with another user?
-  <br />
-  Enter their username and we'll take care of the rest!
-  <form [formGroup]="usernameForm" class="form">
-    <div class="username-input-field">
-      <label for="username">
-        <input
-          type="text"
-          name="username"
-          formControlName="username"
-          placeholder="username"
-        />
-      </label>
-      <button
-        class="irecipe-button send-button btn-sm"
-        (click)="sendRecipe()"
-      >
-        Send Recipe
-      </button>
-      <div class="error-container">
-        <ng-container *ngIf="username?.invalid && username?.touched">
-          <div
-            class="error-label"
-            *ngIf="
-              username?.hasError('doesNotExist') &&
-              usernameForm.controls['username'].touched
-            "
-          >
-            Username does not exist.
-          </div>
-          <div
-            class="error-label"
-            *ngIf="
-              username?.hasError('cantUseOwnUsername') &&
-              usernameForm.controls['username'].touched
-            "
-          >
-            You cannot send a recipe to yourself. Please enter another
-            persons username!
-          </div>
-        </ng-container>
-      </div>
-      <div
-        class="alert alert-success alert-dismissible fade show"
-        role="alert"
-        *ngIf="showSuccessMessage"
-      >
-        <strong>Holy guacamole!</strong> You have successfully sent the
-        recipe
-        <button
-          (click)="onCloseSuccessMessage()"
-          type="button"
-          class="close"
-          data-dismiss="alert"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-    </div>
-  </form>
-</div> -->

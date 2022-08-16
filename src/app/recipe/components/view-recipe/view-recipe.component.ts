@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { UserService } from 'src/app/user/service/user.service';
@@ -27,9 +32,9 @@ export class ViewRecipeComponent implements OnInit {
 
   recipe!: Recipe;
   id = this.route.snapshot.paramMap.get('id') as string;
-  usernameForm!: FormGroup;
   recipeImage!: string | undefined;
   showSuccessMessage: boolean = false;
+  usernameControl!: FormControl;
 
   ngOnInit(): void {
     this.recipeService.getRecipeById(this.id).then((obs) =>
@@ -41,21 +46,19 @@ export class ViewRecipeComponent implements OnInit {
       })
     );
 
-    this.usernameForm = this.fb.group({
-      username: [
-        '',
-        [],
-        [
-          this.userDoesNotExistValidator.validate.bind(
-            this.userDoesNotExistValidator
-          ),
-        ],
-      ],
-    });
+    this.usernameControl = new FormControl(
+      '',
+      [],
+      [
+        this.userDoesNotExistValidator.validate.bind(
+          this.userDoesNotExistValidator
+        ),
+      ]
+    );
   }
 
   get username() {
-    return this.usernameForm.get('username');
+    return this.usernameControl.get('username');
   }
 
   deleteRecipe() {
@@ -74,12 +77,13 @@ export class ViewRecipeComponent implements OnInit {
     this.userService
       .updateUserWithRecipeId(this.recipe.id, this.username?.value)
       .then(() => {
-        this.usernameForm.reset;
+        this.usernameControl.reset;
         this.showSuccessMessage = true;
       });
   }
 
   onCloseSuccessMessage() {
     this.showSuccessMessage = false;
+    this.usernameControl.reset();
   }
 }

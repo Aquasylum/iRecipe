@@ -11,11 +11,13 @@
     {{ username }}
   </div>
   <div>
-    <span
-      *ngFor="let star of userRatingArray"
-      class="material-symbols-outlined user-icons"
-    >
-      star_outline
-    </span>
+    <div class="profile-header-user-rating">
+      <span
+        *ngFor="let star of userRatingArray"
+        class="material-symbols-outlined user-icons"
+      >
+        star_outline
+      </span>
+    </div>
   </div>
 </div>

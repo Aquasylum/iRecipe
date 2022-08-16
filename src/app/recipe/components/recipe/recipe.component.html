@@ -24,7 +24,7 @@
           name?.hasError('minlength') && recipeForm.controls['name'].touched
         "
       >
-        Recipe name has to be longer than 4 characters
+        Recipe name has to be longer than 3 characters
       </div>
       <div
         class="error-label"
@@ -40,117 +40,122 @@
       <div class="col-xl-4 col-md-6 col-sm-12">
         <div class="ingredients-container">
           <div class="recipe-section-header">Ingredients:</div>
-          <div
-            class="error-label extra-long"
-            *ngIf="
-              ingredients?.hasError('required') &&
-              recipeForm.controls['ingredients'].touched
-            "
-          >
-            At least one ingredient is required for a recipe.
-          </div>
+
           <ng-container formArrayName="ingredients">
-            <ng-container
-              *ngFor="let ingredient of ingredients.controls; let i = index"
-            >
-              <div class="ingredient-container" [formArrayName]="i">
-                <div class="ingredient-row">
-                  <input
-                    class="input ingredient-name-text"
-                    formControlName="name"
-                    type="text"
-                    placeholder="Name"
-                  />
-                  <div
-                    class="error-label extra-long"
-                    *ngIf="
-                      ingredients.controls[i]
-                        .get('name')
-                        ?.hasError('required') &&
-                      ingredients.controls[i].get('name')?.touched
-                    "
-                  >
-                    Ingredient name is required.
-                  </div>
-                  <div
-                    class="error-label extra-long"
-                    *ngIf="
-                      ingredients.controls[i]
-                        .get('name')
-                        ?.hasError('minlength') &&
-                      ingredients.controls[i].get('name')?.touched
-                    "
-                  >
-                    Ingredient name has to be longer than 3 characters.
-                  </div>
-                  <div
-                    class="error-label extra-long"
-                    *ngIf="
-                      ingredients.controls[i]
-                        .get('name')
-                        ?.hasError('maxlength') &&
-                      ingredients.controls[i].get('name')?.touched
-                    "
-                  >
-                    Ingredient name cannot be longer than 20 characters.
-                  </div>
-                </div>
-                <div class="ingredient-row">
-                  <input
-                    formControlName="weight"
-                    type="text"
-                    class="input ingredient-name-text"
-                    placeholder="Weight"
-                  />
-                  <div
-                    class="error-label extra-long"
-                    *ngIf="
-                      ingredients.controls[i]
-                        .get('weight')
-                        ?.hasError('required') &&
-                      ingredients.controls[i].get('weight')?.touched
-                    "
-                  >
-                    Ingredient weight is required for an successful recipe.
-                  </div>
-                </div>
+            <div *ngFor="let ingredient of ingredients.controls; let i = index">
+              <div *ngIf="i == ingredients.controls.length - 1">
+                <ng-container [formArrayName]="i">
+                  <div class="ingredient-container">
+                    <div class="ingredient-row">
+                      <input
+                        class="input ingredient-name-text"
+                        formControlName="name"
+                        type="text"
+                        placeholder="Name"
+                      />
+                      <div
+                        class="error-label"
+                        *ngIf="
+                          ingredients.controls[i]
+                            .get('name')
+                            ?.hasError('required') &&
+                          ingredients.controls[i].get('name')?.touched
+                        "
+                      >
+                        Ingredient name is required.
+                      </div>
+                      <div
+                        class="error-label"
+                        *ngIf="
+                          ingredients.controls[i]
+                            .get('name')
+                            ?.hasError('minlength') &&
+                          ingredients.controls[i].get('name')?.touched
+                        "
+                      >
+                        Ingredient name has to be longer than 2 characters.
+                      </div>
+                      <div
+                        class="error-label"
+                        *ngIf="
+                          ingredients.controls[i]
+                            .get('name')
+                            ?.hasError('maxlength') &&
+                          ingredients.controls[i].get('name')?.touched
+                        "
+                      >
+                        Ingredient name cannot be longer than 20 characters.
+                      </div>
+                    </div>
+                    <div class="ingredient-row">
+                      <input
+                        formControlName="weight"
+                        type="text"
+                        class="input ingredient-name-text"
+                        placeholder="Weight"
+                      />
+                      <div
+                        class="error-label"
+                        *ngIf="
+                          ingredients.controls[i]
+                            .get('weight')
+                            ?.hasError('required') &&
+                          ingredients.controls[i].get('weight')?.touched
+                        "
+                      >
+                        Ingredient weight is required for an successful recipe.
+                      </div>
+                    </div>
 
-                <div class="ingredient-row">
-                  <input
-                    class="input ingredient-name-text"
-                    formControlName="metricUnit"
-                    type="text"
-                    placeholder="Metric Unit"
-                  />
-                  <div
-                    class="error-label extra-long"
-                    *ngIf="
-                      ingredients.controls[i]
-                        .get('metricUnit')
-                        ?.hasError('required') &&
-                      ingredients.controls[i].get('metricUnit')?.touched
-                    "
-                  >
-                    A metric unit of weight is required for an accurate recipe.
+                    <div class="ingredient-row">
+                      <input
+                        class="input ingredient-name-text"
+                        formControlName="metricUnit"
+                        type="text"
+                        placeholder="Metric Unit"
+                      />
+                      <div
+                        class="error-label"
+                        *ngIf="
+                          ingredients.controls[i]
+                            .get('metricUnit')
+                            ?.hasError('required') &&
+                          ingredients.controls[i].get('metricUnit')?.touched
+                        "
+                      >
+                        A metric unit of weight is required for an accurate
+                        recipe.
+                      </div>
+                    </div>
                   </div>
-                </div>
 
-                <div>
-                  <button
-                    [disabled]="i == 0"
-                    class="delete-button btn-danger irecipe-button btn-sm"
-                    (click)="deleteIngredient(i)"
-                  >
-                    X
-                  </button>
+                  <div>
+                    <div (click)="addIngredient()" class="add-icon">
+                      <span class="material-symbols-outlined">
+                        add_circle
+                      </span>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+
+            <div class="display-ingredients-container">
+              <div
+                *ngFor="let ingredient of ingredients.controls; let i = index"
+              >
+                <div
+                  class="display-ingredients"
+                  (click)="deleteIngredient(i)"
+                  *ngIf="i < ingredients.controls.length - 1"
+                >
+                  {{ ingredient.get("weight")?.value }}
+                  {{ ingredient.get("metricUnit")?.value }}
+                  {{ ingredient.get("name")?.value }}
                 </div>
               </div>
-            </ng-container>
+            </div>
           </ng-container>
-
-          <div (click)="addIngredient()" class="add-icon">
-            <span class="material-symbols-outlined"> add_circle </span>
-          </div>
         </div>
       </div>
 
@@ -180,7 +185,7 @@
           </ng-template>
 
           <ng-template #showImage>
-            <img class="recipe-image" [src]="recipeImage" />
+            <img class="irecipe-image" [src]="recipeImage" />
             <div>
               <button
                 (click)="onDeleteImage()"
@@ -198,48 +203,53 @@
           <div class="recipe-section-header">Steps:</div>
           <ng-container formArrayName="steps">
             <ng-container *ngFor="let step of steps.controls; let i = index">
-              <div class="step-container" [formArrayName]="i">
-                <textarea
-                  formControlName="step"
-                  class="input steps-text"
-                  type="text"
-                  placeholder="step"
-                ></textarea>
-                <div
-                  class="error-label irecipe-length"
-                  *ngIf="
-                    steps.controls[0].get('step')?.hasError('required') &&
-                    steps.controls[0].get('step')?.touched &&
-                    i == 0
-                  "
-                >
-                  At least one step is required for a recipe!
-                </div>
-                <div
-                  class="error-label extra-long"
-                  *ngIf="
-                    steps.controls[i].get('step')?.hasError('minlength') &&
-                    steps.controls[i].get('step')?.touched
-                  "
-                >
-                  At least one step is required for a recipe!
-                </div>
-                <div>
-                  <button
-                    [disabled]="i == 0"
-                    class="delete-button btn-danger btn-sm irecipe-button"
-                    (click)="deleteStep(i)"
+              <div *ngIf="i == steps.controls.length - 1">
+                <div class="step-container" [formArrayName]="i">
+                  <textarea
+                    formControlName="step"
+                    class="input recipe-textarea"
+                    type="text"
+                    placeholder="step"
+                  ></textarea>
+                  <div
+                    class="error-label"
+                    *ngIf="
+                      steps.controls[0].get('step')?.hasError('required') &&
+                      steps.controls[0].get('step')?.touched &&
+                      i == 0
+                    "
                   >
-                    X
-                  </button>
+                    At least one step is required for a recipe!
+                  </div>
+                  <div
+                    class="error-label"
+                    *ngIf="
+                      steps.controls[i].get('step')?.hasError('minlength') &&
+                      steps.controls[i].get('step')?.touched
+                    "
+                  >
+                    At least one step is required for a recipe!
+                  </div>
+
+                  <div (click)="addStep()" class="add-icon">
+                    <span class="material-symbols-outlined"> add_circle </span>
+                  </div>
                 </div>
               </div>
             </ng-container>
-          </ng-container>
 
-          <div (click)="addStep()" class="add-icon">
-            <span class="material-symbols-outlined"> add_circle </span>
-          </div>
+            <div class="display-steps-container">
+              <div *ngFor="let step of steps.controls; let i = index">
+                <div
+                  (click)="deleteStep(i)"
+                  class="display-steps"
+                  *ngIf="i < steps.controls.length - 1"
+                >
+                  {{ step.get("step")?.value }}
+                </div>
+              </div>
+            </div>
+          </ng-container>
         </div>
       </div>
     </div>
@@ -248,50 +258,59 @@
       <div class="recipe-section-header">Tips:</div>
       <ng-container formArrayName="tips">
         <ng-container *ngFor="let tip of tips.controls; let i = index">
-          <div class="tip-container" [formArrayName]="i">
-            <input
-              formControlName="tip"
-              type="text"
-              class="irecipe-length"
-              placeholder="tip"
-            />
-            <button
-              class="delete-button btn-danger btn-sm irecipe-button"
-              (click)="deleteTip(i)"
-            >
-              X
-            </button>
+          <div *ngIf="i == tips.controls.length - 1">
+            <div class="tip-container" [formArrayName]="i">
+              <textarea
+                formControlName="tip"
+                type="text"
+                class="input recipe-textarea"
+                placeholder="tip"
+              ></textarea>
+            </div>
+            <div (click)="addTip()" class="add-icon">
+              <span class="material-symbols-outlined"> add_circle </span>
+            </div>
           </div>
         </ng-container>
-      </ng-container>
 
-      <div (click)="addTip()" class="add-icon">
-        <span class="material-symbols-outlined"> add_circle </span>
-      </div>
+        <div class="display-tips-container">
+          <div *ngFor="let tip of tips.controls; let i = index">
+            <div
+              class="display-tips"
+              (click)="deleteTip(i)"
+              *ngIf="i < tips.controls.length - 1"
+            >
+              {{ tip.get("tip")?.value }}
+            </div>
+          </div>
+        </div>
+      </ng-container>
     </div>
 
     <div class="recipe-details-container">
       <div class="row">
         <div class="col-xl-4 col-md-6 col-sm-12">
-          <span class="material-symbols-outlined"> monitoring </span>
-          <label class="recipe-details" for="calories"
-            >Calories
-            <input
-              class="details-container"
-              type="text"
-              name="calories"
-              formControlName="calories"
-              placeholder="kkcal"
-            />
-          </label>
-          <div
-            class="error-label long"
-            *ngIf="
-              calories?.hasError('pattern') &&
-              recipeForm.controls['calories'].touched
-            "
-          >
-            Please only enter numbers.
+          <div>
+            <span class="material-symbols-outlined"> monitoring </span>
+            <label class="recipe-details" for="calories"
+              >Calories
+              <input
+                class="details-container"
+                type="text"
+                name="calories"
+                formControlName="calories"
+                placeholder="kkcal"
+              />
+            </label>
+            <div
+              class="error-label"
+              *ngIf="
+                calories?.hasError('pattern') &&
+                recipeForm.controls['calories'].touched
+              "
+            >
+              Please only enter numbers.
+            </div>
           </div>
         </div>
 
@@ -308,7 +327,7 @@
             />
           </label>
           <div
-            class="error-label long"
+            class="error-label"
             *ngIf="
               estimatedTime?.hasError('pattern') &&
               recipeForm.controls['estimatedTime'].touched
@@ -332,7 +351,7 @@
             </label>
           </div>
           <div
-            class="error-label long"
+            class="error-label"
             *ngIf="
               portions?.hasError('pattern') &&
               recipeForm.controls['portions'].touched
@@ -347,13 +366,13 @@
     <div class="input-group-container">
       <div>
         <button
-          [disabled]="recipeForm.invalid"
           (click)="onSubmit()"
           type="submit"
           class="save-button btn-lg irecipe-button"
         >
           Save Recipe
         </button>
+
         <button
           *ngIf="!isAddMode"
           (click)="deleteRecipe()"

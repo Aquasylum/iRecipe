@@ -27,7 +27,7 @@ export class RecipeComponent implements OnInit {
   file!: File;
   fileUploaded: boolean = false;
 
-  ingredientIndex: number = -1;
+  ingredientIndex: number = 0;
   ingredientName!: string;
   ingredientWeight!: string;
   ingredientMetricUnit!: string;
@@ -50,13 +50,12 @@ export class RecipeComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.minLength(5),
+          Validators.minLength(4),
           Validators.maxLength(20),
         ],
       ],
       ingredients: this.fb.array([], [Validators.required]),
       steps: this.fb.array([], [Validators.required]),
-      recipeTypes: this.fb.array([]),
       calories: ['', Validators.pattern('^[0-9]*$')],
       tips: this.fb.array([]),
       estimatedTime: ['', Validators.pattern('^[0-9]*$')],
@@ -66,6 +65,8 @@ export class RecipeComponent implements OnInit {
     });
 
     this.addIngredient();
+    this.addStep();
+    this.addTip();
 
     if (this.isAddMode) {
       this.recipeId = uuid.v4();
@@ -78,6 +79,11 @@ export class RecipeComponent implements OnInit {
     if (!this.isAddMode) {
       if (this.id) {
         this.recipeService.getRecipeById(this.id).then((observable) => {
+          this.fileUploaded = true;
+          this.fileService
+            .downloadRecipeImage(this.id)
+            .then((imageUrl) => (this.recipeImage = imageUrl));
+
           observable
             .pipe(
               tap((r: Recipe) => {
@@ -87,10 +93,7 @@ export class RecipeComponent implements OnInit {
                   r.steps.forEach((s) => {
                     this.steps.push(this.fb.group(s));
                   });
-                r.tips?.forEach((t) => this.tips.push(this.fb.group(t))),
-                  r.recipeType?.forEach((rt) =>
-                    this.recipeTypes.push(this.fb.group(rt))
-                  );
+                r.tips?.forEach((t) => this.tips.push(this.fb.group(t)));
               })
             )
             .subscribe((recipe) => {
@@ -126,20 +129,19 @@ export class RecipeComponent implements OnInit {
   addIngredient() {
     const ingredientForm = this.fb.group({
       name: [
-        this.ingredientName,
+        '',
         [
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(2),
           Validators.maxLength(20),
         ],
       ],
-      weight: [this.ingredientWeight, Validators.required],
-      metricUnit: [this.ingredientMetricUnit, Validators.required],
+      weight: ['', Validators.required],
+      metricUnit: ['', Validators.required],
     });
 
     this.ingredients.push(ingredientForm);
     this.ingredientIndex++;
-    console.log(this.ingredients.controls);
   }
 
   getCurrentIngredient(index: number) {
@@ -182,22 +184,6 @@ export class RecipeComponent implements OnInit {
 
   deleteTip(tipIndex: number): void {
     this.tips.removeAt(tipIndex);
-  }
-
-  //Recipe Types
-  get recipeTypes() {
-    return this.recipeForm.controls['recipeTypes'] as FormArray;
-  }
-
-  onSelectedRecipeType(recipeType: string) {
-    const recipeTypeForm = this.fb.group({
-      types: [recipeType],
-    });
-    this.recipeTypes.push(recipeTypeForm);
-  }
-
-  deleteRecipeType(recipeTypeIndex: number): void {
-    this.recipeTypes.removeAt(recipeTypeIndex);
   }
 
   onSubmit(): void {

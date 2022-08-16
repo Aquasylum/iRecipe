@@ -50,6 +50,20 @@
   cursor: pointer;
 }
 
+.search-user-input {
+  border: none;
+  background: var(--irecipe-primary);
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.search-user-input::placeholder {
+  color: white;
+}
+
 .navbar {
   font: large;
   color: var(--irecipe-primary);
@@ -88,6 +102,14 @@
 }
 
 .irecipe-hide {
+  visibility: hidden;
+}
+
+.show-input {
+  visibility: visible;
+}
+
+.dont-show-input {
   visibility: hidden;
 }
 
