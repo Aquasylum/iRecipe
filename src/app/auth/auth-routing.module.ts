@@ -5,13 +5,13 @@ import { RegisterPageComponent } from './components/register-page/register-page.
 import { canActivate, redirectLoggedInTo } from '@angular/fire/auth-guard';
 import { ForgetPasswordComponent } from './components/forget-password/forget-password.component';
 
-const redirectLoggedInToHome = () => redirectLoggedInTo(['main']);
+//const redirectLoggedInToHome = () => redirectLoggedInTo(['']);
 
 const routes: Routes = [
   {
     path: '',
     component: LoginPageComponent,
-    ...canActivate(redirectLoggedInToHome),
+    // ...canActivate(redirectLoggedInToHome),
   },
   {
     path: 'login',

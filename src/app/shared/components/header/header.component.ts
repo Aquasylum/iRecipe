@@ -37,18 +37,18 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.auth
       .logout()
-      .then(() => this.router.navigate(['/']))
+      .then(() => this.router.navigate(['/login']))
       .catch((e) => console.log(e.message));
   }
 
   onRecipes() {
     this.isRecipes = true;
-    this.router.navigate(['/main']);
+    this.router.navigate(['/']);
   }
 
   onDiscover() {
     this.isRecipes = false;
-    this.router.navigate(['/main/discover']);
+    this.router.navigate(['/discover']);
   }
 
   toggleSearchUserInput() {

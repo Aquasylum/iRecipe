@@ -14,12 +14,12 @@
       <div class="col-lg-10 col-sm-10">
         <div class="recipe-display">
           <div
-            *ngIf="allRecipes.length === 0; then addRecipe; else showRecipes"
+            *ngIf="allRecipes.length == 0; then addRecipe; else showRecipes"
           ></div>
           <ng-template #addRecipe>
             <div class="no-recipes">
               <h2>Oh no, it seems like you have no recipes!</h2>
-              <button class="irecipe-button btn-lg" routerLink="/main/recipe">
+              <button class="irecipe-button btn-lg" routerLink="/recipe">
                 Add Recipe
               </button>
             </div>
@@ -43,14 +43,14 @@
   </div>
 
   <div class="recipes-container-functionality">
-    <div routerLink="/main/recipe" class="functionality-button">
+    <div routerLink="/recipe" class="functionality-button">
       <span class="material-icons icon-large"> add_circle </span>
       <div>Add Recipe</div>
     </div>
 
     <div class="functionality-button">
       <span
-        routerLink="['/main/recipe', recipe.id]"
+        [routerLink]="['/recipe', recipe.id]"
         class="material-symbols-outlined icon-large"
       >
         edit

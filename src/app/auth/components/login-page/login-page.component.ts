@@ -23,7 +23,7 @@ export class LoginPageComponent implements OnInit {
   login(data: { email: string; password: string }) {
     this.authService
       .login(data)
-      .then(() => this.router.navigate(['/main']))
+      .then(() => this.router.navigate(['/profile']))
       .catch((e) => (this.error = e));
   }
 
@@ -31,7 +31,7 @@ export class LoginPageComponent implements OnInit {
     if (data) {
       this.authService
         .loginWithGoogle()
-        .then(() => this.router.navigate(['/main']))
+        .then(() => this.router.navigate(['/profile']))
         .catch((e) => console.log(e.message));
     }
   }
