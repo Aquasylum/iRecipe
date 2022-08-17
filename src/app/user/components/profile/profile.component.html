@@ -12,7 +12,7 @@
       </div>
 
       <div class="col-lg-10 col-sm-10">
-        <div class="recipe-display">
+        <div class="recipe-display" *ngIf="allRecipes">
           <div
             *ngIf="allRecipes.length == 0; then addRecipe; else showRecipes"
           ></div>
@@ -48,7 +48,7 @@
       <div>Add Recipe</div>
     </div>
 
-    <div class="functionality-button">
+    <div *ngIf="recipe" class="functionality-button">
       <span
         [routerLink]="['/recipe', recipe.id]"
         class="material-symbols-outlined icon-large"

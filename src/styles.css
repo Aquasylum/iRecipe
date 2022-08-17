@@ -14,10 +14,12 @@
 
   /* Font sizes */
   --irecipe-name: 75px;
-  --irecipe-logo: 60px;
   --irecipe-title: 48px;
   --irecipe-heading: 24px;
   --irecipe-label: 16px;
+
+  /* Icons */
+  --irecipe-logo: 60px;
 }
 
 /* Responsiveness sizing adjustments from variables */
@@ -31,7 +33,7 @@
   }
 
   .irecipe-image {
-    width: 450px;
+    max-width: 450px;
     max-height: 450px;
   }
 
@@ -70,7 +72,7 @@
   }
 
   .irecipe-image {
-    width: 375px;
+    max-width: 375px;
     max-height: 375px;
   }
 
@@ -109,7 +111,7 @@
   }
 
   .irecipe-image {
-    width: 300px;
+    max-width: 300px;
     max-height: 300px;
   }
 
@@ -141,6 +143,7 @@
 body {
   font-family: AlegreyaBold, "Helvetica Neue", sans-serif;
   font-size: var(--irecipe-text) !important;
+  background-color: var(--irecipe-dark) !important;
 }
 
 .light {
@@ -178,7 +181,8 @@ body {
 .irecipe-button {
   margin-top: 2vh;
   margin-bottom: 2vh;
-  border: none;
+  background-color: transparent;
+  border-radius: 20px;
 }
 
 button:disabled {
@@ -216,8 +220,8 @@ button:disabled {
 .material-icons,
 .material-symbols-outlined {
   display: inline-block;
-  vertical-align: -0.25rem;
-  padding-right: 0.5vw;
+  vertical-align: -0.3em;
+  padding-right: 1vw;
 }
 
 .add-button {

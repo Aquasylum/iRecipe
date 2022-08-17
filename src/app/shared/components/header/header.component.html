@@ -7,6 +7,9 @@
       <li class="nav-item">
         <span class="material-symbols-outlined"> search </span>
       </li>
+      <li>
+        <a class="display-name">{{ displayName }}</a>
+      </li>
       <li class="nav-item">
         <span class="material-symbols-outlined"> account_circle </span>
       </li>
@@ -60,8 +63,18 @@
           search
         </span>
       </li>
+      <li
+        [ngClass]="
+          showUserDisplayName ? 'show-display-name' : 'dont-show-display-name'
+        "
+      >
+        <a>{{ displayName }}</a>
+      </li>
       <li class="nav-item">
-        <span class="material-symbols-outlined recipe-icons">
+        <span
+          (click)="toggleUserDisplayName()"
+          class="material-symbols-outlined recipe-icons"
+        >
           account_circle
         </span>
       </li>

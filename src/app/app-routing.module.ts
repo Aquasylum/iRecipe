@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { RouterModule, Routes } from '@angular/router';
 import { RecipeComponent } from './recipe/components/recipe/recipe.component';
-import { RecipesContainerComponent } from './recipe/components/recipes-container/recipes-container.component';
+
 import { ViewRecipeComponent } from './recipe/components/view-recipe/view-recipe.component';
 import { DiscoverComponent } from './user/components/discover/discover.component';
 import { ProfileComponent } from './user/components/profile/profile.component';
@@ -28,11 +28,6 @@ let routes: Routes = [
   {
     path: 'recipe/:id',
     component: RecipeComponent,
-    ...canActivate(redirectUnauthorizedToLogin),
-  },
-  {
-    path: 'recipe-list',
-    component: RecipesContainerComponent,
     ...canActivate(redirectUnauthorizedToLogin),
   },
   {

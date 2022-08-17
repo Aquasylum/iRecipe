@@ -105,12 +105,23 @@
   visibility: hidden;
 }
 
-.show-input {
+.show-input,
+.show-display-name {
   visibility: visible;
 }
 
-.dont-show-input {
+.dont-show-input,
+.dont-show-display-name {
   visibility: hidden;
+}
+
+.show-display-name {
+  padding-top: 3px;
+}
+
+.display-name {
+  color: white;
+  font-size: 14px;
 }
 
 .navbar-toggler {

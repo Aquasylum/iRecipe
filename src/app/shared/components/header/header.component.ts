@@ -20,6 +20,7 @@ export class HeaderComponent implements OnInit {
   isRecipes: boolean = true;
   userSearchControl!: FormControl;
   showUserInput: boolean = false;
+  showUserDisplayName: boolean = true;
 
   ngOnInit(): void {
     this.displayName = this.auth.getCurrentUserDisplayName();
@@ -53,5 +54,9 @@ export class HeaderComponent implements OnInit {
 
   toggleSearchUserInput() {
     this.showUserInput = !this.showUserInput;
+  }
+
+  toggleUserDisplayName() {
+    this.showUserDisplayName = !this.showUserDisplayName;
   }
 }
