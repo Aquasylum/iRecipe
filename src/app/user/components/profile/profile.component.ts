@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { Recipe } from 'src/app/recipe/models/Recipe';
 import { RecipeService } from 'src/app/recipe/services/recipe.service';
 
@@ -11,9 +12,15 @@ export class ProfileComponent implements OnInit {
   allRecipes!: Recipe[];
   recipe!: Recipe;
   recipeIndex: number = 0;
-  constructor(private recipeService: RecipeService) {}
+  constructor(
+    private recipeService: RecipeService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
+    if (this.authService.getCurrentUser())
+      this.authService.emitCurrentLoggedInStatus(true);
+
     this.recipeService.getAllRecipesByUserId().then((recipes) => {
       this.allRecipes = recipes;
       this.recipe = this.allRecipes[this.recipeIndex];

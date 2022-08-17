@@ -1,4 +1,4 @@
-import { Component, OnChanges, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from './auth/services/auth.service';
 
 @Component({
@@ -6,15 +6,17 @@ import { AuthService } from './auth/services/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnChanges {
+export class AppComponent {
   title = 'iRecipe';
   isLoggedIn: boolean = false;
 
   constructor(public authService: AuthService) {
-    console.log(this.authService.getCurrentUser());
+    this.authService.isLoggedIn$.subscribe((status) =>
+      this.userLoggedInStatus(status)
+    );
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log('changing');
+  userLoggedInStatus(status: boolean) {
+    this.isLoggedIn = status;
   }
 }

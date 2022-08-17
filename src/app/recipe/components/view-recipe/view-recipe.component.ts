@@ -37,6 +37,9 @@ export class ViewRecipeComponent implements OnInit {
   usernameControl!: FormControl;
 
   ngOnInit(): void {
+    if (this.authService.getCurrentUser())
+      this.authService.emitCurrentLoggedInStatus(true);
+
     this.recipeService.getRecipeById(this.id).then((obs) =>
       obs.subscribe((recipe) => {
         this.recipe = recipe;

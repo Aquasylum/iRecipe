@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-discover',
@@ -6,9 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./discover.component.css'],
 })
 export class DiscoverComponent implements OnInit {
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    console.log('loading');
+    if (this.authService.getCurrentUser())
+      this.authService.emitCurrentLoggedInStatus(true);
   }
 }
