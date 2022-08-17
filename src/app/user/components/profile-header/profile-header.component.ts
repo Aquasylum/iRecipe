@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { user } from '@angular/fire/auth';
 import { UserService } from '../../service/user.service';
 
 @Component({
@@ -8,15 +7,15 @@ import { UserService } from '../../service/user.service';
   styleUrls: ['./profile-header.component.css'],
 })
 export class ProfileHeaderComponent implements OnInit {
-  username: string | undefined = '';
+  username: string = '';
   userRating: number = 0;
   userRatingArray: number[] = [];
 
-  constructor(private userService: UserService) {}
+  constructor(public userService: UserService) {}
 
   ngOnInit(): void {
     this.userService.getUserNameAndSurname().then((username) => {
-      this.username = username?.toLowerCase();
+      username ? (this.username = username?.toLowerCase()) : 'anonymous';
     });
 
     this.userRating = this.userService.getUserRating();
