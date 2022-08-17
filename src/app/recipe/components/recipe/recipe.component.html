@@ -363,23 +363,26 @@
       </div>
     </div>
 
-    <div class="input-group-container">
-      <div>
-        <button
+    <div class="recipe-functionality-container">
+      <div class="recipe-functionality-button save">
+        <span
           (click)="onSubmit()"
           type="submit"
-          class="save-button btn-lg irecipe-button"
+          class="icon-large material-icons"
         >
-          Save Recipe
-        </button>
+          save
+        </span>
+        <div>Save recipe</div>
+      </div>
 
-        <button
-          *ngIf="!isAddMode"
+      <div class="recipe-functionality-button delete" *ngIf="!isAddMode">
+        <span
           (click)="deleteRecipe()"
-          class="delete-button btn-lg irecipe-button"
+          class="icon-large material-symbols-outlined"
         >
-          Delete Recipe
-        </button>
+          delete
+        </span>
+        <div>Delete recipe</div>
       </div>
     </div>
   </form>

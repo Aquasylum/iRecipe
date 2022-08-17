@@ -12,6 +12,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Ingredient } from 'src/app/recipe/models/Ingredient';
 
 import { FileService } from 'src/app/user/service/file.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'irecipe-recipe',
@@ -29,19 +30,20 @@ export class RecipeComponent implements OnInit {
   fileName!: string;
 
   ingredientIndex: number = 0;
-  ingredientName!: string;
-  ingredientWeight!: string;
-  ingredientMetricUnit!: string;
 
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
     private fb: FormBuilder,
     private router: Router,
-    private fileService: FileService
+    private fileService: FileService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    if (this.authService.getCurrentUser())
+      this.authService.emitCurrentLoggedInStatus(true);
+
     this.id = this.route.snapshot.paramMap.get('id') as string;
     this.isAddMode = !this.id;
 
@@ -211,7 +213,7 @@ export class RecipeComponent implements OnInit {
   }
 
   onUpload() {
-    this.fileService.uploadRecipeImage(this.file, this.recipeId).then(() => {
+    this.fileService.uploadRecipeImage(this.file, this.id).then(() => {
       this.fileService.downloadRecipeImage(this.recipeId).then((imageUrl) => {
         this.recipeImage = imageUrl;
         this.fileUploaded = true;
@@ -221,7 +223,7 @@ export class RecipeComponent implements OnInit {
 
   onDeleteImage() {
     this.fileService
-      .deleteRecipe(this.recipeId)
+      .deleteRecipe(this.id)
       .then(() => (this.fileUploaded = false));
   }
 }
