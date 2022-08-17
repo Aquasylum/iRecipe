@@ -20,19 +20,33 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  login(data: { email: string; password: string }) {
-    this.authService
-      .login(data)
-      .then(() => this.router.navigate(['/profile']))
+  async login(data: { email: string; password: string }) {
+    let user = await this.authService
+      .loginWithEmailAndPassword(data)
       .catch((e) => (this.error = e));
+
+    if (user) {
+      this.router.navigate(['/profile/' + user.user.uid]);
+    }
   }
 
-  loginWithGoogle(data: boolean) {
-    if (data) {
-      this.authService
-        .loginWithGoogle()
-        .then(() => this.router.navigate(['/profile']))
-        .catch((e) => console.log(e.message));
+  async loginWithGoogle() {
+    let user = await this.authService
+      .loginWithGoogle()
+      .catch((e) => console.log(e.message));
+
+    if (user) {
+      this.router.navigate(['/profile/' + user.user.uid]);
+    }
+  }
+
+  async loginWithFacebook() {
+    let user = await this.authService
+      .loginWithFacebook()
+      .catch((e) => console.log(e.message));
+
+    if (user) {
+      this.router.navigate(['/profile/' + user.user.uid]);
     }
   }
 }

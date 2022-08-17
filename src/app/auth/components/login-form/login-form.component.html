@@ -1,4 +1,4 @@
-<div class="irecipe-text">
+<div class="irecipe-login-form-container">
   <a class="irecipe-header bold">Sign In</a>
   <div *ngIf="formType == 'register'">
     <p>
@@ -245,18 +245,20 @@
         This user does not exist. Please enter the details correctly or create
         an account!
       </div>
-
-      <button
-        class="irecipe-button-login-submit"
-        [disabled]="userForm.invalid"
-        type="submit"
-      >
-        Submit
-      </button>
     </form>
   </div>
 
   <div class="irecipe-social-login">
+    <div>
+      <button
+        class="irecipe-button-login-submit"
+        [disabled]="userForm.invalid"
+        type="submit"
+        (click)="onSubmit()"
+      >
+        Submit
+      </button>
+    </div>
     <div>OR</div>
     <div>
       <button
@@ -269,7 +271,10 @@
     </div>
 
     <div>
-      <button class="irecipe-button-social irecipe-length-social facebook">
+      <button
+        (click)="onFacebookLogin()"
+        class="irecipe-button-social irecipe-length-social facebook"
+      >
         <img src=" ../../../../assets/logos/facebook.png" height="35" />Continue
         with Facebook
       </button>

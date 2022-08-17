@@ -18,6 +18,13 @@
   }
 }
 
+.irecipe-login-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .irecipe-create-account {
   color: #1a77f0;
 }
@@ -48,14 +55,13 @@
 }
 
 .irecipe-button-login-submit {
-  margin-top: 2vh;
-  margin-left: 25%;
   background-color: #1a77f0;
   border-radius: 30px;
   border: none;
   color: white;
   padding-top: 1vh;
   padding-bottom: 1vh;
+  margin-bottom: 4vh;
 }
 
 .irecipe-button-social {
@@ -84,13 +90,3 @@
   margin-top: 2%;
   text-align: center;
 }
-
-/* .irecipe-social-login::before {
-  content: "";
-  border-bottom: 1px solid black;
-}
-
-.irecipe-social-login::after {
-  content: "";
-  border-bottom: 1px solid black;
-} */

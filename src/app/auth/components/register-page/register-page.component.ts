@@ -48,7 +48,7 @@ export class RegisterPageComponent implements OnInit {
     if (data) {
       this.authService
         .loginWithGoogle()
-        .then(() => this.router.navigate(['/main']))
+        .then(() => this.router.navigate(['/profile']))
         .catch((e) => console.log(e.message));
     }
   }

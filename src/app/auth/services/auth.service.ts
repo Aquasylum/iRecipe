@@ -6,12 +6,14 @@ import {
   signInWithEmailAndPassword,
   signOut,
   GoogleAuthProvider,
+  FacebookAuthProvider,
   signInWithPopup,
   sendPasswordResetEmail,
+  UserCredential,
 } from '@angular/fire/auth';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { ILoginData } from '../Interfaces/ILoginData';
 import { collection, Firestore, setDoc, doc } from '@angular/fire/firestore';
 import { getDocs, query, where } from 'firebase/firestore';
@@ -20,31 +22,57 @@ import { getDocs, query, where } from 'firebase/firestore';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private auth: Auth, private firestore: Firestore) {}
+  isLoggedIn$: EventEmitter<boolean> = new EventEmitter();
+
+  constructor(private auth: Auth, private firestore: Firestore) {
+    this.isLoggedIn$.emit(false);
+  }
 
   userCollection = collection(this.firestore, 'users');
 
-  async login(login: ILoginData) {
-    return await signInWithEmailAndPassword(
+  async loginWithEmailAndPassword(login: ILoginData) {
+    let user = await signInWithEmailAndPassword(
       this.auth,
       login.email,
       login.password
-    ).catch((e: HttpErrorResponse) => {
-      throw e;
-    });
+    )
+      .then((userCredential) => {
+        this.emitCurrentLoggedInStatus(true);
+        return userCredential;
+      })
+      .catch((e: HttpErrorResponse) => {
+        throw e;
+      });
+
+    return user;
+  }
+
+  emitCurrentLoggedInStatus(status: boolean) {
+    this.isLoggedIn$.emit(status);
   }
 
   async loginWithGoogle() {
     let user = await signInWithPopup(this.auth, new GoogleAuthProvider());
+    this.emitCurrentLoggedInStatus(true);
 
+    await this.createUser(user);
+    return user;
+  }
+
+  async loginWithFacebook() {
+    let user = await signInWithPopup(this.auth, new FacebookAuthProvider());
+    this.emitCurrentLoggedInStatus(true);
+
+    await this.createUser(user);
+    return user;
+  }
+
+  async createUser(user: UserCredential) {
     if (user) {
       //get display name so we can cut first name
       // and use the remainder as the surname
       let surname: any = user.user.displayName;
       let name = user.user.displayName?.split(' ');
-
-      //Check if user exists in user collection
-      this.userCollection;
 
       let q = query(this.userCollection, where('userId', '==', user.user.uid));
       await getDocs(q).then((querySnapshot) => {
@@ -74,10 +102,7 @@ export class AuthService {
           }
         }
       });
-
-      return user;
     }
-    return;
   }
 
   getCurrentUser() {
@@ -114,7 +139,9 @@ export class AuthService {
     );
   }
 
-  logout() {
-    return signOut(this.auth);
+  async logout() {
+    return await signOut(this.auth).then(() =>
+      this.emitCurrentLoggedInStatus(false)
+    );
   }
 }

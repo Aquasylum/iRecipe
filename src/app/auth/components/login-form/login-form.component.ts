@@ -24,8 +24,8 @@ export class LoginFormComponent implements OnInit, OnChanges {
   @Input() showSuccessMessage: boolean = false;
   @Input() userError!: HttpErrorResponse;
 
-  @Output() googleLogin = new EventEmitter<boolean>();
-
+  @Output() googleLogin = new EventEmitter();
+  @Output() facebookLogin = new EventEmitter();
   @Output() userFormData = new EventEmitter<any>();
 
   userForm!: FormGroup;
@@ -114,7 +114,11 @@ export class LoginFormComponent implements OnInit, OnChanges {
   }
 
   onGoogleLogin() {
-    this.googleLogin.emit(true);
+    this.googleLogin.emit();
+  }
+
+  onFacebookLogin() {
+    this.facebookLogin.emit();
   }
 
   onCloseSuccessMessage() {

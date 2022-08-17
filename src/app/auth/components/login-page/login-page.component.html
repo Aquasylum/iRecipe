@@ -12,7 +12,8 @@
   <div class="irecipe-login-form">
     <irecipe-login-form
       (userFormData)="login($event)"
-      (googleLogin)="loginWithGoogle($event)"
+      (facebookLogin)="loginWithFacebook()"
+      (googleLogin)="loginWithGoogle()"
       [userError]="error"
       formType="login"
     ></irecipe-login-form>
