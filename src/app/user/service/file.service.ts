@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FirebaseError } from 'firebase/app';
 import {
   getStorage,
   ref,
@@ -40,6 +41,10 @@ export class FileService {
 
   deleteRecipe(recipeId: string) {
     let recipeImageRef = ref(this.storage, 'recipeImages/' + recipeId);
-    return deleteObject(recipeImageRef);
+    return deleteObject(recipeImageRef).catch((error: FirebaseError) => {
+      if (error.code == 'storage/object-not-found') {
+        return;
+      }
+    });
   }
 }
