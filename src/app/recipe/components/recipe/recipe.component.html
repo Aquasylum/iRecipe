@@ -209,7 +209,7 @@
                     formControlName="step"
                     class="input recipe-textarea"
                     type="text"
-                    placeholder="step"
+                    [placeholder]="'step #' + steps.controls.length"
                   ></textarea>
                   <div
                     class="error-label"
@@ -264,7 +264,7 @@
                 formControlName="tip"
                 type="text"
                 class="input recipe-textarea"
-                placeholder="tip"
+                [placeholder]="'tip #' + tips.controls.length"
               ></textarea>
             </div>
             <div (click)="addTip()" class="add-icon">

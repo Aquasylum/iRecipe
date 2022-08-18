@@ -72,3 +72,8 @@ button:hover {
   background-color: var(--irecipe-orange);
   transform: scale(1.1);
 }
+
+.star {
+  font-size: 28px;
+  padding-left: 5px;
+}
