@@ -143,7 +143,6 @@
 body {
   font-family: AlegreyaBold, "Helvetica Neue", sans-serif;
   font-size: var(--irecipe-text) !important;
-  background-color: var(--irecipe-dark) !important;
 }
 
 .light {

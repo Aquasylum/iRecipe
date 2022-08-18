@@ -91,3 +91,6 @@
 .arrow {
   color: var(--irecipe-secondary);
 }
+.row {
+  flex-wrap: nowrap;
+}

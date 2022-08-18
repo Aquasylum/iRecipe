@@ -10,7 +10,7 @@ import { UserModule } from './user/user.module';
 
 //Components
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './shared/components/header/header.component';
+
 import { RecipeComponent } from './recipe/components/recipe/recipe.component';
 import { ViewRecipeComponent } from './recipe/components/view-recipe/view-recipe.component';
 
@@ -26,12 +26,7 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    RecipeComponent,
-    ViewRecipeComponent,
-  ],
+  declarations: [AppComponent, RecipeComponent, ViewRecipeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

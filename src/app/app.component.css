@@ -1,3 +1,11 @@
-.body-container {
-  display: flex;
+.irecipe-main {
+  height: 100vh;
+}
+
+.light {
+  background-color: white !important;
+}
+
+.dark {
+  background-color: var(--irecipe-dark) !important;
 }
