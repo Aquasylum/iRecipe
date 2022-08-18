@@ -1,23 +1,16 @@
 <nav class="navbar navbar-expand-lg">
-  <div class="collapse navbar-collapse irecipe-hide" id="invisibleToggler">
-    <ul class="navbar-nav">
-      <li>
-        <input class="search-user-input" placeholder="Search Users" />
-      </li>
-      <li class="nav-item">
-        <span class="material-symbols-outlined"> search </span>
-      </li>
-      <li>
-        <a class="display-name">{{ displayName }}</a>
-      </li>
-      <li class="nav-item">
-        <span class="material-symbols-outlined"> account_circle </span>
-      </li>
-      <li class="nav-item">
-        <span (click)="logout()"> login </span>
-      </li>
-    </ul>
-  </div>
+  <ul class="navbar-nav header-menu">
+    <li>
+      <span class="navbar-logo logo">iRecipe</span>
+    </li>
+    <li class="nav-item">
+      <span (click)="onRecipes()" class="navbar-heading bold">My Recipes</span>
+    </li>
+
+    <li class="nav-item">
+      <span (click)="onDiscover()" class="navbar-heading bold">Discover</span>
+    </li>
+  </ul>
 
   <button
     class="navbar-toggler"
@@ -28,56 +21,32 @@
     <span class="material-symbols-outlined"> menu </span>
   </button>
 
-  <ul class="navbar-nav">
-    <li class="navbar-heading-left">
-      <span (click)="onRecipes()" class="navbar-heading bold">My Recipes</span>
-    </li>
-
-    <li>
-      <span class="navbar-logo logo">iRecipe</span>
-    </li>
-    <li class="navbar-heading-right">
-      <span (click)="onDiscover()" class="navbar-heading bold">Discover</span>
-    </li>
-  </ul>
-
-  <button
-    class="navbar-toggler irecipe-hide"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarToggleExternalContent"
-  >
-    <span class="material-symbols-outlined"> menu </span>
-  </button>
-
   <div class="collapse navbar-collapse justify-content-end">
     <ul class="navbar-nav">
-      <li [ngClass]="showUserInput ? 'show-input' : 'dont-show-input'">
+      <li>
         <input class="search-user-input" placeholder="Search Users" />
       </li>
-      <li class="nav-item">
-        <span
-          (click)="toggleSearchUserInput()"
-          class="material-symbols-outlined recipe-icons"
-        >
-          search
-        </span>
+      <li class="nav-item search">
+        <span class="material-symbols-outlined recipe-icons"> search </span>
       </li>
-      <li
-        [ngClass]="
-          showUserDisplayName ? 'show-display-name' : 'dont-show-display-name'
-        "
-      >
-        <a>{{ displayName }}</a>
-      </li>
-      <li class="nav-item">
+
+      <li class="nav-item header-user-account">
+        <div [ngClass]="showSettings ? 'show-menu' : 'dont-show-menu'">
+          <irecipe-settings
+            class="display-menu"
+            [ngClass]="currentColorTheme"
+            (themeColor)="onColorTheme($event)"
+          ></irecipe-settings>
+        </div>
+
         <span
-          (click)="toggleUserDisplayName()"
+          (click)="toggleSettings()"
           class="material-symbols-outlined recipe-icons"
         >
           account_circle
         </span>
       </li>
+
       <li class="nav-item">
         <span (click)="logout()" class="material-symbols-outlined recipe-icons">
           logout
