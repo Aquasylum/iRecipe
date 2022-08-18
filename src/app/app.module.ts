@@ -24,14 +24,17 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 
 // Animations:
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RecipeDisplayCardComponent } from './recipe/components/recipe-display-card/recipe-display-card.component';
+import { RecipeModule } from './recipe/recipe.module';
 
 @NgModule({
-  declarations: [AppComponent, RecipeComponent, ViewRecipeComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AuthModule,
     UserModule,
+    RecipeModule,
     SharedModule,
     ReactiveFormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),

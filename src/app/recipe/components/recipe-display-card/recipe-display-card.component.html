@@ -4,7 +4,11 @@
     {{ recipe.name }}
   </div>
 
-  <img class="recipe-display-card-image" [src]="recipeImage" />
+  <img
+    [routerLink]="['/view-recipe', recipe.id]"
+    class="recipe-display-card-image"
+    [src]="recipeImage"
+  />
 
   <div class="recipe-icons">
     <span class="material-icons functionality-icons"> thumb_up </span>

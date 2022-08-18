@@ -125,6 +125,8 @@
 }
 
 .recipe-container {
+  background-color: var(--irecipe-dark);
+
   padding-top: 2%;
   display: flex;
   justify-content: center;

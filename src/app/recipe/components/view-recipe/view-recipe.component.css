@@ -89,6 +89,7 @@
 }
 
 .irecipe-container {
+  background-color: var(--irecipe-dark);
   display: flex;
   justify-content: center;
   align-items: center;

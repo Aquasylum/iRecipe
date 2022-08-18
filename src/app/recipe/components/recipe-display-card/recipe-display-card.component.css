@@ -2,6 +2,7 @@
   .recipe-name {
     font-size: 32px !important;
     padding-top: 15px;
+    padding-bottom: 15px;
   }
 
   .recipe-display-card-image {
@@ -14,6 +15,7 @@
   .recipe-name {
     font-size: 26px !important;
     padding-top: 12px;
+    padding-bottom: 12px;
   }
 
   .recipe-display-card-image {
@@ -26,6 +28,7 @@
   .recipe-name {
     font-size: 20px !important;
     padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   .recipe-display-card-image {
@@ -71,6 +74,11 @@
 button:hover {
   background-color: var(--irecipe-orange);
   transform: scale(1.1);
+}
+
+.recipe-display-card-image:hover {
+  cursor: pointer;
+  transform: scale(1.05);
 }
 
 .star {

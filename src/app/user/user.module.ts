@@ -6,11 +6,13 @@ import { FileService } from './service/file.service';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule } from '@angular/router';
+import { RecipeModule } from '../recipe/recipe.module';
+import { RecipeDisplayCardComponent } from '../recipe/components/recipe-display-card/recipe-display-card.component';
 
 @NgModule({
   declarations: [DiscoverComponent, ProfileHeaderComponent, ProfileComponent],
-  imports: [CommonModule, SharedModule, RouterModule],
-  exports: [DiscoverComponent, ProfileHeaderComponent],
+  imports: [CommonModule, SharedModule, RouterModule, RecipeModule],
+  exports: [DiscoverComponent],
   providers: [FileService],
 })
 export class UserModule {}
