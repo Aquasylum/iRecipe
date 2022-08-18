@@ -1,0 +1,48 @@
+@media screen and (max-width: 1800px) {
+  .recipe-icons {
+    font-size: 32px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .recipe-icons {
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .recipe-icons {
+    font-size: 18px;
+  }
+}
+
+.header-menu-heading {
+  border-bottom: 1px solid black;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.header-menu-item {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.color-theme-selector:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.header-menu-item > .material-symbols-outlined {
+  float: left;
+  padding-left: 20px;
+  padding-right: 0px;
+}
+
+.light {
+  background-color: var(--irecipe-primary);
+  color: black;
+}
+
+.dark {
+  color: black;
+}

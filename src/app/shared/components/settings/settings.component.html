@@ -1,0 +1,13 @@
+<div class="display-menu">
+  <div class="bold header-menu-heading">User Menu</div>
+  <div class="header-menu-item bold">
+    <span class="material-symbols-outlined recipe-icons"> account_circle </span>
+    Currently logged in as: {{ displayName }}
+  </div>
+  <div class="header-menu-item color-theme-selector">
+    <span class="material-symbols-outlined recipe-icons bold"> palette </span>
+    <span (click)="changeColorTheme()"
+      >Change color theme to: <strong>{{ invertedColorTheme }}</strong></span
+    >
+  </div>
+</div>
