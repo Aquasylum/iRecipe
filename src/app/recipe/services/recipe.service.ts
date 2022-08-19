@@ -29,9 +29,11 @@ export class RecipeService {
 
   recipeCollection = collection(this.fireStore, 'recipes');
 
-  async getAllRecipesByUserId(): Promise<Recipe[]> {
+  async getAllRecipesByUserId(): Promise<Recipe[] | null> {
     let recipes: Recipe[] = [];
     const userRecipeIds = await this.userService.userRecipeIds();
+
+    if (!userRecipeIds) return null;
 
     const recipieQueries = userRecipeIds.map((recipeId) => {
       const q = query(this.recipeCollection, where('id', '==', recipeId));
@@ -60,6 +62,7 @@ export class RecipeService {
     //Add all data not done by user
     recipe.dateCreated = Date.now();
     recipe.dateModified = Date.now();
+    recipe.authorId = recipe.id;
 
     this.userService.getUserNameAndSurname().then((usernameAndSurname) => {
       recipe.author = usernameAndSurname;

@@ -24,11 +24,11 @@ import { getDocs, query, where } from 'firebase/firestore';
 export class AuthService {
   isLoggedIn$: EventEmitter<boolean> = new EventEmitter();
 
+  userCollection = collection(this.firestore, 'users');
+
   constructor(private auth: Auth, private firestore: Firestore) {
     this.isLoggedIn$.emit(false);
   }
-
-  userCollection = collection(this.firestore, 'users');
 
   async loginWithEmailAndPassword(login: ILoginData) {
     let user = await signInWithEmailAndPassword(

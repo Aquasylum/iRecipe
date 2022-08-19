@@ -77,7 +77,7 @@
     </div>
 
     <div class="view-recipe-send-container">
-      <div class="irecipe-share">
+      <div class="irecipe-share" [ngClass]="currentColorTheme">
         Want to share this recipe with another user?
         <br />
         Enter their username and we'll take care of the rest!
@@ -142,22 +142,44 @@
     </div>
 
     <div class="view-recipe-functionality-container">
-      <div class="row">
-        <div class="col-lg-12">
-          <button
-            class="irecipe-button btn-lg edit-button"
+      <div
+        *ngIf="userIsAuthor; then showFavorite; else showEditAndDelete"
+      ></div>
+
+      <ng-template #showEditAndDelete>
+        <div class="recipe-functionality-button save">
+          <span
             routerLink="/recipe/{{ recipe.id }}"
+            type="submit"
+            class="icon-large material-symbols-outlined"
           >
-            Edit Recipe
-          </button>
-          <button
-            class="irecipe-button btn-lg delete-button"
-            (click)="deleteRecipe()"
-          >
-            Delete Recipe
-          </button>
+            edit
+          </span>
+          <div>Edit recipe</div>
         </div>
-      </div>
+
+        <div class="recipe-functionality-button delete">
+          <span
+            (click)="deleteRecipe()"
+            class="icon-large material-symbols-outlined"
+          >
+            delete
+          </span>
+          <div>Delete recipe</div>
+        </div>
+      </ng-template>
+
+      <ng-template #showFavorite>
+        <div class="recipe-functionality-button edit">
+          <span
+            (click)="toggleRecipeFavorite()"
+            class="icon-large material-symbols-outlined"
+          >
+            favorite
+          </span>
+          <div>Favorite</div>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>

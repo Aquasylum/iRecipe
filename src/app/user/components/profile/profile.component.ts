@@ -22,8 +22,10 @@ export class ProfileComponent implements OnInit {
       this.authService.emitCurrentLoggedInStatus(true);
 
     this.recipeService.getAllRecipesByUserId().then((recipes) => {
-      this.allRecipes = recipes;
-      this.recipe = this.allRecipes[this.recipeIndex];
+      if (recipes) {
+        this.allRecipes = recipes;
+        this.recipe = this.allRecipes[this.recipeIndex];
+      }
     });
   }
 

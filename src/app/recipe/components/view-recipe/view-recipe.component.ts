@@ -12,6 +12,7 @@ import { Recipe } from 'src/app/recipe/models/Recipe';
 import { RecipeService } from 'src/app/recipe/services/recipe.service';
 import { UserDoesNotExist } from 'src/app/shared/validators/UserDoesNotExist.validator';
 import { FileService } from 'src/app/user/service/file.service';
+import { SettingsService } from 'src/app/shared/services/settings.service';
 
 @Component({
   selector: 'app-view-recipe',
@@ -23,11 +24,11 @@ export class ViewRecipeComponent implements OnInit {
     private route: ActivatedRoute,
     private recipeService: RecipeService,
     private router: Router,
-    private fb: FormBuilder,
     private userService: UserService,
     private userDoesNotExistValidator: UserDoesNotExist,
     private authService: AuthService,
-    private fileService: FileService
+    private fileService: FileService,
+    private settingService: SettingsService
   ) {}
 
   recipe!: Recipe;
@@ -35,16 +36,28 @@ export class ViewRecipeComponent implements OnInit {
   recipeImage!: string | undefined;
   showSuccessMessage: boolean = false;
   usernameControl!: FormControl;
+  currentColorTheme: string = 'dark';
+  isFavorite: boolean = false;
+  userIsAuthor!: boolean;
 
   ngOnInit(): void {
     if (this.authService.getCurrentUser())
       this.authService.emitCurrentLoggedInStatus(true);
+
+    this.settingService.colorTheme$.subscribe((color) =>
+      this.colorTheme(color)
+    );
 
     this.recipeService.getRecipeById(this.id).then((obs) =>
       obs.subscribe((recipe) => {
         this.recipe = recipe;
         this.fileService.downloadRecipeImage(this.recipe.id).then((url) => {
           this.recipeImage = url;
+
+          //Check if the current user is the author of the recipe
+          this.recipe.authorId == this.authService.getCurrentUser()?.uid
+            ? (this.userIsAuthor = true)
+            : (this.userIsAuthor = false);
         });
       })
     );
@@ -60,6 +73,10 @@ export class ViewRecipeComponent implements OnInit {
     );
   }
 
+  colorTheme(color: string) {
+    this.currentColorTheme = color;
+  }
+
   get username() {
     return this.usernameControl.get('username');
   }
@@ -67,7 +84,11 @@ export class ViewRecipeComponent implements OnInit {
   deleteRecipe() {
     this.recipeService
       .deleteRecipe(this.recipe.id)
-      .then(() => this.router.navigate(['/main']));
+      .then(() =>
+        this.router.navigate([
+          '/profile/' + this.authService.getCurrentUser()?.uid,
+        ])
+      );
   }
 
   sendRecipe() {
@@ -88,5 +109,9 @@ export class ViewRecipeComponent implements OnInit {
   onCloseSuccessMessage() {
     this.showSuccessMessage = false;
     this.usernameControl.reset();
+  }
+
+  toggleRecipeFavorite() {
+    this.isFavorite = !this.isFavorite;
   }
 }

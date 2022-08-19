@@ -179,6 +179,7 @@ textarea {
 .display-steps,
 .display-ingredients,
 .display-tips {
+  overflow-wrap: anywhere;
   padding-top: 15px;
 }
 

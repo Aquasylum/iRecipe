@@ -3,19 +3,20 @@
   <div class="recipe-display-container">
     <div class="row">
       <div class="col-sm-1 col-lg-1 control-left">
-        <span
-          (click)="previousRecipe()"
-          class="material-symbols-outlined arrow"
-        >
-          arrow_back_ios
-        </span>
+        <div *ngIf="allRecipes">
+          <span
+            *ngIf="allRecipes.length != 0"
+            (click)="previousRecipe()"
+            class="material-symbols-outlined arrow"
+          >
+            arrow_back_ios
+          </span>
+        </div>
       </div>
 
       <div class="col-lg-10 col-sm-10">
-        <div class="recipe-display" *ngIf="allRecipes">
-          <div
-            *ngIf="allRecipes.length == 0; then addRecipe; else showRecipes"
-          ></div>
+        <div class="recipe-display">
+          <div *ngIf="!allRecipes; then addRecipe; else showRecipes"></div>
           <ng-template #addRecipe>
             <div class="no-recipes">
               <h2>Oh no, it seems like you have no recipes!</h2>
@@ -35,20 +36,30 @@
       </div>
 
       <div class="col-lg-1 col-sm-1 control-right">
-        <span (click)="nextRecipe()" class="material-symbols-outlined arrow">
-          arrow_forward_ios
-        </span>
+        <div *ngIf="allRecipes">
+          <span
+            *ngIf="allRecipes.length != 0"
+            (click)="nextRecipe()"
+            class="material-symbols-outlined arrow"
+          >
+            arrow_forward_ios
+          </span>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="recipes-container-functionality">
-    <div routerLink="/recipe" class="functionality-button">
+    <div
+      *ngIf="allRecipes"
+      routerLink="/recipe"
+      class="functionality-button add"
+    >
       <span class="material-icons icon-large"> add_circle </span>
       <div>Add Recipe</div>
     </div>
 
-    <div *ngIf="recipe" class="functionality-button">
+    <div *ngIf="recipe" class="functionality-button edit">
       <span
         [routerLink]="['/recipe', recipe.id]"
         class="material-symbols-outlined icon-large"

@@ -15,8 +15,8 @@
   /* Font sizes */
   --irecipe-name: 75px;
   --irecipe-title: 48px;
-  --irecipe-heading: 24px;
-  --irecipe-label: 16px;
+  --irecipe-text: 22px;
+  --irecipe-placeholder: 18px;
 
   /* Icons */
   --irecipe-logo: 60px;
@@ -26,6 +26,10 @@
 @media screen and (max-width: 1800px) {
   .irecipe-name {
     font-size: var(--irecipe-name);
+  }
+
+  input::placeholder {
+    font-size: var(--irecipe-placeholder);
   }
 
   .irecipe-logo {
@@ -49,10 +53,6 @@
     font-size: var(--irecipe-icons);
   }
 
-  .irecipe-label {
-    font-size: var(--irecipe-label);
-  }
-
   .irecipe-text {
     font-size: var(--irecipe-text);
   }
@@ -65,6 +65,10 @@
 @media screen and (max-width: 1200px) {
   .irecipe-name {
     font-size: calc(var(--irecipe-name) * 0.8);
+  }
+
+  input::placeholder {
+    font-size: calc(var(--irecipe-placeholder) * 0.8);
   }
 
   .irecipe-logo {
@@ -88,10 +92,6 @@
     font-size: calc(var(--irecipe-icons) * 0.8);
   }
 
-  .irecipe-label {
-    font-size: calc(var(--irecipe-label) * 0.8);
-  }
-
   .irecipe-text {
     font-size: calc(var(--irecipe-text) * 0.8);
   }
@@ -104,6 +104,10 @@
 @media screen and (max-width: 600px) {
   .irecipe-name {
     font-size: calc(var(--irecipe-name) * 0.5);
+  }
+
+  input::placeholder {
+    font-size: calc(var(--irecipe-placeholder) * 0.5);
   }
 
   .irecipe-logo {
@@ -127,10 +131,6 @@
     font-size: calc(var(--irecipe-icons) * 0.5);
   }
 
-  .irecipe-label {
-    font-size: calc(var(--irecipe-label) * 0.5);
-  }
-
   .irecipe-text {
     font-size: calc(var(--irecipe-text) * 0.5);
   }
@@ -141,7 +141,7 @@
 }
 
 body {
-  font-family: AlegreyaBold, "Helvetica Neue", sans-serif;
+  font-family: AlegreyaBold, "Helvetica Neue", sans-serif !important;
   font-size: var(--irecipe-text) !important;
 }
 

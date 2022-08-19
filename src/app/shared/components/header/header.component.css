@@ -57,6 +57,7 @@
 
 .search-user-input::placeholder {
   color: white;
+  font-size: 20px;
 }
 
 .navbar {

@@ -71,8 +71,12 @@ export class RecipeComponent implements OnInit {
     this.addStep();
     this.addTip();
 
+    //Checking if in add mode:
+    //If in add mode then we create our own unique uid and assign it to the
+    //id of the recipe and
     if (this.isAddMode) {
       this.recipeId = uuid.v4();
+      this.id = this.recipeId;
       this.recipeForm.patchValue({
         id: this.recipeId,
       });

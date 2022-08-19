@@ -28,7 +28,6 @@
   padding-top: 4vh;
   display: flex;
   text-align: center;
-  color: var(--irecipe-primary);
 }
 
 .functionality-button {
@@ -44,10 +43,12 @@
 .no-recipes {
   text-align: center;
   margin-top: 10%;
+  color: white;
 }
 
 .irecipe-button {
-  background-color: var(--irecipe-green);
+  color: white;
+  background-color: var(--irecipe-primary);
 }
 
 .irecipe-main {
@@ -93,4 +94,16 @@
 }
 .row {
   flex-wrap: nowrap;
+}
+
+.recipes-container-functionality {
+  padding-bottom: 250px;
+}
+
+.edit {
+  color: var(--irecipe-secondary);
+}
+
+.add {
+  color: var(--irecipe-primary);
 }

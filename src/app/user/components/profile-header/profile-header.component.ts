@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { user } from '@angular/fire/auth';
 import { UserService } from '../../service/user.service';
 
 @Component({
@@ -16,6 +17,7 @@ export class ProfileHeaderComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getUserNameAndSurname().then((username) => {
       username ? (this.username = username?.toLowerCase()) : 'anonymous';
+      console.log(username);
     });
 
     this.userRating = this.userService.getUserRating();
