@@ -39,7 +39,7 @@
     <div class="row">
       <div class="col-xl-4 col-md-6 col-sm-12">
         <div class="ingredients-container">
-          <div class="recipe-section-header">Ingredients:</div>
+          <div class="irecipe-title">Ingredients:</div>
 
           <ng-container formArrayName="ingredients">
             <div *ngFor="let ingredient of ingredients.controls; let i = index">
@@ -161,7 +161,7 @@
 
       <div class="col-xl-4 col-md-6 col-sm-12">
         <div class="upload-photo-container">
-          <div class="recipe-section-header">Upload Photo</div>
+          <div class="irecipe-title">Upload Photo</div>
           <div *ngIf="!fileUploaded; then showUpload; else showImage"></div>
 
           <ng-template #showUpload>
@@ -200,7 +200,7 @@
 
       <div class="col-xl-4 col-md-6 col-sm-12">
         <div class="steps-container">
-          <div class="recipe-section-header">Steps:</div>
+          <div class="irecipe-title">Steps:</div>
           <ng-container formArrayName="steps">
             <ng-container *ngFor="let step of steps.controls; let i = index">
               <div *ngIf="i == steps.controls.length - 1">
@@ -255,7 +255,7 @@
     </div>
 
     <div class="tips-container">
-      <div class="recipe-section-header">Tips:</div>
+      <div class="irecipe-title">Tips:</div>
       <ng-container formArrayName="tips">
         <ng-container *ngFor="let tip of tips.controls; let i = index">
           <div *ngIf="i == tips.controls.length - 1">

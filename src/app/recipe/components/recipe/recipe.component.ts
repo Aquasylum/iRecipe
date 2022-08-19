@@ -148,7 +148,6 @@ export class RecipeComponent implements OnInit {
   }
 
   getCurrentIngredient(index: number) {
-    console.log(this.ingredients.controls[index].value);
     this.ingredientIndex == index;
   }
 
@@ -193,11 +192,11 @@ export class RecipeComponent implements OnInit {
     if (this.isAddMode) {
       this.recipeService
         .createRecipe(this.recipeForm.value)
-        .then((id) => this.router.navigate(['/main/view-recipe/' + id]));
+        .then((id) => this.router.navigate(['/view-recipe/' + id]));
     } else if (!this.isAddMode) {
       this.recipeService
         .updateRecipe(this.recipeForm.value, this.id)
-        .then(() => this.router.navigate(['/main/view-recipe/' + this.id]));
+        .then(() => this.router.navigate(['/view-recipe/' + this.id]));
     }
   }
 
