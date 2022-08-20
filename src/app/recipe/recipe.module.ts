@@ -6,14 +6,12 @@ import { RecipeDisplayCardComponent } from './components/recipe-display-card/rec
 import { RecipeComponent } from './components/recipe/recipe.component';
 import { ViewRecipeComponent } from './components/view-recipe/view-recipe.component';
 import { RecipeService } from './services/recipe.service';
-import { ShareRecipeComponent } from './components/share-recipe/share-recipe.component';
 
 @NgModule({
   declarations: [
     RecipeComponent,
     ViewRecipeComponent,
     RecipeDisplayCardComponent,
-    ShareRecipeComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule, FormsModule],
   exports: [RecipeDisplayCardComponent],

@@ -11,9 +11,6 @@ import { UserModule } from './user/user.module';
 //Components
 import { AppComponent } from './app.component';
 
-import { RecipeComponent } from './recipe/components/recipe/recipe.component';
-import { ViewRecipeComponent } from './recipe/components/view-recipe/view-recipe.component';
-
 //Services
 import { RecipeService } from './recipe/services/recipe.service';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
@@ -24,7 +21,6 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 
 // Animations:
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RecipeDisplayCardComponent } from './recipe/components/recipe-display-card/recipe-display-card.component';
 import { RecipeModule } from './recipe/recipe.module';
 
 @NgModule({

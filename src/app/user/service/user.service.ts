@@ -61,32 +61,38 @@ export class UserService {
   }
 
   async getUsername() {
-    let user: User = new User();
     let q = query(
       this.userCollection,
       where('userId', '==', this.auth.getCurrentUser()?.uid)
     );
 
-    await getDocs(q).then((querySnapshot) =>
-      querySnapshot.forEach((doc) => (user = doc.data() as User))
-    );
+    let docsQuery = await getDocs(q);
+    let user = docsQuery.docs[0].data() as User;
 
     return user.username;
   }
 
-  async userRecipeIds(): Promise<string[]> {
-    const q = query(
-      this.userCollection,
-      where('userId', '==', this.auth.getCurrentUser()?.uid)
-    );
+  async getUserIdByUsername(username: string) {
+    let q = query(this.userCollection, where('username', '==', username));
 
-    const docs = await getDocs(q);
-    const user = docs.docs[0].data() as User;
+    let docsQuery = await getDocs(q);
+    let user = docsQuery.docs[0].data() as User;
+
+    return user.userId;
+  }
+
+  async userRecipeIds(userId: string): Promise<string[]> {
+    const q = query(this.userCollection, where('userId', '==', userId));
+
+    const docsQuery = await getDocs(q);
+    const user = docsQuery.docs[0].data() as User;
     return user.recipes;
   }
 
   async userExists(username: string): Promise<boolean> {
     let user: User = new User();
+    if (username == null) return false;
+
     let q = query(
       this.userCollection,
       where('username', '==', username.toLowerCase())
@@ -102,16 +108,11 @@ export class UserService {
     }
   }
 
-  async getUserNameAndSurname(): Promise<string | undefined> {
-    let user: User = new User();
-    let q = query(
-      this.userCollection,
-      where('userId', '==', this.auth.getCurrentUser()?.uid)
-    );
+  async getUserNameAndSurname(userId: string): Promise<string | undefined> {
+    let q = query(this.userCollection, where('userId', '==', userId));
 
-    await getDocs(q).then((querySnapshot) =>
-      querySnapshot.forEach((doc) => (user = doc.data() as User))
-    );
+    let queryDocs = await getDocs(q);
+    let user = queryDocs.docs[0].data() as User;
 
     if (user.name || user.surname) {
       return user.name + ' ' + user.surname;
