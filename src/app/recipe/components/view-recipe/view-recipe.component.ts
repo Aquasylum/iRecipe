@@ -77,10 +77,6 @@ export class ViewRecipeComponent implements OnInit {
     this.currentColorTheme = color;
   }
 
-  get username() {
-    return this.usernameControl.get('username');
-  }
-
   deleteRecipe() {
     this.recipeService
       .deleteRecipe(this.recipe.id)
@@ -93,13 +89,15 @@ export class ViewRecipeComponent implements OnInit {
 
   sendRecipe() {
     //check if user is typing in their display name ie cannot send recipe to self
-    if (this.authService.getCurrentUserDisplayName() == this.username?.value) {
-      this.username?.setErrors({ cantUseOwnUsername: true });
+    if (
+      this.authService.getCurrentUserDisplayName() == this.usernameControl.value
+    ) {
+      this.usernameControl?.setErrors({ cantUseOwnUsername: true });
       return;
     }
 
     this.userService
-      .updateUserWithRecipeId(this.recipe.id, this.username?.value)
+      .updateUserWithRecipeId(this.recipe.id, this.usernameControl?.value)
       .then(() => {
         this.usernameControl.reset;
         this.showSuccessMessage = true;

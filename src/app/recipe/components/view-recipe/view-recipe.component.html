@@ -99,11 +99,14 @@
             Send Recipe
           </button>
           <div class="error-container">
-            <ng-container *ngIf="username?.invalid && username?.touched">
+            <ng-container
+              *ngIf="usernameControl?.invalid && usernameControl?.touched"
+            >
               <div
                 class="error-label"
                 *ngIf="
-                  username?.hasError('doesNotExist') && usernameControl.touched
+                  usernameControl?.hasError('doesNotExist') &&
+                  usernameControl.touched
                 "
               >
                 Username does not exist.
@@ -111,7 +114,7 @@
               <div
                 class="error-label"
                 *ngIf="
-                  username?.hasError('cantUseOwnUsername') &&
+                  usernameControl?.hasError('cantUseOwnUsername') &&
                   usernameControl.touched
                 "
               >
@@ -143,7 +146,7 @@
 
     <div class="view-recipe-functionality-container">
       <div
-        *ngIf="userIsAuthor; then showFavorite; else showEditAndDelete"
+        *ngIf="userIsAuthor; then showEditAndDelete; else showFavorite"
       ></div>
 
       <ng-template #showEditAndDelete>
@@ -170,7 +173,7 @@
       </ng-template>
 
       <ng-template #showFavorite>
-        <div class="recipe-functionality-button edit">
+        <div class="recipe-functionality-button favorite">
           <span
             (click)="toggleRecipeFavorite()"
             class="icon-large material-symbols-outlined"
