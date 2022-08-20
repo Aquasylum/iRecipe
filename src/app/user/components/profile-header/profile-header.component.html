@@ -1,14 +1,21 @@
 <div class="profile-container irecipe-profile-black">
-  <span class="material-symbols-outlined profile-picture">
+  <span
+    class="material-symbols-outlined profile-picture"
+    [ngClass]="loggedInUserProfile ? 'primary' : 'secondary'"
+  >
     account_circle
   </span>
-  <div class="irecipe-name">
+  <div
+    class="irecipe-name"
+    [ngClass]="loggedInUserProfile ? 'primary' : 'secondary'"
+  >
     {{ username }}
   </div>
   <div>
     <div class="profile-header-user-rating">
       <span
         *ngFor="let star of userRatingArray"
+        [ngClass]="loggedInUserProfile ? 'primary' : 'secondary'"
         class="material-symbols-outlined user-icons"
       >
         star_outline

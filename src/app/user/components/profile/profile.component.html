@@ -1,5 +1,9 @@
 <div class="recipes-container">
-  <irecipe-profile-header></irecipe-profile-header>
+  <irecipe-profile-header
+    [userId]="userId"
+    [loggedInUserProfile]="loggedInUserProfile"
+  ></irecipe-profile-header>
+
   <div class="recipe-display-container">
     <div class="row">
       <div class="col-sm-1 col-lg-1 control-left">
@@ -50,23 +54,37 @@
   </div>
 
   <div class="recipes-container-functionality">
-    <div
-      *ngIf="allRecipes"
-      routerLink="/recipe"
-      class="functionality-button add"
-    >
-      <span class="material-icons icon-large"> add_circle </span>
-      <div>Add Recipe</div>
+    <div *ngIf="!loggedInUserProfile">
+      <div (click)="toggleFavorite()" class="functionality-button edit">
+        <span *ngIf="!isFavorite" class="icon-large material-icons"
+          >favorite_border
+        </span>
+        <span *ngIf="isFavorite" class="icon-large material-icons"
+          >favorite
+        </span>
+
+        <div>Favorite</div>
+      </div>
     </div>
 
-    <div *ngIf="recipe" class="functionality-button edit">
-      <span
-        [routerLink]="['/recipe', recipe.id]"
-        class="material-symbols-outlined icon-large"
+    <div *ngIf="loggedInUserProfile">
+      <div
+        *ngIf="allRecipes"
+        routerLink="/recipe"
+        class="functionality-button add"
       >
-        edit
-      </span>
-      <div>Edit Recipe</div>
+        <span class="material-icons icon-large"> add_circle </span>
+        <div>Add Recipe</div>
+      </div>
+      <div *ngIf="recipe" class="functionality-button edit">
+        <span
+          [routerLink]="['/recipe', recipe.id]"
+          class="material-symbols-outlined icon-large"
+        >
+          edit
+        </span>
+        <div>Edit Recipe</div>
+      </div>
     </div>
   </div>
 </div>

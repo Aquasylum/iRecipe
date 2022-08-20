@@ -24,6 +24,14 @@
   line-height: 53px;
 }
 
+.primary {
+  color: var(--irecipe-primary) !important;
+}
+
+.secondary {
+  color: var(--irecipe-secondary) !important;
+}
+
 .user-icons {
   color: var(--irecipe-primary);
 }

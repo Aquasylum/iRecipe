@@ -65,6 +65,11 @@
   padding-left: 0px;
 }
 
+.material-symbols-outlined,
+.material-icons {
+  padding-right: 0px;
+}
+
 .arrow:hover {
   cursor: pointer;
   transform: scale(1.1);
