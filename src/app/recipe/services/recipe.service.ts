@@ -14,7 +14,6 @@ import {
 } from '@firebase/firestore';
 
 import { Firestore, docData, getDocs, setDoc } from '@angular/fire/firestore';
-import { AuthService } from '../../auth/services/auth.service';
 import { UserService } from '../../user/service/user.service';
 
 @Injectable({
@@ -29,9 +28,9 @@ export class RecipeService {
 
   recipeCollection = collection(this.fireStore, 'recipes');
 
-  async getAllRecipesByUserId(): Promise<Recipe[] | null> {
+  async getAllRecipesByUserId(userId: string): Promise<Recipe[] | null> {
     let recipes: Recipe[] = [];
-    const userRecipeIds = await this.userService.userRecipeIds();
+    const userRecipeIds = await this.userService.userRecipeIds(userId);
 
     if (!userRecipeIds) return null;
 
@@ -64,12 +63,14 @@ export class RecipeService {
     recipe.dateModified = Date.now();
     recipe.authorId = recipe.id;
 
-    this.userService.getUserNameAndSurname().then((usernameAndSurname) => {
-      recipe.author = usernameAndSurname;
-      setDoc(doc(this.fireStore, 'recipes', recipe.id), recipe).then(() =>
-        this.userService.updateUserWithRecipeId(recipe.id)
-      );
-    });
+    this.userService
+      .getUserNameAndSurname(recipe.id)
+      .then((usernameAndSurname) => {
+        recipe.author = usernameAndSurname;
+        setDoc(doc(this.fireStore, 'recipes', recipe.id), recipe).then(() =>
+          this.userService.updateUserWithRecipeId(recipe.id)
+        );
+      });
 
     return recipe.id;
   }
