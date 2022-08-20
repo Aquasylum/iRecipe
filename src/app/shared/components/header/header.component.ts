@@ -52,7 +52,9 @@ export class HeaderComponent implements OnInit {
 
   onRecipes() {
     this.isRecipes = true;
-    this.router.navigate(['/']);
+    this.router.navigate([
+      '/profile/' + this.authService.getCurrentUser()?.uid,
+    ]);
   }
 
   onDiscover() {
@@ -65,7 +67,6 @@ export class HeaderComponent implements OnInit {
   }
 
   onColorTheme(themeColor: string) {
-    console.log('chaning theme color');
     this.currentColorTheme = themeColor;
   }
 }

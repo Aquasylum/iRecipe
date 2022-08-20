@@ -45,21 +45,6 @@
   cursor: pointer;
 }
 
-.search-user-input {
-  border: none;
-  background: var(--irecipe-primary);
-  color: white;
-  border-radius: 5px;
-  text-align: center;
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-
-.search-user-input::placeholder {
-  color: white;
-  font-size: 20px;
-}
-
 .navbar {
   color: var(--irecipe-primary);
 }
@@ -103,7 +88,6 @@
   display: none;
 }
 
-.search-user-input,
 .display-menu {
   margin-right: 10px;
 }
