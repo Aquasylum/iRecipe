@@ -1,0 +1,46 @@
+<div class="username-input-field">
+  <label for="username">
+    <div>
+      <input
+        type="text"
+        class="user-search-input"
+        name="Search"
+        [formControl]="usernameControl"
+        placeholder="Search for user"
+      />
+    </div>
+  </label>
+
+  <span (click)="findUser()" class="material-symbols-outlined user-search-icon">
+    search
+  </span>
+  <div class="error-container">
+    <ng-container *ngIf="usernameControl?.invalid && usernameControl?.touched">
+      <div
+        class="error-label"
+        *ngIf="
+          usernameControl?.hasError('doesNotExist') && usernameControl?.touched
+        "
+      >
+        Username does not exist.
+      </div>
+    </ng-container>
+  </div>
+  <div
+    class="alert alert-success alert-dismissible fade show"
+    role="alert"
+    *ngIf="showSuccessMessage"
+  >
+    <strong>Holy guacamole!</strong> You have found their profile. Close this
+    message to be redirected to their profile
+    <button
+      (click)="onCloseSuccessMessage()"
+      type="button"
+      class="close"
+      data-dismiss="alert"
+      aria-label="Close"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>

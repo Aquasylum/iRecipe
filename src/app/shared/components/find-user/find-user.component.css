@@ -1,0 +1,54 @@
+@media screen and(max-width) {
+  .material-symbols-outlined {
+    font-size: 32px !important;
+  }
+}
+
+@media screen and(max-width) {
+  .material-symbols-outlined {
+    font-size: 24px;
+  }
+}
+
+@media screen and(max-width) {
+  .material-symbols-outlined {
+    font-size: 18px;
+  }
+}
+
+.user-search-input {
+  border: none;
+  background: var(--irecipe-primary);
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-right: 10px;
+}
+
+.search-user-input::placeholder {
+  color: white;
+  font-size: 20px;
+}
+
+.error-label {
+  color: red;
+}
+
+.user-search-icon {
+  margin-top: 15px;
+  float: left;
+  font-size: 32px !important;
+}
+
+.user-search-icon:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.error-container {
+  position: absolute;
+  margin-left: 30px;
+}
