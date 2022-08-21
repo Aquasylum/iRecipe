@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 
 //firebase imports:
 import {
-  addDoc,
   collection,
   where,
   query,
@@ -15,6 +14,7 @@ import {
 
 import { Firestore, docData, getDocs, setDoc } from '@angular/fire/firestore';
 import { UserService } from '../../user/service/user.service';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,7 @@ import { UserService } from '../../user/service/user.service';
 export class RecipeService {
   constructor(
     private fireStore: Firestore,
-
+    private authService: AuthService,
     private userService: UserService
   ) {}
 
@@ -30,7 +30,7 @@ export class RecipeService {
 
   async getAllRecipesByUserId(userId: string): Promise<Recipe[] | null> {
     let recipes: Recipe[] = [];
-    const userRecipeIds = await this.userService.userRecipeIds(userId);
+    const userRecipeIds = await this.userService.getUserRecipeIds(userId);
 
     if (!userRecipeIds) return null;
 
@@ -53,6 +53,7 @@ export class RecipeService {
   }
 
   async getRecipeById(id: string): Promise<Observable<Recipe>> {
+    console.log(id);
     const recipeDocumentReference = doc(this.recipeCollection, id);
     return docData(recipeDocumentReference) as Observable<Recipe>;
   }
@@ -61,14 +62,14 @@ export class RecipeService {
     //Add all data not done by user
     recipe.dateCreated = Date.now();
     recipe.dateModified = Date.now();
-    recipe.authorId = recipe.id;
+    recipe.authorId = this.authService.getCurrentUser()?.uid;
 
     this.userService
-      .getUserNameAndSurname(recipe.id)
+      .getUserNameAndSurname(recipe.authorId)
       .then((usernameAndSurname) => {
         recipe.author = usernameAndSurname;
         setDoc(doc(this.fireStore, 'recipes', recipe.id), recipe).then(() =>
-          this.userService.updateUserWithRecipeId(recipe.id)
+          this.userService.updateUser(recipe.id)
         );
       });
 

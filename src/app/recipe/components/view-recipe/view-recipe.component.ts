@@ -20,6 +20,15 @@ import { SettingsService } from 'src/app/shared/services/settings.service';
   styleUrls: ['./view-recipe.component.css'],
 })
 export class ViewRecipeComponent implements OnInit {
+  recipe!: Recipe;
+  recipeImage!: string | undefined;
+  showSuccessMessage: boolean = false;
+  usernameControl!: FormControl;
+  currentColorTheme: string = 'dark';
+  isFavorite: boolean = false;
+  userIsAuthor!: boolean;
+  recipeId!: string;
+
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
@@ -31,16 +40,9 @@ export class ViewRecipeComponent implements OnInit {
     private settingService: SettingsService
   ) {}
 
-  recipe!: Recipe;
-  id = this.route.snapshot.paramMap.get('id') as string;
-  recipeImage!: string | undefined;
-  showSuccessMessage: boolean = false;
-  usernameControl!: FormControl;
-  currentColorTheme: string = 'dark';
-  isFavorite: boolean = false;
-  userIsAuthor!: boolean;
-
   ngOnInit(): void {
+    this.recipeId = this.route.snapshot.paramMap.get('id') as string;
+
     if (this.authService.getCurrentUser())
       this.authService.emitCurrentLoggedInStatus(true);
 
@@ -48,7 +50,7 @@ export class ViewRecipeComponent implements OnInit {
       this.colorTheme(color)
     );
 
-    this.recipeService.getRecipeById(this.id).then((obs) =>
+    this.recipeService.getRecipeById(this.recipeId).then((obs) =>
       obs.subscribe((recipe) => {
         this.recipe = recipe;
         this.fileService.downloadRecipeImage(this.recipe.id).then((url) => {
@@ -97,7 +99,7 @@ export class ViewRecipeComponent implements OnInit {
     }
 
     this.userService
-      .updateUserWithRecipeId(this.recipe.id, this.usernameControl?.value)
+      .updateUser(this.recipe.id, this.usernameControl?.value)
       .then(() => {
         this.usernameControl.reset;
         this.showSuccessMessage = true;
