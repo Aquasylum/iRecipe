@@ -166,7 +166,7 @@ export class RecipeComponent implements OnInit {
 
   addStep() {
     const stepForm = this.fb.group({
-      step: ['', Validators.required],
+      step: ['', Validators.required, Validators.min(10), Validators.max(22)],
     });
     this.steps.push(stepForm);
   }
@@ -183,7 +183,7 @@ export class RecipeComponent implements OnInit {
   //Add the current tip to the existing array of tips
   addTip() {
     const tipForm = this.fb.group({
-      tip: [''],
+      tip: ['', Validators.required],
     });
     this.tips.push(tipForm);
   }

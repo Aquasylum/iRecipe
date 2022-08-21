@@ -150,7 +150,8 @@
   transform: scale(1.1);
 }
 
-.add-icon {
+.add-icon,
+.invalid-icon {
   padding-top: 1%;
   margin-left: 10px;
 }
@@ -241,11 +242,11 @@ input[type="file"] {
 
 .irecipe-title,
 ::placeholder,
-.add-icon {
+.add-icon,
+.invalid-icon {
   color: var(--irecipe-secondary);
   text-align: center;
   text-transform: uppercase;
-  font-weight: 700;
 }
 
 .ingredient-name-text::placeholder,
@@ -337,4 +338,8 @@ form {
 input:hover,
 textarea:hover {
   cursor: pointer;
+}
+
+.invalid-icon {
+  color: grey;
 }

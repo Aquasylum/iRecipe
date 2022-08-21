@@ -223,17 +223,34 @@
                   </div>
                   <div
                     class="error-label"
-                    *ngIf="
-                      steps.controls[i].get('step')?.hasError('minlength') &&
-                      steps.controls[i].get('step')?.touched
-                    "
+                    *ngIf="steps.controls[i].get('step')?.hasError('minlength')"
                   >
-                    At least one step is required for a recipe!
+                    A step has to be more detailed than that!
                   </div>
 
-                  <div (click)="addStep()" class="add-icon">
-                    <span class="material-symbols-outlined"> add_circle </span>
-                  </div>
+                  <div
+                    *ngIf="
+                      steps.controls[i].get('step')?.hasError('required');
+                      then showDisabled;
+                      else showAdd
+                    "
+                  ></div>
+
+                  <ng-template #showAdd>
+                    <div (click)="addStep()" class="add-icon">
+                      <span class="material-symbols-outlined">
+                        add_circle
+                      </span>
+                    </div>
+                  </ng-template>
+
+                  <ng-template #showDisabled>
+                    <div class="invalid-icon">
+                      <span class="material-symbols-outlined">
+                        add_circle
+                      </span>
+                    </div>
+                  </ng-template>
                 </div>
               </div>
             </ng-container>
@@ -267,9 +284,26 @@
                 [placeholder]="'tip #' + tips.controls.length"
               ></textarea>
             </div>
-            <div (click)="addTip()" class="add-icon">
-              <span class="material-symbols-outlined"> add_circle </span>
-            </div>
+
+            <div
+              *ngIf="
+                tips.controls[i].get('tip')?.hasError('required');
+                then showDisabled;
+                else showAdd
+              "
+            ></div>
+
+            <ng-template #showAdd>
+              <div (click)="addTip()" class="add-icon">
+                <span class="material-symbols-outlined"> add_circle </span>
+              </div>
+            </ng-template>
+
+            <ng-template #showDisabled>
+              <div class="invalid-icon">
+                <span class="material-symbols-outlined"> add_circle </span>
+              </div>
+            </ng-template>
           </div>
         </ng-container>
 
