@@ -28,6 +28,7 @@
   padding-top: 4vh;
   display: flex;
   text-align: center;
+  padding-bottom: 250px;
 }
 
 .functionality-button {
@@ -97,12 +98,12 @@
 .arrow {
   color: var(--irecipe-secondary);
 }
+
+.grey-arrow {
+  color: grey;
+}
 .row {
   flex-wrap: nowrap;
-}
-
-.recipes-container-functionality {
-  padding-bottom: 250px;
 }
 
 .edit {

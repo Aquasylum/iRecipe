@@ -9,9 +9,16 @@
       <div class="col-sm-1 col-lg-1 control-left">
         <div *ngIf="allRecipes">
           <span
-            *ngIf="allRecipes.length != 0"
+            *ngIf="allRecipes.length > 1"
             (click)="previousRecipe()"
             class="material-symbols-outlined arrow"
+          >
+            arrow_back_ios
+          </span>
+          <span
+            *ngIf="allRecipes.length == 1"
+            (click)="previousRecipe()"
+            class="material-symbols-outlined grey-arrow"
           >
             arrow_back_ios
           </span>
@@ -42,9 +49,17 @@
       <div class="col-lg-1 col-sm-1 control-right">
         <div *ngIf="allRecipes">
           <span
-            *ngIf="allRecipes.length != 0"
+            *ngIf="allRecipes.length > 1"
             (click)="nextRecipe()"
             class="material-symbols-outlined arrow"
+          >
+            arrow_forward_ios
+          </span>
+
+          <span
+            *ngIf="allRecipes.length == 1"
+            (click)="nextRecipe()"
+            class="material-symbols-outlined grey-arrow"
           >
             arrow_forward_ios
           </span>
@@ -53,8 +68,8 @@
     </div>
   </div>
 
-  <div class="recipes-container-functionality">
-    <div *ngIf="!loggedInUserProfile">
+  <div>
+    <div *ngIf="!loggedInUserProfile" class="recipes-container-functionality">
       <div (click)="toggleFavorite()" class="functionality-button edit">
         <span *ngIf="!isFavorite" class="icon-large material-icons"
           >favorite_border
@@ -67,7 +82,7 @@
       </div>
     </div>
 
-    <div *ngIf="loggedInUserProfile">
+    <div *ngIf="loggedInUserProfile" class="recipes-container-functionality">
       <div
         *ngIf="allRecipes"
         routerLink="/recipe"
