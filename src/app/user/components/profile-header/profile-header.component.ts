@@ -1,13 +1,4 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
-import { user } from '@angular/fire/auth';
-import { ActivatedRoute } from '@angular/router';
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { UserService } from '../../service/user.service';
 
 @Component({
@@ -32,7 +23,6 @@ export class ProfileHeaderComponent implements OnInit {
         username ? (this.username = username?.toLowerCase()) : 'anonymous';
       });
 
-    this.userRating = this.userService.getUserRating();
-    this.userRatingArray = new Array(this.userRating);
+    this.userRatingArray = new Array(this.userService.getUserRating());
   }
 }

@@ -15,12 +15,33 @@
     font-size: 18px;
   }
 }
+.username-input-field {
+  position: relative;
+}
+
+.user-found {
+  position: absolute;
+  left: 50px;
+  background-color: white;
+  color: black;
+  min-width: 250px;
+  border-radius: 5px;
+  margin-top: 10px;
+  padding-top: 5px;
+  border: 2px solid black;
+  padding-bottom: 5px;
+  margin-right: 10px;
+}
+
+.user-found {
+  cursor: pointer;
+}
 
 .user-search-input {
-  border: none;
   background: var(--irecipe-primary);
   color: white;
   border-radius: 5px;
+
   text-align: center;
   margin-top: 10px;
   padding-top: 5px;
@@ -28,7 +49,7 @@
   margin-right: 10px;
 }
 
-.search-user-input::placeholder {
+::placeholder {
   color: white;
   font-size: 20px;
 }
@@ -51,4 +72,18 @@
 .error-container {
   position: absolute;
   margin-left: 30px;
+}
+
+input:hover {
+  cursor: pointer;
+}
+
+.light {
+  color: white;
+  background-color: var(--irecipe-primary);
+}
+
+.dark {
+  color: black;
+  background-color: white;
 }

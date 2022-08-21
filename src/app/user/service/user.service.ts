@@ -11,7 +11,6 @@ import {
   where,
   getDocs,
 } from 'firebase/firestore';
-import { asapScheduler } from 'rxjs';
 
 import { User } from 'src/app/user/models/User';
 import { AuthService } from '../../auth/services/auth.service';
@@ -33,7 +32,7 @@ export class UserService {
     });
   }
 
-  async updateUserWithRecipeId(recipeId: string, username?: string) {
+  async updateUser(recipeId: string, username?: string) {
     if (username) {
       const userToAddRecipeTo = doc(
         this.firestore,
@@ -81,7 +80,14 @@ export class UserService {
     return user.userId;
   }
 
-  async userRecipeIds(userId: string): Promise<string[]> {
+  async getUserByUsername(username: string) {
+    let q = query(this.userCollection, where('username', '==', username));
+
+    let queryDocs = await getDocs(q);
+    return queryDocs.docs[0].data() as User;
+  }
+
+  async getUserRecipeIds(userId: string): Promise<string[]> {
     const q = query(this.userCollection, where('userId', '==', userId));
 
     const docsQuery = await getDocs(q);
@@ -90,25 +96,28 @@ export class UserService {
   }
 
   async userExists(username: string): Promise<boolean> {
-    let user: User = new User();
     if (username == null) return false;
 
     let q = query(
       this.userCollection,
       where('username', '==', username.toLowerCase())
     );
-    await getDocs(q).then((querySnapshot) =>
-      querySnapshot.forEach((doc) => (user = doc.data() as User))
-    );
 
-    if (user.username == username) {
-      return true;
-    } else {
-      return false;
-    }
+    let queryDocs = await getDocs(q);
+    if (queryDocs.docs[0]) {
+      let user = queryDocs.docs[0].data() as User;
+
+      if (user.username == username) {
+        return true;
+      } else {
+        return false;
+      }
+    } else return false;
   }
 
-  async getUserNameAndSurname(userId: string): Promise<string | undefined> {
+  async getUserNameAndSurname(
+    userId: string | undefined
+  ): Promise<string | undefined> {
     let q = query(this.userCollection, where('userId', '==', userId));
 
     let queryDocs = await getDocs(q);

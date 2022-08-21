@@ -1,8 +1,10 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { exhaustMap, Observable, takeLast } from 'rxjs';
+import { switchMap, Observable, interval } from 'rxjs';
+import { User } from 'src/app/user/models/User';
 import { UserService } from 'src/app/user/service/user.service';
+import { SettingsService } from '../../services/settings.service';
 import { UserDoesNotExist } from '../../validators/UserDoesNotExist.validator';
 
 @Component({
@@ -13,18 +15,27 @@ import { UserDoesNotExist } from '../../validators/UserDoesNotExist.validator';
 export class FindUserComponent implements OnInit {
   usernameControl!: FormControl;
   showSuccessMessage: boolean = false;
-  inputText$!: Observable<string>;
+  username!: string;
+  currentColorTheme: string = 'dark';
+  userId!: string;
+  userRatingArray: number[] = [];
+  user!: User;
 
   constructor(
     private userDoesNotExistValidator: UserDoesNotExist,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private settingService: SettingsService
   ) {
     //Allows the route to be reloaded and not reused
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit(): void {
+    this.settingService.colorTheme$.subscribe((color) =>
+      this.colorTheme(color)
+    );
+
     this.usernameControl = new FormControl(
       '',
       [],
@@ -35,9 +46,17 @@ export class FindUserComponent implements OnInit {
       ]
     );
 
-    this.usernameControl.valueChanges.subscribe(() =>
-      setTimeout(() => this.resetUsernameForm(), 5000)
-    );
+    this.usernameControl.valueChanges
+      .pipe(
+        switchMap(() => {
+          return interval(10000);
+        })
+      )
+      .subscribe(() => this.resetUsernameForm());
+  }
+
+  colorTheme(color: string) {
+    this.currentColorTheme = color;
   }
 
   resetUsernameForm() {
@@ -45,22 +64,29 @@ export class FindUserComponent implements OnInit {
   }
 
   async findUser() {
-    let userId = await this.userService.getUserIdByUsername(
-      this.usernameControl.value
-    );
+    this.username = this.usernameControl.value;
+    await this.userService
+      .getUserIdByUsername(this.usernameControl.value)
+      .then((userId) => {
+        this.userService
+          .getUserByUsername(this.usernameControl.value)
+          .then((user) => (this.user = user));
+        this.userId = userId;
+        this.showSuccessMessage = true;
+        setTimeout(
+          () => (this.showSuccessMessage = false),
+
+          10000
+        );
+
+        this.userRatingArray = new Array(this.userService.getUserRating());
+      });
     this.usernameControl.reset();
-    this.router.navigate(['/profile/' + userId]);
   }
 
   onCloseSuccessMessage() {
+    this.router.navigate(['/profile/' + this.userId]);
     this.showSuccessMessage = false;
     this.usernameControl.reset();
   }
 }
-
-// subscribe(() => {
-//   console.log('x');
-//   setTimeout(() => {
-//     this.resetUsernameForm();
-//   }, 10000);
-// }
