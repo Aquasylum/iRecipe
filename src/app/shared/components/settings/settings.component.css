@@ -46,3 +46,7 @@
 .dark {
   color: black;
 }
+
+.profile-layout-selector:hover {
+  cursor: pointer;
+}

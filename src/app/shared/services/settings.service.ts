@@ -5,6 +5,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 })
 export class SettingsService {
   colorTheme$: EventEmitter<string> = new EventEmitter();
+  profileLayout$: EventEmitter<string> = new EventEmitter();
 
   constructor() {}
 
@@ -14,5 +15,13 @@ export class SettingsService {
 
   changeThemeToLight() {
     this.colorTheme$.emit('light');
+  }
+
+  changeLayoutToGrid() {
+    this.profileLayout$.emit('grid');
+  }
+
+  changeLayoutToCarousel() {
+    this.profileLayout$.emit('carousel');
   }
 }

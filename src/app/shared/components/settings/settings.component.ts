@@ -12,6 +12,7 @@ export class SettingsComponent implements OnInit {
   currentColorTheme: string = 'dark';
   invertedColorTheme: string = 'light';
   displayName!: string | null | undefined;
+  currentLayout: string = 'carousel';
 
   @Output() themeColor: EventEmitter<string> = new EventEmitter<string>();
 
@@ -38,6 +39,20 @@ export class SettingsComponent implements OnInit {
       this.invertedColorTheme = 'dark';
       this.settingsService.changeThemeToLight();
       this.themeColor.emit(this.currentColorTheme);
+      return;
+    }
+  }
+
+  changeProfileLayout() {
+    if (this.currentLayout == 'carousel') {
+      this.currentLayout = 'grid';
+      this.settingsService.changeLayoutToCarousel();
+      return;
+    }
+
+    if (this.currentLayout == 'grid') {
+      this.currentLayout = 'carousel';
+      this.settingsService.changeLayoutToGrid();
       return;
     }
   }

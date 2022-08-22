@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Recipe } from 'src/app/recipe/models/Recipe';
 import { RecipeService } from 'src/app/recipe/services/recipe.service';
+import { SettingsService } from 'src/app/shared/services/settings.service';
 
 @Component({
   selector: 'irecipe-profile',
@@ -16,10 +17,14 @@ export class ProfileComponent implements OnInit {
   userId!: string | undefined;
   loggedInUserProfile!: boolean;
   isFavorite: boolean = false;
+  profileLayout: string = 'grid';
+  colorTheme: string = 'dark';
+
   constructor(
     private recipeService: RecipeService,
     private authService: AuthService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private settingService: SettingsService
   ) {}
 
   ngOnInit(): void {
@@ -31,13 +36,21 @@ export class ProfileComponent implements OnInit {
       this.userId = this.authService.getCurrentUser()?.uid;
     }
 
+    this.settingService.profileLayout$.subscribe(
+      (layout) => (this.profileLayout = layout)
+    );
+
+    this.settingService.colorTheme$.subscribe(
+      (color) => (this.colorTheme = color)
+    );
+
     //Check if this profile belongs to the signed in user:
     this.userId == this.authService.getCurrentUser()?.uid
       ? (this.loggedInUserProfile = true)
       : (this.loggedInUserProfile = false);
 
     if (this.userId) {
-      this.recipeService.getAllRecipesByUserId(this.userId).then((recipes) => {
+      this.recipeService.getRecipesByUserId(this.userId).then((recipes) => {
         if (recipes) {
           this.allRecipes = recipes;
           this.recipe = this.allRecipes[this.recipeIndex];
@@ -63,5 +76,11 @@ export class ProfileComponent implements OnInit {
 
   toggleFavorite() {
     this.isFavorite = !this.isFavorite;
+  }
+
+  async onFilterRecipes(filter: any) {
+    console.log(filter);
+    this.allRecipes = await this.recipeService.findRecipeByFilter(filter);
+    console.log(this.allRecipes);
   }
 }

@@ -64,6 +64,9 @@ export class HeaderComponent implements OnInit {
 
   toggleSettings() {
     this.showSettings = !this.showSettings;
+    if (this.showSettings == true) {
+      setTimeout(() => this.toggleSettings(), 5000);
+    }
   }
 
   onColorTheme(themeColor: string) {

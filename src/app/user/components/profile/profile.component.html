@@ -4,10 +4,34 @@
     [loggedInUserProfile]="loggedInUserProfile"
   ></irecipe-profile-header>
 
-  <div class="recipe-display-container">
-    <div class="row">
-      <div class="col-sm-1 col-lg-1 control-left">
-        <div *ngIf="allRecipes">
+  <irecipe-filter
+    (filterData)="onFilterRecipes($event)"
+    class="filter"
+  ></irecipe-filter>
+
+  <div class="grid-container" *ngIf="profileLayout == 'grid' && allRecipes">
+    <div *ngFor="let recipe of allRecipes" class="recipe-card">
+      <irecipe-recipe-display-card
+        [recipe]="recipe"
+      ></irecipe-recipe-display-card>
+
+      <div class="recipe-icons">
+        <span class="material-icons functionality-icons"> thumb_up </span>
+        <span class="material-icons functionality-icons">
+          chat_bubble_outline
+        </span>
+        <span class="material-icons functionality-icons star"> grade </span>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="carousel-container"
+    *ngIf="profileLayout == 'carousel' && allRecipes"
+  >
+    <div class="recipe-display-container">
+      <div class="row">
+        <div class="col-sm-1 col-lg-1 control-left">
           <span
             *ngIf="allRecipes.length > 1"
             (click)="previousRecipe()"
@@ -23,83 +47,91 @@
             arrow_back_ios
           </span>
         </div>
-      </div>
 
-      <div class="col-lg-10 col-sm-10">
-        <div class="recipe-display">
-          <div *ngIf="!allRecipes; then addRecipe; else showRecipes"></div>
-          <ng-template #addRecipe>
-            <div class="no-recipes">
-              <h2>Oh no, it seems like you have no recipes!</h2>
-              <button class="irecipe-button btn-lg" routerLink="/recipe">
-                Add Recipe
-              </button>
-            </div>
-          </ng-template>
-          <ng-template #showRecipes>
+        <div class="col-lg-10 col-sm-10">
+          <div class="recipe-display">
             <div class="recipe-card">
               <irecipe-recipe-display-card
                 [recipe]="recipe"
               ></irecipe-recipe-display-card>
+
+              <div class="recipe-icons">
+                <span class="material-icons functionality-icons">
+                  thumb_up
+                </span>
+                <span class="material-icons functionality-icons">
+                  chat_bubble_outline
+                </span>
+                <span class="material-icons functionality-icons star">
+                  grade
+                </span>
+              </div>
             </div>
-          </ng-template>
+          </div>
+        </div>
+
+        <div class="col-lg-1 col-sm-1 control-right">
+          <div *ngIf="allRecipes">
+            <span
+              *ngIf="allRecipes.length > 1"
+              (click)="nextRecipe()"
+              class="material-symbols-outlined arrow"
+            >
+              arrow_forward_ios
+            </span>
+
+            <span
+              *ngIf="allRecipes.length == 1"
+              (click)="nextRecipe()"
+              class="material-symbols-outlined grey-arrow"
+            >
+              arrow_forward_ios
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="profileLayout == 'carousel'">
+      <div *ngIf="!loggedInUserProfile" class="recipes-container-functionality">
+        <div (click)="toggleFavorite()" class="functionality-button edit">
+          <span *ngIf="!isFavorite" class="icon-large material-icons"
+            >favorite_border
+          </span>
+          <span *ngIf="isFavorite" class="icon-large material-icons"
+            >favorite
+          </span>
+
+          <div>Favorite</div>
         </div>
       </div>
 
-      <div class="col-lg-1 col-sm-1 control-right">
-        <div *ngIf="allRecipes">
+      <div *ngIf="loggedInUserProfile" class="recipes-container-functionality">
+        <div
+          *ngIf="allRecipes"
+          routerLink="/recipe"
+          class="functionality-button add"
+        >
+          <span class="material-icons icon-large"> add_circle </span>
+          <div>Add Recipe</div>
+        </div>
+        <div *ngIf="recipe" class="functionality-button edit">
           <span
-            *ngIf="allRecipes.length > 1"
-            (click)="nextRecipe()"
-            class="material-symbols-outlined arrow"
+            [routerLink]="['/recipe', recipe.id]"
+            class="material-symbols-outlined icon-large"
           >
-            arrow_forward_ios
+            edit
           </span>
-
-          <span
-            *ngIf="allRecipes.length == 1"
-            (click)="nextRecipe()"
-            class="material-symbols-outlined grey-arrow"
-          >
-            arrow_forward_ios
-          </span>
+          <div>Edit Recipe</div>
         </div>
       </div>
     </div>
   </div>
 
-  <div>
-    <div *ngIf="!loggedInUserProfile" class="recipes-container-functionality">
-      <div (click)="toggleFavorite()" class="functionality-button edit">
-        <span *ngIf="!isFavorite" class="icon-large material-icons"
-          >favorite_border
-        </span>
-        <span *ngIf="isFavorite" class="icon-large material-icons"
-          >favorite
-        </span>
-
-        <div>Favorite</div>
-      </div>
-    </div>
-
-    <div *ngIf="loggedInUserProfile" class="recipes-container-functionality">
-      <div
-        *ngIf="allRecipes"
-        routerLink="/recipe"
-        class="functionality-button add"
-      >
-        <span class="material-icons icon-large"> add_circle </span>
-        <div>Add Recipe</div>
-      </div>
-      <div *ngIf="recipe" class="functionality-button edit">
-        <span
-          [routerLink]="['/recipe', recipe.id]"
-          class="material-symbols-outlined icon-large"
-        >
-          edit
-        </span>
-        <div>Edit Recipe</div>
-      </div>
-    </div>
+  <div *ngIf="!allRecipes" class="no-recipes">
+    <h2 [ngClass]="colorTheme">Oh no, it seems like you have no recipes!</h2>
+    <button class="irecipe-button btn-lg" routerLink="/recipe">
+      Add Recipe
+    </button>
   </div>
 </div>

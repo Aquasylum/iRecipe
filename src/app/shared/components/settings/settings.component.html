@@ -13,4 +13,20 @@
       >Change color theme to: <strong>{{ invertedColorTheme }}</strong></span
     >
   </div>
+  <div class="profile-layout-selector" (click)="changeProfileLayout()">
+    <span
+      *ngIf="currentLayout == 'grid'"
+      class="material-symbols-outlined recipe-icons bold"
+    >
+      grid_view
+    </span>
+
+    <span
+      *ngIf="currentLayout == 'carousel'"
+      class="material-symbols-outlined recipe-icons bold"
+    >
+      view_carousel
+    </span>
+    Change profile layout to: {{ this.currentLayout }}
+  </div>
 </div>

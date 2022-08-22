@@ -28,7 +28,7 @@ export class RecipeService {
 
   recipeCollection = collection(this.fireStore, 'recipes');
 
-  async getAllRecipesByUserId(userId: string): Promise<Recipe[] | null> {
+  async getRecipesByUserId(userId: string): Promise<Recipe[] | null> {
     let recipes: Recipe[] = [];
     const userRecipeIds = await this.userService.getUserRecipeIds(userId);
 
@@ -86,5 +86,16 @@ export class RecipeService {
     const recipeDocumentReference = doc(this.recipeCollection, id);
 
     return await deleteDoc(recipeDocumentReference);
+  }
+
+  async findRecipeByFilter(filter: string) {
+    let recipes!: Recipe[];
+    let q = query(this.recipeCollection, where('name', '==', filter));
+
+    await getDocs(q).then((doc) =>
+      doc.forEach((recipe) => recipes.push(recipe.data() as Recipe))
+    );
+
+    return recipes;
   }
 }
