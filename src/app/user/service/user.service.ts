@@ -87,7 +87,7 @@ export class UserService {
     return queryDocs.docs[0].data() as User;
   }
 
-  async getUserRecipeIds(userId: string): Promise<string[]> {
+  async getUserRecipeIds(userId: string | undefined): Promise<string[]> {
     const q = query(this.userCollection, where('userId', '==', userId));
 
     const docsQuery = await getDocs(q);

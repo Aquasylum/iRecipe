@@ -88,14 +88,23 @@ export class RecipeService {
     return await deleteDoc(recipeDocumentReference);
   }
 
-  async findRecipeByFilter(filter: string) {
+  async findRecipeByFilter(filter: string, userId: string | undefined) {
     let recipes!: Recipe[];
     let q = query(this.recipeCollection, where('name', '==', filter));
+
+    let allUserRecipes = await this.userService.getUserRecipeIds(userId);
 
     await getDocs(q).then((doc) =>
       doc.forEach((recipe) => recipes.push(recipe.data() as Recipe))
     );
 
+    //Checking if the recipe with the filter belongs to the profile being viewed
+    for (let i = 0; i < recipes.length; i++) {
+      if (allUserRecipes.indexOf(recipes[i].id) == -1) {
+        console.log('splicing');
+        recipes.splice(i);
+      }
+    }
     return recipes;
   }
 }

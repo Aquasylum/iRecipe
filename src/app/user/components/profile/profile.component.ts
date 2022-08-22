@@ -49,10 +49,14 @@ export class ProfileComponent implements OnInit {
       ? (this.loggedInUserProfile = true)
       : (this.loggedInUserProfile = false);
 
+    this.retrieveRecipes();
+  }
+
+  retrieveRecipes() {
     if (this.userId) {
-      this.recipeService.getRecipesByUserId(this.userId).then((recipes) => {
-        if (recipes) {
-          this.allRecipes = recipes;
+      this.recipeService.getRecipesByUserId(this.userId).then((response) => {
+        if (response) {
+          this.allRecipes = response;
           this.recipe = this.allRecipes[this.recipeIndex];
         }
       });
@@ -79,8 +83,10 @@ export class ProfileComponent implements OnInit {
   }
 
   async onFilterRecipes(filter: any) {
-    console.log(filter);
-    this.allRecipes = await this.recipeService.findRecipeByFilter(filter);
+    this.allRecipes = await this.recipeService.findRecipeByFilter(
+      filter,
+      this.userId
+    );
     console.log(this.allRecipes);
   }
 }
