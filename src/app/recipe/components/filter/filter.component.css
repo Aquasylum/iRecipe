@@ -1,0 +1,26 @@
+.filter-container {
+  padding-top: 8%;
+  padding-bottom: 3%;
+}
+
+input {
+  text-align: center;
+}
+
+.material-symbols-outlined {
+  color: white;
+  font-size: 32px;
+}
+
+.material-symbols-outlined:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.dark {
+  color: white;
+}
+
+.light {
+  color: var(--irecipe-primary);
+}

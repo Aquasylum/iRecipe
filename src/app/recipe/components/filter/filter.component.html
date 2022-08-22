@@ -1,0 +1,10 @@
+<div class="filter-container">
+  <input [(ngModel)]="filter" placeholder="Filter Recipes" />
+  <span
+    (click)="filterRecipes(filter)"
+    class="material-symbols-outlined"
+    [ngClass]="colorTheme"
+  >
+    filter_alt
+  </span>
+</div>
