@@ -87,6 +87,5 @@ export class ProfileComponent implements OnInit {
       filter,
       this.userId
     );
-    console.log(this.allRecipes);
   }
 }

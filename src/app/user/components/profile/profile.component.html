@@ -94,7 +94,10 @@
 
     <div *ngIf="profileLayout == 'carousel'">
       <div *ngIf="!loggedInUserProfile" class="recipes-container-functionality">
-        <div (click)="toggleFavorite()" class="functionality-button edit">
+        <div
+          (click)="toggleFavorite()"
+          class="recipe-functionality-button favorite"
+        >
           <span *ngIf="!isFavorite" class="icon-large material-icons"
             >favorite_border
           </span>
@@ -133,5 +136,13 @@
     <button class="irecipe-button btn-lg" routerLink="/recipe">
       Add Recipe
     </button>
+  </div>
+
+  <div class="total-recipes" *ngIf="profileLayout == 'grid' && allRecipes">
+    Showing total of {{ allRecipes.length }} recipes.
+  </div>
+
+  <div class="total-recipes" *ngIf="profileLayout == 'carousel' && allRecipes">
+    Currently showing {{ recipeIndex + 1 }} of {{ allRecipes.length }} recipes.
   </div>
 </div>

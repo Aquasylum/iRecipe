@@ -2,17 +2,37 @@
   .icon-large {
     font-size: 60px;
   }
+
+  .grid-container {
+    flex-direction: row;
+    width: 70%;
+    align-content: flex-start;
+  }
 }
 
 @media screen and (max-width: 1200px) {
   .icon-large {
     font-size: 40px;
   }
+
+  .grid-container {
+    flex-direction: row;
+    width: 90%;
+  }
 }
 
 @media screen and (max-width: 600px) {
   .icon-large {
     font-size: 20px;
+  }
+
+  .grid-container {
+    flex-direction: column;
+    align-content: center;
+  }
+
+  .recipe-card {
+    padding-top: 55px !important;
   }
 }
 
@@ -34,10 +54,8 @@
 
 .grid-container {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   flex-wrap: wrap;
-  width: 70%;
 }
 
 .grid-item {
@@ -46,20 +64,20 @@
 }
 
 .recipes-container-functionality {
-  padding-top: 4vh;
+  padding-top: 40px;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   text-align: center;
-  padding-bottom: 250px;
+  padding-bottom: 50px;
 }
 
-.functionality-button {
+.recipe-functionality-button {
   padding-left: 20px;
   padding-right: 20px;
   cursor: pointer;
 }
 
-.functionality-button:hover {
+.recipe-functionality-button:hover {
   transform: scale(1.1);
 }
 
@@ -109,7 +127,8 @@
   flex-wrap: nowrap;
 }
 
-.edit {
+.edit,
+.favorite {
   color: var(--irecipe-secondary);
 }
 
@@ -145,4 +164,12 @@
 
 .dark {
   color: white;
+}
+
+.total-recipes {
+  color: var(--irecipe-secondary);
+
+  text-align: center;
+  padding-top: 30px;
+  margin-bottom: 25px;
 }
