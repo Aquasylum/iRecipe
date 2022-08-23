@@ -11,12 +11,13 @@ import { SettingsService } from 'src/app/shared/services/settings.service';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  allRecipes!: Recipe[];
+  allRecipes!: Recipe[] | undefined;
   recipe!: Recipe;
   recipeIndex: number = 0;
   userId!: string | undefined;
   loggedInUserProfile!: boolean;
   isFavorite: boolean = false;
+  comment: boolean = false;
   profileLayout: string = 'grid';
   colorTheme: string = 'dark';
 
@@ -87,5 +88,10 @@ export class ProfileComponent implements OnInit {
       filter,
       this.userId
     );
+
+    if (this.allRecipes) {
+      this.recipeIndex = 0;
+      this.recipe = this.allRecipes[this.recipeIndex];
+    }
   }
 }

@@ -8,20 +8,20 @@
     (filterData)="onFilterRecipes($event)"
     class="filter"
   ></irecipe-filter>
+  <div
+    *ngIf="allRecipes && profileLayout == 'grid' && loggedInUserProfile"
+    routerLink="/recipe"
+    class="functionality-button add"
+  >
+    <span class="material-icons icon-large"> add_circle </span>
+    <div>Add new recipe</div>
+  </div>
 
   <div class="grid-container" *ngIf="profileLayout == 'grid' && allRecipes">
     <div *ngFor="let recipe of allRecipes" class="recipe-card">
       <irecipe-recipe-display-card
         [recipe]="recipe"
       ></irecipe-recipe-display-card>
-
-      <div class="recipe-icons">
-        <span class="material-icons functionality-icons"> thumb_up </span>
-        <span class="material-icons functionality-icons">
-          chat_bubble_outline
-        </span>
-        <span class="material-icons functionality-icons star"> grade </span>
-      </div>
     </div>
   </div>
 
@@ -54,18 +54,6 @@
               <irecipe-recipe-display-card
                 [recipe]="recipe"
               ></irecipe-recipe-display-card>
-
-              <div class="recipe-icons">
-                <span class="material-icons functionality-icons">
-                  thumb_up
-                </span>
-                <span class="material-icons functionality-icons">
-                  chat_bubble_outline
-                </span>
-                <span class="material-icons functionality-icons star">
-                  grade
-                </span>
-              </div>
             </div>
           </div>
         </div>

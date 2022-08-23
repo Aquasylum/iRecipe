@@ -34,13 +34,19 @@
     *ngIf="showSuccessMessage"
   >
     <div class="user-found-container">
-      <span class="username">{{ username }}</span>
-      <span
-        *ngFor="let star of userRatingArray"
-        class="material-symbols-outlined user-icons"
-      >
-        star_outline
-      </span>
+      <div class="user-stars">
+        <span
+          *ngFor="let star of userRatingArray"
+          class="material-symbols-outlined"
+        >
+          star_outline
+        </span>
+      </div>
+
+      <div>
+        <span class="username">{{ username }}</span>
+      </div>
+
       <div *ngIf="user.recipes">Total recipes: {{ user.recipes.length }}</div>
     </div>
   </div>

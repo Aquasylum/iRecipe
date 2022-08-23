@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { switchMap, Observable, interval } from 'rxjs';
+import { switchMap, Observable, interval, find } from 'rxjs';
 import { User } from 'src/app/user/models/User';
 import { UserService } from 'src/app/user/service/user.service';
 import { SettingsService } from '../../services/settings.service';
@@ -15,6 +15,7 @@ import { UserDoesNotExist } from '../../validators/UserDoesNotExist.validator';
 export class FindUserComponent implements OnInit {
   usernameControl!: FormControl;
   showSuccessMessage: boolean = false;
+  search: boolean = false;
   username!: string;
   currentColorTheme: string = 'dark';
   userId!: string;
@@ -73,11 +74,11 @@ export class FindUserComponent implements OnInit {
           .then((user) => (this.user = user));
         this.userId = userId;
         this.showSuccessMessage = true;
-        setTimeout(
-          () => (this.showSuccessMessage = false),
+        // setTimeout(
+        //   () => (this.showSuccessMessage = false),
 
-          10000
-        );
+        //   10000
+        // );
 
         this.userRatingArray = new Array(this.userService.getUserRating());
       });

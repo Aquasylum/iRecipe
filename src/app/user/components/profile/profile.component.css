@@ -6,7 +6,6 @@
   .grid-container {
     flex-direction: row;
     width: 70%;
-    align-content: flex-start;
   }
 }
 
@@ -24,11 +23,6 @@
 @media screen and (max-width: 600px) {
   .icon-large {
     font-size: 20px;
-  }
-
-  .grid-container {
-    flex-direction: column;
-    align-content: center;
   }
 
   .recipe-card {
@@ -54,7 +48,7 @@
 
 .grid-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 }
 
@@ -69,6 +63,15 @@
   justify-content: space-evenly;
   text-align: center;
   padding-bottom: 50px;
+}
+
+.functionality-button {
+  text-align: center;
+}
+
+.functionality-button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 .recipe-functionality-button {
@@ -136,28 +139,6 @@
   color: var(--irecipe-primary);
 }
 
-.recipe-icons {
-  color: var(--irecipe-secondary);
-  text-align: left;
-  position: absolute;
-  padding-top: 1%;
-}
-
-.functionality-icons:hover {
-  transform: scale(1.2);
-}
-
-.functionality-icons {
-  cursor: pointer;
-  padding-right: 10px;
-  padding-left: 10px;
-}
-
-.star {
-  font-size: 28px;
-  padding-left: 5px;
-}
-
 .light {
   color: var(--irecipe-primary);
 }
@@ -168,8 +149,7 @@
 
 .total-recipes {
   color: var(--irecipe-secondary);
-
   text-align: center;
-  padding-top: 30px;
+  padding-top: 100px;
   margin-bottom: 25px;
 }

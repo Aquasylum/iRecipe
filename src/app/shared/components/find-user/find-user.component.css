@@ -26,10 +26,18 @@
   color: black;
   min-width: 250px;
   border-radius: 10px;
-  margin-top: 10px;
+
   padding: 15px;
   border: 2px solid black;
   margin-right: 10px;
+}
+
+.user-stars {
+  text-align: center;
+}
+
+.user-icons {
+  text-align: center;
 }
 
 .user-found:hover {
