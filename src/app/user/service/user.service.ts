@@ -10,6 +10,7 @@ import {
   query,
   where,
   getDocs,
+  arrayRemove,
 } from 'firebase/firestore';
 
 import { User } from 'src/app/user/models/User';
@@ -32,7 +33,7 @@ export class UserService {
     });
   }
 
-  async updateUser(recipeId: string, username?: string) {
+  async updateUser(recipeId: string, username?: string | undefined) {
     if (username) {
       const userToAddRecipeTo = doc(
         this.firestore,
@@ -140,5 +141,16 @@ export class UserService {
     };
 
     return genrateRandomNumber(1, 5);
+  }
+
+  async deleteRecipeFromUser(recipeId: string) {
+    let username = await this.getUsername();
+    if (username) {
+      let userToRemoveRecipeFrom = doc(this.firestore, 'users', username);
+
+      return await updateDoc(userToRemoveRecipeFrom, {
+        recipes: arrayRemove(recipeId),
+      });
+    }
   }
 }
