@@ -36,6 +36,18 @@
       </div>
     </div>
 
+    <div class="recipe-description-container">
+      <label for="description">
+        <textarea
+          type="text"
+          class="recipe-description-textarea bold"
+          name="description"
+          placeholder="Recipe Description"
+          formControlName="description"
+        ></textarea>
+      </label>
+    </div>
+
     <div class="row">
       <div class="col-xl-4 col-md-6 col-sm-12">
         <div class="ingredients-container">
@@ -131,13 +143,28 @@
 
                   <div
                     *ngIf="
-                      ingredients.hasError('required');
+                      !ingredients.controls[i]
+                        .get('name')
+                        ?.hasError('required') &&
+                        !ingredients.controls[i]
+                          .get('name')
+                          ?.hasError('minlength') &&
+                        !ingredients.controls[i]
+                          .get('name')
+                          ?.hasError('maxlength') &&
+                        !ingredients.controls[i]
+                          .get('weight')
+                          ?.hasError('required') &&
+                        !ingredients.controls[i]
+                          .get('metricUnit')
+                          ?.hasError('required');
                       then showAdd;
                       else showDisabled
                     "
                   ></div>
+
                   <ng-template #showAdd>
-                    <div (click)="addIngredient()">
+                    <div type="button" (click)="addIngredient()">
                       <span class="material-symbols-outlined add-icon">
                         add_circle
                       </span>
@@ -411,15 +438,31 @@
     </div>
 
     <div class="recipe-functionality-container">
-      <div class="recipe-functionality-button save">
-        <span
-          (click)="onSubmit()"
-          type="submit"
-          class="icon-large material-icons"
-        >
-          save
-        </span>
-        <div>Save recipe</div>
+      <div class="save">
+        <div *ngIf="!recipeForm.invalid; then showInvalid; else showSave"></div>
+        <ng-template #showSave>
+          <span
+            (click)="onSubmit()"
+            type="submit"
+            class="icon-large material-icons recipe-functionality-button"
+          >
+            save
+          </span>
+          <div>Save recipe</div>
+        </ng-template>
+
+        <ng-template #showInvalid>
+          <div class="invalid-icon">
+            <span
+              (click)="onSubmit()"
+              type="submit"
+              class="icon-large material-icons"
+            >
+              save
+            </span>
+            <div>Save recipe</div>
+          </div>
+        </ng-template>
       </div>
 
       <div class="recipe-functionality-button delete" *ngIf="!isAddMode">

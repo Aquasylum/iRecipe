@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, tap, map } from 'rxjs';
+import { tap } from 'rxjs';
 //Routes
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecipeService } from 'src/app/recipe/services/recipe.service';
@@ -47,8 +47,8 @@ export class RecipeComponent implements OnInit {
     this.id = this.route.snapshot.paramMap.get('id') as string;
 
     this.initializeForm();
-    this.initializeMode();
     this.initializeRecipe();
+    this.initializeMode();
   }
 
   initializeForm() {
@@ -62,6 +62,7 @@ export class RecipeComponent implements OnInit {
           Validators.maxLength(20),
         ],
       ],
+      description: [''],
       ingredients: this.fb.array([], [Validators.required]),
       steps: this.fb.array([], [Validators.required]),
       calories: ['', Validators.pattern('^[0-9]*$')],
@@ -203,19 +204,21 @@ export class RecipeComponent implements OnInit {
   }
 
   async onSubmit(): Promise<void> {
+    this.findInvalidControls(this.recipeForm);
+    //this.findInvalidControls(this.ingredients);
     if (this.isAddMode) {
       await this.recipeService.createRecipe(this.recipeForm.value);
       this.router.navigate(['/view-recipe/' + this.id]);
     } else if (!this.isAddMode) {
-      await this.recipeService.updateRecipe(this.recipeForm.value, this.id);
-      this.router.navigate(['/view-recipe/' + this.id]);
+      await this.recipeService.updateRecipe(this.recipeForm.value);
+      this.router.navigate(['view-recipe/' + this.id]);
     }
   }
 
   deleteRecipe() {
     this.recipeService
       .deleteRecipe(this.id)
-      .then(() => this.router.navigate(['/main']));
+      .then(() => this.router.navigate(['/']));
   }
 
   onChange(event: any) {
@@ -236,5 +239,17 @@ export class RecipeComponent implements OnInit {
     this.fileService
       .deleteRecipe(this.id)
       .then(() => (this.fileUploaded = false));
+  }
+
+  findInvalidControls(form: any) {
+    const invalid = [];
+    const controls = form.controls;
+    for (const name in controls) {
+      if (controls[name].invalid) {
+        invalid.push(name);
+      }
+    }
+
+    return invalid;
   }
 }
