@@ -50,6 +50,12 @@ export class ViewRecipeComponent implements OnInit {
       this.colorTheme(color)
     );
 
+    this.initializeRecipe();
+    this.initializeFormControl();
+    this.initializeIsFavorite();
+  }
+
+  initializeRecipe() {
     this.recipeService.getRecipeById(this.recipeId).then((obs) =>
       obs.subscribe((recipe) => {
         this.recipe = recipe;
@@ -63,7 +69,9 @@ export class ViewRecipeComponent implements OnInit {
         });
       })
     );
+  }
 
+  initializeFormControl() {
     this.usernameControl = new FormControl(
       '',
       [],
@@ -73,6 +81,18 @@ export class ViewRecipeComponent implements OnInit {
         ),
       ]
     );
+  }
+
+  async initializeIsFavorite() {
+    //Get all current user recipes:
+    let recipeIds = await this.userService.getUserRecipeIds(
+      this.authService.getCurrentUser()?.uid
+    );
+    if (recipeIds.indexOf(this.recipeId) == -1) {
+      this.isFavorite = false;
+    } else {
+      this.isFavorite = true;
+    }
   }
 
   colorTheme(color: string) {
@@ -90,9 +110,10 @@ export class ViewRecipeComponent implements OnInit {
   }
 
   sendRecipe() {
-    //check if user is typing in their display name ie cannot send recipe to self
+    //check if user is typing in their display name ie owner cannot send recipe to self
     if (
-      this.authService.getCurrentUserDisplayName() == this.usernameControl.value
+      this.authService.getCurrentUser()?.displayName ==
+      this.usernameControl.value
     ) {
       this.usernameControl?.setErrors({ cantUseOwnUsername: true });
       return;
@@ -111,7 +132,20 @@ export class ViewRecipeComponent implements OnInit {
     this.usernameControl.reset();
   }
 
-  toggleRecipeFavorite() {
+  async toggleFavorite() {
     this.isFavorite = !this.isFavorite;
+
+    if (this.isFavorite == true) {
+      //Add to this users recipe list
+      this.userService.updateUser(
+        this.recipeId,
+        await this.userService.getUsername()
+      );
+    }
+
+    if (this.isFavorite == false) {
+      //Remove from this users recipe list
+      this.userService.deleteRecipeFromUser(this.recipeId);
+    }
   }
 }

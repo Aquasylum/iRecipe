@@ -2,11 +2,7 @@
   <div class="recipe-header">
     <div class="irecipe-name bold">
       {{ recipe.name }}
-      <div class="view-recipe-description">
-        This salmon salad recipe makes a main dish salad with chopped
-        vegetables, flaky fish, and tangy citrus dressing. It has plenty of
-        protein and healthy fats, so it’s nutritious and delicious!
-      </div>
+      <div class="view-recipe-description"></div>
     </div>
   </div>
 
@@ -148,6 +144,9 @@
       <div
         *ngIf="userIsAuthor; then showEditAndDelete; else showFavorite"
       ></div>
+      <div class="dark">
+        {{ userIsAuthor }}
+      </div>
 
       <ng-template #showEditAndDelete>
         <div class="recipe-functionality-button save">
@@ -173,13 +172,17 @@
       </ng-template>
 
       <ng-template #showFavorite>
-        <div class="recipe-functionality-button favorite">
-          <span
-            (click)="toggleRecipeFavorite()"
-            class="icon-large material-symbols-outlined"
-          >
-            favorite
+        <div
+          (click)="toggleFavorite()"
+          class="recipe-functionality-button favorite"
+        >
+          <span *ngIf="!isFavorite" class="icon-large material-icons"
+            >favorite_border
           </span>
+          <span *ngIf="isFavorite" class="icon-large material-icons"
+            >favorite
+          </span>
+
           <div>Favorite</div>
         </div>
       </ng-template>
