@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
   showSettings: boolean = false;
   showUserInput: boolean = true;
   currentColorTheme: string = 'dark';
+  findUser: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -31,7 +32,7 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.displayName = this.authService.getCurrentUserDisplayName();
+    this.displayName = this.authService.getCurrentUser()?.displayName;
     this.userSearchControl = new FormControl(
       '',
       [],
@@ -71,5 +72,10 @@ export class HeaderComponent implements OnInit {
 
   onColorTheme(themeColor: string) {
     this.currentColorTheme = themeColor;
+  }
+
+  toggleFindUserCollapsed() {
+    console.log(this.findUser);
+    this.findUser = !this.findUser;
   }
 }

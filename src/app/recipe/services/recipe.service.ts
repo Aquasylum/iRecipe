@@ -64,16 +64,12 @@ export class RecipeService {
     recipe.dateModified = Date.now();
     recipe.authorId = this.authService.getCurrentUser()?.uid;
 
-    this.userService
+    await this.userService
       .getUserNameAndSurname(recipe.authorId)
       .then((usernameAndSurname) => {
         recipe.author = usernameAndSurname;
-        setDoc(doc(this.fireStore, 'recipes', recipe.id), recipe).then(() =>
-          this.userService.updateUser(recipe.id)
-        );
+        setDoc(doc(this.fireStore, 'recipes', recipe.id), recipe);
       });
-
-    return recipe.id;
   }
 
   async updateRecipe(recipe: Recipe, id: string) {

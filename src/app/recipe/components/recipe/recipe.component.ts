@@ -45,8 +45,13 @@ export class RecipeComponent implements OnInit {
       this.authService.emitCurrentLoggedInStatus(true);
 
     this.id = this.route.snapshot.paramMap.get('id') as string;
-    this.isAddMode = !this.id;
 
+    this.initializeForm();
+    this.initializeMode();
+    this.initializeRecipe();
+  }
+
+  initializeForm() {
     this.recipeForm = this.fb.group({
       id: [''],
       name: [
@@ -70,7 +75,9 @@ export class RecipeComponent implements OnInit {
     this.addIngredient();
     this.addStep();
     this.addTip();
+  }
 
+  initializeMode() {
     //Checking if in add mode:
     //If in add mode then we create our own unique uid and assign it to the
     //id of the recipe and
@@ -81,7 +88,10 @@ export class RecipeComponent implements OnInit {
         id: this.recipeId,
       });
     }
+  }
 
+  initializeRecipe() {
+    this.isAddMode = !this.id;
     //Checking if in edit mode
     if (!this.isAddMode) {
       if (this.id) {
@@ -192,15 +202,13 @@ export class RecipeComponent implements OnInit {
     this.tips.removeAt(tipIndex);
   }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     if (this.isAddMode) {
-      this.recipeService
-        .createRecipe(this.recipeForm.value)
-        .then((id) => this.router.navigate(['/view-recipe/' + id]));
+      await this.recipeService.createRecipe(this.recipeForm.value);
+      this.router.navigate(['/view-recipe/' + this.id]);
     } else if (!this.isAddMode) {
-      this.recipeService
-        .updateRecipe(this.recipeForm.value, this.id)
-        .then(() => this.router.navigate(['/view-recipe/' + this.id]));
+      await this.recipeService.updateRecipe(this.recipeForm.value, this.id);
+      this.router.navigate(['/view-recipe/' + this.id]);
     }
   }
 

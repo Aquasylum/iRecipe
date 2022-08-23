@@ -109,10 +109,6 @@ export class AuthService {
     return this.auth.currentUser;
   }
 
-  getCurrentUserDisplayName() {
-    return this.auth.currentUser?.displayName;
-  }
-
   async register(register: ILoginData) {
     await createUserWithEmailAndPassword(
       this.auth,

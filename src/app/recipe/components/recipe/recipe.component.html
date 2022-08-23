@@ -129,13 +129,26 @@
                     </div>
                   </div>
 
-                  <div>
-                    <div (click)="addIngredient()" class="add-icon">
-                      <span class="material-symbols-outlined">
+                  <div
+                    *ngIf="
+                      ingredients.hasError('required');
+                      then showAdd;
+                      else showDisabled
+                    "
+                  ></div>
+                  <ng-template #showAdd>
+                    <div (click)="addIngredient()">
+                      <span class="material-symbols-outlined add-icon">
                         add_circle
                       </span>
                     </div>
-                  </div>
+                  </ng-template>
+
+                  <ng-template #showDisabled>
+                    <span class="material-symbols-outlined invalid-icon">
+                      add_circle
+                    </span>
+                  </ng-template>
                 </ng-container>
               </div>
             </div>
@@ -237,19 +250,17 @@
                   ></div>
 
                   <ng-template #showAdd>
-                    <div (click)="addStep()" class="add-icon">
-                      <span class="material-symbols-outlined">
+                    <div (click)="addStep()">
+                      <span class="material-symbols-outlined add-icon">
                         add_circle
                       </span>
                     </div>
                   </ng-template>
 
                   <ng-template #showDisabled>
-                    <div class="invalid-icon">
-                      <span class="material-symbols-outlined">
-                        add_circle
-                      </span>
-                    </div>
+                    <span class="material-symbols-outlined invalid-icon">
+                      add_circle
+                    </span>
                   </ng-template>
                 </div>
               </div>
@@ -294,15 +305,17 @@
             ></div>
 
             <ng-template #showAdd>
-              <div (click)="addTip()" class="add-icon">
-                <span class="material-symbols-outlined"> add_circle </span>
+              <div (click)="addTip()">
+                <span class="material-symbols-outlined add-icon">
+                  add_circle
+                </span>
               </div>
             </ng-template>
 
             <ng-template #showDisabled>
-              <div class="invalid-icon">
-                <span class="material-symbols-outlined"> add_circle </span>
-              </div>
+              <span class="material-symbols-outlined invalid-icon">
+                add_circle
+              </span>
             </ng-template>
           </div>
         </ng-container>

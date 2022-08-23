@@ -21,20 +21,32 @@
 
 .user-found {
   position: absolute;
-  left: 50px;
+  left: 40px;
   background-color: white;
   color: black;
   min-width: 250px;
-  border-radius: 5px;
+  border-radius: 10px;
   margin-top: 10px;
-  padding-top: 5px;
+  padding: 15px;
   border: 2px solid black;
-  padding-bottom: 5px;
   margin-right: 10px;
 }
 
-.user-found {
+.user-found:hover {
+  transform: scale(1.1);
+}
+
+.user-found-container:hover {
   cursor: pointer;
+}
+
+.username {
+  margin-right: 15px;
+}
+
+.material-symbols-outlined {
+  padding-right: 2px !important;
+  vertical-align: -5px;
 }
 
 .user-search-input {
@@ -86,4 +98,8 @@ input:hover {
 .dark {
   color: black;
   background-color: white;
+}
+
+.user-search-icon {
+  color: var(--irecipe-primary);
 }

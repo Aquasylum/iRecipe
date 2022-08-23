@@ -3,6 +3,10 @@
   padding-bottom: 3%;
 }
 
+::placeholder {
+  font-size: var(--irecipe-placeholder);
+}
+
 input {
   text-align: center;
 }

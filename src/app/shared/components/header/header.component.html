@@ -54,9 +54,12 @@
 </nav>
 
 <div class="collapse" id="navbarToggleExternalContent">
-  <div class="p-2 bold collapsed-item">
+  <div class="p-2 bold collapsed-item" (click)="toggleFindUserCollapsed()">
     <span class="material-symbols-outlined"> search </span>
-    Search Recipes
+    Search Users
+  </div>
+  <div *ngIf="findUser">
+    <irecipe-find-user></irecipe-find-user>
   </div>
   <div class="p-2 bold collapsed-item">
     <span class="material-symbols-outlined"> account_circle </span>

@@ -33,16 +33,15 @@
     role="alert"
     *ngIf="showSuccessMessage"
   >
-    {{ username }}
-    <div *ngIf="user.recipes">Total recipes: {{ user.recipes.length }}</div>
-    {{ currentColorTheme }}
-    <div>
+    <div class="user-found-container">
+      <span class="username">{{ username }}</span>
       <span
         *ngFor="let star of userRatingArray"
         class="material-symbols-outlined user-icons"
       >
         star_outline
       </span>
+      <div *ngIf="user.recipes">Total recipes: {{ user.recipes.length }}</div>
     </div>
   </div>
 </div>

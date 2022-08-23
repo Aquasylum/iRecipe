@@ -342,4 +342,5 @@ textarea:hover {
 
 .invalid-icon {
   color: grey;
+  display: block;
 }

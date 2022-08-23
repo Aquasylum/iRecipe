@@ -53,13 +53,16 @@ export class LoginFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    this.initializeForms();
+  }
+
+  initializeForms() {
     if (this.formType == 'login') {
       this.userForm = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]],
       });
     }
-
     if (this.formType == 'register') {
       this.userForm = this.fb.group({
         username: [

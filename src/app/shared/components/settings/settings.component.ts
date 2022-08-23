@@ -22,7 +22,7 @@ export class SettingsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.displayName = this.authService.getCurrentUserDisplayName();
+    this.displayName = this.authService.getCurrentUser()?.displayName;
   }
 
   changeColorTheme() {
