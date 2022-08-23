@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Recipe } from '../models/Recipe';
+import { Comment } from '../models/Comment';
 import { Observable } from 'rxjs';
+
+//Uuid
+import * as uuid from 'uuid';
 
 //firebase imports:
 import {
@@ -12,7 +16,13 @@ import {
   updateDoc,
 } from '@firebase/firestore';
 
-import { Firestore, docData, getDocs, setDoc } from '@angular/fire/firestore';
+import {
+  Firestore,
+  docData,
+  getDocs,
+  setDoc,
+  arrayRemove,
+} from '@angular/fire/firestore';
 import { UserService } from '../../user/service/user.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
@@ -106,5 +116,13 @@ export class RecipeService {
       }
     }
     return recipes;
+  }
+
+  async deleteCommentFromRecipe(comment: Comment, recipeId: string) {
+    let recipeToRemoveCommentFrom = doc(this.recipeCollection, recipeId);
+
+    return await updateDoc(recipeToRemoveCommentFrom, {
+      comments: arrayRemove(comment),
+    });
   }
 }

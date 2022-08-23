@@ -1,9 +1,31 @@
-<div class="comment-container">
+<div class="recipe-comment-container">
   <textarea placeholder="comment" [(ngModel)]="comment"></textarea>
 
   <div (click)="sendComment()" class="add-comment-button">
     <span class="material-symbols-outlined"> check_box </span>
     Add Comment
   </div>
+
+  <div class="recipe-comments-display">
+    <div class="recipe-comment" *ngFor="let comment of comments">
+      <div class="comment-author">
+        <span class="material-symbols-outlined"> account_circle </span>
+        {{ comment.username }}
+      </div>
+
+      <div class="comment">
+        {{ comment.comment }}
+      </div>
+      <div class="comment-time">
+        {{ millisecondsToDateConverter(comment.dateCreated) }}
+      </div>
+      <div
+        (click)="deleteComment(comment)"
+        *ngIf="loggedInUserId == comment.commentAuthorId"
+        class="comment-delete"
+      >
+        delete comment
+      </div>
+    </div>
+  </div>
 </div>
->

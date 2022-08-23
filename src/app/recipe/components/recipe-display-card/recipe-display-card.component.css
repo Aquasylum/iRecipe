@@ -69,8 +69,7 @@ button:hover {
 .recipe-icons {
   color: var(--irecipe-secondary);
   text-align: left;
-
-  padding-top: 1%;
+  padding-top: 15px;
 }
 
 .functionality-icons:hover {

@@ -50,7 +50,6 @@ export class RecipeDisplayCardComponent implements OnInit, OnChanges {
 
   toggleComment() {
     this.comment = !this.comment;
-    console.log(this.comment);
   }
 
   onAddComment(comment: Comment) {
@@ -64,6 +63,10 @@ export class RecipeDisplayCardComponent implements OnInit, OnChanges {
     this.recipe.comments.push(commentObj);
 
     this.recipeService.updateRecipe(this.recipe);
+  }
+
+  onDeleteComment(comment: Comment) {
+    this.recipeService.deleteCommentFromRecipe(comment, this.recipe.id);
   }
 
   changeImage(changes: SimpleChanges) {

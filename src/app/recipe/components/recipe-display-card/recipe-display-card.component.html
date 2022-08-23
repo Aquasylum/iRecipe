@@ -14,10 +14,13 @@
     <span (click)="toggleComment()" class="material-icons functionality-icons">
       chat_bubble_outline
     </span>
-    <span class="material-icons functionality-icons star"> grade </span>
   </div>
 
   <div *ngIf="comment" class="recipe-comment">
-    <irecipe-comment (commentToAdd)="onAddComment($event)"></irecipe-comment>
+    <irecipe-comment
+      [comments]="recipe.comments"
+      (commentToAdd)="onAddComment($event)"
+      (commentToDelete)="onDeleteComment($event)"
+    ></irecipe-comment>
   </div>
 </div>

@@ -9,7 +9,9 @@
     class="filter"
   ></irecipe-filter>
   <div
-    *ngIf="allRecipes && profileLayout == 'grid' && loggedInUserProfile"
+    *ngIf="
+      allRecipes?.length != 0 && profileLayout == 'grid' && loggedInUserProfile
+    "
     routerLink="/recipe"
     class="functionality-button add"
   >
@@ -119,11 +121,15 @@
     </div>
   </div>
 
-  <div *ngIf="!allRecipes" class="no-recipes">
+  <div *ngIf="allRecipes?.length == 0" class="no-recipes">
     <h2 [ngClass]="colorTheme">Oh no, it seems like you have no recipes!</h2>
-    <button class="irecipe-button btn-lg" routerLink="/recipe">
-      Add Recipe
-    </button>
+
+    <div class="functionality-button add">
+      <span routerLink="/recipe" class="material-icons icon-large">
+        add_circle
+      </span>
+      <div>Add new recipe</div>
+    </div>
   </div>
 
   <div class="total-recipes" *ngIf="profileLayout == 'grid' && allRecipes">

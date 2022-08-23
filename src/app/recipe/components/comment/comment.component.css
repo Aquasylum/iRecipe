@@ -1,4 +1,4 @@
-.comment-container {
+.recipe-comment-container {
   margin-top: 25px;
 }
 
@@ -14,4 +14,35 @@
 
 .material-symbols-outlined {
   padding-right: 0px;
+}
+
+.comment {
+  color: var(--irecipe-secondary);
+  text-align: left;
+}
+
+.recipe-comment {
+  padding-top: 40px;
+}
+
+.comment-author {
+  text-align: left;
+  color: var(--irecipe-primary);
+  font-family: Alegreya;
+}
+
+.material-symbols-outlined {
+  vertical-align: -0.25em;
+}
+
+.comment-time,
+.comment-delete {
+  color: grey;
+  text-align: right;
+  font-size: 12px;
+}
+
+.comment-delete:hover {
+  cursor: pointer;
+  transform: scale(1.05);
 }

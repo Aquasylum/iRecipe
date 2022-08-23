@@ -26,7 +26,7 @@
   }
 
   .recipe-card {
-    padding-top: 55px !important;
+    padding-top: 30px !important;
   }
 }
 
@@ -43,13 +43,22 @@
   padding: 10px;
   padding-bottom: 0;
   padding-bottom: 20px;
-  position: relative;
+  width: min-content;
 }
 
 .grid-container {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+}
+
+.add-recipe:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.add-recipe {
+  color: var(--irecipe-primary);
 }
 
 .grid-item {

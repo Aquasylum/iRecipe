@@ -144,9 +144,6 @@
       <div
         *ngIf="userIsAuthor; then showEditAndDelete; else showFavorite"
       ></div>
-      <div class="dark">
-        {{ userIsAuthor }}
-      </div>
 
       <ng-template #showEditAndDelete>
         <div class="recipe-functionality-button save">

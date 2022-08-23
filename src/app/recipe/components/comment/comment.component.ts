@@ -1,4 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Comment } from '../../models/Comment';
 
@@ -11,12 +19,19 @@ import * as uuid from 'uuid';
   styleUrls: ['./comment.component.css'],
 })
 export class CommentComponent implements OnInit {
-  comment!: string;
   @Output() commentToAdd: EventEmitter<Comment> = new EventEmitter();
+  @Output() commentToDelete: EventEmitter<Comment> = new EventEmitter();
+
+  @Input() comments!: Comment[];
+
+  comment!: string;
+  loggedInUserId!: string | undefined;
 
   constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loggedInUserId = this.authService.getCurrentUser()?.uid;
+  }
 
   sendComment() {
     //Get information about logged in user as this is the only person able to create this comment
@@ -33,5 +48,15 @@ export class CommentComponent implements OnInit {
       this.commentToAdd.emit(comment);
     }
     this.comment = '';
+  }
+
+  deleteComment(comment: Comment) {
+    this.commentToDelete.emit(comment);
+    this.comments = this.comments.filter((item) => item != comment);
+  }
+
+  millisecondsToDateConverter(dateCreated: number) {
+    let date = new Date(dateCreated).toUTCString();
+    return date.substring(0, 25);
   }
 }
