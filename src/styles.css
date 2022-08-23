@@ -153,6 +153,15 @@ body {
   font-weight: 600;
 }
 
+textarea {
+  padding: 10px;
+  border: 1px solid var(--irecipe-secondary);
+  border-radius: 20px;
+  background-color: transparent;
+  color: var(--irecipe-primary);
+  resize: none !important;
+}
+
 .irecipe-profile-black {
   font-family: Alegreya;
   line-height: 1;

@@ -53,7 +53,6 @@ export class RecipeService {
   }
 
   async getRecipeById(id: string): Promise<Observable<Recipe>> {
-    console.log(id);
     const recipeDocumentReference = doc(this.recipeCollection, id);
     return docData(recipeDocumentReference) as Observable<Recipe>;
   }
@@ -63,17 +62,20 @@ export class RecipeService {
     recipe.dateCreated = Date.now();
     recipe.dateModified = Date.now();
     recipe.authorId = this.authService.getCurrentUser()?.uid;
+    recipe.comments = [];
 
     await this.userService
       .getUserNameAndSurname(recipe.authorId)
       .then((usernameAndSurname) => {
         recipe.author = usernameAndSurname;
-        setDoc(doc(this.fireStore, 'recipes', recipe.id), recipe);
+        setDoc(doc(this.fireStore, 'recipes', recipe.id), recipe).then(() =>
+          this.userService.updateUser(recipe.id)
+        );
       });
   }
 
-  async updateRecipe(recipe: Recipe, id: string) {
-    const recipeDocumentReference = doc(this.recipeCollection, id);
+  async updateRecipe(recipe: Recipe) {
+    const recipeDocumentReference = doc(this.recipeCollection, recipe.id);
     recipe.dateModified = Date.now();
     return await updateDoc(recipeDocumentReference, { ...recipe });
   }
@@ -85,7 +87,7 @@ export class RecipeService {
   }
 
   async findRecipeByFilter(filter: string, userId: string | undefined) {
-    let recipes!: Recipe[];
+    let recipes: Recipe[] = [];
     let q = query(this.recipeCollection, where('name', '==', filter));
 
     let allUserRecipes = await this.userService.getUserRecipeIds(userId);
@@ -95,9 +97,11 @@ export class RecipeService {
     );
 
     //Checking if the recipe with the filter belongs to the profile being viewed
+    if (!recipes) {
+      return;
+    }
     for (let i = 0; i < recipes.length; i++) {
       if (allUserRecipes.indexOf(recipes[i].id) == -1) {
-        console.log('splicing');
         recipes.splice(i);
       }
     }

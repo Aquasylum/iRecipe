@@ -8,4 +8,16 @@
     class="recipe-display-card-image"
     [src]="recipeImage"
   />
+
+  <div class="recipe-icons">
+    <span class="material-icons functionality-icons"> thumb_up </span>
+    <span (click)="toggleComment()" class="material-icons functionality-icons">
+      chat_bubble_outline
+    </span>
+    <span class="material-icons functionality-icons star"> grade </span>
+  </div>
+
+  <div *ngIf="comment" class="recipe-comment">
+    <irecipe-comment (commentToAdd)="onAddComment($event)"></irecipe-comment>
+  </div>
 </div>

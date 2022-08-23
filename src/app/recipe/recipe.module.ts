@@ -7,6 +7,7 @@ import { RecipeComponent } from './components/recipe/recipe.component';
 import { ViewRecipeComponent } from './components/view-recipe/view-recipe.component';
 import { RecipeService } from './services/recipe.service';
 import { FilterComponent } from './components/filter/filter.component';
+import { CommentComponent } from './components/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -14,9 +15,10 @@ import { FilterComponent } from './components/filter/filter.component';
     ViewRecipeComponent,
     RecipeDisplayCardComponent,
     FilterComponent,
+    CommentComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule, FormsModule],
-  exports: [RecipeDisplayCardComponent, FilterComponent],
+  exports: [RecipeDisplayCardComponent, FilterComponent, CommentComponent],
   providers: [RecipeService],
 })
 export class RecipeModule {}

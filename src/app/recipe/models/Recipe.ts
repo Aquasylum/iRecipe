@@ -1,9 +1,8 @@
-import { Time } from '@angular/common';
 import { RecipeType } from './RecipeType';
 import { Step } from './Step';
 import { Ingredient } from './Ingredient';
 import { Tip } from './Tip';
-import { User } from 'firebase/auth';
+import { Comment } from '../models/Comment';
 
 export class Recipe {
   id!: string;
@@ -23,4 +22,6 @@ export class Recipe {
   recipeType!: RecipeType[];
   tags?: string[];
   rating?: number;
+  comments: Comment[] = [];
+  likes!: number;
 }

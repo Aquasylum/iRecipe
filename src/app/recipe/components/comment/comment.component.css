@@ -1,0 +1,17 @@
+.comment-container {
+  margin-top: 25px;
+}
+
+.add-comment-button {
+  text-align: right;
+  color: var(--irecipe-primary);
+}
+
+.add-comment-button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.material-symbols-outlined {
+  padding-right: 0px;
+}
