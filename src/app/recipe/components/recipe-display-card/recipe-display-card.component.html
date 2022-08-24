@@ -10,10 +10,33 @@
   />
 
   <div class="recipe-icons">
-    <span class="material-icons functionality-icons"> thumb_up </span>
-    <span (click)="toggleComment()" class="material-icons functionality-icons">
-      chat_bubble_outline
-    </span>
+    <div class="likes">
+      {{ recipe.likes }}
+      <span
+        (click)="toggleLike()"
+        *ngIf="!like"
+        class="material-icons-outlined functionality-icons"
+      >
+        thumb_up
+      </span>
+      <span
+        (click)="toggleLike()"
+        *ngIf="like"
+        class="material-icons functionality-icons"
+      >
+        thumb_up
+      </span>
+    </div>
+
+    <div class="comments">
+      {{ recipe.comments.length }}
+      <span
+        (click)="toggleComment()"
+        class="material-icons functionality-icons"
+      >
+        chat_bubble_outline
+      </span>
+    </div>
   </div>
 
   <div *ngIf="comment" class="recipe-comment">

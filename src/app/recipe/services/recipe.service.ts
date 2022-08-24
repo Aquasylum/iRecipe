@@ -73,6 +73,7 @@ export class RecipeService {
     recipe.dateModified = Date.now();
     recipe.authorId = this.authService.getCurrentUser()?.uid;
     recipe.comments = [];
+    recipe.likes = 0;
 
     await this.userService
       .getUserNameAndSurname(recipe.authorId)

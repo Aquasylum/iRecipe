@@ -24,6 +24,7 @@ export class RecipeDisplayCardComponent implements OnInit, OnChanges {
 
   recipeImage!: string | undefined;
   comment: boolean = false;
+  like: boolean = false;
 
   constructor(
     private fileService: FileService,
@@ -50,6 +51,19 @@ export class RecipeDisplayCardComponent implements OnInit, OnChanges {
 
   toggleComment() {
     this.comment = !this.comment;
+  }
+
+  toggleLike() {
+    this.like = !this.like;
+
+    if (this.like == true) {
+      this.recipe.likes++;
+      this.recipeService.updateRecipe(this.recipe);
+    }
+    if (this.like == false) {
+      this.recipe.likes--;
+      this.recipeService.updateRecipe(this.recipe);
+    }
   }
 
   onAddComment(comment: Comment) {

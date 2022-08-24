@@ -24,4 +24,5 @@ export class Recipe {
   rating?: number;
   comments: Comment[] = [];
   likes!: number;
+  likedBy!: string[];
 }
