@@ -33,28 +33,28 @@
           <div class="error-container">
             <ng-container *ngIf="username?.invalid && username?.touched">
               <div
-                class="error-label"
+                class="error-label irecipe-error-text"
                 *ngIf="username?.hasError('required') && username?.touched"
               >
                 A username is required.
               </div>
 
               <div
-                class="error-label"
+                class="error-label irecipe-error-text"
                 *ngIf="username?.hasError('minlength') && username?.touched"
               >
                 Username is too short! Please enter more than 3 characters.
               </div>
 
               <div
-                class="error-label"
+                class="error-label irecipe-error-text"
                 *ngIf="username?.hasError('maxlength') && username?.touched"
               >
                 Username is too long! Please enter less than 12 characters.
               </div>
 
               <div
-                class="error-label"
+                class="error-label irecipe-error-text"
                 *ngIf="username?.hasError('exists') && username?.touched"
               >
                 Username is already taken. Please enter a new username.
@@ -76,21 +76,21 @@
           <div class="error-container">
             <ng-container *ngIf="name?.invalid && name?.touched">
               <div
-                class="error-label"
+                class="error-label irecipe-error-text"
                 *ngIf="name?.hasError('required') && name?.touched"
               >
                 A name is required.
               </div>
 
               <div
-                class="error-label"
+                class="error-label irecipe-error-text"
                 *ngIf="name?.hasError('minlength') && name?.touched"
               >
                 Name is too short! Please enter more than 3 characters.
               </div>
 
               <div
-                class="error-label"
+                class="error-label irecipe-error-text"
                 *ngIf="name?.hasError('maxlength') && name?.touched"
               >
                 Name is too long! Please enter less than 12 characters.
@@ -113,21 +113,21 @@
           <div class="error-container">
             <ng-container *ngIf="surname?.invalid && surname?.touched">
               <div
-                class="error-label"
+                class="error-label irecipe-error-text"
                 *ngIf="surname?.hasError('required') && surname?.touched"
               >
                 A surname is required.
               </div>
 
               <div
-                class="error-label"
+                class="error-label irecipe-error-text"
                 *ngIf="surname?.hasError('minlength') && surname?.touched"
               >
                 Surname is too short! Please enter more than 3 characters.
               </div>
 
               <div
-                class="error-label"
+                class="error-label irecipe-error-text"
                 *ngIf="surname?.hasError('maxlength') && surname?.touched"
               >
                 Surname is too long! Please enter less than 12 characters.
@@ -151,21 +151,21 @@
         <div class="error-container">
           <ng-container *ngIf="email?.invalid && email?.touched">
             <div
-              class="error-label"
+              class="error-label irecipe-error-text"
               *ngIf="email?.hasError('email') && email?.touched"
             >
               Email isn't valid. Please enter a valid email.
             </div>
 
             <div
-              class="error-label"
+              class="error-label irecipe-error-text"
               *ngIf="email?.hasError('emailAlreadyInUse') && email?.touched"
             >
               Email is already in use. Please log in or reset your password.
             </div>
 
             <div
-              class="error-label"
+              class="error-label irecipe-error-text"
               *ngIf="email?.hasError('required') && email?.touched"
             >
               Email isn't valid. Please enter a valid email.
@@ -188,21 +188,21 @@
         <div class="error-container">
           <ng-container>
             <div
-              class="error-label"
+              class="error-label irecipe-error-text"
               *ngIf="password?.hasError('required') && password?.touched"
             >
               Password is required
             </div>
 
             <div
-              class="error-label"
+              class="error-label irecipe-error-text"
               *ngIf="password?.hasError('minlength') && password?.touched"
             >
               Password needs to be longer then 6 characters!
             </div>
 
             <div
-              class="error-label"
+              class="error-label irecipe-error-text"
               *ngIf="password?.hasError('wrongPassword') && password?.touched"
             >
               This password does not match the specified email address. Please
@@ -220,7 +220,7 @@
         </div>
       </div>
       <div
-        class="alert alert-success alert-dismissible fade show"
+        class="alert alert-success irecipe-error-text alert-dismissible fade show"
         role="alert"
         *ngIf="showSuccessMessage"
       >
@@ -240,7 +240,10 @@
       <div class="error-container">
         <ng-container *ngIf="userForm.invalid"> </ng-container>
       </div>
-      <div class="error-label" *ngIf="userForm?.hasError('userNotFound')">
+      <div
+        class="error-label irecipe-error-text"
+        *ngIf="userForm?.hasError('userNotFound')"
+      >
         This user does not exist. Please enter the details correctly or create
         an account!
       </div>

@@ -25,6 +25,10 @@
   flex-direction: column;
 }
 
+.alert {
+  overflow-wrap: anywhere;
+}
+
 .irecipe-create-account {
   color: var(--irecipe-secondary);
 }

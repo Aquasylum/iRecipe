@@ -16,7 +16,8 @@
   --irecipe-name: 75px;
   --irecipe-title: 48px;
   --irecipe-text: 22px;
-  --irecipe-placeholder: 18px;
+  --irecipe-placeholder: 20px;
+  --irecipe-error-text: 16px;
 
   /* Icons */
   --irecipe-logo: 60px;
@@ -24,11 +25,16 @@
 
 /* Responsiveness sizing adjustments from variables */
 @media screen and (max-width: 1800px) {
+  body {
+    font-size: var(22px) !important;
+  }
+
   .irecipe-name {
     font-size: var(--irecipe-name);
   }
 
-  input::placeholder {
+  input::placeholder,
+  textarea::placeholder {
     font-size: var(--irecipe-placeholder);
   }
 
@@ -60,14 +66,24 @@
   .irecipe-length {
     width: var(--input-long);
   }
+
+  .irecipe-error-text {
+    font-size: var(--irecipe-error-text);
+    width: 350px;
+  }
 }
 
 @media screen and (max-width: 1200px) {
+  body {
+    font-size: 16px !important;
+  }
+
   .irecipe-name {
     font-size: calc(var(--irecipe-name) * 0.8);
   }
 
-  input::placeholder {
+  input::placeholder,
+  textarea::placeholder {
     font-size: calc(var(--irecipe-placeholder) * 0.8);
   }
 
@@ -99,15 +115,25 @@
   .irecipe-length {
     width: var(--input-medium);
   }
+
+  .irecipe-error-text {
+    font-size: calc(var(--irecipe-error-text) * 0.8);
+    width: 250px;
+  }
 }
 
 @media screen and (max-width: 768px) {
+  body {
+    font-size: 14px !important;
+  }
+
   .irecipe-name {
     font-size: calc(var(--irecipe-name) * 0.5);
   }
 
-  input::placeholder {
-    font-size: calc(var(--irecipe-placeholder) * 0.5);
+  input::placeholder,
+  textarea::placeholder {
+    font-size: 14px;
   }
 
   .irecipe-logo {
@@ -138,11 +164,15 @@
   .irecipe-length {
     width: var(--input-medium);
   }
+
+  .irecipe-error-text {
+    font-size: calc(var(--irecipe-error-text) * 0.5);
+    width: 250px;
+  }
 }
 
 body {
-  font-family: AlegreyaBold, "Helvetica Neue", sans-serif !important;
-  font-size: var(--irecipe-text) !important;
+  font-family: AlegreyaBold !important;
 }
 
 .light {
@@ -221,7 +251,6 @@ button:disabled {
 }
 
 .error-container {
-  font-size: 1rem;
   margin-bottom: 1vh;
 }
 
