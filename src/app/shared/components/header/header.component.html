@@ -3,11 +3,11 @@
     <li>
       <span class="navbar-logo logo">iRecipe</span>
     </li>
-    <li class="nav-item">
+    <li *ngIf="!mobile" class="nav-item">
       <span (click)="onRecipes()" class="navbar-heading bold">My Recipes</span>
     </li>
 
-    <li class="nav-item">
+    <li *ngIf="!mobile" class="nav-item">
       <span (click)="onDiscover()" class="navbar-heading bold">Discover</span>
     </li>
   </ul>

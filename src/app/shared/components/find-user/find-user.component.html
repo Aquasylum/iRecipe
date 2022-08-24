@@ -45,12 +45,13 @@
       </div>
 
       <div>
-        <span class="username">{{ username }}</span>
+        <span class="username irecipe-text">{{ username }}</span>
       </div>
 
       <div *ngIf="user && user.recipes">
         Total recipes: {{ user.recipes.length }}
       </div>
+      <div *ngIf="user && !user.recipes">This user has 0 recipes!</div>
     </div>
   </div>
 </div>

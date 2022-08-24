@@ -63,7 +63,6 @@ export class ProfileComponent implements OnInit {
     if (this.userId) {
       this.recipeService.getRecipesByUserId(this.userId).then((response) => {
         if (response) {
-          console.log(response);
           this.allRecipes = response;
           this.recipe = this.allRecipes[this.recipeIndex];
         }

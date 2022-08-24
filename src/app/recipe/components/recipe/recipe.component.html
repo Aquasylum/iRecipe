@@ -58,47 +58,46 @@
               <div *ngIf="i == ingredients.controls.length - 1">
                 <ng-container [formArrayName]="i">
                   <div class="ingredient-container">
-                    <div class="ingredient-row">
-                      <input
-                        class="input ingredient-name-text"
-                        formControlName="name"
-                        type="text"
-                        placeholder="Name"
-                      />
-                      <div
-                        class="error-label"
-                        *ngIf="
-                          ingredients.controls[i]
-                            .get('name')
-                            ?.hasError('required') &&
-                          ingredients.controls[i].get('name')?.touched
-                        "
-                      >
-                        Ingredient name is required.
-                      </div>
-                      <div
-                        class="error-label"
-                        *ngIf="
-                          ingredients.controls[i]
-                            .get('name')
-                            ?.hasError('minlength') &&
-                          ingredients.controls[i].get('name')?.touched
-                        "
-                      >
-                        Ingredient name has to be longer than 2 characters.
-                      </div>
-                      <div
-                        class="error-label"
-                        *ngIf="
-                          ingredients.controls[i]
-                            .get('name')
-                            ?.hasError('maxlength') &&
-                          ingredients.controls[i].get('name')?.touched
-                        "
-                      >
-                        Ingredient name cannot be longer than 20 characters.
-                      </div>
+                    <input
+                      class="input ingredient-name-text"
+                      formControlName="name"
+                      type="text"
+                      placeholder="Name"
+                    />
+                    <div
+                      class="error-label"
+                      *ngIf="
+                        ingredients.controls[i]
+                          .get('name')
+                          ?.hasError('required') &&
+                        ingredients.controls[i].get('name')?.touched
+                      "
+                    >
+                      Ingredient name is required.
                     </div>
+                    <div
+                      class="error-label"
+                      *ngIf="
+                        ingredients.controls[i]
+                          .get('name')
+                          ?.hasError('minlength') &&
+                        ingredients.controls[i].get('name')?.touched
+                      "
+                    >
+                      Ingredient name has to be longer than 2 characters.
+                    </div>
+                    <div
+                      class="error-label"
+                      *ngIf="
+                        ingredients.controls[i]
+                          .get('name')
+                          ?.hasError('maxlength') &&
+                        ingredients.controls[i].get('name')?.touched
+                      "
+                    >
+                      Ingredient name cannot be longer than 20 characters.
+                    </div>
+
                     <div class="ingredient-row">
                       <input
                         formControlName="weight"

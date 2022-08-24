@@ -54,12 +54,16 @@
   }
 
   .recipe-name {
-    font-size: 65px;
+    font-size: 55px;
     width: 500px;
   }
 
   input.recipe-name::placeholder {
-    font-size: 65px !important;
+    font-size: 60px !important;
+  }
+
+  .recipe-details {
+    padding-top: 25px;
   }
 
   .error-label {
@@ -83,11 +87,11 @@
 
   .recipe-textarea {
     width: 300px;
-    height: 250px;
+    height: 200px;
   }
 
   .recipe-description-textarea {
-    width: 400px;
+    width: 300px;
     height: 120px;
   }
 }
@@ -99,12 +103,12 @@
   }
 
   .recipe-name {
-    font-size: 50px;
+    font-size: 40px;
     width: 350px;
   }
 
   input.recipe-name::placeholder {
-    font-size: 50px !important;
+    font-size: 40px !important;
   }
 
   .icon-large {
@@ -137,7 +141,7 @@
   }
 
   .recipe-textarea {
-    width: 400px;
+    width: 300px;
     height: 150px;
   }
 
@@ -208,6 +212,7 @@
 
 .upload-photo-container {
   padding-top: 5%;
+  padding-bottom: 5%;
 }
 
 .upload-button {

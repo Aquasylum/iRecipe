@@ -22,14 +22,14 @@
 
 .user-found {
   position: absolute;
-  left: 40px;
+  left: 35px;
   min-width: 250px;
   border-radius: 10px;
   padding: 15px;
   margin-right: 10px;
   padding: 10px;
   border: 1px solid var(--irecipe-secondary) !important ;
-  border-radius: 20px !important;
+
   color: white !important;
 }
 
@@ -51,6 +51,7 @@
 
 .username {
   margin-right: 15px;
+  font-family: AlegreyaBold !important;
 }
 
 .material-symbols-outlined {

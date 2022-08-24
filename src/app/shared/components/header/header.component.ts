@@ -20,21 +20,12 @@ export class HeaderComponent implements OnInit {
   showUserInput: boolean = true;
   colorTheme!: string;
   findUser: boolean = false;
+  mobile!: boolean;
 
   @HostListener('window:resize', []) updateDays() {
-    // lg (for laptops and desktops - screens equal to or greater than 1200px wide)
-    // md (for small laptops - screens equal to or greater than 992px wide)
-    // sm (for tablets - screens equal to or greater than 768px wide)
-    // xs (for phones - screens less than 768px wide)
-    // if (window.innerWidth >= 1200) {
-    //   this.visibleDays = 7; // lg
-    // } else if (window.innerWidth >= 992) {
-    //   this.visibleDays = 6; //md
-    // } else if (window.innerWidth >= 768) {
-    //   this.visibleDays = 5; //sm
-    // } else if (window.innerWidth < 768) {
-    //   this.visibleDays = 3; //xs
-    // }
+    if (window.innerWidth < 1200) {
+      this.mobile = true;
+    } else if (window.innerWidth >= 1200) this.mobile = false;
   }
 
   constructor(
