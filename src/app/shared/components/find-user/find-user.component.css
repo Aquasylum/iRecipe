@@ -15,6 +15,7 @@
     font-size: 18px;
   }
 }
+
 .username-input-field {
   position: relative;
 }
@@ -22,14 +23,14 @@
 .user-found {
   position: absolute;
   left: 40px;
-  background-color: white;
-  color: black;
   min-width: 250px;
   border-radius: 10px;
-
   padding: 15px;
-  border: 2px solid black;
   margin-right: 10px;
+  padding: 10px;
+  border: 1px solid var(--irecipe-secondary) !important ;
+  border-radius: 20px !important;
+  color: white !important;
 }
 
 .user-stars {
@@ -58,15 +59,20 @@
 }
 
 .user-search-input {
-  background: var(--irecipe-primary);
-  color: white;
   border-radius: 5px;
-
   text-align: center;
   margin-top: 10px;
   padding-top: 5px;
   padding-bottom: 5px;
   margin-right: 10px;
+}
+
+.user-search-input.dark {
+  border: 1px solid var(--irecipe-secondary);
+}
+
+.user-search-input.light {
+  border: 1px solid white;
 }
 
 ::placeholder {
@@ -104,8 +110,8 @@ input:hover {
 }
 
 .dark {
-  color: black;
-  background-color: white;
+  color: white;
+  background-color: var(--irecipe-dark);
 }
 
 .user-search-icon {

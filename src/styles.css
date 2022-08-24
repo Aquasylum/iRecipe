@@ -226,7 +226,8 @@ button:disabled {
 }
 
 .material-icons,
-.material-symbols-outlined {
+.material-symbols-outlined,
+.material-icons-outlined {
   display: inline-block;
   vertical-align: -0.3em;
   padding-right: 1vw;

@@ -1,3 +1,21 @@
+@media screen and(max-width:1800px) {
+  .comment {
+    font-size: 16px;
+  }
+}
+
+@media screen and(max-width:1200px) {
+  .comment {
+    font-size: 14px;
+  }
+}
+
+@media screen and(max-width:600px) {
+  .comment {
+    font-size: 12px;
+  }
+}
+
 .recipe-comment-container {
   margin-top: 25px;
 }
@@ -19,6 +37,8 @@
 .comment {
   color: var(--irecipe-secondary);
   text-align: left;
+  overflow-wrap: anywhere;
+  font-size: 16px;
 }
 
 .recipe-comment {

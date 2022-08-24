@@ -1,13 +1,7 @@
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { switchMap, timer, of } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { UserDoesNotExist } from '../../validators/UserDoesNotExist.validator';
 
@@ -33,6 +27,10 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.displayName = this.authService.getCurrentUser()?.displayName;
+    this.initializeForm();
+  }
+
+  initializeForm() {
     this.userSearchControl = new FormControl(
       '',
       [],
@@ -63,10 +61,13 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/discover']);
   }
 
-  toggleSettings() {
+  toggleSettings(event: Event) {
     this.showSettings = !this.showSettings;
+
     if (this.showSettings == true) {
-      setTimeout(() => this.toggleSettings(), 5000);
+      of(event)
+        .pipe(switchMap(() => timer(5000)))
+        .subscribe(() => (this.showSettings = false));
     }
   }
 
@@ -75,7 +76,6 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleFindUserCollapsed() {
-    console.log(this.findUser);
     this.findUser = !this.findUser;
   }
 }

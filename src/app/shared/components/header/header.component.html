@@ -26,7 +26,9 @@
       <li>
         <irecipe-find-user></irecipe-find-user>
       </li>
-
+      <div class="tester">
+        {{ showSettings }}
+      </div>
       <li class="nav-item header-user-account">
         <div [ngClass]="showSettings ? 'show-menu' : 'dont-show-menu'">
           <irecipe-settings
@@ -37,7 +39,7 @@
         </div>
 
         <span
-          (click)="toggleSettings()"
+          (click)="toggleSettings($event)"
           class="material-symbols-outlined recipe-icons"
         >
           account_circle

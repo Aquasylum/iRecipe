@@ -74,11 +74,11 @@ export class FindUserComponent implements OnInit {
           .then((user) => (this.user = user));
         this.userId = userId;
         this.showSuccessMessage = true;
-        // setTimeout(
-        //   () => (this.showSuccessMessage = false),
+        setTimeout(
+          () => (this.showSuccessMessage = false),
 
-        //   10000
-        // );
+          10000
+        );
 
         this.userRatingArray = new Array(this.userService.getUserRating());
       });
