@@ -19,6 +19,21 @@
           </span>
           {{ recipe.author }}
         </div>
+
+        <div class="functionality-icons-container">
+          {{ recipe.likes }}
+          <span class="material-icons-outlined functionality-icons">
+            thumb_up
+          </span>
+
+          <span>
+            {{ recipe.comments.length }}
+            <span class="material-icons functionality-icons">
+              chat_bubble_outline
+            </span>
+          </span>
+        </div>
+
         <div class="ingredients">
           <div class="irecipe-title bold view-recipe-heading">Ingredients</div>
 
@@ -183,6 +198,23 @@
           <div>Favorite</div>
         </div>
       </ng-template>
+    </div>
+
+    <div class="comments">
+      <div class="irecipe-title bold view-recipe-heading">Comments</div>
+      <irecipe-view-comment
+        (commentToDelete)="onDeleteComment($event)"
+        [comment]="comment"
+        *ngFor="let comment of recipe.comments"
+      ></irecipe-view-comment>
+
+      <div class="user-comment">
+        <textarea placeholder="Comment" [(ngModel)]="comment"></textarea>
+        <div (click)="sendComment()" class="add-comment-button">
+          <span class="material-symbols-outlined"> check_box </span>
+          Add Comment
+        </div>
+      </div>
     </div>
   </div>
 </div>

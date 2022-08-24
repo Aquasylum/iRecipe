@@ -18,8 +18,8 @@ export class ProfileComponent implements OnInit {
   loggedInUserProfile!: boolean;
   isFavorite: boolean = false;
   comment: boolean = false;
-  profileLayout: string = 'grid';
-  colorTheme: string = 'dark';
+  profileLayout!: string;
+  colorTheme!: string;
 
   constructor(
     private recipeService: RecipeService,
@@ -41,9 +41,15 @@ export class ProfileComponent implements OnInit {
       (layout) => (this.profileLayout = layout)
     );
 
+    //Get existing global value of profile layout:
+    this.profileLayout = this.settingService.getProfileLayout();
+
     this.settingService.colorTheme$.subscribe(
       (color) => (this.colorTheme = color)
     );
+
+    //Get exisiting value of color theme:
+    this.colorTheme = this.settingService.getColorTheme();
 
     //Check if this profile belongs to the signed in user:
     this.userId == this.authService.getCurrentUser()?.uid
@@ -57,6 +63,7 @@ export class ProfileComponent implements OnInit {
     if (this.userId) {
       this.recipeService.getRecipesByUserId(this.userId).then((response) => {
         if (response) {
+          console.log(response);
           this.allRecipes = response;
           this.recipe = this.allRecipes[this.recipeIndex];
         }

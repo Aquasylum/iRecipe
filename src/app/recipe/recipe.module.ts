@@ -8,6 +8,7 @@ import { ViewRecipeComponent } from './components/view-recipe/view-recipe.compon
 import { RecipeService } from './services/recipe.service';
 import { FilterComponent } from './components/filter/filter.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { ViewCommentComponent } from './components/view-comment/view-comment.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { CommentComponent } from './components/comment/comment.component';
     RecipeDisplayCardComponent,
     FilterComponent,
     CommentComponent,
+    ViewCommentComponent,
   ],
   imports: [CommonModule, RouterModule, ReactiveFormsModule, FormsModule],
   exports: [RecipeDisplayCardComponent, FilterComponent, CommentComponent],

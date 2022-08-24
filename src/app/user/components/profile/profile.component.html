@@ -121,7 +121,7 @@
     </div>
   </div>
 
-  <div *ngIf="allRecipes?.length == 0" class="no-recipes">
+  <div *ngIf="allRecipes?.length == 0 || !allRecipes" class="no-recipes">
     <h2 [ngClass]="colorTheme">Oh no, it seems like you have no recipes!</h2>
 
     <div class="functionality-button add">

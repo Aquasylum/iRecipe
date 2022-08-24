@@ -13,6 +13,10 @@ import { RecipeService } from 'src/app/recipe/services/recipe.service';
 import { UserDoesNotExist } from 'src/app/shared/validators/UserDoesNotExist.validator';
 import { FileService } from 'src/app/user/service/file.service';
 import { SettingsService } from 'src/app/shared/services/settings.service';
+import { Comment } from '../../models/Comment';
+
+//Uuid
+import * as uuid from 'uuid';
 
 @Component({
   selector: 'app-view-recipe',
@@ -28,6 +32,7 @@ export class ViewRecipeComponent implements OnInit {
   isFavorite: boolean = false;
   userIsAuthor!: boolean;
   recipeId!: string;
+  comment!: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -147,5 +152,30 @@ export class ViewRecipeComponent implements OnInit {
       //Remove from this users recipe list
       this.userService.deleteRecipeFromUser(this.recipeId);
     }
+  }
+
+  sendComment() {
+    let user = this.authService.getCurrentUser();
+    if (user) {
+      let commentObj = {
+        username: user.displayName,
+        comment: this.comment,
+        commentId: uuid.v4(),
+        dateCreated: Date.now(),
+        commentAuthorId: user.uid,
+      };
+      this.recipe.comments.push(commentObj);
+
+      this.recipeService
+        .updateRecipe(this.recipe)
+        .then(() => this.initializeRecipe());
+    }
+    this.comment = '';
+  }
+
+  onDeleteComment(comment: Comment) {
+    this.recipeService
+      .deleteCommentFromRecipe(comment, this.recipe.id)
+      .then(() => this.initializeRecipe());
   }
 }

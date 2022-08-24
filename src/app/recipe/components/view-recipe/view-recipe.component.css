@@ -146,7 +146,7 @@
 
 .view-recipe-functionality-container {
   padding-top: 4vh;
-  padding-bottom: 8vh;
+
   display: flex;
   text-align: center;
   justify-content: center;
@@ -222,4 +222,37 @@ input[type="text"] {
 
 .dark {
   color: white;
+}
+
+.functionality-icons-container {
+  color: var(--irecipe-primary);
+  text-align: left;
+}
+
+.comments {
+  margin-top: 55px;
+  padding-bottom: 8vh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+}
+
+.add-comment-button {
+  text-align: right;
+  color: var(--irecipe-primary);
+}
+
+.add-comment-button:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.add-comment {
+  padding-top: 40px;
+}
+
+.user-comment,
+textarea {
+  width: 700px;
 }

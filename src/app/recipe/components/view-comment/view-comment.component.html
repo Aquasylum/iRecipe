@@ -1,0 +1,20 @@
+<div class="view-comment-container">
+  <div class="comment-author">
+    <span class="material-symbols-outlined"> account_circle </span>
+    {{ comment.username }}
+  </div>
+
+  <div class="comment">
+    {{ comment.comment }}
+  </div>
+  <div class="comment-time">
+    {{ millisecondsToDateConverter(comment.dateCreated) }}
+  </div>
+  <div
+    (click)="deleteComment(comment)"
+    *ngIf="loggedInUserId == comment.commentAuthorId"
+    class="comment-delete"
+  >
+    delete comment
+  </div>
+</div>
