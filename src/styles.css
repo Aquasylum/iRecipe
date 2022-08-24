@@ -101,7 +101,7 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   .irecipe-name {
     font-size: calc(var(--irecipe-name) * 0.5);
   }
@@ -136,7 +136,7 @@
   }
 
   .irecipe-length {
-    width: var(--input-small);
+    width: var(--input-medium);
   }
 }
 

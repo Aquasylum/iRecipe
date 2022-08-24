@@ -10,7 +10,7 @@
   }
 }
 
-@media screen and(max-width:600px) {
+@media screen and(max-width:768px) {
   .comment {
     font-size: 12px;
   }

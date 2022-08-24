@@ -1,39 +1,40 @@
+@media screen and (max-width: 1800px) {
+  .irecipe-register-form {
+    padding: 50px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .irecipe-register-form {
+    padding: 40px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .irecipe-register-form {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
 .register-page-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   background-color: var(--irecipe-dark);
+  padding: 2%;
 }
 
 .irecipe-heading {
   text-align: center;
   color: white;
+  padding-top: 50px;
 }
 
 .irecipe-register-form {
   background-color: white;
   border-radius: 30px;
-}
-
-@media screen and (max-width: 1800px) {
-  .irecipe-register-form {
-    padding: 4%;
-    padding-top: 2%;
-    padding-bottom: 1%;
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  .irecipe-register-form {
-    padding: 6%;
-    padding-top: 2%;
-    padding-bottom: 1%;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .irecipe-register-form {
-    padding: 8%;
-  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Settings } from 'http2';
@@ -20,6 +20,22 @@ export class HeaderComponent implements OnInit {
   showUserInput: boolean = true;
   colorTheme!: string;
   findUser: boolean = false;
+
+  @HostListener('window:resize', []) updateDays() {
+    // lg (for laptops and desktops - screens equal to or greater than 1200px wide)
+    // md (for small laptops - screens equal to or greater than 992px wide)
+    // sm (for tablets - screens equal to or greater than 768px wide)
+    // xs (for phones - screens less than 768px wide)
+    // if (window.innerWidth >= 1200) {
+    //   this.visibleDays = 7; // lg
+    // } else if (window.innerWidth >= 992) {
+    //   this.visibleDays = 6; //md
+    // } else if (window.innerWidth >= 768) {
+    //   this.visibleDays = 5; //sm
+    // } else if (window.innerWidth < 768) {
+    //   this.visibleDays = 3; //xs
+    // }
+  }
 
   constructor(
     private authService: AuthService,
