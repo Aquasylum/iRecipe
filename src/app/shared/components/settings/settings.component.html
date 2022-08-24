@@ -15,18 +15,18 @@
   </div>
   <div class="profile-layout-selector" (click)="changeProfileLayout()">
     <span
-      *ngIf="currentLayout == 'grid'"
+      *ngIf="profileLayout == 'grid'"
       class="material-symbols-outlined recipe-icons bold"
     >
       grid_view
     </span>
 
     <span
-      *ngIf="currentLayout == 'carousel'"
+      *ngIf="profileLayout == 'carousel'"
       class="material-symbols-outlined recipe-icons bold"
     >
       view_carousel
     </span>
-    Change profile layout to: {{ this.currentLayout }}
+    Change profile layout to: {{ this.profileLayout }}
   </div>
 </div>

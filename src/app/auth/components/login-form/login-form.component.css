@@ -26,16 +26,16 @@
 }
 
 .irecipe-create-account {
-  color: #1a77f0;
+  color: var(--irecipe-secondary);
 }
 
 .irecipe-create-account:hover {
-  color: #1a77f0;
+  color: var(--irecipe-secondary);
   cursor: pointer;
 }
 
 .irecipe-input {
-  border-color: #1a77f0;
+  border-color: var(--irecipe-secondary);
   margin-left: 0;
 }
 
@@ -55,13 +55,21 @@
 }
 
 .irecipe-button-login-submit {
-  background-color: #1a77f0;
+  background-color: white;
   border-radius: 30px;
-  border: none;
-  color: white;
+  border: 1px solid var(--irecipe-secondary);
+  color: black;
   padding-top: 1vh;
   padding-bottom: 1vh;
   margin-bottom: 4vh;
+}
+
+.irecipe-button-login-submit:hover {
+  transform: scale(1.1);
+}
+
+[disabled] {
+  color: grey;
 }
 
 .irecipe-button-social {
@@ -69,6 +77,10 @@
   border-radius: 30px;
   padding-top: 1vh;
   padding-bottom: 1vh;
+}
+
+.irecipe-button-social:hover {
+  transform: scale(1.1);
 }
 
 .google {
@@ -84,6 +96,7 @@
 
 .irecipe-forgot-password:hover {
   cursor: pointer;
+  color: var(--irecipe-secondary);
 }
 
 .irecipe-social-login {

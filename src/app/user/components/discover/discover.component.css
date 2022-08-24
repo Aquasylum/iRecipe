@@ -21,4 +21,13 @@
 .coming-soon {
   padding-top: 100px;
   font-size: 70px;
+  padding-bottom: 250px;
+}
+
+.dark {
+  color: whitesmoke;
+}
+
+.light {
+  color: black;
 }

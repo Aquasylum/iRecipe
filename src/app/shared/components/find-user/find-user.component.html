@@ -3,7 +3,7 @@
     <div>
       <input
         type="text"
-        [ngClass]="currentColorTheme"
+        [ngClass]="colorTheme"
         class="user-search-input"
         name="Search"
         [formControl]="usernameControl"
@@ -30,7 +30,7 @@
   <div
     (click)="onCloseSuccessMessage()"
     class="user-found"
-    [ngClass]="currentColorTheme"
+    [ngClass]="colorTheme"
     role="alert"
     *ngIf="showSuccessMessage"
   >
@@ -48,7 +48,9 @@
         <span class="username">{{ username }}</span>
       </div>
 
-      <div *ngIf="user.recipes">Total recipes: {{ user.recipes.length }}</div>
+      <div *ngIf="user && user.recipes">
+        Total recipes: {{ user.recipes.length }}
+      </div>
     </div>
   </div>
 </div>

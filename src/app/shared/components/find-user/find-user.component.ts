@@ -17,7 +17,7 @@ export class FindUserComponent implements OnInit {
   showSuccessMessage: boolean = false;
   search: boolean = false;
   username!: string;
-  currentColorTheme: string = 'dark';
+  colorTheme!: string;
   userId!: string;
   userRatingArray: number[] = [];
   user!: User;
@@ -33,8 +33,9 @@ export class FindUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.colorTheme = this.settingService.getColorTheme();
     this.settingService.colorTheme$.subscribe((color) =>
-      this.colorTheme(color)
+      this.themeColor(color)
     );
 
     this.usernameControl = new FormControl(
@@ -56,8 +57,8 @@ export class FindUserComponent implements OnInit {
       .subscribe(() => this.resetUsernameForm());
   }
 
-  colorTheme(color: string) {
-    this.currentColorTheme = color;
+  themeColor(color: string) {
+    this.colorTheme = color;
   }
 
   resetUsernameForm() {

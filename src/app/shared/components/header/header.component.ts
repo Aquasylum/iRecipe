@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Settings } from 'http2';
 import { switchMap, timer, of } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { SettingsService } from '../../services/settings.service';
 import { UserDoesNotExist } from '../../validators/UserDoesNotExist.validator';
 
 @Component({
@@ -16,16 +18,18 @@ export class HeaderComponent implements OnInit {
   userSearchControl!: FormControl;
   showSettings: boolean = false;
   showUserInput: boolean = true;
-  currentColorTheme: string = 'dark';
+  colorTheme!: string;
   findUser: boolean = false;
 
   constructor(
     private authService: AuthService,
     private router: Router,
-    private userDoesNotExistValidator: UserDoesNotExist
+    private userDoesNotExistValidator: UserDoesNotExist,
+    private settingsService: SettingsService
   ) {}
 
   ngOnInit(): void {
+    this.colorTheme = this.settingsService.getColorTheme();
     this.displayName = this.authService.getCurrentUser()?.displayName;
     this.initializeForm();
   }
@@ -72,7 +76,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onColorTheme(themeColor: string) {
-    this.currentColorTheme = themeColor;
+    this.colorTheme = themeColor;
   }
 
   toggleFindUserCollapsed() {

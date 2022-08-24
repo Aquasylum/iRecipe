@@ -26,14 +26,12 @@
       <li>
         <irecipe-find-user></irecipe-find-user>
       </li>
-      <div class="tester">
-        {{ showSettings }}
-      </div>
+
       <li class="nav-item header-user-account">
         <div [ngClass]="showSettings ? 'show-menu' : 'dont-show-menu'">
           <irecipe-settings
             class="display-menu"
-            [ngClass]="currentColorTheme"
+            [ngClass]="colorTheme"
             (themeColor)="onColorTheme($event)"
           ></irecipe-settings>
         </div>

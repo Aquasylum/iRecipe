@@ -9,10 +9,10 @@ import { SettingsService } from '../../services/settings.service';
   styleUrls: ['./settings.component.css'],
 })
 export class SettingsComponent implements OnInit {
-  currentColorTheme: string = 'dark';
+  colorTheme!: string;
   invertedColorTheme: string = 'light';
   displayName!: string | null | undefined;
-  currentLayout: string = 'carousel';
+  profileLayout!: string;
 
   @Output() themeColor: EventEmitter<string> = new EventEmitter<string>();
 
@@ -22,36 +22,38 @@ export class SettingsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.colorTheme = this.settingsService.getColorTheme();
+    this.profileLayout = this.settingsService.getProfileLayout();
     this.displayName = this.authService.getCurrentUser()?.displayName;
   }
 
   changeColorTheme() {
-    if (this.currentColorTheme == 'light') {
-      this.currentColorTheme = 'dark';
+    if (this.colorTheme == 'light') {
+      this.colorTheme = 'dark';
       this.invertedColorTheme = 'light';
       this.settingsService.changeThemeToDark();
-      this.themeColor.emit(this.currentColorTheme);
+      this.themeColor.emit(this.colorTheme);
       return;
     }
 
-    if (this.currentColorTheme == 'dark') {
-      this.currentColorTheme = 'light';
+    if (this.colorTheme == 'dark') {
+      this.colorTheme = 'light';
       this.invertedColorTheme = 'dark';
       this.settingsService.changeThemeToLight();
-      this.themeColor.emit(this.currentColorTheme);
+      this.themeColor.emit(this.colorTheme);
       return;
     }
   }
 
   changeProfileLayout() {
-    if (this.currentLayout == 'carousel') {
-      this.currentLayout = 'grid';
+    if (this.profileLayout == 'carousel') {
+      this.profileLayout = 'grid';
       this.settingsService.changeLayoutToCarousel();
       return;
     }
 
-    if (this.currentLayout == 'grid') {
-      this.currentLayout = 'carousel';
+    if (this.profileLayout == 'grid') {
+      this.profileLayout = 'carousel';
       this.settingsService.changeLayoutToGrid();
       return;
     }

@@ -10,11 +10,12 @@ export class FilterComponent implements OnInit {
   @Output() filterData: EventEmitter<string> = new EventEmitter();
 
   filter!: string;
-  colorTheme: string = 'dark';
+  colorTheme!: string;
 
   constructor(private settingService: SettingsService) {}
 
   ngOnInit(): void {
+    this.colorTheme = this.settingService.getColorTheme();
     this.settingService.colorTheme$.subscribe(
       (color) => (this.colorTheme = color)
     );
