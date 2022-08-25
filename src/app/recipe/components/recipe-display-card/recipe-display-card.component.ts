@@ -24,7 +24,8 @@ export class RecipeDisplayCardComponent implements OnInit, OnChanges {
 
   recipeImage!: string | undefined;
   comment: boolean = false;
-  like: boolean = false;
+  like!: boolean;
+  userId!: string | undefined;
 
   constructor(
     private fileService: FileService,
@@ -33,7 +34,10 @@ export class RecipeDisplayCardComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit(): void {
+    this.userId = this.authService.getCurrentUser()?.uid;
+
     this.getRecipeImage();
+    this.getLike();
   }
 
   async ngOnChanges(changes: SimpleChanges) {
@@ -49,6 +53,16 @@ export class RecipeDisplayCardComponent implements OnInit, OnChanges {
     this.recipeImage = newRecipeImage;
   }
 
+  getLike() {
+    if (this.userId) {
+      if (this.recipe.likedBy.indexOf(this.userId) == -1) {
+        this.like = false;
+      } else {
+        this.like = true;
+      }
+    }
+  }
+
   toggleComment() {
     this.comment = !this.comment;
   }
@@ -56,12 +70,12 @@ export class RecipeDisplayCardComponent implements OnInit, OnChanges {
   toggleLike() {
     this.like = !this.like;
 
-    if (this.like == true) {
-      this.recipe.likes++;
+    if (this.like == true && this.userId) {
+      this.recipe.likedBy.push(this.userId);
       this.recipeService.updateRecipe(this.recipe);
     }
     if (this.like == false) {
-      this.recipe.likes--;
+      this.recipe.likedBy.filter((item) => item != this.userId);
       this.recipeService.updateRecipe(this.recipe);
     }
   }

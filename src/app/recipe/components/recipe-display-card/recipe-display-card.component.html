@@ -10,8 +10,11 @@
   />
 
   <div class="recipe-icons">
-    <div class="likes">
-      {{ recipe.likes }}
+    <div class="">
+      <span class="likes-amount">
+        {{ recipe.likedBy.length }}
+      </span>
+
       <span
         (click)="toggleLike()"
         *ngIf="!like"
@@ -29,7 +32,10 @@
     </div>
 
     <div class="comments">
-      {{ recipe.comments.length }}
+      <span class="comments-amount">
+        {{ recipe.comments.length }}
+      </span>
+
       <span
         (click)="toggleComment()"
         class="material-icons functionality-icons"
