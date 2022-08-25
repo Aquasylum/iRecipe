@@ -1,12 +1,20 @@
-@media screen and(max-width:1800px) {
+@media screen and (max-width: 1800px) {
   .comment {
     font-size: 16px;
+  }
+
+  textarea {
+    width: 300px;
   }
 }
 
 @media screen and(max-width:1200px) {
   .comment {
     font-size: 14px;
+  }
+
+  textarea {
+    width: 250px;
   }
 }
 
