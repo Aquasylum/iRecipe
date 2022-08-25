@@ -1,4 +1,4 @@
-<div class="irecipe-container">
+<div class="irecipe-container" *ngIf="recipe">
   <div class="recipe-header">
     <div class="irecipe-name bold">
       {{ recipe.name }}
@@ -13,7 +13,10 @@
       </div>
 
       <div class="col-lg-6 col-sm-12">
-        <div class="view-recipe-author">
+        <div
+          [routerLink]="['/profile', recipe.authorId]"
+          class="view-recipe-author"
+        >
           <span class="material-symbols-outlined view-recipe-author-icon">
             account_circle
           </span>
@@ -21,17 +24,28 @@
         </div>
 
         <div class="functionality-icons-container">
-          {{ recipe.likes }}
-          <span class="material-icons-outlined functionality-icons">
+          {{ recipe.likedBy.length }}
+          <span
+            (click)="toggleLike()"
+            *ngIf="!like"
+            class="material-icons-outlined functionality-icons"
+          >
+            thumb_up
+          </span>
+          <span
+            (click)="toggleLike()"
+            *ngIf="like"
+            class="material-icons functionality-icons"
+          >
             thumb_up
           </span>
 
-          <span>
+          <a [href]="'/view-recipe/' + recipe.id + '#comments'">
             {{ recipe.comments.length }}
             <span class="material-icons functionality-icons">
               chat_bubble_outline
             </span>
-          </span>
+          </a>
         </div>
 
         <div class="ingredients">
@@ -164,7 +178,6 @@
         <div class="recipe-functionality-button save">
           <span
             routerLink="/recipe/{{ recipe.id }}"
-            type="submit"
             class="icon-large material-symbols-outlined"
           >
             edit
@@ -200,7 +213,7 @@
       </ng-template>
     </div>
 
-    <div class="comments">
+    <div id="comments" class="comments">
       <div class="irecipe-title bold view-recipe-heading">Comments</div>
       <irecipe-view-comment
         (commentToDelete)="onDeleteComment($event)"

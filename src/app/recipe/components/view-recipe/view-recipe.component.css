@@ -7,8 +7,12 @@
     margin-top: 25px;
   }
 
+  .functionality-icons-container {
+    text-align: left;
+  }
+
   .view-recipe-author {
-    font-size: 24px;
+    font-size: 36px;
   }
 
   .icon-large {
@@ -30,6 +34,11 @@
   .view-recipe-author-icon {
     font-size: 30px;
   }
+
+  .user-comment,
+  textarea {
+    width: 700px;
+  }
 }
 
 @media screen and (max-width: 1200px) {
@@ -41,8 +50,12 @@
     margin-top: 25px;
   }
 
+  .functionality-icons-container {
+    text-align: left;
+  }
+
   .view-recipe-author {
-    font-size: 20px;
+    font-size: 30px;
   }
 
   .icon-large {
@@ -64,6 +77,11 @@
   .view-recipe-author-icon {
     font-size: 25px;
   }
+
+  .user-comment,
+  textarea {
+    width: 400px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -73,6 +91,10 @@
   .view-recipe-author {
     text-align: center;
     margin-top: 25px;
+  }
+
+  .functionality-icons-container {
+    text-align: center;
   }
 
   .recipe-header {
@@ -86,7 +108,7 @@
   }
 
   .view-recipe-author {
-    font-size: 18px;
+    font-size: 24px;
   }
 
   .view-recipe-section,
@@ -98,6 +120,11 @@
   .view-recipe-author-icon {
     font-size: 22px;
   }
+
+  .user-comment,
+  textarea {
+    width: 300px;
+  }
 }
 
 .irecipe-container {
@@ -107,6 +134,16 @@
   flex-direction: column;
   text-align: center;
   width: 100%;
+}
+
+.functionality-icons:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.view-recipe-author:hover {
+  cursor: pointer;
+  transform: scale(1.05);
 }
 
 .view-recipe-author-icon {
@@ -146,7 +183,6 @@
 
 .view-recipe-functionality-container {
   padding-top: 4vh;
-
   display: flex;
   text-align: center;
   justify-content: center;
@@ -224,9 +260,9 @@ input[type="text"] {
   color: white;
 }
 
-.functionality-icons-container {
+.functionality-icons-container,
+a {
   color: var(--irecipe-primary);
-  text-align: left;
 }
 
 .comments {
@@ -250,9 +286,4 @@ input[type="text"] {
 
 .add-comment {
   padding-top: 40px;
-}
-
-.user-comment,
-textarea {
-  width: 700px;
 }

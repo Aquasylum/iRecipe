@@ -54,7 +54,8 @@
   color: var(--irecipe-secondary);
 }
 
-.header-menu > .nav-item:hover {
+.header-menu > .nav-item:hover,
+.navbar-logo:hover {
   transform: scale(1.1);
   cursor: pointer;
 }

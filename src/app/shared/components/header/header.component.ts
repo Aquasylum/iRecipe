@@ -22,12 +22,6 @@ export class HeaderComponent implements OnInit {
   findUser: boolean = false;
   mobile!: boolean;
 
-  @HostListener('window:resize', []) updateDays() {
-    if (window.innerWidth < 1200) {
-      this.mobile = true;
-    } else if (window.innerWidth >= 1200) this.mobile = false;
-  }
-
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -39,6 +33,10 @@ export class HeaderComponent implements OnInit {
     this.colorTheme = this.settingsService.getColorTheme();
     this.displayName = this.authService.getCurrentUser()?.displayName;
     this.initializeForm();
+
+    if (window.innerWidth < 992) {
+      this.mobile = true;
+    } else if (window.innerWidth >= 992) this.mobile = false;
   }
 
   initializeForm() {

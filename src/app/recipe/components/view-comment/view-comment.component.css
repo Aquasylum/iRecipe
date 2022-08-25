@@ -1,7 +1,24 @@
+@media screen and (max-width: 1800px) {
+  .view-comment-container {
+    width: 700px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .view-comment-container {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .view-comment-container {
+    width: 350px;
+  }
+}
+
 .view-comment-container {
   padding-top: 10px;
   padding-bottom: 10px;
-  width: 700px;
 }
 
 .comment-author {

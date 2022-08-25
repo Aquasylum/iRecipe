@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg">
   <ul class="navbar-nav header-menu">
     <li>
-      <span class="navbar-logo logo">iRecipe</span>
+      <span (click)="onRecipes()" class="navbar-logo logo">iRecipe</span>
     </li>
     <li *ngIf="!mobile" class="nav-item">
       <span (click)="onRecipes()" class="navbar-heading bold">My Recipes</span>
@@ -54,12 +54,20 @@
 </nav>
 
 <div class="collapse" id="navbarToggleExternalContent">
+  <div (click)="onRecipes()" class="p-2 bold collapsed-item">
+    <span class="material-symbols-outlined"> home </span>
+    Home
+  </div>
   <div class="p-2 bold collapsed-item" (click)="toggleFindUserCollapsed()">
     <span class="material-symbols-outlined"> search </span>
     Search Users
   </div>
   <div *ngIf="findUser">
     <irecipe-find-user></irecipe-find-user>
+  </div>
+  <div (click)="onDiscover()" class="p-2 bold collapsed-item">
+    <span class="material-symbols-outlined"> travel_explore </span>
+    Discover
   </div>
   <div class="p-2 bold collapsed-item">
     <span class="material-symbols-outlined"> account_circle </span>

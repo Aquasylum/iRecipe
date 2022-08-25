@@ -163,7 +163,7 @@
                   ></div>
 
                   <ng-template #showAdd>
-                    <div type="button" (click)="addIngredient()">
+                    <div (click)="addIngredient()">
                       <span class="material-symbols-outlined add-icon">
                         add_circle
                       </span>
@@ -442,7 +442,6 @@
         <ng-template #showSave>
           <span
             (click)="onSubmit()"
-            type="submit"
             class="icon-large material-icons recipe-functionality-button"
           >
             save
@@ -452,11 +451,7 @@
 
         <ng-template #showInvalid>
           <div class="invalid-icon">
-            <span
-              (click)="onSubmit()"
-              type="submit"
-              class="icon-large material-icons"
-            >
+            <span (click)="onSubmit()" class="icon-large material-icons">
               save
             </span>
             <div>Save recipe</div>

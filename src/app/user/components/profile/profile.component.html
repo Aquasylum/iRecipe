@@ -4,10 +4,13 @@
     [loggedInUserProfile]="loggedInUserProfile"
   ></irecipe-profile-header>
 
-  <irecipe-filter
-    (filterData)="onFilterRecipes($event)"
-    class="filter"
-  ></irecipe-filter>
+  <div class="profile-filter-container">
+    <irecipe-filter
+      (filterData)="onFilterRecipes($event)"
+      class="filter"
+    ></irecipe-filter>
+  </div>
+
   <div
     *ngIf="
       allRecipes?.length != 0 &&
@@ -109,7 +112,7 @@
           class="functionality-button add"
         >
           <span class="material-icons icon-large"> add_circle </span>
-          <div>Add Recipe</div>
+          <div class="irecipe-text">Add Recipe</div>
         </div>
         <div *ngIf="recipe" class="functionality-button edit">
           <span
@@ -118,7 +121,7 @@
           >
             edit
           </span>
-          <div>Edit Recipe</div>
+          <div class="irecipe-text">Edit Recipe</div>
         </div>
       </div>
     </div>
@@ -138,7 +141,7 @@
       <span routerLink="/recipe" class="material-icons icon-large">
         add_circle
       </span>
-      <div>Add new recipe</div>
+      <div class="irecipe-text">Add new recipe</div>
     </div>
   </div>
 

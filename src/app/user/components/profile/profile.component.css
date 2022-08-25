@@ -11,7 +11,7 @@
 
 @media screen and (max-width: 1200px) {
   .icon-large {
-    font-size: 40px;
+    font-size: 50px;
   }
 
   .grid-container {
@@ -22,7 +22,7 @@
 
 @media screen and (max-width: 768px) {
   .icon-large {
-    font-size: 20px;
+    font-size: 30px;
   }
 
   .recipe-card {
@@ -159,6 +159,10 @@
 .total-recipes {
   color: var(--irecipe-secondary);
   text-align: center;
-  padding-top: 100px;
+  padding-top: 50px;
   margin-bottom: 25px;
+}
+
+.profile-filter-container {
+  padding-bottom: 15px;
 }

@@ -167,7 +167,7 @@
 
   .irecipe-error-text {
     font-size: calc(var(--irecipe-error-text) * 0.5);
-    width: 250px;
+    width: 200px;
   }
 }
 

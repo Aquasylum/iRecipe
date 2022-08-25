@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  FormControl,
-} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { UserService } from 'src/app/user/service/user.service';
@@ -33,6 +28,8 @@ export class ViewRecipeComponent implements OnInit {
   userIsAuthor!: boolean;
   recipeId!: string;
   comment!: string;
+  like!: boolean;
+  userId!: string | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -47,6 +44,7 @@ export class ViewRecipeComponent implements OnInit {
 
   ngOnInit(): void {
     this.recipeId = this.route.snapshot.paramMap.get('id') as string;
+    this.userId = this.authService.getCurrentUser()?.uid;
 
     if (this.authService.getCurrentUser())
       this.authService.emitCurrentLoggedInStatus(true);
@@ -71,6 +69,8 @@ export class ViewRecipeComponent implements OnInit {
           this.recipe.authorId == this.authService.getCurrentUser()?.uid
             ? (this.userIsAuthor = true)
             : (this.userIsAuthor = false);
+
+          this.getLike();
         });
       })
     );
@@ -93,6 +93,7 @@ export class ViewRecipeComponent implements OnInit {
     let recipeIds = await this.userService.getUserRecipeIds(
       this.authService.getCurrentUser()?.uid
     );
+    if (!recipeIds) return;
     if (recipeIds.indexOf(this.recipeId) == -1) {
       this.isFavorite = false;
     } else {
@@ -151,6 +152,37 @@ export class ViewRecipeComponent implements OnInit {
     if (this.isFavorite == false) {
       //Remove from this users recipe list
       this.userService.deleteRecipeFromUser(this.recipeId);
+    }
+  }
+
+  getLike() {
+    if (this.userId) {
+      if (this.recipe.likedBy.indexOf(this.userId) == -1) {
+        this.like = false;
+      } else {
+        this.like = true;
+      }
+    }
+  }
+
+  toggleLike() {
+    this.like = !this.like;
+
+    if (this.like == true && this.userId) {
+      this.recipe.likedBy.push(this.userId);
+      this.recipeService
+        .updateRecipe(this.recipe)
+        .then(() => this.initializeRecipe());
+    }
+    if (this.like == false) {
+      let userIdIndex = this.recipe.likedBy.findIndex(
+        (elem) => elem == this.userId
+      );
+      this.recipe.likedBy.splice(userIdIndex, 1);
+
+      this.recipeService
+        .updateRecipe(this.recipe)
+        .then(() => this.initializeRecipe());
     }
   }
 

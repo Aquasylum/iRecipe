@@ -13,6 +13,7 @@ export class SettingsComponent implements OnInit {
   invertedColorTheme: string = 'light';
   displayName!: string | null | undefined;
   profileLayout!: string;
+  invertedProfileLayout!: string;
 
   @Output() themeColor: EventEmitter<string> = new EventEmitter<string>();
 
@@ -24,6 +25,7 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
     this.colorTheme = this.settingsService.getColorTheme();
     this.profileLayout = this.settingsService.getProfileLayout();
+    this.invertedProfileLayout = 'carousel';
     this.displayName = this.authService.getCurrentUser()?.displayName;
   }
 
@@ -48,13 +50,15 @@ export class SettingsComponent implements OnInit {
   changeProfileLayout() {
     if (this.profileLayout == 'carousel') {
       this.profileLayout = 'grid';
-      this.settingsService.changeLayoutToCarousel();
+      this.invertedProfileLayout = 'carousel';
+      this.settingsService.changeLayoutToGrid();
       return;
     }
 
     if (this.profileLayout == 'grid') {
       this.profileLayout = 'carousel';
-      this.settingsService.changeLayoutToGrid();
+      this.invertedProfileLayout = 'grid';
+      this.settingsService.changeLayoutToCarousel();
       return;
     }
   }
