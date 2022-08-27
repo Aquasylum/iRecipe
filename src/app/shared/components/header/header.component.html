@@ -4,11 +4,15 @@
       <span (click)="onRecipes()" class="navbar-logo logo">iRecipe</span>
     </li>
     <li *ngIf="!mobile" class="nav-item">
-      <span (click)="onRecipes()" class="navbar-heading bold">My Recipes</span>
+      <span (click)="onRecipes()" class="navbar-heading">My Recipes</span>
     </li>
 
     <li *ngIf="!mobile" class="nav-item">
-      <span (click)="onDiscover()" class="navbar-heading bold">Discover</span>
+      <span (click)="onDiscover()" class="navbar-heading">Discover</span>
+    </li>
+
+    <li *ngIf="!mobile" class="nav-item">
+      <span (click)="onSettings()" class="navbar-heading"> Settings </span>
     </li>
   </ul>
 
@@ -25,24 +29,6 @@
     <ul class="navbar-nav">
       <li>
         <irecipe-find-user></irecipe-find-user>
-      </li>
-
-      <li class="nav-item header-user-account">
-        <div [ngClass]="showSettings ? 'show-menu' : 'dont-show-menu'">
-          <irecipe-settings
-            [isCollapsed]="false"
-            class="display-menu"
-            [ngClass]="colorTheme"
-            (themeColor)="onColorTheme($event)"
-          ></irecipe-settings>
-        </div>
-
-        <span
-          (click)="toggleSettings($event)"
-          class="material-symbols-outlined recipe-icons"
-        >
-          settings
-        </span>
       </li>
 
       <li class="nav-item">

@@ -70,16 +70,6 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/discover']);
   }
 
-  toggleSettings(event: Event) {
-    this.showSettings = !this.showSettings;
-
-    if (this.showSettings == true) {
-      of(event)
-        .pipe(switchMap(() => timer(5000)))
-        .subscribe(() => (this.showSettings = false));
-    }
-  }
-
   onColorTheme(themeColor: string) {
     this.colorTheme = themeColor;
   }
