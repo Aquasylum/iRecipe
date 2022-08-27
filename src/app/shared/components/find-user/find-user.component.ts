@@ -78,23 +78,21 @@ export class FindUserComponent implements OnInit {
   }
 
   async findUser() {
-    this.username = this.usernameControl.value;
-    await this.userService
-      .getUserIdByUsername(this.usernameControl.value)
-      .then((userId) => {
-        this.userService
-          .getUserByUsername(this.usernameControl.value)
-          .then((user) => (this.user = user));
-        this.userId = userId;
-        this.userFound = true;
-        setTimeout(
-          () => (this.userFound = false),
+    this.username = this.usernameControl.value.toLowerCase();
+    await this.userService.getUserIdByUsername(this.username).then((userId) => {
+      this.userService
+        .getUserByUsername(this.username)
+        .then((user) => (this.user = user));
+      this.userId = userId;
+      this.userFound = true;
+      setTimeout(
+        () => (this.userFound = false),
 
-          10000
-        );
+        10000
+      );
 
-        this.userRatingArray = new Array(this.userService.getUserRating());
-      });
+      this.userRatingArray = new Array(this.userService.getUserRating());
+    });
     this.usernameControl.reset();
   }
 
