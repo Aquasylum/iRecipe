@@ -1,7 +1,6 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Settings } from 'http2';
 import { switchMap, timer, of } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { SettingsService } from '../../services/settings.service';
@@ -17,6 +16,7 @@ export class HeaderComponent implements OnInit {
   isRecipes: boolean = true;
   userSearchControl!: FormControl;
   showSettings: boolean = false;
+  showCollapsedSettings: boolean = false;
   showUserInput: boolean = true;
   colorTheme!: string;
   findUser: boolean = false;
@@ -86,5 +86,9 @@ export class HeaderComponent implements OnInit {
 
   toggleFindUserCollapsed() {
     this.findUser = !this.findUser;
+  }
+
+  onSettings() {
+    this.router.navigate(['/settings']);
   }
 }

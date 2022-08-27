@@ -16,6 +16,7 @@
 @media screen and (max-width: 1200px) {
   .navbar-logo {
     font-size: 36px;
+    padding-left: 10px;
   }
 
   .recipe-icons {
@@ -30,6 +31,7 @@
 @media screen and (max-width: 768px) {
   .navbar-logo {
     font-size: 28px;
+    padding-left: 0px;
   }
 
   .recipe-icons {
@@ -62,6 +64,7 @@
 
 .collapsed-item {
   color: var(--irecipe-secondary);
+  font-size: 20px;
 }
 
 .collapsed-item:hover {
@@ -113,7 +116,7 @@
   text-align: center;
   position: absolute;
   top: 45px;
-  left: -270px;
+  left: -220px;
   width: 320px;
   background-color: var(--irecipe-dark);
 }
@@ -131,4 +134,12 @@
 
 .dark {
   color: black;
+}
+
+.search-for-user-true {
+  padding-bottom: 60px !important;
+}
+
+.search-for-user-false {
+  padding-bottom: 0px;
 }

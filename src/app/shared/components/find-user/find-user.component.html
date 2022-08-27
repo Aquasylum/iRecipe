@@ -28,13 +28,12 @@
     </ng-container>
   </div>
   <div
-    (click)="onCloseSuccessMessage()"
+    (click)="onUserFound()"
     class="user-found"
     [ngClass]="colorTheme"
-    role="alert"
-    *ngIf="showSuccessMessage"
+    *ngIf="userFound"
   >
-    <div class="user-found-container">
+    <div *ngIf="!mobile" class="user-found-container">
       <div class="user-stars">
         <span
           *ngFor="let star of userRatingArray"
@@ -45,8 +44,26 @@
       </div>
 
       <div>
-        <span class="username irecipe-text">{{ username }}</span>
+        <span class="username">{{ username }}</span>
       </div>
+
+      <div *ngIf="user && user.recipes">
+        Total recipes: {{ user.recipes.length }}
+      </div>
+      <div *ngIf="user && !user.recipes">This user has 0 recipes!</div>
+    </div>
+
+    <div *ngIf="mobile" class="user-found-container">
+      <span class="username">{{ username }}</span>
+
+      <span class="star-mobile">
+        <span
+          *ngFor="let star of userRatingArray"
+          class="material-symbols-outlined"
+        >
+          star_outline
+        </span>
+      </span>
 
       <div *ngIf="user && user.recipes">
         Total recipes: {{ user.recipes.length }}

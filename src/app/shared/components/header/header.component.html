@@ -30,6 +30,7 @@
       <li class="nav-item header-user-account">
         <div [ngClass]="showSettings ? 'show-menu' : 'dont-show-menu'">
           <irecipe-settings
+            [isCollapsed]="false"
             class="display-menu"
             [ngClass]="colorTheme"
             (themeColor)="onColorTheme($event)"
@@ -40,7 +41,7 @@
           (click)="toggleSettings($event)"
           class="material-symbols-outlined recipe-icons"
         >
-          account_circle
+          settings
         </span>
       </li>
 
@@ -58,21 +59,28 @@
     <span class="material-symbols-outlined"> home </span>
     Home
   </div>
-  <div class="p-2 bold collapsed-item" (click)="toggleFindUserCollapsed()">
-    <span class="material-symbols-outlined"> search </span>
-    Search Users
+  <div
+    class="p-2 bold collapsed-item"
+    [ngClass]="findUser ? 'search-for-user-true ' : 'search-for-user-false'"
+  >
+    <div (click)="toggleFindUserCollapsed()">
+      <span class="material-symbols-outlined"> search </span>
+      Search Users
+    </div>
+    <div *ngIf="findUser">
+      <irecipe-find-user></irecipe-find-user>
+    </div>
   </div>
-  <div *ngIf="findUser">
-    <irecipe-find-user></irecipe-find-user>
-  </div>
+
   <div (click)="onDiscover()" class="p-2 bold collapsed-item">
     <span class="material-symbols-outlined"> travel_explore </span>
     Discover
   </div>
-  <div class="p-2 bold collapsed-item">
-    <span class="material-symbols-outlined"> account_circle </span>
-    Account
+  <div (click)="onSettings()" class="p-2 bold collapsed-item">
+    <span class="material-symbols-outlined"> settings </span>
+    Settings
   </div>
+  <div *ngIf="showCollapsedSettings"></div>
   <div (click)="logout()" class="p-2 bold collapsed-item">
     <span class="material-symbols-outlined"> logout </span>
     Log Out

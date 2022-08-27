@@ -105,8 +105,8 @@
   }
 
   .recipe-name {
-    font-size: 30px;
-    width: 250px;
+    font-size: 25px;
+    width: 200px;
   }
 
   input.recipe-name::placeholder {

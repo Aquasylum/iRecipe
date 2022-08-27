@@ -1,6 +1,6 @@
-<div class="display-menu">
-  <div class="bold header-menu-heading">User Menu</div>
-  <div class="header-menu-item bold">
+<div class="display-menu" *ngIf="!isCollapsed">
+  <div class="header-menu-heading">Settings</div>
+  <div class="header-menu-item">
     <span class="material-symbols-outlined recipe-icons"> account_circle </span>
     Logged in username: {{ displayName }}
   </div>
@@ -8,7 +8,7 @@
     (click)="changeColorTheme()"
     class="header-menu-item color-theme-selector"
   >
-    <span class="material-symbols-outlined recipe-icons bold"> palette </span>
+    <span class="material-symbols-outlined recipe-icons"> palette </span>
     <span
       >Change color theme to: <strong>{{ invertedColorTheme }}</strong></span
     >
@@ -16,17 +16,101 @@
   <div class="profile-layout-selector" (click)="changeProfileLayout()">
     <span
       *ngIf="profileLayout == 'grid'"
-      class="material-symbols-outlined recipe-icons bold"
+      class="material-symbols-outlined recipe-icons"
     >
       grid_view
     </span>
 
     <span
       *ngIf="profileLayout == 'carousel'"
-      class="material-symbols-outlined recipe-icons bold"
+      class="material-symbols-outlined recipe-icons"
     >
       view_carousel
     </span>
     Change profile layout to: {{ this.invertedProfileLayout }}
+  </div>
+</div>
+
+<div *ngIf="isCollapsed">
+  <div class="settings-header">
+    <span class="material-symbols-outlined"> settings </span>
+    <div>Settings</div>
+  </div>
+
+  <div class="settings-container">
+    <div class="settings-item">
+      <span class="material-symbols-outlined recipe-icons">
+        account_circle
+      </span>
+      Logged in username: <span class="username">{{ displayName }}</span>
+    </div>
+
+    <div class="settings-item">
+      <span class="material-symbols-outlined recipe-icons"> palette </span>
+      <span>Color theme: </span>
+      <div class="theme-selector-container">
+        <div
+          (click)="changeColorThemeCollapsed('dark')"
+          [ngClass]="dark ? 'active-dark' : 'none'"
+        >
+          <span class="material-symbols-outlined"> dark_mode </span>
+          <div>Dark</div>
+        </div>
+
+        <div
+          (click)="changeColorThemeCollapsed('light')"
+          [ngClass]="!dark ? 'active-light' : 'none'"
+        >
+          <span class="material-symbols-outlined"> light_mode </span>
+          <div>Light</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-item">
+      <span class="material-symbols-outlined"> visibility </span>
+      <span>Change recipe layout: </span>
+      <div class="layout-selector-container">
+        <div *ngIf="dark">
+          <div
+            (click)="changeProfileLayoutCollapsed('grid')"
+            [ngClass]="grid ? 'active-dark' : 'none'"
+          >
+            <span class="material-symbols-outlined"> grid_view </span>
+            <div>Grid</div>
+          </div>
+        </div>
+
+        <div *ngIf="!dark">
+          <div
+            (click)="changeProfileLayoutCollapsed('grid')"
+            [ngClass]="grid ? 'active-light' : 'none'"
+          >
+            <span class="material-symbols-outlined"> grid_view </span>
+            <div>Grid</div>
+          </div>
+        </div>
+
+        <div *ngIf="dark">
+          <div
+            (click)="changeProfileLayoutCollapsed('carousel')"
+            [ngClass]="!grid ? 'active-dark' : 'none'"
+          >
+            <span class="material-symbols-outlined"> view_carousel </span>
+            <div>Carousel</div>
+          </div>
+        </div>
+
+        <div *ngIf="!dark">
+          <div
+            (click)="changeProfileLayoutCollapsed('carousel')"
+            [ngClass]="!grid ? 'active-light' : 'none'"
+          >
+            <span class="material-symbols-outlined"> view_carousel </span>
+            <div>Carousel</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

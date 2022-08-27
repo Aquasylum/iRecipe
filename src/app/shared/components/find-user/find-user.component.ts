@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { switchMap, Observable, interval, find } from 'rxjs';
@@ -14,13 +14,14 @@ import { UserDoesNotExist } from '../../validators/UserDoesNotExist.validator';
 })
 export class FindUserComponent implements OnInit {
   usernameControl!: FormControl;
-  showSuccessMessage: boolean = false;
   search: boolean = false;
   username!: string;
   colorTheme!: string;
   userId!: string;
   userRatingArray: number[] = [];
   user!: User;
+  mobile!: boolean;
+  userFound!: boolean;
 
   constructor(
     private userDoesNotExistValidator: UserDoesNotExist,
@@ -38,6 +39,17 @@ export class FindUserComponent implements OnInit {
       this.themeColor(color)
     );
 
+    this.checkIsMobile();
+    this.initializeForm();
+  }
+
+  checkIsMobile() {
+    if (window.innerWidth < 992) {
+      this.mobile = true;
+    } else if (window.innerWidth >= 992) this.mobile = false;
+  }
+
+  initializeForm() {
     this.usernameControl = new FormControl(
       '',
       [],
@@ -74,9 +86,9 @@ export class FindUserComponent implements OnInit {
           .getUserByUsername(this.usernameControl.value)
           .then((user) => (this.user = user));
         this.userId = userId;
-        this.showSuccessMessage = true;
+        this.userFound = true;
         setTimeout(
-          () => (this.showSuccessMessage = false),
+          () => (this.userFound = false),
 
           10000
         );
@@ -86,9 +98,9 @@ export class FindUserComponent implements OnInit {
     this.usernameControl.reset();
   }
 
-  onCloseSuccessMessage() {
+  onUserFound() {
     this.router.navigate(['/profile/' + this.userId]);
-    this.showSuccessMessage = false;
+    this.userFound = false;
     this.usernameControl.reset();
   }
 }

@@ -29,7 +29,6 @@
   margin-right: 10px;
   padding: 10px;
   border: 1px solid var(--irecipe-secondary) !important ;
-
   color: white !important;
 }
 
@@ -117,4 +116,8 @@ input:hover {
 
 .user-search-icon {
   color: var(--irecipe-primary);
+}
+
+.star-mobile {
+  float: right;
 }
