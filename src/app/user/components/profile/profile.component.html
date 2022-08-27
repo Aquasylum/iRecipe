@@ -88,41 +88,39 @@
       </div>
     </div>
 
-    <div *ngIf="profileLayout == 'carousel'">
-      <div *ngIf="!loggedInUserProfile" class="recipes-container-functionality">
-        <div
-          (click)="toggleFavorite()"
-          class="recipe-functionality-button favorite"
-        >
-          <span *ngIf="!isFavorite" class="icon-large material-icons"
-            >favorite_border
-          </span>
-          <span *ngIf="isFavorite" class="icon-large material-icons"
-            >favorite
-          </span>
+    <div *ngIf="!loggedInUserProfile" class="recipes-container-functionality">
+      <div
+        (click)="toggleFavorite()"
+        class="recipe-functionality-button favorite"
+      >
+        <span *ngIf="!isFavorite" class="icon-large material-icons"
+          >favorite_border
+        </span>
+        <span *ngIf="isFavorite" class="icon-large material-icons"
+          >favorite
+        </span>
 
-          <div>Favorite</div>
-        </div>
+        <div>Favorite</div>
       </div>
+    </div>
 
-      <div *ngIf="loggedInUserProfile" class="recipes-container-functionality">
-        <div
-          *ngIf="allRecipes"
-          routerLink="/recipe"
-          class="functionality-button add"
+    <div *ngIf="loggedInUserProfile" class="recipes-container-functionality">
+      <div
+        *ngIf="allRecipes"
+        routerLink="/recipe"
+        class="functionality-button add"
+      >
+        <span class="material-icons icon-large"> add_circle </span>
+        <div class="irecipe-text">Add Recipe</div>
+      </div>
+      <div *ngIf="recipe" class="functionality-button edit">
+        <span
+          [routerLink]="['/recipe', recipe.id]"
+          class="material-symbols-outlined icon-large"
         >
-          <span class="material-icons icon-large"> add_circle </span>
-          <div class="irecipe-text">Add Recipe</div>
-        </div>
-        <div *ngIf="recipe" class="functionality-button edit">
-          <span
-            [routerLink]="['/recipe', recipe.id]"
-            class="material-symbols-outlined icon-large"
-          >
-            edit
-          </span>
-          <div class="irecipe-text">Edit Recipe</div>
-        </div>
+          edit
+        </span>
+        <div class="irecipe-text">Edit Recipe</div>
       </div>
     </div>
   </div>

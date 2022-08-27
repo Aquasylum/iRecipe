@@ -71,6 +71,10 @@
     font-size: var(--irecipe-error-text);
     width: 350px;
   }
+
+  .irecipe-page-icon {
+    font-size: 70px !important;
+  }
 }
 
 @media screen and (max-width: 1200px) {
@@ -120,6 +124,10 @@
     font-size: calc(var(--irecipe-error-text) * 0.8);
     width: 250px;
   }
+
+  .irecipe-page-icon {
+    font-size: 60px !important;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -168,6 +176,10 @@
   .irecipe-error-text {
     font-size: calc(var(--irecipe-error-text) * 0.5);
     width: 200px;
+  }
+
+  .irecipe-page-icon {
+    font-size: 50px !important;
   }
 }
 

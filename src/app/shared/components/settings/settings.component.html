@@ -1,114 +1,160 @@
-<div class="display-menu" *ngIf="!isCollapsed">
-  <div class="header-menu-heading">Settings</div>
-  <div class="header-menu-item">
-    <span class="material-symbols-outlined recipe-icons"> account_circle </span>
-    Logged in username: {{ displayName }}
-  </div>
-  <div
-    (click)="changeColorTheme()"
-    class="header-menu-item color-theme-selector"
-  >
-    <span class="material-symbols-outlined recipe-icons"> palette </span>
-    <span
-      >Change color theme to: <strong>{{ invertedColorTheme }}</strong></span
-    >
-  </div>
-  <div class="profile-layout-selector" (click)="changeProfileLayout()">
-    <span
-      *ngIf="profileLayout == 'grid'"
-      class="material-symbols-outlined recipe-icons"
-    >
-      grid_view
-    </span>
+<div class="settings-container">
+  <span class="material-symbols-outlined irecipe-page-icon"> settings </span>
+  <div class="irecipe-name">Settings</div>
 
-    <span
-      *ngIf="profileLayout == 'carousel'"
-      class="material-symbols-outlined recipe-icons"
-    >
-      view_carousel
-    </span>
-    Change profile layout to: {{ this.invertedProfileLayout }}
-  </div>
-</div>
-
-<div *ngIf="isCollapsed">
-  <div class="settings-header">
-    <span class="material-symbols-outlined"> settings </span>
-    <div>Settings</div>
+  <div class="settings-item">
+    <span class="material-symbols-outlined"> account_circle </span>
+    Logged in username: <span class="username">{{ displayName }}</span>
   </div>
 
-  <div class="settings-container">
-    <div class="settings-item">
-      <span class="material-symbols-outlined recipe-icons">
-        account_circle
+  <div class="settings-item">
+    <div>Name: {{ userName }}</div>
+    <span class="material-symbols-outlined"> edit </span>
+    Change Name:
+    <div>
+      <label for="name">
+        <input
+          type="text"
+          name="name"
+          [formControl]="nameControl"
+          class="change-username-input"
+        />
+      </label>
+      <span
+        (click)="changeName()"
+        class="material-symbols-outlined submit-username clickable"
+        [ngClass]="nameControl.invalid ? 'invalid-username' : 'none'"
+      >
+        check_circle
       </span>
-      Logged in username: <span class="username">{{ displayName }}</span>
-    </div>
+      <div class="error-container">
+        <ng-container *ngIf="nameControl?.invalid">
+          <div class="error-label" *ngIf="nameControl?.hasError('minlength')">
+            Name has to be longer than 2.
+          </div>
 
-    <div class="settings-item">
-      <span class="material-symbols-outlined recipe-icons"> palette </span>
-      <span>Color theme: </span>
-      <div class="theme-selector-container">
-        <div
-          (click)="changeColorThemeCollapsed('dark')"
-          [ngClass]="dark ? 'active-dark' : 'none'"
-        >
-          <span class="material-symbols-outlined"> dark_mode </span>
-          <div>Dark</div>
-        </div>
-
-        <div
-          (click)="changeColorThemeCollapsed('light')"
-          [ngClass]="!dark ? 'active-light' : 'none'"
-        >
-          <span class="material-symbols-outlined"> light_mode </span>
-          <div>Light</div>
-        </div>
+          <div
+            class="error-label"
+            *ngIf="nameControl?.hasError('maxlength') && nameControl.touched"
+          >
+            Name cannot be longer than 12 characters.
+          </div>
+        </ng-container>
       </div>
     </div>
+  </div>
 
-    <div class="settings-item">
-      <span class="material-symbols-outlined"> visibility </span>
-      <span>Change recipe layout: </span>
-      <div class="layout-selector-container">
-        <div *ngIf="dark">
+  <div class="settings-item">
+    <div>Surname: {{ userSurname }}</div>
+    <span class="material-symbols-outlined"> edit </span>
+    Change Surname:
+    <div>
+      <label for="surname">
+        <input
+          type="text"
+          name="surname"
+          [formControl]="surnameControl"
+          class="change-username-input"
+        />
+      </label>
+      <span
+        (click)="changeSurname()"
+        class="material-symbols-outlined submit-username clickable"
+        [ngClass]="surnameControl.invalid ? 'invalid-username' : 'none'"
+      >
+        check_circle
+      </span>
+      <div class="error-container">
+        <ng-container *ngIf="surnameControl?.invalid">
           <div
-            (click)="changeProfileLayoutCollapsed('grid')"
-            [ngClass]="grid ? 'active-dark' : 'none'"
+            class="error-label"
+            *ngIf="surnameControl?.hasError('minlength')"
           >
-            <span class="material-symbols-outlined"> grid_view </span>
-            <div>Grid</div>
+            Name has to be longer than 2.
           </div>
+
+          <div
+            class="error-label"
+            *ngIf="
+              surnameControl?.hasError('maxlength') && surnameControl.touched
+            "
+          >
+            Name cannot be longer than 12 characters.
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-item">
+    <span class="material-symbols-outlined"> palette </span>
+    <span>Color theme: </span>
+    <div class="theme-selector-container">
+      <div
+        class="clickable"
+        (click)="changeColorThemeCollapsed('dark')"
+        [ngClass]="dark ? 'active-dark' : 'none'"
+      >
+        <span class="material-symbols-outlined"> dark_mode </span>
+        <div>Dark</div>
+      </div>
+
+      <div
+        class="clickable"
+        (click)="changeColorThemeCollapsed('light')"
+        [ngClass]="!dark ? 'active-light' : 'none'"
+      >
+        <span class="material-symbols-outlined"> light_mode </span>
+        <div>Light</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="settings-item">
+    <span class="material-symbols-outlined"> visibility </span>
+    <span>Change recipe layout: </span>
+    <div class="layout-selector-container">
+      <div *ngIf="dark">
+        <div
+          class="clickable"
+          (click)="changeProfileLayoutCollapsed('grid')"
+          [ngClass]="grid ? 'active-dark' : 'none'"
+        >
+          <span class="material-symbols-outlined"> grid_view </span>
+          <div>Grid</div>
         </div>
+      </div>
 
-        <div *ngIf="!dark">
-          <div
-            (click)="changeProfileLayoutCollapsed('grid')"
-            [ngClass]="grid ? 'active-light' : 'none'"
-          >
-            <span class="material-symbols-outlined"> grid_view </span>
-            <div>Grid</div>
-          </div>
+      <div *ngIf="!dark">
+        <div
+          class="clickable"
+          (click)="changeProfileLayoutCollapsed('grid')"
+          [ngClass]="grid ? 'active-light' : 'none'"
+        >
+          <span class="material-symbols-outlined"> grid_view </span>
+          <div>Grid</div>
         </div>
+      </div>
 
-        <div *ngIf="dark">
-          <div
-            (click)="changeProfileLayoutCollapsed('carousel')"
-            [ngClass]="!grid ? 'active-dark' : 'none'"
-          >
-            <span class="material-symbols-outlined"> view_carousel </span>
-            <div>Carousel</div>
-          </div>
+      <div *ngIf="dark">
+        <div
+          class="clickable"
+          (click)="changeProfileLayoutCollapsed('carousel')"
+          [ngClass]="!grid ? 'active-dark' : 'none'"
+        >
+          <span class="material-symbols-outlined"> view_carousel </span>
+          <div>Carousel</div>
         </div>
+      </div>
 
-        <div *ngIf="!dark">
-          <div
-            (click)="changeProfileLayoutCollapsed('carousel')"
-            [ngClass]="!grid ? 'active-light' : 'none'"
-          >
-            <span class="material-symbols-outlined"> view_carousel </span>
-            <div>Carousel</div>
-          </div>
+      <div *ngIf="!dark">
+        <div
+          class="clickable"
+          (click)="changeProfileLayoutCollapsed('carousel')"
+          [ngClass]="!grid ? 'active-light' : 'none'"
+        >
+          <span class="material-symbols-outlined"> view_carousel </span>
+          <div>Carousel</div>
         </div>
       </div>
     </div>

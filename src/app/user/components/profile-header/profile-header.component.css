@@ -2,29 +2,17 @@
   .user-icons {
     font-size: 36px;
   }
-
-  .profile-picture {
-    font-size: 70px;
-  }
 }
 
 @media screen and (max-width: 1200px) {
   .user-icons {
     font-size: 30px;
   }
-
-  .profile-picture {
-    font-size: 60px;
-  }
 }
 
 @media screen and (max-width: 768px) {
   .user-icons {
     font-size: 24px;
-  }
-
-  .profile-picture {
-    font-size: 50px;
   }
 }
 
@@ -50,8 +38,4 @@
 
 .profile-header-user-rating {
   margin-top: 3%;
-}
-
-.profile-picture {
-  color: var(--irecipe-primary);
 }

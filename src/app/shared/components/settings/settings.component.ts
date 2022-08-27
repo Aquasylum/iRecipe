@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { UserService } from 'src/app/user/service/user.service';
 
 import { SettingsService } from '../../services/settings.service';
+import { UserExistsValidator } from '../../validators/UserExists.validator';
 
 @Component({
   selector: 'irecipe-settings',
@@ -9,8 +12,6 @@ import { SettingsService } from '../../services/settings.service';
   styleUrls: ['./settings.component.css'],
 })
 export class SettingsComponent implements OnInit {
-  @Input() isCollapsed: boolean = true;
-
   colorTheme!: string;
   invertedColorTheme: string = 'light';
   displayName!: string | null | undefined;
@@ -18,12 +19,18 @@ export class SettingsComponent implements OnInit {
   invertedProfileLayout!: string;
   grid!: boolean;
   dark!: boolean;
+  nameControl!: FormControl;
+  surnameControl!: FormControl;
+  userId!: string | undefined;
+  userName!: string;
+  userSurname!: string;
 
   @Output() themeColor: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
     private settingsService: SettingsService,
-    private authService: AuthService
+    private authService: AuthService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -34,7 +41,49 @@ export class SettingsComponent implements OnInit {
     this.grid = true;
     this.dark = true;
     this.invertedProfileLayout = 'carousel';
+    this.userId = this.authService.getCurrentUser()?.uid;
+    this.initializeUserData();
+    this.initializeForms();
+  }
+
+  async initializeUserData() {
     this.displayName = this.authService.getCurrentUser()?.displayName;
+
+    if (this.displayName) {
+      let user = await this.userService.getUserByUsername(this.displayName);
+      this.userName = user.name;
+      this.userSurname = user.surname;
+    }
+  }
+
+  initializeForms() {
+    this.nameControl = new FormControl('', [
+      Validators.minLength(2),
+      Validators.maxLength(12),
+    ]);
+
+    this.surnameControl = new FormControl('', [
+      Validators.minLength(2),
+      Validators.maxLength(12),
+    ]);
+  }
+
+  changeName() {
+    if (this.displayName) {
+      this.userService
+        .updateExistingUserName(this.nameControl.value, this.displayName)
+        .then(() => this.initializeUserData());
+    }
+    this.nameControl.reset();
+  }
+
+  changeSurname() {
+    if (this.displayName) {
+      this.userService
+        .updateExistingUserSurname(this.surnameControl.value, this.displayName)
+        .then(() => this.initializeUserData());
+    }
+    this.surnameControl.reset();
   }
 
   changeColorTheme() {
