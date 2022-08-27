@@ -33,7 +33,7 @@ export class RegisterPageComponent implements OnInit {
       .then(() => {
         if (data.username) {
           this.userService
-            .addUser(data.username, data.name, data.surname)
+            .addUser(data.username.toLowerCase(), data.name, data.surname)
             .then(() => {
               this.success = true;
             });
