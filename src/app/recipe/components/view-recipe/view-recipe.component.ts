@@ -126,7 +126,7 @@ export class ViewRecipeComponent implements OnInit {
     }
 
     this.userService
-      .updateUser(this.recipe.id, this.usernameControl?.value)
+      .updateUserWithRecipeId(this.recipe.id, this.usernameControl?.value)
       .then(() => {
         this.usernameControl.reset;
         this.showSuccessMessage = true;
@@ -143,7 +143,7 @@ export class ViewRecipeComponent implements OnInit {
 
     if (this.isFavorite == true) {
       //Add to this users recipe list
-      this.userService.updateUser(
+      this.userService.updateUserWithRecipeId(
         this.recipeId,
         await this.userService.getUsername()
       );

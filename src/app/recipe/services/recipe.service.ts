@@ -79,9 +79,9 @@ export class RecipeService {
       .getUserNameAndSurname(recipe.authorId)
       .then((usernameAndSurname) => {
         recipe.author = usernameAndSurname;
-        setDoc(doc(this.fireStore, 'recipes', recipe.id), recipe).then(() =>
-          this.userService.updateUser(recipe.id)
-        );
+        setDoc(doc(this.fireStore, 'recipes', recipe.id), recipe).then(() => {
+          this.userService.updateUserWithRecipeId(recipe.id);
+        });
       });
   }
 

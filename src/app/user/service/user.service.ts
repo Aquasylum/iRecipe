@@ -33,7 +33,10 @@ export class UserService {
     });
   }
 
-  async updateUser(recipeId: string, username?: string | undefined) {
+  async updateUserWithRecipeId(
+    recipeId: string,
+    username?: string | undefined
+  ) {
     if (username) {
       const userToAddRecipeTo = doc(
         this.firestore,
@@ -152,5 +155,19 @@ export class UserService {
         recipes: arrayRemove(recipeId),
       });
     }
+  }
+
+  async updateExistingUserName(name: string, username: string) {
+    let docRef = doc(this.userCollection, username);
+    await updateDoc(docRef, {
+      name: name,
+    });
+  }
+
+  async updateExistingUserSurname(surname: string, username: string) {
+    let docRef = doc(this.userCollection, username);
+    await updateDoc(docRef, {
+      surname: surname,
+    });
   }
 }
