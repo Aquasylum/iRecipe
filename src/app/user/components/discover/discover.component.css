@@ -39,6 +39,10 @@
   padding-bottom: 500px;
 }
 
+.irecipe-page-icon {
+  color: var(--irecipe-secondary);
+}
+
 .discover {
   color: var(--irecipe-secondary);
 }
