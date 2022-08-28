@@ -24,9 +24,8 @@
 
 @media screen and (max-width: 768px) {
   .settings-container {
-    justify-content: flex-start;
-    align-items: left;
-    padding-left: 50px;
+    justify-content: center;
+    align-items: center;
   }
 
   .settings-item {
@@ -43,13 +42,15 @@
 }
 
 .settings-header {
-  text-align: center;
-  color: var(--irecipe-secondary);
-  padding-bottom: 50px;
+  padding-bottom: 15px;
 }
 
 .error-label {
   font-size: 14px;
+}
+
+::placeholder {
+  padding-left: 10px;
 }
 
 .clickable:hover {
@@ -95,24 +96,27 @@
 
 .theme-selector-container > .material-symbols-outlined {
   font-size: 50px;
+  padding-right: 0px;
 }
 
 .layout-selector-container > .material-symbols-outlined {
   font-size: 50px;
+  padding-right: 0px;
 }
 
-.settings-header > .material-symbols-outlined {
-  font-size: 50px !important;
+.material-symbols-outlined {
+  vertical-align: -0.2em;
 }
 
 .settings-item {
   padding-top: 5px;
-  padding-bottom: 5px;
+  padding-bottom: 15px;
   color: var(--irecipe-primary);
 }
 
 .active-dark {
   background-color: white;
+  width: 150px;
   border-radius: 10px;
   padding: 10px;
 }
@@ -120,5 +124,6 @@
 .active-light {
   background-color: grey;
   border-radius: 10px;
+  width: 150px;
   padding: 10px;
 }

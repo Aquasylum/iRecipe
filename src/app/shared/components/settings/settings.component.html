@@ -8,9 +8,10 @@
   </div>
 
   <div class="settings-item">
-    <div>Name: {{ userName }}</div>
-    <span class="material-symbols-outlined"> edit </span>
-    Change Name:
+    <div class="settings-header">
+      <span class="material-symbols-outlined"> edit </span> Change Name:
+    </div>
+
     <div>
       <label for="name">
         <input
@@ -18,6 +19,7 @@
           name="name"
           [formControl]="nameControl"
           class="change-username-input"
+          [placeholder]="userName"
         />
       </label>
       <span
@@ -28,7 +30,7 @@
         check_circle
       </span>
       <div class="error-container">
-        <ng-container *ngIf="nameControl?.invalid">
+        <ng-container>
           <div class="error-label" *ngIf="nameControl?.hasError('minlength')">
             Name has to be longer than 2.
           </div>
@@ -45,9 +47,11 @@
   </div>
 
   <div class="settings-item">
-    <div>Surname: {{ userSurname }}</div>
-    <span class="material-symbols-outlined"> edit </span>
-    Change Surname:
+    <div class="settings-header">
+      <span class="material-symbols-outlined"> edit </span>
+      Change Surname:
+    </div>
+
     <div>
       <label for="surname">
         <input
@@ -55,6 +59,7 @@
           name="surname"
           [formControl]="surnameControl"
           class="change-username-input"
+          [placeholder]="userSurname"
         />
       </label>
       <span
@@ -65,30 +70,23 @@
         check_circle
       </span>
       <div class="error-container">
-        <ng-container *ngIf="surnameControl?.invalid">
-          <div
-            class="error-label"
-            *ngIf="surnameControl?.hasError('minlength')"
-          >
-            Name has to be longer than 2.
-          </div>
+        <div class="error-label" *ngIf="surnameControl?.hasError('minlength')">
+          Name has to be longer than 2.
+        </div>
 
-          <div
-            class="error-label"
-            *ngIf="
-              surnameControl?.hasError('maxlength') && surnameControl.touched
-            "
-          >
-            Name cannot be longer than 12 characters.
-          </div>
-        </ng-container>
+        <div class="error-label" *ngIf="surnameControl?.hasError('maxlength')">
+          Name cannot be longer than 12 characters.
+        </div>
       </div>
     </div>
   </div>
 
   <div class="settings-item">
-    <span class="material-symbols-outlined"> palette </span>
-    <span>Color theme: </span>
+    <div class="settings-header">
+      <span class="material-symbols-outlined"> palette </span>
+      <span>Color theme: </span>
+    </div>
+
     <div class="theme-selector-container">
       <div
         class="clickable"
@@ -111,8 +109,11 @@
   </div>
 
   <div class="settings-item">
-    <span class="material-symbols-outlined"> visibility </span>
-    <span>Change recipe layout: </span>
+    <div class="settings-header">
+      <span class="material-symbols-outlined"> visibility </span>
+      <span>Change recipe layout: </span>
+    </div>
+
     <div class="layout-selector-container">
       <div *ngIf="dark">
         <div
