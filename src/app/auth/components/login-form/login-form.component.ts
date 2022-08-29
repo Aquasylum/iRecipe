@@ -37,18 +37,29 @@ export class LoginFormComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (
-      this.userError?.message == 'Firebase: Error (auth/email-already-in-use).'
-    ) {
-      this.email?.setErrors({ emailAlreadyInUse: true });
-    }
+    if (this.userError != null) {
+      if (
+        this.userError?.message ==
+        'Firebase: Error (auth/email-already-in-use).'
+      ) {
+        this.email?.setErrors({ emailAlreadyInUse: true });
+      }
 
-    if (this.userError?.message == 'Firebase: Error (auth/wrong-password).') {
-      this.password?.setErrors({ wrongPassword: true });
-    }
+      if (this.userError?.message == 'Firebase: Error (auth/wrong-password).') {
+        this.password?.setErrors({ wrongPassword: true });
+      }
 
-    if (this.userError?.message == 'Firebase: Error (auth/user-not-found).') {
-      this.userForm?.setErrors({ userNotFound: true });
+      if (this.userError?.message == 'Firebase: Error (auth/user-not-found).') {
+        this.userForm?.setErrors({ userNotFound: true });
+      }
+      if (
+        this.userError?.message ==
+        'Firebase: Error (auth/popup-closed-by-user).'
+      ) {
+        this.userForm?.setErrors({ userClosedPopUp: true });
+      } else if (this.userError.message != null) {
+        this.userForm.setErrors({ somethingWentWrong: true });
+      }
     }
   }
 

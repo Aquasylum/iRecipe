@@ -1,5 +1,5 @@
 <div class="irecipe-login-form-container">
-  <a class="irecipe-header bold">Sign In</a>
+  <a class="irecipe-header">Sign In</a>
   <div *ngIf="formType == 'register'">
     <p>
       Already have an account?
@@ -7,7 +7,7 @@
     </p>
   </div>
 
-  <div *ngIf="formType == 'login'">
+  <div *ngIf="formType != 'register'">
     <p>
       New user?
       <a routerLink="/register" class="irecipe-create-account"
@@ -246,6 +246,19 @@
       >
         This user does not exist. Please enter the details correctly or create
         an account!
+      </div>
+      <div
+        class="error-label irecipe-error-text"
+        *ngIf="userForm?.hasError('userClosedPopUp')"
+      >
+        User closed the login popup. Please try again.
+      </div>
+      <div
+        class="error-label irecipe-error-text"
+        *ngIf="userForm?.hasError('somethingWentWrong')"
+      >
+        Something went wrong. Please use different login method or try again
+        later.
       </div>
     </form>
   </div>
