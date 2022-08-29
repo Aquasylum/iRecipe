@@ -31,7 +31,7 @@ export class AuthService {
   }
 
   async loginWithEmailAndPassword(login: ILoginData) {
-    let user = await signInWithEmailAndPassword(
+    let user: UserCredential = await signInWithEmailAndPassword(
       this.auth,
       login.email,
       login.password
@@ -52,18 +52,32 @@ export class AuthService {
   }
 
   async loginWithGoogle() {
-    let user = await signInWithPopup(this.auth, new GoogleAuthProvider());
-    this.emitCurrentLoggedInStatus(true);
-
-    await this.createUser(user);
+    let user: UserCredential = await signInWithPopup(
+      this.auth,
+      new GoogleAuthProvider()
+    )
+      .then(async (userCredential) => {
+        this.emitCurrentLoggedInStatus(true);
+        this.createUser(userCredential);
+        return userCredential;
+      })
+      .catch((e: HttpErrorResponse) => {
+        throw e;
+      });
     return user;
   }
 
   async loginWithFacebook() {
-    let user = await signInWithPopup(this.auth, new FacebookAuthProvider());
-    this.emitCurrentLoggedInStatus(true);
+    let user = await signInWithPopup(this.auth, new FacebookAuthProvider())
+      .then(async (userCredential) => {
+        this.emitCurrentLoggedInStatus(true);
+        await this.createUser(userCredential);
+        return userCredential;
+      })
+      .catch((e: HttpErrorResponse) => {
+        throw e;
+      });
 
-    await this.createUser(user);
     return user;
   }
 

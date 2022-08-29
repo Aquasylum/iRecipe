@@ -33,7 +33,7 @@ export class LoginPageComponent implements OnInit {
   async loginWithGoogle() {
     let user = await this.authService
       .loginWithGoogle()
-      .catch((e) => console.log(e.message));
+      .catch((e) => (this.error = e));
 
     if (user) {
       this.router.navigate(['/profile/' + user.user.uid]);
@@ -43,7 +43,7 @@ export class LoginPageComponent implements OnInit {
   async loginWithFacebook() {
     let user = await this.authService
       .loginWithFacebook()
-      .catch((e) => console.log(e.message));
+      .catch((e) => console.log(e));
 
     if (user) {
       this.router.navigate(['/profile/' + user.user.uid]);
