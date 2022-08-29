@@ -166,15 +166,36 @@
   width: 150px;
 }
 
-.add-icon:hover {
-  cursor: pointer;
-  transform: scale(1.1);
-}
-
 .add-icon,
 .invalid-icon {
   padding-top: 1%;
   margin-left: 10px;
+}
+
+.upload-image {
+  padding-top: 10px;
+  color: var(--irecipe-primary);
+}
+
+.upload-image-disabled {
+  padding-top: 10px;
+  color: grey;
+}
+
+.delete-image {
+  padding-top: 10px;
+  color: red;
+}
+
+.upload-image:hover,
+.delete-image:hover,
+.add-icon:hover,
+.display-ingredients:hover,
+.display-steps:hover,
+.display-tips:hover,
+.recipe-functionality-button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 .display-ingredients-container,
@@ -207,6 +228,7 @@
 
 .recipe-name-container {
   padding-bottom: 5px;
+  font-family: Alegreya;
 }
 
 .tips-container {
@@ -253,6 +275,10 @@ input[type="file"] {
   padding-left: 30%;
 }
 
+.irecipe-title {
+  font-family: Alegreya;
+}
+
 .irecipe-title,
 ::placeholder,
 .add-icon,
@@ -269,6 +295,7 @@ input[type="file"] {
 .recipe-description-textarea::placeholder,
 .recipe-textarea::placeholder {
   color: var(--irecipe-primary) !important;
+  text-transform: lowercase;
 }
 
 form {
@@ -288,13 +315,6 @@ form {
   margin: 5vh;
   border: none;
   color: white;
-}
-
-.display-ingredients:hover,
-.display-steps:hover,
-.display-tips:hover {
-  transform: scale(1.1);
-  cursor: pointer;
 }
 
 .remove-button {
@@ -343,11 +363,6 @@ form {
 
 .recipe-details {
   color: var(--irecipe-primary);
-}
-
-.recipe-functionality-button:hover {
-  transform: scale(1.2);
-  cursor: pointer;
 }
 
 input:hover,

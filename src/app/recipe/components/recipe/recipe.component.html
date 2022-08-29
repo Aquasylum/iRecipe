@@ -4,7 +4,7 @@
       <label for="name">
         <input
           type="text"
-          class="recipe-name bold"
+          class="recipe-name"
           name="name"
           placeholder="Recipe Name"
           formControlName="name"
@@ -213,25 +213,25 @@
                 Click to add photo
               </label>
             </div>
-            <div>
-              <button
-                (click)="onUpload()"
-                class="recipe-button btn-lg upload-button"
-              >
-                Upload {{ fileName }}
-              </button>
+            <div
+              [ngClass]="
+                canClickUpload ? 'upload-image' : 'upload-image-disabled'
+              "
+            >
+              <span (click)="onUpload()" class="material-symbols-outlined">
+                upload_file
+              </span>
+              <div>Upload image</div>
             </div>
           </ng-template>
 
           <ng-template #showImage>
             <img class="irecipe-image" [src]="recipeImage" />
-            <div>
-              <button
-                (click)="onDeleteImage()"
-                class="irecipe-button btn-lg remove-button"
-              >
-                Delete Image
-              </button>
+            <div class="delete-image">
+              <span (click)="onDeleteImage()" class="material-symbols-outlined">
+                delete
+              </span>
+              <div>Delete Image</div>
             </div>
           </ng-template>
         </div>
@@ -418,7 +418,6 @@
                 class="details-container"
                 type="text"
                 name="portions"
-                placeholder="portions"
                 formControlName="portions"
               />
             </label>

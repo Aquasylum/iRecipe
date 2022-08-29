@@ -28,7 +28,7 @@ export class RecipeComponent implements OnInit {
   file!: File;
   fileUploaded: boolean = false;
   fileName!: string;
-
+  canClickUpload!: boolean;
   ingredientIndex: number = 0;
 
   constructor(
@@ -223,14 +223,18 @@ export class RecipeComponent implements OnInit {
 
   onChange(event: any) {
     this.file = event.target.files[0];
+    this.canClickUpload = true;
     this.fileName = this.file.name;
   }
 
   onUpload() {
+    if (this.canClickUpload != true) return;
+
     this.fileService.uploadRecipeImage(this.file, this.id).then(() => {
       this.fileService.downloadRecipeImage(this.recipeId).then((imageUrl) => {
         this.recipeImage = imageUrl;
         this.fileUploaded = true;
+        this.canClickUpload = false;
       });
     });
   }
