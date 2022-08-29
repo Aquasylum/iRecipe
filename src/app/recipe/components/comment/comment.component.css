@@ -30,12 +30,22 @@
 
 .add-comment-button {
   text-align: right;
+}
+
+.enabled {
   color: var(--irecipe-primary);
+}
+
+.disabled {
+  color: grey;
+}
+
+.disabled:hover {
+  cursor: not-allowed;
 }
 
 .add-comment-button:hover {
   cursor: pointer;
-  transform: scale(1.1);
 }
 
 .material-symbols-outlined {

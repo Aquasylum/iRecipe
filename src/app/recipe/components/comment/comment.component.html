@@ -1,9 +1,13 @@
 <div class="recipe-comment-container">
-  <textarea placeholder="comment" [(ngModel)]="comment"></textarea>
+  <textarea placeholder="Add a comment" [(ngModel)]="comment"></textarea>
 
-  <div (click)="sendComment()" class="add-comment-button">
+  <div
+    (click)="sendComment()"
+    class="add-comment-button"
+    [ngClass]="comment ? 'enabled' : 'disabled'"
+  >
     <span class="material-symbols-outlined"> check_box </span>
-    Add Comment
+    Post Comment
   </div>
 
   <div class="recipe-comments-display">
@@ -16,15 +20,20 @@
       <div class="comment">
         {{ comment.comment }}
       </div>
+
       <div class="comment-time">
-        {{ millisecondsToDateConverter(comment.dateCreated) }}
+        <span>
+          {{ millisecondsToDateConverter(comment.dateCreated) }}
+        </span>
       </div>
-      <div
-        (click)="deleteComment(comment)"
-        *ngIf="loggedInUserId == comment.commentAuthorId"
-        class="comment-delete"
-      >
-        delete comment
+
+      <div class="comment-delete">
+        <span
+          (click)="deleteComment(comment)"
+          *ngIf="loggedInUserId == comment.commentAuthorId"
+        >
+          delete comment
+        </span>
       </div>
     </div>
   </div>

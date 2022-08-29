@@ -44,11 +44,12 @@ export class CommentComponent implements OnInit {
 
   deleteComment(comment: Comment) {
     this.commentToDelete.emit(comment);
-    this.comments = this.comments.filter((item) => item != comment);
+    let commentToRemoveIndex = this.comments.indexOf(comment);
+    this.comments.splice(commentToRemoveIndex, 1);
   }
 
   millisecondsToDateConverter(dateCreated: number) {
     let date = new Date(dateCreated).toUTCString();
-    return date.substring(0, 25);
+    return date.substring(0, 22);
   }
 }
