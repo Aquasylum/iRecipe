@@ -14,7 +14,7 @@ import { UserExistsValidator } from '../../validators/UserExists.validator';
 export class SettingsComponent implements OnInit {
   colorTheme!: string;
   invertedColorTheme: string = 'light';
-  displayName!: string | null | undefined;
+  username!: string | undefined;
   profileLayout!: string;
   invertedProfileLayout!: string;
   grid!: boolean;
@@ -47,10 +47,10 @@ export class SettingsComponent implements OnInit {
   }
 
   async initializeUserData() {
-    this.displayName = this.authService.getCurrentUser()?.displayName;
+    this.username = await this.userService.getUsername();
 
-    if (this.displayName) {
-      let user = await this.userService.getUserByUsername(this.displayName);
+    if (this.username) {
+      let user = await this.userService.getUserByUsername(this.username);
       this.userName = user.name;
       this.userSurname = user.surname;
     }
@@ -69,18 +69,18 @@ export class SettingsComponent implements OnInit {
   }
 
   changeName() {
-    if (this.displayName) {
+    if (this.username) {
       this.userService
-        .updateExistingUserName(this.nameControl.value, this.displayName)
+        .updateExistingUserName(this.nameControl.value, this.username)
         .then(() => this.initializeUserData());
     }
     this.nameControl.reset();
   }
 
   changeSurname() {
-    if (this.displayName) {
+    if (this.username) {
       this.userService
-        .updateExistingUserSurname(this.surnameControl.value, this.displayName)
+        .updateExistingUserSurname(this.surnameControl.value, this.username)
         .then(() => this.initializeUserData());
     }
     this.surnameControl.reset();

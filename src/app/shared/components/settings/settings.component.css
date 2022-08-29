@@ -6,7 +6,8 @@
 
   .settings-item {
     font-size: 26px;
-    width: 400px;
+    width: 700px;
+    padding-left: 150px;
   }
 }
 
@@ -18,7 +19,7 @@
 
   .settings-item {
     font-size: 23px;
-    width: 300px;
+    width: 400px;
   }
 }
 

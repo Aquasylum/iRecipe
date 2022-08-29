@@ -6,6 +6,7 @@
   .grid-container {
     flex-direction: row;
     width: 70%;
+    justify-content: flex-start;
   }
 }
 
@@ -28,6 +29,12 @@
   .recipe-card {
     padding-top: 30px !important;
   }
+
+  .grid-container {
+    flex-direction: column;
+    align-content: center;
+    width: 90%;
+  }
 }
 
 .recipes-container {
@@ -48,7 +55,6 @@
 
 .grid-container {
   display: flex;
-  justify-content: space-evenly;
   flex-wrap: wrap;
 }
 

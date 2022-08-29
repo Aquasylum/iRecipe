@@ -85,10 +85,6 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  toggleFavorite() {
-    this.isFavorite = !this.isFavorite;
-  }
-
   async onFilterRecipes(filter: any) {
     this.allRecipes = await this.recipeService.findRecipeByFilter(
       filter,

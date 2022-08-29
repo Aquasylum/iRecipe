@@ -15,7 +15,6 @@
     *ngIf="
       allRecipes?.length != 0 &&
       allRecipes?.length != undefined &&
-      profileLayout == 'grid' &&
       loggedInUserProfile
     "
     routerLink="/recipe"
@@ -61,6 +60,8 @@
             <div class="recipe-card">
               <irecipe-recipe-display-card
                 [recipe]="recipe"
+                [loggedInUserProfile]="loggedInUserProfile"
+                [isCarousel]="true"
               ></irecipe-recipe-display-card>
             </div>
           </div>
@@ -85,42 +86,6 @@
             </span>
           </div>
         </div>
-      </div>
-    </div>
-
-    <div *ngIf="!loggedInUserProfile" class="recipes-container-functionality">
-      <div
-        (click)="toggleFavorite()"
-        class="recipe-functionality-button favorite"
-      >
-        <span *ngIf="!isFavorite" class="icon-large material-icons"
-          >favorite_border
-        </span>
-        <span *ngIf="isFavorite" class="icon-large material-icons"
-          >favorite
-        </span>
-
-        <div>Favorite</div>
-      </div>
-    </div>
-
-    <div *ngIf="loggedInUserProfile" class="recipes-container-functionality">
-      <div
-        *ngIf="allRecipes"
-        routerLink="/recipe"
-        class="functionality-button add"
-      >
-        <span class="material-icons icon-large"> add_circle </span>
-        <div class="irecipe-text">Add Recipe</div>
-      </div>
-      <div *ngIf="recipe" class="functionality-button edit">
-        <span
-          [routerLink]="['/recipe', recipe.id]"
-          class="material-symbols-outlined icon-large"
-        >
-          edit
-        </span>
-        <div class="irecipe-text">Edit Recipe</div>
       </div>
     </div>
   </div>

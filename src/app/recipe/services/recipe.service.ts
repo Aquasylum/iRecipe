@@ -22,9 +22,11 @@ import {
   getDocs,
   setDoc,
   arrayRemove,
+  arrayUnion,
 } from '@angular/fire/firestore';
 import { UserService } from '../../user/service/user.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { Ingredient } from '../models/Ingredient';
 
 @Injectable({
   providedIn: 'root',
@@ -80,15 +82,34 @@ export class RecipeService {
       .then((usernameAndSurname) => {
         recipe.author = usernameAndSurname;
         setDoc(doc(this.fireStore, 'recipes', recipe.id), recipe).then(() => {
+          this.createIngredientSubCollection(recipe.ingredients, recipe.id);
           this.userService.updateUserWithRecipeId(recipe.id);
         });
       });
+  }
+
+  createIngredientSubCollection(ingredients: Ingredient[], recipeId: string) {
+    ingredients.forEach((ingredient: Ingredient) => {});
   }
 
   async updateRecipe(recipe: Recipe) {
     const recipeDocumentReference = doc(this.recipeCollection, recipe.id);
     recipe.dateModified = Date.now();
     return await updateDoc(recipeDocumentReference, { ...recipe });
+  }
+
+  async updateLikedBy(recipeId: string, userId: string) {
+    const recipeToUpdateLikedBy = doc(this.recipeCollection, recipeId);
+    return updateDoc(recipeToUpdateLikedBy, {
+      likedBy: arrayUnion(userId),
+    });
+  }
+
+  async removeLikedBy(recipeId: string, userId: string) {
+    const recipeToUpdateLikedBy = doc(this.recipeCollection, recipeId);
+    return updateDoc(recipeToUpdateLikedBy, {
+      likedBy: arrayRemove(userId),
+    });
   }
 
   async deleteRecipe(id: string) {
